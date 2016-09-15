@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plotting the analysis chain &mdash;  0.1.4-git documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.4-git',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title=" 0.1.4-git documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html"> 0.1.4-git documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plotting-the-analysis-chain">
+<span id="sphx-glr-auto-examples-plot-analysis-12-py"></span><h1>Plotting the analysis chain<a class="headerlink" href="#plotting-the-analysis-chain" title="Permalink to this headline">¶</a></h1>
+<p>Run the analysis.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
+<span class="kn">import</span> <span class="nn">mne</span>
+
+<span class="n">mlab</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_stc</span><span class="p">(</span><span class="n">cond</span><span class="p">):</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;mne_dSPM_inverse-</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">cond</span><span class="p">)</span>
+    <span class="n">stc</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">stc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cau&#39;</span><span class="p">],</span>
+                     <span class="n">hemi</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">time_viewer</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">stc</span>
+    <span class="k">return</span> <span class="n">brain</span>
+
+<span class="n">study_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="s2">&quot;__file__&quot;</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="n">subjects_dir</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;subjects&#39;</span><span class="p">)</span>
+<span class="n">meg_dir</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">)</span>
+
+
+<span class="c1">#subject_id = os.getenv(&quot;SUBJECT_ID&quot;)</span>
+<span class="c1">#print(subject_id)</span>
+<span class="c1">#subject_id = 1</span>
+<span class="c1"># Configuration</span>
+
+<span class="c1"># Raw data</span>
+<span class="c1">#fname = op.join(study_path, &#39;ds117&#39;, subject, &#39;MEG&#39;, &#39;run_01_raw.fif&#39;)</span>
+<span class="c1">#raw = mne.io.Raw(fname)</span>
+
+<span class="c1">#fname = op.join(meg_dir, subject, &#39;run_01_filt_sss_raw.fif&#39;)</span>
+<span class="c1">#raw_filt = mne.io.Raw(fname)</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Filtering
+raw.plot_psd()
+raw_filt.plot_psd()</p>
+<p>Evoked responses</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">evo_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">evoked</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">evo_fname</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Faces</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">famous_evo</span><span class="p">,</span> <span class="n">scrambled_evo</span><span class="p">,</span> <span class="n">unfamiliar_evo</span><span class="p">,</span> <span class="n">contrast_evo</span><span class="p">,</span> <span class="n">faces_evo</span> <span class="o">=</span> <span class="n">evoked</span>
+<span class="n">faces_evo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;eeg&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)},</span>
+               <span class="n">window_title</span><span class="o">=</span><span class="s1">&#39;Faces </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_001.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_001.png" />
+<p>Famous</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">famous_evo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                <span class="n">window_title</span><span class="o">=</span><span class="s1">&#39;Famous </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_002.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_002.png" />
+<p>Scrambled</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">scrambled_evo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                   <span class="n">window_title</span><span class="o">=</span><span class="s1">&#39;Scrambled </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_003.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_003.png" />
+<p>Unfamiliar</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">unfamiliar_evo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                    <span class="n">window_title</span><span class="o">=</span><span class="s1">&#39;Unfamiliar </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_004.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_004.png" />
+<p>Faces - scrambled</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">contrast_evo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                  <span class="n">window_title</span><span class="o">=</span><span class="s1">&#39;Faces - scrambled </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_005.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_005.png" />
+<p>Topomaps</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">times</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="n">famous_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Famous </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">scrambled_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scrambled </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">unfamiliar_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Unfamiliar </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">contrast_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Faces - scrambled </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_006.png"><img alt="../_images/sphx_glr_plot_analysis_12_006.png" src="../_images/sphx_glr_plot_analysis_12_006.png" style="width: 282.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_007.png"><img alt="../_images/sphx_glr_plot_analysis_12_007.png" src="../_images/sphx_glr_plot_analysis_12_007.png" style="width: 282.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_008.png"><img alt="../_images/sphx_glr_plot_analysis_12_008.png" src="../_images/sphx_glr_plot_analysis_12_008.png" style="width: 282.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_009.png"><img alt="../_images/sphx_glr_plot_analysis_12_009.png" src="../_images/sphx_glr_plot_analysis_12_009.png" style="width: 282.0px; height: 84.6px;" /></a>
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre>Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
+Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
+Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
+Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
+</pre></div>
+</div>
+<p>TFR</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fpower</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-faces-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">fitc</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-itc_faces-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">spower</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-scrambled-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sitc</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-itc_scrambled-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">channel</span> <span class="o">=</span> <span class="s1">&#39;EEG070&#39;</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">fpower</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">channel</span><span class="p">)]</span>
+<span class="n">fpower</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Faces power </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;logratio&#39;</span><span class="p">)</span>
+<span class="n">spower</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scrambled power </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;logratio&#39;</span><span class="p">)</span>
+<span class="n">fitc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Faces ITC </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+          <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;logratio&#39;</span><span class="p">)</span>
+<span class="n">sitc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scrambled ITC </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+          <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;logratio&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_010.png"><img alt="../_images/sphx_glr_plot_analysis_12_010.png" src="../_images/sphx_glr_plot_analysis_12_010.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_011.png"><img alt="../_images/sphx_glr_plot_analysis_12_011.png" src="../_images/sphx_glr_plot_analysis_12_011.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_012.png"><img alt="../_images/sphx_glr_plot_analysis_12_012.png" src="../_images/sphx_glr_plot_analysis_12_012.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_013.png"><img alt="../_images/sphx_glr_plot_analysis_12_013.png" src="../_images/sphx_glr_plot_analysis_12_013.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p>Covariance</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cov</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_cov</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-cov.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
+<span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_cov</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">faces_evo</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
+<span class="n">faces_evo</span><span class="o">.</span><span class="n">plot_white</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_014.png"><img alt="../_images/sphx_glr_plot_analysis_12_014.png" src="../_images/sphx_glr_plot_analysis_12_014.png" style="width: 352.5px; height: 126.9px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_015.png"><img alt="../_images/sphx_glr_plot_analysis_12_015.png" src="../_images/sphx_glr_plot_analysis_12_015.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_12_016.png"><img alt="../_images/sphx_glr_plot_analysis_12_016.png" src="../_images/sphx_glr_plot_analysis_12_016.png" style="width: 413.6px; height: 310.2px;" /></a>
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre>No average EEG reference present in info[&quot;projs&quot;], covariance may be adversely affected. Consider recomputing covariance using a raw file with an average eeg reference projector added.
+</pre></div>
+</div>
+<p>Trans</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fname_trans</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-trans.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_trans</span><span class="p">(</span><span class="n">famous_evo</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">fname_trans</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span>
+                   <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">meg_sensors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                   <span class="n">eeg_sensors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_017.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_017.png" />
+<p>Faces</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">brain</span> <span class="o">=</span> <span class="n">plot_stc</span><span class="p">(</span><span class="s1">&#39;faces&#39;</span><span class="p">)</span>
+<span class="n">brain</span><span class="o">.</span><span class="n">set_data_time_index</span><span class="p">(</span><span class="mi">407</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_018.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_018.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre>The time_unit parameter default will change from &#39;ms&#39; to &#39;s&#39; in MNE 0.14. To avoid this warning specify the parameter explicitly.
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.09e+00 fmid=2.27e+00 fmax=3.45e+00 transparent=1
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.09e+00 fmid=2.27e+00 fmax=3.45e+00 transparent=1
+</pre></div>
+</div>
+<p>Famous</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">brain</span> <span class="o">=</span> <span class="n">plot_stc</span><span class="p">(</span><span class="s1">&#39;famous&#39;</span><span class="p">)</span>
+<span class="n">brain</span><span class="o">.</span><span class="n">set_data_time_index</span><span class="p">(</span><span class="mi">407</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_019.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_019.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre>The time_unit parameter default will change from &#39;ms&#39; to &#39;s&#39; in MNE 0.14. To avoid this warning specify the parameter explicitly.
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.10e+00 fmid=2.28e+00 fmax=3.49e+00 transparent=1
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.10e+00 fmid=2.28e+00 fmax=3.49e+00 transparent=1
+</pre></div>
+</div>
+<p>Unfamiliar</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">brain</span> <span class="o">=</span> <span class="n">plot_stc</span><span class="p">(</span><span class="s1">&#39;unfamiliar&#39;</span><span class="p">)</span>
+<span class="n">brain</span><span class="o">.</span><span class="n">set_data_time_index</span><span class="p">(</span><span class="mi">407</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_020.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_020.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre>The time_unit parameter default will change from &#39;ms&#39; to &#39;s&#39; in MNE 0.14. To avoid this warning specify the parameter explicitly.
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.00e+00 fmid=2.18e+00 fmax=3.35e+00 transparent=1
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.00e+00 fmid=2.18e+00 fmax=3.35e+00 transparent=1
+</pre></div>
+</div>
+<p>Scrambled</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">brain</span> <span class="o">=</span> <span class="n">plot_stc</span><span class="p">(</span><span class="s1">&#39;scrambled&#39;</span><span class="p">)</span>
+<span class="n">brain</span><span class="o">.</span><span class="n">set_data_time_index</span><span class="p">(</span><span class="mi">407</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_021.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_021.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre>The time_unit parameter default will change from &#39;ms&#39; to &#39;s&#39; in MNE 0.14. To avoid this warning specify the parameter explicitly.
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.07e+00 fmid=2.26e+00 fmax=3.48e+00 transparent=1
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.07e+00 fmid=2.26e+00 fmax=3.48e+00 transparent=1
+</pre></div>
+</div>
+<p>Faces - scrambled</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">brain</span> <span class="o">=</span> <span class="n">plot_stc</span><span class="p">(</span><span class="s1">&#39;contrast&#39;</span><span class="p">)</span>
+<span class="n">brain</span><span class="o">.</span><span class="n">set_data_time_index</span><span class="p">(</span><span class="mi">407</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_12_022.png" class="align-center" src="../_images/sphx_glr_plot_analysis_12_022.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre>The time_unit parameter default will change from &#39;ms&#39; to &#39;s&#39; in MNE 0.14. To avoid this warning specify the parameter explicitly.
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.07e+00 fmid=2.26e+00 fmax=3.60e+00 transparent=1
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.07e+00 fmid=2.26e+00 fmax=3.60e+00 transparent=1
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  45.004 seconds)</p>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/plot_analysis_12.py"><tt class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_analysis_12.py</span></tt></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/plot_analysis_12.ipynb"><tt class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_analysis_12.ipynb</span></tt></a></div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/auto_examples/plot_analysis_12.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html"> 0.1.4-git documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
