@@ -9,26 +9,6 @@ Analysis Gallery
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Run the analysis. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_generate_scripts_thumb.png
-
-        :ref:`sphx_glr_auto_examples_generate_scripts.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/generate_scripts
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="All the subjects compared. ">
 
 .. only:: html
@@ -446,26 +426,6 @@ Analysis Gallery
    :hidden:
 
    /auto_examples/plot_analysis_19
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Run the analysis. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_template_analysis_thumb.png
-
-        :ref:`sphx_glr_auto_examples_template_analysis.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/template_analysis
 .. raw:: html
 
     <div style='clear:both'></div>

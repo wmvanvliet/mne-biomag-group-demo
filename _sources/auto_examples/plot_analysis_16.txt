@@ -492,7 +492,7 @@ Covariance
 
 
 **Total running time of the script:**
-(0 minutes 40.110 seconds)
+(0 minutes 39.865 seconds)
 
 
 
