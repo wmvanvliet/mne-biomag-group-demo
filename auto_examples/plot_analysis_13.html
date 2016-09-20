@@ -123,24 +123,18 @@
   <div class="section" id="plotting-the-analysis-chain-subject-13">
 <span id="sphx-glr-auto-examples-plot-analysis-13-py"></span><h1>Plotting the analysis chain (Subject 13)<a class="headerlink" href="#plotting-the-analysis-chain-subject-13" title="Permalink to this headline">¶</a></h1>
 <p>Run the analysis.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
+
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span>
 </pre></div>
 </div>
 <p>Configuration</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">user</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;USER&#39;</span><span class="p">]</span>
-<span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;gramfort&#39;</span><span class="p">:</span>
-    <span class="n">study_path</span> <span class="o">=</span> <span class="s1">&#39;/tsi/doctorants/data_gramfort/dgw_faces&#39;</span>
-    <span class="n">N_JOBS</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="k">elif</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;jleppakangas&#39;</span> <span class="ow">or</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;mjas&#39;</span><span class="p">:</span>
-    <span class="n">study_path</span> <span class="o">=</span> <span class="s1">&#39;/tsi/doctorants/data_gramfort/dgw_faces&#39;</span>
-    <span class="n">N_JOBS</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">study_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">)</span>
-<span class="n">subjects_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;subjects&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">subjects_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;subjects&#39;</span><span class="p">)</span>
 <span class="n">meg_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">)</span>
 
 <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
@@ -409,7 +403,7 @@ No average EEG reference present in info[&quot;projs&quot;], covariance may be a
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 42.364 seconds)</p>
+(0 minutes 47.584 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_analysis_13.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_analysis_13.py</span></code></a></div>
 <div class="sphx-glr-download container">

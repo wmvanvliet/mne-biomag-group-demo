@@ -137,7 +137,7 @@ Now we fit and plot the time decoder
 
 
 **Total running time of the script:**
-(0 minutes 18.311 seconds)
+(0 minutes 21.750 seconds)
 
 
 
