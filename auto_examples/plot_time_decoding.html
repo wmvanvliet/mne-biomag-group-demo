@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Time Decoding &mdash; MNE Biomag Demo</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/flatly/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          MNE Biomag Demo</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="index.html">Subjects</a></li>
+                <li><a href="plot_group.html">Group</a></li>
+                <li><a href="plot_compare.html">Comparison</a></li>
+                <li><a href="../auto_scripts/index.html">Processing Scripts</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Analysis Gallery</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Time Decoding</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="time-decoding">
+<span id="sphx-glr-auto-examples-plot-time-decoding-py"></span><h1>Time Decoding<a class="headerlink" href="#time-decoding" title="Permalink to this headline">¶</a></h1>
+<p>Time decoding fits a Logistic Regression model for every time point in the
+epoch. In this example, we contrast the condition &#8216;famous&#8217; against &#8216;scrambled&#8217;
+using this approach. The end result is an averaging effect across sensors.
+The contrast across different sensors are combined into a single plot.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
+<span class="kn">import</span> <span class="nn">mne</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+<p>We analyze only one subject. Change <code class="docutils literal"><span class="pre">meg_dir</span></code> to point to your directory</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">subject_id</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;USER&#39;</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;gramfort&#39;</span><span class="p">:</span>
+    <span class="n">study_path</span> <span class="o">=</span> <span class="s1">&#39;/tsi/doctorants/data_gramfort/dgw_faces&#39;</span>
+    <span class="n">N_JOBS</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="k">elif</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;jleppakangas&#39;</span> <span class="ow">or</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;mjas&#39;</span><span class="p">:</span>
+    <span class="n">study_path</span> <span class="o">=</span> <span class="s1">&#39;/tsi/doctorants/data_gramfort/dgw_faces&#39;</span>
+    <span class="n">N_JOBS</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">study_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="n">subjects_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;subjects&#39;</span><span class="p">)</span>
+<span class="n">meg_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">)</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-epo.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-epo.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (None)
+        0 CTF compensation matrices available
+778 matching events found
+No baseline correction applied
+Created an SSP operator (subspace dimension = 1)
+778 matching events found
+No baseline correction applied
+Created an SSP operator (subspace dimension = 1)
+1 projection items activated
+</pre></div>
+</div>
+<p>We define the labels for the epochs by pooling together all &#8216;famous&#8217;
+and all &#8216;scrambled&#8217; epochs</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">n_famous</span><span class="p">,</span> <span class="n">n_unfamiliar</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">epochs</span><span class="p">[</span><span class="s1">&#39;face/famous&#39;</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">epochs</span><span class="p">[</span><span class="s1">&#39;scrambled&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.r_.html#numpy.r_"><span class="n">np</span><span class="o">.</span><span class="n">r_</span></a><span class="p">[</span><a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.ones.html#numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">((</span><span class="n">n_famous</span><span class="p">,</span> <span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_unfamiliar</span><span class="p">,</span> <span class="p">))]</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">concatenate_epochs</span><span class="p">([</span><span class="n">epochs</span><span class="p">[</span><span class="s1">&#39;face/famous&#39;</span><span class="p">],</span> <span class="n">epochs</span><span class="p">[</span><span class="s1">&#39;scrambled&#39;</span><span class="p">]])</span>
+<span class="n">epochs</span><span class="p">[(</span><span class="s1">&#39;face/famous&#39;</span><span class="p">,</span> <span class="s1">&#39;scrambled&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<div class="highlight-pytb"><div class="highlight"><pre><span></span><span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;/tsi/doctorants/mainak/github_repos/sphinx-gallery/sphinx_gallery/gen_rst.py&quot;</span>, line <span class="m">520</span>, in <span class="n">execute_code_block</span>
+    <span class="k">exec</span><span class="p">(</span><span class="n">code_block</span><span class="p">,</span> <span class="n">example_globals</span><span class="p">)</span>
+  File <span class="nb">&quot;&lt;string&gt;&quot;</span>, line <span class="m">6</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;/tsi/doctorants/mainak/mne-python/mne/epochs.py&quot;</span>, line <span class="m">1269</span>, in <span class="n">__getitem__</span>
+    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Attempting selection of events via &#39;</span>
+<span class="gr">KeyError</span>: <span class="n">&#39;Attempting selection of events via multiple/partial matching, but no event matches all criteria.&#39;</span>
+</pre></div>
+</div>
+<p>Let us restrict ourselves to the occipital channels</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mne.selection</span> <span class="kn">import</span> <span class="n">read_selection</span>
+<span class="n">ch_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch_name</span>
+            <span class="ow">in</span> <span class="n">read_selection</span><span class="p">(</span><span class="s1">&#39;occipital&#39;</span><span class="p">)]</span>
+<span class="n">epochs</span><span class="o">.</span><span class="n">pick_channels</span><span class="p">(</span><span class="n">ch_names</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we fit and plot the time decoder</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mne.decoding</span> <span class="kn">import</span> <span class="n">TimeDecoding</span>
+
+<span class="n">times</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mf">0.005</span><span class="p">)</span> <span class="c1"># fit a classifier only ever 5 ms</span>
+<span class="n">td</span> <span class="o">=</span> <span class="n">TimeDecoding</span><span class="p">(</span><span class="n">predict_mode</span><span class="o">=</span><span class="s1">&#39;cross-validation&#39;</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">)</span>
+<span class="n">td</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">td</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
+<span class="n">td</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time decoding (famous vs. scrambled)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 6.124 seconds)</p>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/plot_time_decoding.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_time_decoding.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/plot_time_decoding.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">plot_time_decoding.ipynb</span></code></a></div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-20.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

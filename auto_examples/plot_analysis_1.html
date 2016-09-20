@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plotting the analysis chain (Subject 1) &mdash; MNE Biomag Demo</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/flatly/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="up" title="Analysis Gallery" href="index.html" />
+    <link rel="next" title="Plotting the analysis chain (Subject 2)" href="plot_analysis_2.html" />
+    <link rel="prev" title="Group analysis" href="group.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          MNE Biomag Demo</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="index.html">Subjects</a></li>
+                <li><a href="plot_group.html">Group</a></li>
+                <li><a href="plot_compare.html">Comparison</a></li>
+                <li><a href="../auto_scripts/index.html">Processing Scripts</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Analysis Gallery</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Plotting the analysis chain (Subject 1)</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="plotting-the-analysis-chain-subject-1">
+<span id="sphx-glr-auto-examples-plot-analysis-1-py"></span><h1>Plotting the analysis chain (Subject 1)<a class="headerlink" href="#plotting-the-analysis-chain-subject-1" title="Permalink to this headline">¶</a></h1>
+<p>Run the analysis.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">mne</span>
+</pre></div>
+</div>
+<p>Configuration</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">user</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;USER&#39;</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;gramfort&#39;</span><span class="p">:</span>
+    <span class="n">study_path</span> <span class="o">=</span> <span class="s1">&#39;/tsi/doctorants/data_gramfort/dgw_faces&#39;</span>
+    <span class="n">N_JOBS</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="k">elif</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;jleppakangas&#39;</span> <span class="ow">or</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;mjas&#39;</span><span class="p">:</span>
+    <span class="n">study_path</span> <span class="o">=</span> <span class="s1">&#39;/tsi/doctorants/data_gramfort/dgw_faces&#39;</span>
+    <span class="n">N_JOBS</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">study_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="n">subjects_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;subjects&#39;</span><span class="p">)</span>
+<span class="n">meg_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">)</span>
+
+<span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;run_01_raw.fif&#39;</span><span class="p">)</span>
+<span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+
+<span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss_raw.fif&#39;</span><span class="p">)</span>
+<span class="n">raw_filt</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub001/MEG/run_01_raw.fif...
+    Read a total of 8 projection items:
+        mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
+    Range : 268400 ... 815099 =    244.000 ...   740.999 secs
+Ready.
+Current compensation grade : 0
+Adding average EEG reference projection.
+1 projection items deactivated
+Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/run_01_filt_sss_raw.fif...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 74)  idle
+    Range : 268400 ... 815099 =    244.000 ...   740.999 secs
+Ready.
+Current compensation grade : 0
+</pre></div>
+</div>
+<p>Filtering</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">()</span>
+<span class="n">raw_filt</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_001.png"><img alt="../_images/sphx_glr_plot_analysis_1_001.png" src="../_images/sphx_glr_plot_analysis_1_001.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_002.png"><img alt="../_images/sphx_glr_plot_analysis_1_002.png" src="../_images/sphx_glr_plot_analysis_1_002.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+</pre></div>
+</div>
+<p>Events</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_events</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss-eve.fif&#39;</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_events</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Events from run 01&#39;</span><span class="p">)</span>
+
+<span class="n">epochs</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">subject</span> <span class="o">+</span> <span class="s1">&#39;-epo.fif&#39;</span><span class="p">))</span>
+<span class="n">epochs</span><span class="o">.</span><span class="n">plot_drop_log</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_003.png"><img alt="../_images/sphx_glr_plot_analysis_1_003.png" src="../_images/sphx_glr_plot_analysis_1_003.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_004.png"><img alt="../_images/sphx_glr_plot_analysis_1_004.png" src="../_images/sphx_glr_plot_analysis_1_004.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>More events than colors available. You should pass a list of unique colors.
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-epo.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (None)
+        0 CTF compensation matrices available
+778 matching events found
+No baseline correction applied
+Created an SSP operator (subspace dimension = 1)
+778 matching events found
+No baseline correction applied
+Created an SSP operator (subspace dimension = 1)
+1 projection items activated
+</pre></div>
+</div>
+<p>Evoked responses</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">evo_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">evoked</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">evo_fname</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (famous)
+        0 CTF compensation matrices available
+        nave = 260 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (scrambled)
+        0 CTF compensation matrices available
+        nave = 265 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (unfamiliar)
+        0 CTF compensation matrices available
+        nave = 253 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 175 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (faces)
+        0 CTF compensation matrices available
+        nave = 513 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+</pre></div>
+</div>
+<p>Faces</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">famous_evo</span><span class="p">,</span> <span class="n">scrambled_evo</span><span class="p">,</span> <span class="n">unfamiliar_evo</span><span class="p">,</span> <span class="n">contrast_evo</span><span class="p">,</span> <span class="n">faces_evo</span> <span class="o">=</span> <span class="n">evoked</span>
+<span class="n">faces_evo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;eeg&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)},</span>
+               <span class="n">window_title</span><span class="o">=</span><span class="s1">&#39;Faces </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_1_005.png" class="align-center" src="../_images/sphx_glr_plot_analysis_1_005.png" />
+<p>Famous</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">famous_evo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                <span class="n">window_title</span><span class="o">=</span><span class="s1">&#39;Famous </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_1_006.png" class="align-center" src="../_images/sphx_glr_plot_analysis_1_006.png" />
+<p>Scrambled</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">scrambled_evo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                   <span class="n">window_title</span><span class="o">=</span><span class="s1">&#39;Scrambled </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_1_007.png" class="align-center" src="../_images/sphx_glr_plot_analysis_1_007.png" />
+<p>Unfamiliar</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">unfamiliar_evo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                    <span class="n">window_title</span><span class="o">=</span><span class="s1">&#39;Unfamiliar </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_1_008.png" class="align-center" src="../_images/sphx_glr_plot_analysis_1_008.png" />
+<p>Faces - scrambled</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">contrast_evo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                  <span class="n">window_title</span><span class="o">=</span><span class="s1">&#39;Faces - scrambled </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_1_009.png" class="align-center" src="../_images/sphx_glr_plot_analysis_1_009.png" />
+<p>Topomaps</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">)</span>
+<span class="n">famous_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Famous </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">scrambled_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scrambled </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">unfamiliar_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Unfamiliar </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">contrast_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Faces - scrambled </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_010.png"><img alt="../_images/sphx_glr_plot_analysis_1_010.png" src="../_images/sphx_glr_plot_analysis_1_010.png" style="width: 517.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_011.png"><img alt="../_images/sphx_glr_plot_analysis_1_011.png" src="../_images/sphx_glr_plot_analysis_1_011.png" style="width: 517.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_012.png"><img alt="../_images/sphx_glr_plot_analysis_1_012.png" src="../_images/sphx_glr_plot_analysis_1_012.png" style="width: 517.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_013.png"><img alt="../_images/sphx_glr_plot_analysis_1_013.png" src="../_images/sphx_glr_plot_analysis_1_013.png" style="width: 517.0px; height: 84.6px;" /></a>
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
+Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
+Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
+Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
+</pre></div>
+</div>
+<p>TFR</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fpower</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-faces-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">fitc</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-itc_faces-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">spower</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-scrambled-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sitc</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-itc_scrambled-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">channel</span> <span class="o">=</span> <span class="s1">&#39;EEG070&#39;</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">fpower</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">channel</span><span class="p">)]</span>
+<span class="n">fpower</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Faces power </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;logratio&#39;</span><span class="p">)</span>
+<span class="n">spower</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scrambled power </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;logratio&#39;</span><span class="p">)</span>
+<span class="n">fitc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Faces ITC </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+          <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;logratio&#39;</span><span class="p">)</span>
+<span class="n">sitc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scrambled ITC </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+          <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;logratio&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_014.png"><img alt="../_images/sphx_glr_plot_analysis_1_014.png" src="../_images/sphx_glr_plot_analysis_1_014.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_015.png"><img alt="../_images/sphx_glr_plot_analysis_1_015.png" src="../_images/sphx_glr_plot_analysis_1_015.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_016.png"><img alt="../_images/sphx_glr_plot_analysis_1_016.png" src="../_images/sphx_glr_plot_analysis_1_016.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_017.png"><img alt="../_images/sphx_glr_plot_analysis_1_017.png" src="../_images/sphx_glr_plot_analysis_1_017.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-faces-tfr.h5 ...
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-itc_faces-tfr.h5 ...
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-scrambled-tfr.h5 ...
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-itc_scrambled-tfr.h5 ...
+Applying baseline correction (mode: logratio)
+Applying baseline correction (mode: logratio)
+Applying baseline correction (mode: logratio)
+Applying baseline correction (mode: logratio)
+</pre></div>
+</div>
+<p>Covariance</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_cov</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-cov.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
+<span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_cov</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">faces_evo</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
+<span class="n">faces_evo</span><span class="o">.</span><span class="n">plot_white</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_018.png"><img alt="../_images/sphx_glr_plot_analysis_1_018.png" src="../_images/sphx_glr_plot_analysis_1_018.png" style="width: 352.5px; height: 126.9px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_019.png"><img alt="../_images/sphx_glr_plot_analysis_1_019.png" src="../_images/sphx_glr_plot_analysis_1_019.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_020.png"><img alt="../_images/sphx_glr_plot_analysis_1_020.png" src="../_images/sphx_glr_plot_analysis_1_020.png" style="width: 413.6px; height: 310.2px;" /></a>
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>376 x 376 full covariance (kind = 1) found.
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+SSS has been applied to data. Showing mag and grad whitening jointly.
+estimated rank (eeg): 68
+estimated rank (mag + grad): 108
+Setting small MEG eigenvalues to zero.
+Not doing PCA for MEG.
+Setting small EEG eigenvalues to zero.
+Not doing PCA for EEG.
+No average EEG reference present in info[&quot;projs&quot;], covariance may be adversely affected. Consider recomputing covariance using a raw file with an average eeg reference projector added.
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 35.861 seconds)</p>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/plot_analysis_1.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_analysis_1.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/plot_analysis_1.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">plot_analysis_1.ipynb</span></code></a></div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-20.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
