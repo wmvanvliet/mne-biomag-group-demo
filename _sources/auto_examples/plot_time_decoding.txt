@@ -52,23 +52,6 @@ We analyze only one subject. Change ``meg_dir`` to point to your directory
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-epo.fif ...
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 70) active
-        Found the data of interest:
-            t =    -200.00 ...     800.00 ms (None)
-            0 CTF compensation matrices available
-    778 matching events found
-    No baseline correction applied
-    Created an SSP operator (subspace dimension = 1)
-    778 matching events found
-    No baseline correction applied
-    Created an SSP operator (subspace dimension = 1)
-    1 projection items activated
 
 
 We define the labels for the epochs by pooling together all 'famous'
@@ -87,14 +70,6 @@ and all 'scrambled' epochs
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    525 matching events found
-    No baseline correction applied
-    Created an SSP operator (subspace dimension = 1)
-    0 bad epochs dropped
 
 
 Let us restrict ourselves to the occipital channels
@@ -136,8 +111,7 @@ Now we fit and plot the time decoder
 
 
 
-**Total running time of the script:**
-(0 minutes 21.750 seconds)
+**Total running time of the script:** ( 0 minutes  32.024 seconds)
 
 
 
@@ -146,9 +120,10 @@ Now we fit and plot the time decoder
     :download:`Download Python source code: plot_time_decoding.py <plot_time_decoding.py>`
 
 
+
 .. container:: sphx-glr-download
 
-    :download:`Download IPython notebook: plot_time_decoding.ipynb <plot_time_decoding.ipynb>`
+    :download:`Download Jupyter notebook: plot_time_decoding.ipynb <plot_time_decoding.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

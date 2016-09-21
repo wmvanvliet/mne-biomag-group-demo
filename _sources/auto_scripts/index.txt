@@ -9,7 +9,7 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="blabla ">
+    <div class="sphx-glr-thumbcontainer" tooltip="Create BEM surfaces using watershed algorithm. ">
 
 .. only:: html
 
@@ -49,26 +49,6 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip=" ">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_04-run_ica_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_04-run_ica.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/04-run_ica
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="The data are bandpass filtered (1 - 40 Hz) using linear-phase fir filter with delay compensatio...">
 
 .. only:: html
@@ -89,13 +69,13 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="blabla ">
+    <div class="sphx-glr-thumbcontainer" tooltip=" ">
 
 .. only:: html
 
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_06-make_evoked_thumb.png
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_04-run_ica_thumb.png
 
-        :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
+        :ref:`sphx_glr_auto_scripts_04-run_ica.py`
 
 .. raw:: html
 
@@ -105,51 +85,11 @@ Processing scripts
 .. toctree::
    :hidden:
 
-   /auto_scripts/06-make_evoked
+   /auto_scripts/04-run_ica
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="blabla ">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_09-make_forward_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_09-make_forward.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/09-make_forward
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="blabla ">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_10-make_inverse_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_10-make_inverse.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/10-make_inverse
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="blabla ">
+    <div class="sphx-glr-thumbcontainer" tooltip="The epoched data is transformed to time-frequency domain using morlet wavelets. Faces and scram...">
 
 .. only:: html
 
@@ -169,7 +109,67 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="blabla ">
+    <div class="sphx-glr-thumbcontainer" tooltip="The evoked data sets are created by averaging different categories of epochs. The evoked data i...">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_06-make_evoked_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/06-make_evoked
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Compute inverse solution for each evoked data set. ">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_10-make_inverse_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_10-make_inverse.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/10-make_inverse
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Calculate forward solution for MEG channels. ">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_09-make_forward_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_09-make_forward.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/09-make_forward
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The sensor level data are averaged for EEG channels. Source estimates are computed for contrast...">
 
 .. only:: html
 
@@ -209,7 +209,7 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="blabla ">
+    <div class="sphx-glr-thumbcontainer" tooltip="The epochs are constructed by using the events created in script 03. MNE supports hierarchical ...">
 
 .. only:: html
 
@@ -250,6 +250,17 @@ Processing scripts
 
     <div style='clear:both'></div>
 
+
+
+.. container:: sphx-glr-download
+
+    :download:`Download all examples in Python source code: auto_scripts_python.zip </auto_scripts/auto_scripts_python.zip>`
+
+
+
+.. container:: sphx-glr-download
+
+    :download:`Download all examples in Jupyter notebook files: auto_scripts_jupyter.zip </auto_scripts/auto_scripts_jupyter.zip>`
 
 .. rst-class:: sphx-glr-signature
 

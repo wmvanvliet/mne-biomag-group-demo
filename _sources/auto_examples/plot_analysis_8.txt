@@ -14,7 +14,6 @@ Run the analysis.
 .. code-block:: python
 
 
-    import sys
     import os
     import os.path as op
     import numpy as np
@@ -54,27 +53,8 @@ Configuration
 
  Out::
 
-    Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub008/MEG/run_01_raw.fif...
-        Read a total of 8 projection items:
-            mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
-            mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
-            mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
-            mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
-            mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
-            grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
-            grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
-            grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
-        Range : 147400 ... 689699 =    134.000 ...   626.999 secs
-    Ready.
-    Current compensation grade : 0
-    Adding average EEG reference projection.
-    1 projection items deactivated
-    Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub008/run_01_filt_sss_raw.fif...
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 74)  idle
-        Range : 147400 ... 689699 =    134.000 ...   626.999 secs
-    Ready.
-    Current compensation grade : 0
+    add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+    add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
 
 
 Filtering
@@ -103,16 +83,6 @@ Filtering
             :scale: 47
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Effective window size : 1.862 (s)
-    Effective window size : 1.862 (s)
-    Effective window size : 1.862 (s)
-    Effective window size : 1.862 (s)
-    Effective window size : 1.862 (s)
-    Effective window size : 1.862 (s)
 
 
 Events
@@ -145,23 +115,6 @@ Events
             :scale: 47
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub008/sub008-epo.fif ...
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 70) active
-        Found the data of interest:
-            t =    -200.00 ...     800.00 ms (None)
-            0 CTF compensation matrices available
-    876 matching events found
-    No baseline correction applied
-    Created an SSP operator (subspace dimension = 1)
-    876 matching events found
-    No baseline correction applied
-    Created an SSP operator (subspace dimension = 1)
-    1 projection items activated
 
 
 Evoked responses
@@ -177,56 +130,6 @@ Evoked responses
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub008/sub008-ave.fif ...
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 70) active
-        Found the data of interest:
-            t =    -200.00 ...     800.00 ms (famous)
-            0 CTF compensation matrices available
-            nave = 294 - aspect type = 100
-    Projections have already been applied. Setting proj attribute to True.
-    No baseline correction applied
-    No baseline correction applied
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 70) active
-        Found the data of interest:
-            t =    -200.00 ...     800.00 ms (scrambled)
-            0 CTF compensation matrices available
-            nave = 293 - aspect type = 100
-    Projections have already been applied. Setting proj attribute to True.
-    No baseline correction applied
-    No baseline correction applied
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 70) active
-        Found the data of interest:
-            t =    -200.00 ...     800.00 ms (unfamiliar)
-            0 CTF compensation matrices available
-            nave = 289 - aspect type = 100
-    Projections have already been applied. Setting proj attribute to True.
-    No baseline correction applied
-    No baseline correction applied
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 70) active
-        Found the data of interest:
-            t =    -200.00 ...     800.00 ms (contrast)
-            0 CTF compensation matrices available
-            nave = 195 - aspect type = 100
-    Projections have already been applied. Setting proj attribute to True.
-    No baseline correction applied
-    No baseline correction applied
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 70) active
-        Found the data of interest:
-            t =    -200.00 ...     800.00 ms (faces)
-            0 CTF compensation matrices available
-            nave = 583 - aspect type = 100
-    Projections have already been applied. Setting proj attribute to True.
-    No baseline correction applied
-    No baseline correction applied
 
 
 Faces
@@ -359,14 +262,6 @@ Topomaps
             :scale: 47
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
-    Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
-    Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
-    Disabling interactive colorbar for multiple axes. Turn interactivity on explicitly by passing cmap as a tuple.
 
 
 TFR
@@ -422,18 +317,6 @@ TFR
             :scale: 47
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub008/sub008-faces-tfr.h5 ...
-    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub008/sub008-itc_faces-tfr.h5 ...
-    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub008/sub008-scrambled-tfr.h5 ...
-    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub008/sub008-itc_scrambled-tfr.h5 ...
-    Applying baseline correction (mode: logratio)
-    Applying baseline correction (mode: logratio)
-    Applying baseline correction (mode: logratio)
-    Applying baseline correction (mode: logratio)
 
 
 Covariance
@@ -471,21 +354,10 @@ Covariance
 
  Out::
 
-    376 x 376 full covariance (kind = 1) found.
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 70) active
-    SSS has been applied to data. Showing mag and grad whitening jointly.
-    estimated rank (eeg): 67
-    estimated rank (mag + grad): 177
-    Setting small MEG eigenvalues to zero.
-    Not doing PCA for MEG.
-    Setting small EEG eigenvalues to zero.
-    Not doing PCA for EEG.
     No average EEG reference present in info["projs"], covariance may be adversely affected. Consider recomputing covariance using a raw file with an average eeg reference projector added.
 
 
-**Total running time of the script:**
-(0 minutes 49.853 seconds)
+**Total running time of the script:** ( 1 minutes  11.575 seconds)
 
 
 
@@ -494,9 +366,10 @@ Covariance
     :download:`Download Python source code: plot_analysis_8.py <plot_analysis_8.py>`
 
 
+
 .. container:: sphx-glr-download
 
-    :download:`Download IPython notebook: plot_analysis_8.ipynb <plot_analysis_8.ipynb>`
+    :download:`Download Jupyter notebook: plot_analysis_8.ipynb <plot_analysis_8.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

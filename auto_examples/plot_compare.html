@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Comparison between subjects &mdash; MNE Biomag Demo</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/flatly/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="up" title="Analysis Gallery" href="index.html" />
+    <link rel="next" title="Group analysis" href="plot_group.html" />
+    <link rel="prev" title="Analysis Gallery" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          MNE Biomag Demo</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="index.html">Subjects</a></li>
+                <li><a href="plot_group.html">Group</a></li>
+                <li><a href="#">Comparison</a></li>
+                <li><a href="../auto_scripts/index.html">Processing Scripts</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Analysis Gallery</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Comparison between subjects</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="comparison-between-subjects">
+<span id="sphx-glr-auto-examples-plot-compare-py"></span><h1>Comparison between subjects<a class="headerlink" href="#comparison-between-subjects" title="Permalink to this headline">¶</a></h1>
+<p>All the subjects compared.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">mne</span>
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span>
+
+<span class="n">meg_dir</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">)</span>
+<span class="n">evokeds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
+    <span class="n">fname_in</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+    <span class="n">evokeds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">fname_in</span><span class="p">))</span>
+<span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Evoked responses on EEG.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">picks</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">evokeds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">evoked</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">evokeds</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">comm</span> <span class="o">=</span> <span class="n">evoked</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span><span class="o">.</span><span class="n">comment</span>
+        <span class="n">evoked</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Subject </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                                                      <span class="n">comm</span><span class="p">))</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_001.png"><img alt="../_images/sphx_glr_plot_compare_001.png" src="../_images/sphx_glr_plot_compare_001.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_002.png"><img alt="../_images/sphx_glr_plot_compare_002.png" src="../_images/sphx_glr_plot_compare_002.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_003.png"><img alt="../_images/sphx_glr_plot_compare_003.png" src="../_images/sphx_glr_plot_compare_003.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_004.png"><img alt="../_images/sphx_glr_plot_compare_004.png" src="../_images/sphx_glr_plot_compare_004.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_005.png"><img alt="../_images/sphx_glr_plot_compare_005.png" src="../_images/sphx_glr_plot_compare_005.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_006.png"><img alt="../_images/sphx_glr_plot_compare_006.png" src="../_images/sphx_glr_plot_compare_006.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_007.png"><img alt="../_images/sphx_glr_plot_compare_007.png" src="../_images/sphx_glr_plot_compare_007.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_008.png"><img alt="../_images/sphx_glr_plot_compare_008.png" src="../_images/sphx_glr_plot_compare_008.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_009.png"><img alt="../_images/sphx_glr_plot_compare_009.png" src="../_images/sphx_glr_plot_compare_009.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_010.png"><img alt="../_images/sphx_glr_plot_compare_010.png" src="../_images/sphx_glr_plot_compare_010.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_011.png"><img alt="../_images/sphx_glr_plot_compare_011.png" src="../_images/sphx_glr_plot_compare_011.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_012.png"><img alt="../_images/sphx_glr_plot_compare_012.png" src="../_images/sphx_glr_plot_compare_012.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_013.png"><img alt="../_images/sphx_glr_plot_compare_013.png" src="../_images/sphx_glr_plot_compare_013.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_014.png"><img alt="../_images/sphx_glr_plot_compare_014.png" src="../_images/sphx_glr_plot_compare_014.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_015.png"><img alt="../_images/sphx_glr_plot_compare_015.png" src="../_images/sphx_glr_plot_compare_015.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_016.png"><img alt="../_images/sphx_glr_plot_compare_016.png" src="../_images/sphx_glr_plot_compare_016.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_017.png"><img alt="../_images/sphx_glr_plot_compare_017.png" src="../_images/sphx_glr_plot_compare_017.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_018.png"><img alt="../_images/sphx_glr_plot_compare_018.png" src="../_images/sphx_glr_plot_compare_018.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_019.png"><img alt="../_images/sphx_glr_plot_compare_019.png" src="../_images/sphx_glr_plot_compare_019.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_020.png"><img alt="../_images/sphx_glr_plot_compare_020.png" src="../_images/sphx_glr_plot_compare_020.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_021.png"><img alt="../_images/sphx_glr_plot_compare_021.png" src="../_images/sphx_glr_plot_compare_021.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_022.png"><img alt="../_images/sphx_glr_plot_compare_022.png" src="../_images/sphx_glr_plot_compare_022.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_023.png"><img alt="../_images/sphx_glr_plot_compare_023.png" src="../_images/sphx_glr_plot_compare_023.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_024.png"><img alt="../_images/sphx_glr_plot_compare_024.png" src="../_images/sphx_glr_plot_compare_024.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_025.png"><img alt="../_images/sphx_glr_plot_compare_025.png" src="../_images/sphx_glr_plot_compare_025.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_026.png"><img alt="../_images/sphx_glr_plot_compare_026.png" src="../_images/sphx_glr_plot_compare_026.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_027.png"><img alt="../_images/sphx_glr_plot_compare_027.png" src="../_images/sphx_glr_plot_compare_027.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_028.png"><img alt="../_images/sphx_glr_plot_compare_028.png" src="../_images/sphx_glr_plot_compare_028.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_029.png"><img alt="../_images/sphx_glr_plot_compare_029.png" src="../_images/sphx_glr_plot_compare_029.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_030.png"><img alt="../_images/sphx_glr_plot_compare_030.png" src="../_images/sphx_glr_plot_compare_030.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_031.png"><img alt="../_images/sphx_glr_plot_compare_031.png" src="../_images/sphx_glr_plot_compare_031.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_032.png"><img alt="../_images/sphx_glr_plot_compare_032.png" src="../_images/sphx_glr_plot_compare_032.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_033.png"><img alt="../_images/sphx_glr_plot_compare_033.png" src="../_images/sphx_glr_plot_compare_033.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_034.png"><img alt="../_images/sphx_glr_plot_compare_034.png" src="../_images/sphx_glr_plot_compare_034.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_035.png"><img alt="../_images/sphx_glr_plot_compare_035.png" src="../_images/sphx_glr_plot_compare_035.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_036.png"><img alt="../_images/sphx_glr_plot_compare_036.png" src="../_images/sphx_glr_plot_compare_036.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_037.png"><img alt="../_images/sphx_glr_plot_compare_037.png" src="../_images/sphx_glr_plot_compare_037.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_038.png"><img alt="../_images/sphx_glr_plot_compare_038.png" src="../_images/sphx_glr_plot_compare_038.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_039.png"><img alt="../_images/sphx_glr_plot_compare_039.png" src="../_images/sphx_glr_plot_compare_039.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_040.png"><img alt="../_images/sphx_glr_plot_compare_040.png" src="../_images/sphx_glr_plot_compare_040.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_041.png"><img alt="../_images/sphx_glr_plot_compare_041.png" src="../_images/sphx_glr_plot_compare_041.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_042.png"><img alt="../_images/sphx_glr_plot_compare_042.png" src="../_images/sphx_glr_plot_compare_042.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_043.png"><img alt="../_images/sphx_glr_plot_compare_043.png" src="../_images/sphx_glr_plot_compare_043.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_044.png"><img alt="../_images/sphx_glr_plot_compare_044.png" src="../_images/sphx_glr_plot_compare_044.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_045.png"><img alt="../_images/sphx_glr_plot_compare_045.png" src="../_images/sphx_glr_plot_compare_045.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_046.png"><img alt="../_images/sphx_glr_plot_compare_046.png" src="../_images/sphx_glr_plot_compare_046.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_047.png"><img alt="../_images/sphx_glr_plot_compare_047.png" src="../_images/sphx_glr_plot_compare_047.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_048.png"><img alt="../_images/sphx_glr_plot_compare_048.png" src="../_images/sphx_glr_plot_compare_048.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_049.png"><img alt="../_images/sphx_glr_plot_compare_049.png" src="../_images/sphx_glr_plot_compare_049.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_050.png"><img alt="../_images/sphx_glr_plot_compare_050.png" src="../_images/sphx_glr_plot_compare_050.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_051.png"><img alt="../_images/sphx_glr_plot_compare_051.png" src="../_images/sphx_glr_plot_compare_051.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_052.png"><img alt="../_images/sphx_glr_plot_compare_052.png" src="../_images/sphx_glr_plot_compare_052.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_053.png"><img alt="../_images/sphx_glr_plot_compare_053.png" src="../_images/sphx_glr_plot_compare_053.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_054.png"><img alt="../_images/sphx_glr_plot_compare_054.png" src="../_images/sphx_glr_plot_compare_054.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_055.png"><img alt="../_images/sphx_glr_plot_compare_055.png" src="../_images/sphx_glr_plot_compare_055.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_056.png"><img alt="../_images/sphx_glr_plot_compare_056.png" src="../_images/sphx_glr_plot_compare_056.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_057.png"><img alt="../_images/sphx_glr_plot_compare_057.png" src="../_images/sphx_glr_plot_compare_057.png" style="width: 376.0px; height: 197.4px;" /></a>
+</li>
+</ul>
+<p>Topomaps</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">evoked</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">evokeds</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">comm</span> <span class="o">=</span> <span class="n">evoked</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span><span class="o">.</span><span class="n">comment</span>
+        <span class="n">evoked</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span>
+                                  <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Subject </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">comm</span><span class="p">))</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_058.png"><img alt="../_images/sphx_glr_plot_compare_058.png" src="../_images/sphx_glr_plot_compare_058.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_059.png"><img alt="../_images/sphx_glr_plot_compare_059.png" src="../_images/sphx_glr_plot_compare_059.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_060.png"><img alt="../_images/sphx_glr_plot_compare_060.png" src="../_images/sphx_glr_plot_compare_060.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_061.png"><img alt="../_images/sphx_glr_plot_compare_061.png" src="../_images/sphx_glr_plot_compare_061.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_062.png"><img alt="../_images/sphx_glr_plot_compare_062.png" src="../_images/sphx_glr_plot_compare_062.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_063.png"><img alt="../_images/sphx_glr_plot_compare_063.png" src="../_images/sphx_glr_plot_compare_063.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_064.png"><img alt="../_images/sphx_glr_plot_compare_064.png" src="../_images/sphx_glr_plot_compare_064.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_065.png"><img alt="../_images/sphx_glr_plot_compare_065.png" src="../_images/sphx_glr_plot_compare_065.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_066.png"><img alt="../_images/sphx_glr_plot_compare_066.png" src="../_images/sphx_glr_plot_compare_066.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_067.png"><img alt="../_images/sphx_glr_plot_compare_067.png" src="../_images/sphx_glr_plot_compare_067.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_068.png"><img alt="../_images/sphx_glr_plot_compare_068.png" src="../_images/sphx_glr_plot_compare_068.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_069.png"><img alt="../_images/sphx_glr_plot_compare_069.png" src="../_images/sphx_glr_plot_compare_069.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_070.png"><img alt="../_images/sphx_glr_plot_compare_070.png" src="../_images/sphx_glr_plot_compare_070.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_071.png"><img alt="../_images/sphx_glr_plot_compare_071.png" src="../_images/sphx_glr_plot_compare_071.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_072.png"><img alt="../_images/sphx_glr_plot_compare_072.png" src="../_images/sphx_glr_plot_compare_072.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_073.png"><img alt="../_images/sphx_glr_plot_compare_073.png" src="../_images/sphx_glr_plot_compare_073.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_074.png"><img alt="../_images/sphx_glr_plot_compare_074.png" src="../_images/sphx_glr_plot_compare_074.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_075.png"><img alt="../_images/sphx_glr_plot_compare_075.png" src="../_images/sphx_glr_plot_compare_075.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_076.png"><img alt="../_images/sphx_glr_plot_compare_076.png" src="../_images/sphx_glr_plot_compare_076.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_077.png"><img alt="../_images/sphx_glr_plot_compare_077.png" src="../_images/sphx_glr_plot_compare_077.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_078.png"><img alt="../_images/sphx_glr_plot_compare_078.png" src="../_images/sphx_glr_plot_compare_078.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_079.png"><img alt="../_images/sphx_glr_plot_compare_079.png" src="../_images/sphx_glr_plot_compare_079.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_080.png"><img alt="../_images/sphx_glr_plot_compare_080.png" src="../_images/sphx_glr_plot_compare_080.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_081.png"><img alt="../_images/sphx_glr_plot_compare_081.png" src="../_images/sphx_glr_plot_compare_081.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_082.png"><img alt="../_images/sphx_glr_plot_compare_082.png" src="../_images/sphx_glr_plot_compare_082.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_083.png"><img alt="../_images/sphx_glr_plot_compare_083.png" src="../_images/sphx_glr_plot_compare_083.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_084.png"><img alt="../_images/sphx_glr_plot_compare_084.png" src="../_images/sphx_glr_plot_compare_084.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_085.png"><img alt="../_images/sphx_glr_plot_compare_085.png" src="../_images/sphx_glr_plot_compare_085.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_086.png"><img alt="../_images/sphx_glr_plot_compare_086.png" src="../_images/sphx_glr_plot_compare_086.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_087.png"><img alt="../_images/sphx_glr_plot_compare_087.png" src="../_images/sphx_glr_plot_compare_087.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_088.png"><img alt="../_images/sphx_glr_plot_compare_088.png" src="../_images/sphx_glr_plot_compare_088.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_089.png"><img alt="../_images/sphx_glr_plot_compare_089.png" src="../_images/sphx_glr_plot_compare_089.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_090.png"><img alt="../_images/sphx_glr_plot_compare_090.png" src="../_images/sphx_glr_plot_compare_090.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_091.png"><img alt="../_images/sphx_glr_plot_compare_091.png" src="../_images/sphx_glr_plot_compare_091.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_092.png"><img alt="../_images/sphx_glr_plot_compare_092.png" src="../_images/sphx_glr_plot_compare_092.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_093.png"><img alt="../_images/sphx_glr_plot_compare_093.png" src="../_images/sphx_glr_plot_compare_093.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_094.png"><img alt="../_images/sphx_glr_plot_compare_094.png" src="../_images/sphx_glr_plot_compare_094.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_095.png"><img alt="../_images/sphx_glr_plot_compare_095.png" src="../_images/sphx_glr_plot_compare_095.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_096.png"><img alt="../_images/sphx_glr_plot_compare_096.png" src="../_images/sphx_glr_plot_compare_096.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_097.png"><img alt="../_images/sphx_glr_plot_compare_097.png" src="../_images/sphx_glr_plot_compare_097.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_098.png"><img alt="../_images/sphx_glr_plot_compare_098.png" src="../_images/sphx_glr_plot_compare_098.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_099.png"><img alt="../_images/sphx_glr_plot_compare_099.png" src="../_images/sphx_glr_plot_compare_099.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_100.png"><img alt="../_images/sphx_glr_plot_compare_100.png" src="../_images/sphx_glr_plot_compare_100.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_101.png"><img alt="../_images/sphx_glr_plot_compare_101.png" src="../_images/sphx_glr_plot_compare_101.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_102.png"><img alt="../_images/sphx_glr_plot_compare_102.png" src="../_images/sphx_glr_plot_compare_102.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_103.png"><img alt="../_images/sphx_glr_plot_compare_103.png" src="../_images/sphx_glr_plot_compare_103.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_104.png"><img alt="../_images/sphx_glr_plot_compare_104.png" src="../_images/sphx_glr_plot_compare_104.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_105.png"><img alt="../_images/sphx_glr_plot_compare_105.png" src="../_images/sphx_glr_plot_compare_105.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_106.png"><img alt="../_images/sphx_glr_plot_compare_106.png" src="../_images/sphx_glr_plot_compare_106.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_107.png"><img alt="../_images/sphx_glr_plot_compare_107.png" src="../_images/sphx_glr_plot_compare_107.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_108.png"><img alt="../_images/sphx_glr_plot_compare_108.png" src="../_images/sphx_glr_plot_compare_108.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_109.png"><img alt="../_images/sphx_glr_plot_compare_109.png" src="../_images/sphx_glr_plot_compare_109.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_110.png"><img alt="../_images/sphx_glr_plot_compare_110.png" src="../_images/sphx_glr_plot_compare_110.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_111.png"><img alt="../_images/sphx_glr_plot_compare_111.png" src="../_images/sphx_glr_plot_compare_111.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_112.png"><img alt="../_images/sphx_glr_plot_compare_112.png" src="../_images/sphx_glr_plot_compare_112.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_113.png"><img alt="../_images/sphx_glr_plot_compare_113.png" src="../_images/sphx_glr_plot_compare_113.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_compare_114.png"><img alt="../_images/sphx_glr_plot_compare_114.png" src="../_images/sphx_glr_plot_compare_114.png" style="width: 376.0px; height: 84.6px;" /></a>
+</li>
+</ul>
+<p><strong>Total running time of the script:</strong> ( 7 minutes  57.023 seconds)</p>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/plot_compare.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/plot_compare.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_compare.ipynb</span></code></a></div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-21.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

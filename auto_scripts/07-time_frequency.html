@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Blabla &mdash; MNE Biomag Demo</title>
+    <title>Time-frequency representation &mdash; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -85,7 +85,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Blabla</a></li>
+<li><a class="reference internal" href="#">Time-frequency representation</a></li>
 </ul>
 </ul>
 </li>
@@ -117,27 +117,30 @@
   <div class="row">
     <div class="col-md-12 content">
       
-  <div class="section" id="blabla">
-<span id="sphx-glr-auto-scripts-07-time-frequency-py"></span><h1>Blabla<a class="headerlink" href="#blabla" title="Permalink to this headline">¶</a></h1>
-<p>blabla</p>
+  <div class="section" id="time-frequency-representation">
+<span id="sphx-glr-auto-scripts-07-time-frequency-py"></span><h1>Time-frequency representation<a class="headerlink" href="#time-frequency-representation" title="Permalink to this headline">¶</a></h1>
+<p>The epoched data is transformed to time-frequency domain using morlet wavelets.
+Faces and scrambled data sets are used and for both of them, the average power
+and inter-trial coherence are computed and saved to disk. Only channel &#8216;EEG070&#8217;
+is used to save time.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
 <span class="kn">from</span> <span class="nn">mne.parallel</span> <span class="kn">import</span> <span class="n">parallel_func</span>
 
-<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span><span class="p">,</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span>
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span>
 
 <span class="n">freqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
 <span class="n">n_cycles</span> <span class="o">=</span> <span class="n">freqs</span> <span class="o">/</span> <span class="mf">2.</span>
+
 
 <span class="k">def</span> <span class="nf">run_time_frequency</span><span class="p">(</span><span class="n">subject_id</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;processing subject: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span><span class="p">)</span>
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="n">data_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">epochs</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-epo.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
-    <span class="c1">#evokeds = mne.read_evokeds(op.join(data_path, &#39;%s-ave.fif&#39; % subject))</span>
-    <span class="c1">#faces = evokeds[-1]</span>
+
     <span class="n">faces</span> <span class="o">=</span> <span class="n">epochs</span><span class="p">[</span><span class="s1">&#39;face&#39;</span><span class="p">]</span>
     <span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">faces</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;EEG070&#39;</span><span class="p">)]</span>
     <span class="n">power_faces</span><span class="p">,</span> <span class="n">itc_faces</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">tfr_morlet</span><span class="p">(</span>
@@ -145,33 +148,27 @@
     <span class="n">power_scrambled</span><span class="p">,</span> <span class="n">itc_scrambled</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">tfr_morlet</span><span class="p">(</span>
         <span class="n">epochs</span><span class="p">[</span><span class="s1">&#39;scrambled&#39;</span><span class="p">],</span> <span class="n">freqs</span><span class="o">=</span><span class="n">freqs</span><span class="p">,</span> <span class="n">return_itc</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">n_cycles</span><span class="o">=</span><span class="n">n_cycles</span><span class="p">,</span>
         <span class="n">picks</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>
-    <span class="c1">#power = mne.time_frequency.tfr_morlet(faces, freqs=freqs, return_itc=False,</span>
-    <span class="c1">#                                      n_cycles=n_cycles)</span>
+
     <span class="n">power_faces</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-faces-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
                      <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">itc_faces</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-itc_faces-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
                    <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
     <span class="n">power_scrambled</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-scrambled-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
                          <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">itc_scrambled</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-itc_scrambled-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
-                         <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                       <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-    <span class="c1">#power, itc = mne.time_frequency.tfr_morlet(epochs[&#39;famous&#39;], freqs=freqs,</span>
-    <span class="c1">#                                           return_itc=True,</span>
-    <span class="c1">#                                           n_cycles=n_cycles)</span>
-    <span class="c1">#power.plot_topo()</span>
-    <span class="c1">#mne.time_frequency.tfr_multitaper()</span>
 
 <span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">run_time_frequency</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">)</span>
 <span class="n">parallel</span><span class="p">(</span><span class="n">run_func</span><span class="p">(</span><span class="n">subject_id</span><span class="p">)</span> <span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong>
-(0 minutes 0.000 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/07-time_frequency.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">07-time_frequency.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/07-time_frequency.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">07-time_frequency.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/07-time_frequency.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">07-time_frequency.ipynb</span></code></a></div>
+<a class="reference download internal" href="../_downloads/07-time_frequency.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">07-time_frequency.ipynb</span></code></a></div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -187,8 +184,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-20.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-21.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
     </p>
   </div>
 </footer>

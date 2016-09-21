@@ -6,7 +6,6 @@ Plotting the analysis chain (Subject 9)
 Run the analysis.
 """
 
-import sys
 import os
 import os.path as op
 import numpy as np

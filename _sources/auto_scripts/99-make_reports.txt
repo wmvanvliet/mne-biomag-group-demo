@@ -123,8 +123,7 @@ blabla
     parallel, run_func, _ = parallel_func(make_report, n_jobs=N_JOBS)
     parallel(run_func(subject_id) for subject_id in range(1, 20))
 
-**Total running time of the script:**
-(0 minutes 0.000 seconds)
+**Total running time of the script:** ( 0 minutes  0.000 seconds)
 
 
 
@@ -133,9 +132,10 @@ blabla
     :download:`Download Python source code: 99-make_reports.py <99-make_reports.py>`
 
 
+
 .. container:: sphx-glr-download
 
-    :download:`Download IPython notebook: 99-make_reports.ipynb <99-make_reports.ipynb>`
+    :download:`Download Jupyter notebook: 99-make_reports.ipynb <99-make_reports.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

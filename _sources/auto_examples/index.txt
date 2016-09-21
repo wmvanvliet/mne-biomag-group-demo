@@ -13,9 +13,9 @@ Analysis Gallery
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_compare_thumb.png
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_compare_thumb.png
 
-        :ref:`sphx_glr_auto_examples_compare.py`
+        :ref:`sphx_glr_auto_examples_plot_compare.py`
 
 .. raw:: html
 
@@ -25,7 +25,27 @@ Analysis Gallery
 .. toctree::
    :hidden:
 
-   /auto_examples/compare
+   /auto_examples/plot_compare
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Run the group analysis. ">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_group_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_group.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_group
 
 .. raw:: html
 
@@ -46,26 +66,6 @@ Analysis Gallery
    :hidden:
 
    /auto_examples/plot_time_decoding
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Run the group analysis. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_group_thumb.png
-
-        :ref:`sphx_glr_auto_examples_group.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/group
 
 .. raw:: html
 
@@ -450,6 +450,17 @@ Analysis Gallery
 
     <div style='clear:both'></div>
 
+
+
+.. container:: sphx-glr-download
+
+    :download:`Download all examples in Python source code: auto_examples_python.zip </auto_examples/auto_examples_python.zip>`
+
+
+
+.. container:: sphx-glr-download
+
+    :download:`Download all examples in Jupyter notebook files: auto_examples_jupyter.zip </auto_examples/auto_examples_jupyter.zip>`
 
 .. rst-class:: sphx-glr-signature
 
