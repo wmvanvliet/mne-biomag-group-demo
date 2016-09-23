@@ -189,6 +189,26 @@ Processing scripts
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="fsd ">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_xx-sensor_stats_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_xx-sensor_stats.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/xx-sensor_stats
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="blabla ">
 
 .. only:: html

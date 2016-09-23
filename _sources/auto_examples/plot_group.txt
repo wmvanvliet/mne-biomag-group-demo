@@ -30,11 +30,17 @@ Run the group analysis.
       .. image:: /auto_examples/images/sphx_glr_plot_group_003.png
             :scale: 47
 
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_004.png
+            :scale: 47
+
 
 .. rst-class:: sphx-glr-script-out
 
  Out::
 
+    In 0.13 the default is weights="nave", but in 0.14 the default will be removed and it will have to be explicitly set
     In 0.13 the default is weights="nave", but in 0.14 the default will be removed and it will have to be explicitly set
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
@@ -47,7 +53,7 @@ Run the group analysis.
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=1.29e+00 fmid=1.36e+00 fmax=2.04e+00 transparent=1
+    colormap: fmin=1.87e+00 fmid=2.06e+00 fmax=3.65e+00 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -59,7 +65,7 @@ Run the group analysis.
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=1.29e+00 fmid=1.36e+00 fmax=2.04e+00 transparent=1
+    colormap: fmin=1.87e+00 fmid=2.06e+00 fmax=3.65e+00 transparent=1
 
 
 
@@ -92,13 +98,18 @@ Run the group analysis.
     mne.viz.plot_compare_evokeds({'Famous': famous, 'Unfamiliar': unfamiliar,
                                   'Scrambled': scrambled}, [idx])
 
+    for evoked in [famous, unfamiliar, scrambled]:
+        evoked.apply_baseline()
+    mne.viz.plot_compare_evokeds({'Famous': famous, 'Unfamiliar': unfamiliar,
+                                  'Scrambled': scrambled}, [idx])
+
     fname = op.join(study_path, 'MEG', 'contrast-average')
     stc = mne.read_source_estimate(fname, subject='fsaverage')
     brain = stc.plot(views=['cau'], hemi='both', subject='fsaverage',
                      subjects_dir=subjects_dir)
-    brain.set_data_time_index(407)
+    brain.set_data_time_index(204)
 
-**Total running time of the script:** ( 0 minutes  40.866 seconds)
+**Total running time of the script:** ( 0 minutes  34.263 seconds)
 
 
 
