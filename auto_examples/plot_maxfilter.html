@@ -121,7 +121,7 @@
       
   <div class="section" id="maxwell-filtering">
 <span id="sphx-glr-auto-examples-plot-maxfilter-py"></span><h1>Maxwell filtering<a class="headerlink" href="#maxwell-filtering" title="Permalink to this headline">¶</a></h1>
-<p>Demonstrates maxwell filtering for one run (sub001, run01) using MNE-python.</p>
+<p>Demonstrates maxwell filtering for one run (sub002, run01) using MNE-python.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
@@ -132,7 +132,7 @@
 
 <span class="n">event_ids</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>  <span class="c1"># Famous faces</span>
 
-<span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub001&quot;</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub002&quot;</span>
 
 <span class="n">raw_fname_in</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;run_01_raw.fif&#39;</span><span class="p">)</span>
 <span class="n">sss_fname_in</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;run_01_sss.fif&#39;</span><span class="p">)</span>
@@ -141,7 +141,7 @@
 <p>First the filtered raw data.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">raw_fname_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;bads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MEG1031&#39;</span><span class="p">,</span> <span class="s1">&#39;MEG1111&#39;</span><span class="p">]</span>  <span class="c1"># set bads</span>
+<span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;bads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MEG1031&#39;</span><span class="p">,</span> <span class="s1">&#39;MEG1111&#39;</span><span class="p">,</span> <span class="s1">&#39;MEG2032&#39;</span><span class="p">]</span>  <span class="c1"># set bads</span>
 <span class="n">picks</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="s1">&#39;bads&#39;</span><span class="p">)</span>
 <span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">fir_window</span><span class="o">=</span><span class="s1">&#39;hann&#39;</span><span class="p">,</span> <span class="n">l_trans_bandwidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span>
            <span class="n">h_trans_bandwidth</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="s1">&#39;10s&#39;</span><span class="p">)</span>
@@ -150,6 +150,34 @@
                          <span class="n">mask</span><span class="o">=</span><span class="mi">4352</span><span class="p">,</span> <span class="n">mask_type</span><span class="o">=</span><span class="s1">&#39;not_and&#39;</span><span class="p">,</span> <span class="n">min_duration</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
                          <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">evoked_before</span> <span class="o">=</span> <span class="n">Epochs</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub002/MEG/run_01_raw.fif...
+    Read a total of 8 projection items:
+        mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
+    Range : 248600 ... 788699 =    226.000 ...   716.999 secs
+Ready.
+Current compensation grade : 0
+add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+Adding average EEG reference projection.
+1 projection items deactivated
+Reading 0 ... 540099  =      0.000 ...   490.999 secs...
+Band-pass filtering from 1 - 40 Hz
+h_trans_bandwidth chosen to be 10.0 Hz
+146 events found
+Events id: [ 5  6  7 13 14 15 17 18 19]
+49 matching events found
+Applying baseline correction (mode: mean)
+Created an SSP operator (subspace dimension = 8)
+9 projection items activated
 </pre></div>
 </div>
 <p>Then Maxfiltered and tSSS&#8217;d data.</p>
@@ -169,6 +197,161 @@
 <span class="n">evoked_sss</span> <span class="o">=</span> <span class="n">Epochs</span><span class="p">(</span><span class="n">raw_sss</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
 </pre></div>
 </div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub002/MEG/run_01_raw.fif...
+    Read a total of 8 projection items:
+        mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
+    Range : 248600 ... 788699 =    226.000 ...   716.999 secs
+Ready.
+Current compensation grade : 0
+add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+Adding average EEG reference projection.
+1 projection items deactivated
+Reading 0 ... 540099  =      0.000 ...   490.999 secs...
+Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub002/MEG/run_01_sss.fif...
+This filename (/tsi/doctorants/data_gramfort/dgw_faces/ds117/sub002/MEG/run_01_sss.fif) does not conform to MNE naming conventions. All raw files should end with raw.fif, raw_sss.fif, raw_tsss.fif, raw.fif.gz, raw_sss.fif.gz or raw_tsss.fif.gz
+    Range : 248600 ... 788699 =    226.000 ...   716.999 secs
+Ready.
+Current compensation grade : 0
+add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+Adding average EEG reference projection.
+1 projection items deactivated
+Reading 0 ... 540099  =      0.000 ...   490.999 secs...
+Maxwell filtering raw data
+    Using loaded raw data
+100 T1/T2 magnetometer channel types found. If using SSS, it is advised to replace coil types using &quot;fix_mag_coil_types&quot;.
+    Bad MEG channels being reconstructed: [&#39;MEG1031&#39;, &#39;MEG1111&#39;]
+    Processing 204 gradiometers and 102 magnetometers
+    Using fine calibration sss_cal.dat
+Overwriting existing file.
+        Adjusting non-orthogonal EX and EY
+        Adjusted coil positions by (μ ± σ): 0.3° ± 0.3° (max: 1.3°)
+(X, Y) fit (3.1, 32.2) more than 20 mm from head frame origin
+    Automatic origin fit: head of radius 80.2 mm
+    Using origin 3.1, 32.2, 1.6 mm in the head frame
+    Processing data using tSSS with st_duration=5.0
+    Spatiotemporal window did not fit evenly into raw object. The final 6.00 seconds were lumped onto the previous window.
+    Computing regularization
+        Using 74/95 harmonic components for    0.000  (59/80 in, 15/15 out)
+    Processing 98 data chunks of (at least) 5.0 sec
+        Projecting  1 intersecting tSSS components for    0.000 -    4.999 sec  (#1/98)
+        Projecting  1 intersecting tSSS components for    5.000 -    9.999 sec  (#2/98)
+        Projecting  1 intersecting tSSS components for   10.000 -   14.999 sec  (#3/98)
+        Projecting  1 intersecting tSSS components for   15.000 -   19.999 sec  (#4/98)
+        Projecting 11 intersecting tSSS components for   20.000 -   24.999 sec  (#5/98)
+        Projecting 11 intersecting tSSS components for   25.000 -   29.999 sec  (#6/98)
+        Projecting 11 intersecting tSSS components for   30.000 -   34.999 sec  (#7/98)
+        Projecting 11 intersecting tSSS components for   35.000 -   39.999 sec  (#8/98)
+        Projecting 11 intersecting tSSS components for   40.000 -   44.999 sec  (#9/98)
+        Projecting 11 intersecting tSSS components for   45.000 -   49.999 sec (#10/98)
+        Projecting 11 intersecting tSSS components for   50.000 -   54.999 sec (#11/98)
+        Projecting 11 intersecting tSSS components for   55.000 -   59.999 sec (#12/98)
+        Projecting 11 intersecting tSSS components for   60.000 -   64.999 sec (#13/98)
+        Projecting 11 intersecting tSSS components for   65.000 -   69.999 sec (#14/98)
+        Projecting 11 intersecting tSSS components for   70.000 -   74.999 sec (#15/98)
+        Projecting 11 intersecting tSSS components for   75.000 -   79.999 sec (#16/98)
+        Projecting 11 intersecting tSSS components for   80.000 -   84.999 sec (#17/98)
+        Projecting 12 intersecting tSSS components for   85.000 -   89.999 sec (#18/98)
+        Projecting 11 intersecting tSSS components for   90.000 -   94.999 sec (#19/98)
+        Projecting 11 intersecting tSSS components for   95.000 -   99.999 sec (#20/98)
+        Projecting 11 intersecting tSSS components for  100.000 -  104.999 sec (#21/98)
+        Projecting 11 intersecting tSSS components for  105.000 -  109.999 sec (#22/98)
+        Projecting 11 intersecting tSSS components for  110.000 -  114.999 sec (#23/98)
+        Projecting 11 intersecting tSSS components for  115.000 -  119.999 sec (#24/98)
+        Projecting 11 intersecting tSSS components for  120.000 -  124.999 sec (#25/98)
+        Projecting 11 intersecting tSSS components for  125.000 -  129.999 sec (#26/98)
+        Projecting 11 intersecting tSSS components for  130.000 -  134.999 sec (#27/98)
+        Projecting 11 intersecting tSSS components for  135.000 -  139.999 sec (#28/98)
+        Projecting 11 intersecting tSSS components for  140.000 -  144.999 sec (#29/98)
+        Projecting 11 intersecting tSSS components for  145.000 -  149.999 sec (#30/98)
+        Projecting 11 intersecting tSSS components for  150.000 -  154.999 sec (#31/98)
+        Projecting 11 intersecting tSSS components for  155.000 -  159.999 sec (#32/98)
+        Projecting 11 intersecting tSSS components for  160.000 -  164.999 sec (#33/98)
+        Projecting 11 intersecting tSSS components for  165.000 -  169.999 sec (#34/98)
+        Projecting 11 intersecting tSSS components for  170.000 -  174.999 sec (#35/98)
+        Projecting 11 intersecting tSSS components for  175.000 -  179.999 sec (#36/98)
+        Projecting 11 intersecting tSSS components for  180.000 -  184.999 sec (#37/98)
+        Projecting 11 intersecting tSSS components for  185.000 -  189.999 sec (#38/98)
+        Projecting 11 intersecting tSSS components for  190.000 -  194.999 sec (#39/98)
+        Projecting 11 intersecting tSSS components for  195.000 -  199.999 sec (#40/98)
+        Projecting 11 intersecting tSSS components for  200.000 -  204.999 sec (#41/98)
+        Projecting 11 intersecting tSSS components for  205.000 -  209.999 sec (#42/98)
+        Projecting 11 intersecting tSSS components for  210.000 -  214.999 sec (#43/98)
+        Projecting 11 intersecting tSSS components for  215.000 -  219.999 sec (#44/98)
+        Projecting 11 intersecting tSSS components for  220.000 -  224.999 sec (#45/98)
+        Projecting 11 intersecting tSSS components for  225.000 -  229.999 sec (#46/98)
+        Projecting 11 intersecting tSSS components for  230.000 -  234.999 sec (#47/98)
+        Projecting 11 intersecting tSSS components for  235.000 -  239.999 sec (#48/98)
+        Projecting 11 intersecting tSSS components for  240.000 -  244.999 sec (#49/98)
+        Projecting 11 intersecting tSSS components for  245.000 -  249.999 sec (#50/98)
+        Projecting 11 intersecting tSSS components for  250.000 -  254.999 sec (#51/98)
+        Projecting 11 intersecting tSSS components for  255.000 -  259.999 sec (#52/98)
+        Projecting 11 intersecting tSSS components for  260.000 -  264.999 sec (#53/98)
+        Projecting 11 intersecting tSSS components for  265.000 -  269.999 sec (#54/98)
+        Projecting 11 intersecting tSSS components for  270.000 -  274.999 sec (#55/98)
+        Projecting 11 intersecting tSSS components for  275.000 -  279.999 sec (#56/98)
+        Projecting 11 intersecting tSSS components for  280.000 -  284.999 sec (#57/98)
+        Projecting 11 intersecting tSSS components for  285.000 -  289.999 sec (#58/98)
+        Projecting 11 intersecting tSSS components for  290.000 -  294.999 sec (#59/98)
+        Projecting 11 intersecting tSSS components for  295.000 -  299.999 sec (#60/98)
+        Projecting 11 intersecting tSSS components for  300.000 -  304.999 sec (#61/98)
+        Projecting 11 intersecting tSSS components for  305.000 -  309.999 sec (#62/98)
+        Projecting 11 intersecting tSSS components for  310.000 -  314.999 sec (#63/98)
+        Projecting 11 intersecting tSSS components for  315.000 -  319.999 sec (#64/98)
+        Projecting 11 intersecting tSSS components for  320.000 -  324.999 sec (#65/98)
+        Projecting 11 intersecting tSSS components for  325.000 -  329.999 sec (#66/98)
+        Projecting 11 intersecting tSSS components for  330.000 -  334.999 sec (#67/98)
+        Projecting 11 intersecting tSSS components for  335.000 -  339.999 sec (#68/98)
+        Projecting 11 intersecting tSSS components for  340.000 -  344.999 sec (#69/98)
+        Projecting 11 intersecting tSSS components for  345.000 -  349.999 sec (#70/98)
+        Projecting 11 intersecting tSSS components for  350.000 -  354.999 sec (#71/98)
+        Projecting 11 intersecting tSSS components for  355.000 -  359.999 sec (#72/98)
+        Projecting 11 intersecting tSSS components for  360.000 -  364.999 sec (#73/98)
+        Projecting 11 intersecting tSSS components for  365.000 -  369.999 sec (#74/98)
+        Projecting 11 intersecting tSSS components for  370.000 -  374.999 sec (#75/98)
+        Projecting 11 intersecting tSSS components for  375.000 -  379.999 sec (#76/98)
+        Projecting 11 intersecting tSSS components for  380.000 -  384.999 sec (#77/98)
+        Projecting 11 intersecting tSSS components for  385.000 -  389.999 sec (#78/98)
+        Projecting 11 intersecting tSSS components for  390.000 -  394.999 sec (#79/98)
+        Projecting 11 intersecting tSSS components for  395.000 -  399.999 sec (#80/98)
+        Projecting 11 intersecting tSSS components for  400.000 -  404.999 sec (#81/98)
+        Projecting 11 intersecting tSSS components for  405.000 -  409.999 sec (#82/98)
+        Projecting 11 intersecting tSSS components for  410.000 -  414.999 sec (#83/98)
+        Projecting 11 intersecting tSSS components for  415.000 -  419.999 sec (#84/98)
+        Projecting 11 intersecting tSSS components for  420.000 -  424.999 sec (#85/98)
+        Projecting 11 intersecting tSSS components for  425.000 -  429.999 sec (#86/98)
+        Projecting 11 intersecting tSSS components for  430.000 -  434.999 sec (#87/98)
+        Projecting 11 intersecting tSSS components for  435.000 -  439.999 sec (#88/98)
+        Projecting 11 intersecting tSSS components for  440.000 -  444.999 sec (#89/98)
+        Projecting 11 intersecting tSSS components for  445.000 -  449.999 sec (#90/98)
+        Projecting 11 intersecting tSSS components for  450.000 -  454.999 sec (#91/98)
+        Projecting 11 intersecting tSSS components for  455.000 -  459.999 sec (#92/98)
+        Projecting 11 intersecting tSSS components for  460.000 -  464.999 sec (#93/98)
+        Projecting 11 intersecting tSSS components for  465.000 -  469.999 sec (#94/98)
+        Projecting 11 intersecting tSSS components for  470.000 -  474.999 sec (#95/98)
+        Projecting 11 intersecting tSSS components for  475.000 -  479.999 sec (#96/98)
+        Projecting 11 intersecting tSSS components for  480.000 -  484.999 sec (#97/98)
+        Projecting 11 intersecting tSSS components for  485.000 -  490.999 sec (#98/98)
+[done]
+Band-pass filtering from 1 - 40 Hz
+h_trans_bandwidth chosen to be 10.0 Hz
+Band-pass filtering from 1 - 40 Hz
+h_trans_bandwidth chosen to be 10.0 Hz
+49 matching events found
+Applying baseline correction (mode: mean)
+1 projection items activated
+49 matching events found
+Applying baseline correction (mode: mean)
+1 projection items activated
+</pre></div>
+</div>
 <p>Plotting</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">evoked_before</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                    <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grad&#39;</span><span class="p">:</span> <span class="s1">&#39;Gradiometers before SSS&#39;</span><span class="p">,</span>
@@ -181,8 +364,16 @@
                         <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;Maxfilter (tm) magnetometers&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_maxfilter_001.png"><img alt="../_images/sphx_glr_plot_maxfilter_001.png" src="../_images/sphx_glr_plot_maxfilter_001.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_maxfilter_002.png"><img alt="../_images/sphx_glr_plot_maxfilter_002.png" src="../_images/sphx_glr_plot_maxfilter_002.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_maxfilter_003.png"><img alt="../_images/sphx_glr_plot_maxfilter_003.png" src="../_images/sphx_glr_plot_maxfilter_003.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 0.000 seconds)</p>
+(1 minutes 36.993 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_maxfilter.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_maxfilter.py</span></code></a></div>
 <div class="sphx-glr-download container">

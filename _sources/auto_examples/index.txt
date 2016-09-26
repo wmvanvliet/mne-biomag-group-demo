@@ -69,7 +69,7 @@ Analysis Gallery
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Demonstrates maxwell filtering for one run (sub001, run01) using MNE-python. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="Demonstrates maxwell filtering for one run (sub002, run01) using MNE-python. ">
 
 .. only:: html
 
