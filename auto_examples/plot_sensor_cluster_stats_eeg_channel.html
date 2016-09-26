@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Non-parametric statistics on one EEG sensor &mdash; MNE Biomag Demo</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/flatly/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="up" title="Analysis Gallery" href="index.html" />
+    <link rel="next" title="Plotting the analysis chain (Subject 1)" href="plot_analysis_1.html" />
+    <link rel="prev" title="Maxwell filtering" href="plot_maxfilter.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          MNE Biomag Demo</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="index.html">Results</a></li>
+                <li><a href="../auto_scripts/index.html">Processing Scripts</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../auto_scripts/index.html">Processing scripts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Analysis Gallery</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Non-parametric statistics on one EEG sensor</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="non-parametric-statistics-on-one-eeg-sensor">
+<span id="sphx-glr-auto-examples-plot-sensor-cluster-stats-eeg-channel-py"></span><h1>Non-parametric statistics on one EEG sensor<a class="headerlink" href="#non-parametric-statistics-on-one-eeg-sensor" title="Permalink to this headline">¶</a></h1>
+<p>Run a non-parametric cluster stats on sensor EEG070
+on the contrast faces vs. scrambled.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">mne</span>
+<span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <span class="n">permutation_cluster_1samp_test</span>
+
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span>
+
+<span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>  <span class="c1"># Excluded subjects</span>
+</pre></div>
+</div>
+<p>Read all the data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">contrasts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">exclude</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;processing subject: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+    <span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
+                                <span class="n">condition</span><span class="o">=</span><span class="s1">&#39;contrast&#39;</span><span class="p">)</span>
+    <span class="n">contrast</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">contrast</span><span class="o">.</span><span class="n">apply_baseline</span><span class="p">((</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+    <span class="n">contrasts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+
+<span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span><span class="p">(</span><span class="n">contrasts</span><span class="p">)</span>
+
+<span class="n">channel</span> <span class="o">=</span> <span class="s1">&#39;EEG070&#39;</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">contrast</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+<span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_compare_evokeds</span><span class="p">(</span><span class="n">contrast</span><span class="p">,</span> <span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_001.png" class="align-center" src="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>processing subject: sub002
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub002/sub002-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 172 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub003
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub003/sub003-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 149 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub004
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub004/sub004-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 159 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub006
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub006/sub006-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 149 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub007
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub007/sub007-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 195 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub008
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub008/sub008-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 195 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub009
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub009/sub009-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 176 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub010
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/sub010-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 185 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub011
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub011/sub011-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 182 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub012
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub012/sub012-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 186 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub013
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub013/sub013-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 161 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub014
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub014/sub014-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 184 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub015
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub015/sub015-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 139 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub017
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub017/sub017-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 155 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub018
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub018/sub018-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 188 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+processing subject: sub019
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub019/sub019-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 156 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+Applying baseline correction (mode: mean)
+In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be removed and it will have to be explicitly set
+In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be removed and it will have to be explicitly set
+</pre></div>
+</div>
+<p>Assemble the data and run the cluster stats on channel data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">contrasts</span><span class="p">])</span>
+
+<span class="n">n_permutations</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># number of permutations to run</span>
+
+<span class="c1"># set family-wise p-value</span>
+<span class="n">p_accept</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="n">connectivity</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">tail</span> <span class="o">=</span> <span class="mf">0.</span>  <span class="c1"># for two sided test</span>
+
+<span class="c1"># set cluster threshold</span>
+<span class="n">ppf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span>
+<span class="n">p_thresh</span> <span class="o">=</span> <span class="n">p_accept</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">tail</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="o">-</span><span class="n">ppf</span><span class="p">(</span><span class="n">p_thresh</span><span class="p">,</span> <span class="n">n_samples</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.sign.html#numpy.sign"><span class="n">np</span><span class="o">.</span><span class="n">sign</span></a><span class="p">(</span><span class="n">tail</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="o">-</span><span class="n">threshold</span>
+
+<span class="n">cluster_stats</span> <span class="o">=</span> <span class="n">permutation_cluster_1samp_test</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="n">tail</span><span class="p">,</span>
+    <span class="n">step_down_p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">connectivity</span><span class="p">,</span>
+    <span class="n">n_permutations</span><span class="o">=</span><span class="n">n_permutations</span><span class="p">)</span>
+
+<span class="n">T_obs</span><span class="p">,</span> <span class="n">clusters</span><span class="p">,</span> <span class="n">cluster_p_values</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cluster_stats</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>stat_fun(H1): min=-6.005630 max=9.197854
+Running initial clustering
+Found 6 clusters
+Permuting ...
+Computing cluster p-values
+Step-down-in-jumps iteration #1 found 2 clusters to exclude from subsequent iterations
+Permuting ...
+Computing cluster p-values
+Step-down-in-jumps iteration #2 found 0 additional clusters to exclude from subsequent iterations
+Done.
+</pre></div>
+</div>
+<p>Visualize results</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">times</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">contrast</span><span class="o">.</span><span class="n">times</span>
+
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.close"><span class="n">plt</span><span class="o">.</span><span class="n">close</span></a><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Channel : &#39;</span> <span class="o">+</span> <span class="n">channel</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="mf">1e6</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ERP Contrast&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;EEG (uV)&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i_c</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">cluster_p_values</span><span class="p">[</span><span class="n">i_c</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="n">h1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">start</span><span class="p">],</span> <span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">h0</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">start</span><span class="p">],</span> <span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">hf</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">T_obs</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">),</span>
+           <span class="p">(</span><span class="s1">&#39;cluster p-value &gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p_accept</span><span class="p">,</span>
+            <span class="s1">&#39;cluster p-value &lt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p_accept</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;time (ms)&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;T-values&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="o">-</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">])</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_002.png" class="align-center" src="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_002.png" />
+<p><strong>Total running time of the script:</strong>
+(0 minutes 5.136 seconds)</p>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/plot_sensor_cluster_stats_eeg_channel.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_sensor_cluster_stats_eeg_channel.py</span></code></a></div>
+<div class="sphx-glr-download container">
+<a class="reference download internal" href="../_downloads/plot_sensor_cluster_stats_eeg_channel.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">plot_sensor_cluster_stats_eeg_channel.ipynb</span></code></a></div>
+<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-26.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -33,7 +33,7 @@
     <link rel="top" title="MNE Biomag Demo" href="../index.html" />
     <link rel="up" title="Analysis Gallery" href="index.html" />
     <link rel="next" title="Plotting the analysis chain (Subject 2)" href="plot_analysis_2.html" />
-    <link rel="prev" title="Time Decoding" href="plot_time_decoding.html" />
+    <link rel="prev" title="Non-parametric statistics on one EEG sensor" href="plot_sensor_cluster_stats_eeg_channel.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -59,9 +59,7 @@
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
-                <li><a href="index.html">Subjects</a></li>
-                <li><a href="plot_group.html">Group</a></li>
-                <li><a href="plot_compare.html">Comparison</a></li>
+                <li><a href="index.html">Results</a></li>
                 <li><a href="../auto_scripts/index.html">Processing Scripts</a></li>
             
             
@@ -74,6 +72,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../auto_scripts/index.html">Processing scripts</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Analysis Gallery</a></li>
 </ul>
 </ul>
@@ -146,7 +145,28 @@
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub001/MEG/run_01_raw.fif...
+    Read a total of 8 projection items:
+        mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
+    Range : 268400 ... 815099 =    244.000 ...   740.999 secs
+Ready.
+Current compensation grade : 0
+add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+Adding average EEG reference projection.
+1 projection items deactivated
+Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/run_01_filt_sss_raw.fif...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 74)  idle
+    Range : 268400 ... 815099 =    244.000 ...   740.999 secs
+Ready.
+Current compensation grade : 0
 add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
 </pre></div>
 </div>
@@ -161,6 +181,15 @@ add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be
 <li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_002.png"><img alt="../_images/sphx_glr_plot_analysis_1_002.png" src="../_images/sphx_glr_plot_analysis_1_002.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
 </ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+</pre></div>
+</div>
 <p>Events</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_events</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss-eve.fif&#39;</span><span class="p">))</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_events</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -177,12 +206,73 @@ add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>More events than colors available. You should pass a list of unique colors.
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-epo.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (None)
+        0 CTF compensation matrices available
+778 matching events found
+No baseline correction applied
+Created an SSP operator (subspace dimension = 1)
+778 matching events found
+No baseline correction applied
+Created an SSP operator (subspace dimension = 1)
+1 projection items activated
 </pre></div>
 </div>
 <p>Evoked responses</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">evo_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
 <span class="n">evoked</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">evo_fname</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-ave.fif ...
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (famous)
+        0 CTF compensation matrices available
+        nave = 260 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (scrambled)
+        0 CTF compensation matrices available
+        nave = 265 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (unfamiliar)
+        0 CTF compensation matrices available
+        nave = 253 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (contrast)
+        0 CTF compensation matrices available
+        nave = 175 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+    Found the data of interest:
+        t =    -200.00 ...     800.00 ms (faces)
+        0 CTF compensation matrices available
+        nave = 513 - aspect type = 100
+Projections have already been applied. Setting proj attribute to True.
+No baseline correction applied
+No baseline correction applied
 </pre></div>
 </div>
 <p>Faces</p>
@@ -265,6 +355,17 @@ add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be
 <li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_1_017.png"><img alt="../_images/sphx_glr_plot_analysis_1_017.png" src="../_images/sphx_glr_plot_analysis_1_017.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
 </ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-faces-tfr.h5 ...
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-itc_faces-tfr.h5 ...
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-scrambled-tfr.h5 ...
+Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-itc_scrambled-tfr.h5 ...
+Applying baseline correction (mode: logratio)
+Applying baseline correction (mode: logratio)
+Applying baseline correction (mode: logratio)
+Applying baseline correction (mode: logratio)
+</pre></div>
+</div>
 <p>Covariance</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_cov</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-cov.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
 <span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_cov</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">faces_evo</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
@@ -280,7 +381,17 @@ add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>No average EEG reference present in info[&quot;projs&quot;], covariance may be adversely affected. Consider recomputing covariance using a raw file with an average eeg reference projector added.
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>376 x 376 full covariance (kind = 1) found.
+    Read a total of 1 projection items:
+        Average EEG reference (1 x 70) active
+SSS has been applied to data. Showing mag and grad whitening jointly.
+estimated rank (eeg): 70
+estimated rank (mag + grad): 306
+Setting small MEG eigenvalues to zero.
+Not doing PCA for MEG.
+Setting small EEG eigenvalues to zero.
+Not doing PCA for EEG.
+No average EEG reference present in info[&quot;projs&quot;], covariance may be adversely affected. Consider recomputing covariance using a raw file with an average eeg reference projector added.
 </pre></div>
 </div>
 <p>Trans</p>
@@ -292,16 +403,20 @@ add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_analysis_1_021.png" class="align-center" src="../_images/sphx_glr_plot_analysis_1_021.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Using surface from /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub001/bem/sub001-head.fif
+Getting helmet for system 306m
+</pre></div>
+</div>
 <p>Faces</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_stc</span><span class="p">(</span><span class="n">cond</span><span class="p">):</span>
     <span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;mne_dSPM_inverse-</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">cond</span><span class="p">)</span>
     <span class="n">stc</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
-    <span class="n">brain</span> <span class="o">=</span> <span class="n">stc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cau&#39;</span><span class="p">],</span>
-                     <span class="n">hemi</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">time_viewer</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">stc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ven&#39;</span><span class="p">],</span>
+                     <span class="n">hemi</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mf">0.17</span><span class="p">,</span> <span class="n">time_unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">brain</span>
 
 <span class="n">brain</span> <span class="o">=</span> <span class="n">plot_stc</span><span class="p">(</span><span class="s1">&#39;faces&#39;</span><span class="p">)</span>
-<span class="n">brain</span><span class="o">.</span><span class="n">set_data_time_index</span><span class="p">(</span><span class="mi">204</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_analysis_1_022.png" class="align-center" src="../_images/sphx_glr_plot_analysis_1_022.png" />
@@ -334,7 +449,6 @@ colormap: fmin=5.93e+00 fmid=7.01e+00 fmax=1.76e+01 transparent=1
 </div>
 <p>Faces - scrambled</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">brain</span> <span class="o">=</span> <span class="n">plot_stc</span><span class="p">(</span><span class="s1">&#39;contrast&#39;</span><span class="p">)</span>
-<span class="n">brain</span><span class="o">.</span><span class="n">set_data_time_index</span><span class="p">(</span><span class="mi">204</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_analysis_1_023.png" class="align-center" src="../_images/sphx_glr_plot_analysis_1_023.png" />
@@ -365,11 +479,12 @@ Smoothing matrix creation, step 10
 colormap: fmin=2.49e+00 fmid=2.82e+00 fmax=5.29e+00 transparent=1
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 1 minutes  41.989 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 56.844 seconds)</p>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_analysis_1.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_analysis_1.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/plot_analysis_1.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_analysis_1.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_analysis_1.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_analysis_1.ipynb</span></code></a></div>
+<a class="reference download internal" href="../_downloads/plot_analysis_1.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">plot_analysis_1.ipynb</span></code></a></div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -385,8 +500,8 @@ colormap: fmin=2.49e+00 fmid=2.82e+00 fmax=5.29e+00 transparent=1
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-23.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-26.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>
 </footer>

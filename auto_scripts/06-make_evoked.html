@@ -31,6 +31,9 @@
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="up" title="Processing scripts" href="index.html" />
+    <link rel="next" title="Inverse solution" href="13-make_inverse.html" />
+    <link rel="prev" title="Time-frequency representation" href="07-time_frequency.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -56,9 +59,7 @@
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
-                <li><a href="../auto_examples/index.html">Subjects</a></li>
-                <li><a href="../auto_examples/plot_group.html">Group</a></li>
-                <li><a href="../auto_examples/plot_compare.html">Comparison</a></li>
+                <li><a href="../auto_examples/index.html">Results</a></li>
                 <li><a href="index.html">Processing Scripts</a></li>
             
             
@@ -70,7 +71,8 @@
      href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Processing scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Analysis Gallery</a></li>
 </ul>
 </ul>
@@ -148,7 +150,7 @@ The evoked data is saved using categories &#8216;famous&#8217;, &#8216;scrambled
 
     <span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span><span class="p">([</span><span class="n">evoked_famous</span><span class="p">,</span> <span class="n">evoked_unfamiliar</span><span class="p">,</span>
                                    <span class="n">evoked_scrambled</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">])</span>
-    <span class="n">contrast</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s1">&#39;faces - scrambled&#39;</span>
+    <span class="n">contrast</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s1">&#39;contrast&#39;</span>
     <span class="n">faces</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span><span class="p">([</span><span class="n">evoked_famous</span><span class="p">,</span> <span class="n">evoked_unfamiliar</span><span class="p">])</span>
     <span class="n">faces</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s1">&#39;faces&#39;</span>
 
@@ -165,11 +167,12 @@ The evoked data is saved using categories &#8216;famous&#8217;, &#8216;scrambled
 <span class="n">parallel</span><span class="p">(</span><span class="n">run_func</span><span class="p">(</span><span class="n">subject_id</span><span class="p">)</span> <span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.000 seconds)</p>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/06-make_evoked.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">06-make_evoked.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/06-make_evoked.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">06-make_evoked.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/06-make_evoked.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">06-make_evoked.ipynb</span></code></a></div>
+<a class="reference download internal" href="../_downloads/06-make_evoked.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">06-make_evoked.ipynb</span></code></a></div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -185,8 +188,8 @@ The evoked data is saved using categories &#8216;famous&#8217;, &#8216;scrambled
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-23.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-26.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>
 </footer>

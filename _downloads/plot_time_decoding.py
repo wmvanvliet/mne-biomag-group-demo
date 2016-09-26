@@ -4,55 +4,78 @@ Time Decoding
 =============
 
 Time decoding fits a Logistic Regression model for every time point in the
-epoch. In this example, we contrast the condition 'famous' against 'scrambled'
-using this approach. The end result is an averaging effect across sensors.
-The contrast across different sensors are combined into a single plot.
+epoch. In this example, we contrast the condition `'famous'` vs `'scrambled'`
+and `'famous'` vs `'unfamiliar'` using this approach. The end result is an
+averaging effect across sensors. The contrast across different sensors are
+combined into a single plot.
 """
 
 ###############################################################################
-import os.path as op
-import mne
+# Let us first import the necessary libraries
+
 import os
-###############################################################################
-# We analyze only one subject. Change ``meg_dir`` to point to your directory
-
-subject_id = 1
-subject = "sub%03d" % subject_id
-user = os.environ['USER']
-if user == 'gramfort':
-    study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
-    N_JOBS = 8
-elif user == 'jleppakangas' or user == 'mjas':
-    study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
-    N_JOBS = 4
-else:
-    study_path = op.join(op.dirname(__file__), '..', '..', '..')
-subjects_dir = os.path.join(study_path, 'subjects')
-meg_dir = os.path.join(study_path, 'MEG')
-data_path = op.join(meg_dir, subject)
-epochs = mne.read_epochs(op.join(data_path, '%s-epo.fif' % subject))
-
-###############################################################################
-# We define the labels for the epochs by pooling together all 'famous'
-# and all 'scrambled' epochs
 import numpy as np
+import matplotlib.pyplot as plt
+from scipy.io import loadmat
+from scipy.stats import sem
 
-n_famous, n_unfamiliar = len(epochs['face/famous']), len(epochs['scrambled'])
-y = np.r_[np.ones((n_famous, )), np.zeros((n_unfamiliar, ))]
-epochs = mne.concatenate_epochs([epochs['face/famous'], epochs['scrambled']])
-###############################################################################
-# Let us restrict ourselves to the occipital channels
-from mne.selection import read_selection
-ch_names = [ch_name.replace(' ', '') for ch_name
-            in read_selection('occipital')]
-epochs.pick_channels(ch_names)
+from library.config import meg_dir
 
 ###############################################################################
-# Now we fit and plot the time decoder
-from mne.decoding import TimeDecoding
+# Now we loop over subjects to load the scores
+a_vs_bs = ['face_vs_scrambled', 'famous_vs_unfamiliar']
+scores = {'face_vs_scrambled': list(), 'famous_vs_unfamiliar': list()}
+for subject_id in range(1, 20):
+    subject = "sub%03d" % subject_id
+    data_path = os.path.join(meg_dir, subject)
 
-times = dict(step=0.005) # fit a classifier only ever 5 ms
-td = TimeDecoding(predict_mode='cross-validation', times=times)
-td.fit(epochs, y)
-td.score(epochs)
-td.plot(title="Time decoding (famous vs. scrambled)")
+    # Load the scores for the subject
+    for a_vs_b in a_vs_bs:
+        fname_td = os.path.join(data_path, '%s-td-auc-%s.mat'
+                                % (subject, a_vs_b))
+        mat = loadmat(fname_td)
+        scores[a_vs_b].append(mat['scores'][0])
+
+###############################################################################
+# ... and average them
+times = mat['times'][0]
+mean_scores, sem_scores = dict(), dict()
+for a_vs_b in a_vs_bs:
+    mean_scores[a_vs_b] = np.mean(scores[a_vs_b], axis=0)
+    sem_scores[a_vs_b] = sem(scores[a_vs_b])
+
+###############################################################################
+# Let's plot the mean AUC score across subjects
+for a_vs_b in a_vs_bs:
+    plt.figure()
+    plt.plot(times, mean_scores[a_vs_b], 'b')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Area under curve (AUC)')
+    plt.fill_between(times, mean_scores[a_vs_b] - sem_scores[a_vs_b],
+                     mean_scores[a_vs_b] + sem_scores[a_vs_b],
+                     color='b', alpha=0.2)
+    plt.axhline(0.5, color='k', linestyle='--', label='Chance level')
+    plt.axvline(0.0, linestyle='--')
+    plt.legend()
+    plt.title('Time decoding (%s)' % a_vs_b)
+
+###############################################################################
+# It seems that `'famous'` vs `'unfamiliar'` gives much noisier time course of
+# decoding scores than `'faces'` vs `'scrambled'`. To verify that this is not
+# due to bad subjects
+fig, axes = plt.subplots(4, 5, sharex=True, sharey=True, figsize=(12, 8))
+axes = axes.ravel()
+for idx in range(19):
+    axes[idx].axhline(0.5, color='k', linestyle='--', label='Chance level')
+    axes[idx].axvline(0.0, color='k', linestyle='--')
+    for a_vs_b in a_vs_bs:
+        axes[idx].plot(times, scores[a_vs_b][idx], label=a_vs_b)
+        axes[idx].set_title('sub%03d' % (idx + 1))
+
+axes[-1].axis('off')
+axes[-2].legend(bbox_to_anchor=(2.35, 0.5), loc='center right', fontsize=12)
+fig.text(0.5, 0, 'Time (s)', ha='center', fontsize=16)
+fig.text(0.01, 0.5, 'Area under curve (AUC)', va='center',
+         rotation='vertical', fontsize=16)
+plt.subplots_adjust(bottom=0.06, left=0.06, right=0.98, top=0.95)
+plt.show()

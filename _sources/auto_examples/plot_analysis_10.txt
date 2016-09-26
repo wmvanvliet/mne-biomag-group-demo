@@ -53,7 +53,28 @@ Configuration
 
  Out::
 
+    Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub010/MEG/run_01_raw.fif...
+        Read a total of 8 projection items:
+            mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
+            grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
+            grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
+            grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
+        Range : 140800 ... 680899 =    128.000 ...   618.999 secs
+    Ready.
+    Current compensation grade : 0
     add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+    Adding average EEG reference projection.
+    1 projection items deactivated
+    Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/run_01_filt_sss_raw.fif...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 74)  idle
+        Range : 140800 ... 680899 =    128.000 ...   618.999 secs
+    Ready.
+    Current compensation grade : 0
     add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
 
 
@@ -83,6 +104,16 @@ Filtering
             :scale: 47
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Effective window size : 1.862 (s)
+    Effective window size : 1.862 (s)
+    Effective window size : 1.862 (s)
+    Effective window size : 1.862 (s)
+    Effective window size : 1.862 (s)
+    Effective window size : 1.862 (s)
 
 
 Events
@@ -119,7 +150,19 @@ Events
 
  Out::
 
-    More events than colors available. You should pass a list of unique colors.
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/sub010-epo.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (None)
+            0 CTF compensation matrices available
+    827 matching events found
+    No baseline correction applied
+    Created an SSP operator (subspace dimension = 1)
+    827 matching events found
+    No baseline correction applied
+    Created an SSP operator (subspace dimension = 1)
+    1 projection items activated
 
 
 Evoked responses
@@ -135,6 +178,56 @@ Evoked responses
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/sub010-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 274 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 280 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 273 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 185 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 547 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
 
 
 Faces
@@ -322,6 +415,18 @@ TFR
             :scale: 47
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/sub010-faces-tfr.h5 ...
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/sub010-itc_faces-tfr.h5 ...
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/sub010-scrambled-tfr.h5 ...
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/sub010-itc_scrambled-tfr.h5 ...
+    Applying baseline correction (mode: logratio)
+    Applying baseline correction (mode: logratio)
+    Applying baseline correction (mode: logratio)
+    Applying baseline correction (mode: logratio)
 
 
 Covariance
@@ -360,6 +465,16 @@ Covariance
 
  Out::
 
+    376 x 376 full covariance (kind = 1) found.
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+    SSS has been applied to data. Showing mag and grad whitening jointly.
+    estimated rank (eeg): 70
+    estimated rank (mag + grad): 306
+    Setting small MEG eigenvalues to zero.
+    Not doing PCA for MEG.
+    Setting small EEG eigenvalues to zero.
+    Not doing PCA for EEG.
     No average EEG reference present in info["projs"], covariance may be adversely affected. Consider recomputing covariance using a raw file with an average eeg reference projector added.
 
 
@@ -382,6 +497,12 @@ Trans
     :align: center
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Using surface from /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub010/bem/sub010-head.fif
+    Getting helmet for system 306m
 
 
 Faces
@@ -395,12 +516,11 @@ Faces
     def plot_stc(cond):
         fname = op.join(meg_dir, subject, 'mne_dSPM_inverse-%s' % cond)
         stc = mne.read_source_estimate(fname, subject)
-        brain = stc.plot(subject=subject, subjects_dir=subjects_dir, views=['cau'],
-                         hemi='both', time_viewer=False)
+        brain = stc.plot(subject=subject, subjects_dir=subjects_dir, views=['ven'],
+                         hemi='both', initial_time=0.17, time_unit='s')
         return brain
 
     brain = plot_stc('faces')
-    brain.set_data_time_index(204)
 
 
 
@@ -424,7 +544,7 @@ Faces
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=6.05e+00 fmid=7.29e+00 fmax=2.10e+01 transparent=1
+    colormap: fmin=6.05e+00 fmid=7.30e+00 fmax=2.10e+01 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -436,7 +556,7 @@ Faces
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=6.05e+00 fmid=7.29e+00 fmax=2.10e+01 transparent=1
+    colormap: fmin=6.05e+00 fmid=7.30e+00 fmax=2.10e+01 transparent=1
 
 
 Faces - scrambled
@@ -446,7 +566,6 @@ Faces - scrambled
 .. code-block:: python
 
     brain = plot_stc('contrast')
-    brain.set_data_time_index(204)
 
 
 
@@ -469,7 +588,7 @@ Faces - scrambled
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=2.78e+00 fmid=3.21e+00 fmax=7.54e+00 transparent=1
+    colormap: fmin=2.77e+00 fmid=3.21e+00 fmax=7.55e+00 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -481,10 +600,11 @@ Faces - scrambled
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=2.78e+00 fmid=3.21e+00 fmax=7.54e+00 transparent=1
+    colormap: fmin=2.77e+00 fmid=3.21e+00 fmax=7.55e+00 transparent=1
 
 
-**Total running time of the script:** ( 1 minutes  45.036 seconds)
+**Total running time of the script:**
+(0 minutes 54.726 seconds)
 
 
 
@@ -493,10 +613,9 @@ Faces - scrambled
     :download:`Download Python source code: plot_analysis_10.py <plot_analysis_10.py>`
 
 
-
 .. container:: sphx-glr-download
 
-    :download:`Download Jupyter notebook: plot_analysis_10.ipynb <plot_analysis_10.ipynb>`
+    :download:`Download IPython notebook: plot_analysis_10.ipynb <plot_analysis_10.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

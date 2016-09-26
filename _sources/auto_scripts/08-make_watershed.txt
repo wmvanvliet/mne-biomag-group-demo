@@ -22,7 +22,8 @@ Create BEM surfaces using watershed algorithm.
         mne.bem.make_watershed_bem(subject, subjects_dir=subjects_dir,
                                    overwrite=True)
 
-**Total running time of the script:** ( 0 minutes  0.000 seconds)
+**Total running time of the script:**
+(0 minutes 0.000 seconds)
 
 
 
@@ -31,10 +32,9 @@ Create BEM surfaces using watershed algorithm.
     :download:`Download Python source code: 08-make_watershed.py <08-make_watershed.py>`
 
 
-
 .. container:: sphx-glr-download
 
-    :download:`Download Jupyter notebook: 08-make_watershed.ipynb <08-make_watershed.ipynb>`
+    :download:`Download IPython notebook: 08-make_watershed.ipynb <08-make_watershed.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

@@ -68,7 +68,8 @@ computed for contrast between faces and scrambled and morphed to average brain,
     scrambled = mne.combine_evoked(scrambled)
     scrambled.save(op.join(meg_dir, 'eeg_scrambled-ave.fif'))
 
-**Total running time of the script:** ( 0 minutes  0.000 seconds)
+**Total running time of the script:**
+(0 minutes 0.000 seconds)
 
 
 
@@ -77,10 +78,9 @@ computed for contrast between faces and scrambled and morphed to average brain,
     :download:`Download Python source code: 11-make_group_average.py <11-make_group_average.py>`
 
 
-
 .. container:: sphx-glr-download
 
-    :download:`Download Jupyter notebook: 11-make_group_average.ipynb <11-make_group_average.ipynb>`
+    :download:`Download IPython notebook: 11-make_group_average.ipynb <11-make_group_average.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

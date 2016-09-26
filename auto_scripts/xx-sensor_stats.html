@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fafffsaa affaf &mdash; MNE Biomag Demo</title>
+    <title>Sensor cluster level statistics on EEG &mdash; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -56,9 +56,7 @@
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
-                <li><a href="../auto_examples/index.html">Subjects</a></li>
-                <li><a href="../auto_examples/plot_group.html">Group</a></li>
-                <li><a href="../auto_examples/plot_compare.html">Comparison</a></li>
+                <li><a href="../auto_examples/index.html">Results</a></li>
                 <li><a href="index.html">Processing Scripts</a></li>
             
             
@@ -71,6 +69,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Processing scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Analysis Gallery</a></li>
 </ul>
 </ul>
@@ -85,7 +84,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">fafffsaa affaf</a></li>
+<li><a class="reference internal" href="#">Sensor cluster level statistics on EEG</a></li>
 </ul>
 </ul>
 </li>
@@ -117,11 +116,13 @@
   <div class="row">
     <div class="col-md-12 content">
       
-  <div class="section" id="fafffsaa-affaf">
-<span id="sphx-glr-auto-scripts-xx-sensor-stats-py"></span><h1>fafffsaa affaf<a class="headerlink" href="#fafffsaa-affaf" title="Permalink to this headline">¶</a></h1>
-<p>fsd</p>
+  <div class="section" id="sensor-cluster-level-statistics-on-eeg">
+<span id="sphx-glr-auto-scripts-xx-sensor-stats-py"></span><h1>Sensor cluster level statistics on EEG<a class="headerlink" href="#sensor-cluster-level-statistics-on-eeg" title="Permalink to this headline">¶</a></h1>
+<p>Run a non-parametric spatio-temporal cluster stats on EEG sensors
+on the contrast faces vs. scrambled.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
 
@@ -131,28 +132,51 @@
 <span class="kn">from</span> <span class="nn">mne.viz</span> <span class="kn">import</span> <span class="n">plot_topomap</span>
 
 <span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span>
+</pre></div>
+</div>
+<p>Read all the data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>  <span class="c1"># Excluded subjects</span>
 
-<span class="n">fsave_vertices</span> <span class="o">=</span> <span class="p">[</span><a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">10242</span><span class="p">),</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">10242</span><span class="p">)]</span>
-<span class="n">contrast_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="n">contrasts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
 <span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">exclude</span><span class="p">:</span>
+        <span class="k">continue</span>
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;processing subject: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">data_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
-    <span class="n">evoked</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
-    <span class="n">contrast</span> <span class="o">=</span> <span class="n">evoked</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">contrast</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="s1">&#39;mag&#39;</span><span class="p">)</span>
+    <span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
+                                <span class="n">condition</span><span class="o">=</span><span class="s1">&#39;contrast&#39;</span><span class="p">)</span>
+    <span class="n">contrast</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">contrast</span><span class="o">.</span><span class="n">apply_baseline</span><span class="p">((</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-    <span class="n">contrast_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contrast</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="n">contrast_data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">contrast_data</span><span class="p">)</span>
-<span class="c1"># set cluster threshold</span>
-<span class="n">threshold</span> <span class="o">=</span> <span class="mf">5.0</span>
+    <span class="n">contrasts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+
+<span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span><span class="p">(</span><span class="n">contrasts</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Assemble the data and run the cluster stats on channel data</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">contrasts</span><span class="p">])</span>
+
+<span class="n">n_permutations</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># number of permutations to run</span>
+
 <span class="c1"># set family-wise p-value</span>
 <span class="n">p_accept</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="n">connectivity</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">tail</span> <span class="o">=</span> <span class="mf">0.</span>  <span class="c1"># for two sided test</span>
+
+<span class="c1"># set cluster threshold</span>
+<span class="n">ppf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span>
+<span class="n">p_thresh</span> <span class="o">=</span> <span class="n">p_accept</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">tail</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="o">-</span><span class="n">ppf</span><span class="p">(</span><span class="n">p_thresh</span><span class="p">,</span> <span class="n">n_samples</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.sign.html#numpy.sign"><span class="n">np</span><span class="o">.</span><span class="n">sign</span></a><span class="p">(</span><span class="n">tail</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="o">-</span><span class="n">threshold</span>
 
 <span class="n">connectivity</span><span class="p">,</span> <span class="n">ch_names</span> <span class="o">=</span> <span class="n">read_ch_connectivity</span><span class="p">(</span><span class="s1">&#39;neuromag306mag&#39;</span><span class="p">)</span>
 
 <span class="n">cluster_stats</span> <span class="o">=</span> <span class="n">permutation_cluster_1samp_test</span><span class="p">(</span>
-    <span class="n">contrast_data</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">step_down_p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">connectivity</span><span class="p">,</span> <span class="n">out_type</span><span class="o">=</span><span class="s1">&#39;indices&#39;</span><span class="p">,</span>
     <span class="n">check_disjoint</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
@@ -178,7 +202,7 @@
     <span class="n">f_map</span> <span class="o">=</span> <span class="n">T_obs</span><span class="p">[</span><span class="n">time_inds</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># get signals at significant sensors</span>
-    <span class="n">signals</span> <span class="o">=</span> <span class="n">contrast_data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">ch_inds</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">signals</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">ch_inds</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">sig_times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">time_inds</span><span class="p">]</span>
 
     <span class="c1"># create spatial mask</span>
@@ -201,7 +225,7 @@
 
     <span class="c1"># add axes for colorbar</span>
     <span class="n">ax_colorbar</span> <span class="o">=</span> <span class="n">divider</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s1">&#39;5%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
-    <a href="http://matplotlib.org/api/colorbar_api.html#matplotlib.colorbar"><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">ax_colorbar</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">ax_colorbar</span><span class="p">)</span>
     <span class="n">ax_topo</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Averaged F-map ({:0.1f} - {:0.1f} ms)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="o">*</span><span class="n">sig_times</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
     <span class="p">))</span>
@@ -231,11 +255,12 @@
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<p><strong>Total running time of the script:</strong>
+(0 minutes 0.000 seconds)</p>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/xx-sensor_stats.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">xx-sensor_stats.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/xx-sensor_stats.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">xx-sensor_stats.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/xx-sensor_stats.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">xx-sensor_stats.ipynb</span></code></a></div>
+<a class="reference download internal" href="../_downloads/xx-sensor_stats.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">xx-sensor_stats.ipynb</span></code></a></div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -251,8 +276,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-23.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-26.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>
 </footer>

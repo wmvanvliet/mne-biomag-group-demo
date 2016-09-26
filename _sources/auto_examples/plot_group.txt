@@ -35,12 +35,73 @@ Run the group analysis.
       .. image:: /auto_examples/images/sphx_glr_plot_group_004.png
             :scale: 47
 
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_005.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_006.png
+            :scale: 47
+
 
 .. rst-class:: sphx-glr-script-out
 
  Out::
 
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/grand_average-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (0.062 * famous + 0.055 * famous + 0.058 * famous + 0.052 * famous + 0.071 * famous + 0.070 * famous + 0.064 * famous + 0.066 * famous + 0.064 * famous + 0.068 * famous + 0.059 * famous + 0.067 * famous + 0.055 * famous + 0.062 * famous + 0.070 * famous + 0.057 * famous)
+            0 CTF compensation matrices available
+            nave = 4181 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (0.064 * scrambled + 0.054 * scrambled + 0.058 * scrambled + 0.055 * scrambled + 0.072 * scrambled + 0.072 * scrambled + 0.065 * scrambled + 0.069 * scrambled + 0.067 * scrambled + 0.068 * scrambled + 0.058 * scrambled + 0.068 * scrambled + 0.049 * scrambled + 0.055 * scrambled + 0.068 * scrambled + 0.058 * scrambled)
+            0 CTF compensation matrices available
+            nave = 4059 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (0.061 * unfamiliar + 0.054 * unfamiliar + 0.057 * unfamiliar + 0.054 * unfamiliar + 0.070 * unfamiliar + 0.069 * unfamiliar + 0.064 * unfamiliar + 0.065 * unfamiliar + 0.066 * unfamiliar + 0.068 * unfamiliar + 0.062 * unfamiliar + 0.066 * unfamiliar + 0.057 * unfamiliar + 0.061 * unfamiliar + 0.070 * unfamiliar + 0.055 * unfamiliar)
+            0 CTF compensation matrices available
+            nave = 4177 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (0.063 * contrast + 0.055 * contrast + 0.058 * contrast + 0.055 * contrast + 0.071 * contrast + 0.071 * contrast + 0.064 * contrast + 0.068 * contrast + 0.067 * contrast + 0.068 * contrast + 0.059 * contrast + 0.067 * contrast + 0.051 * contrast + 0.057 * contrast + 0.069 * contrast + 0.057 * contrast)
+            0 CTF compensation matrices available
+            nave = 2731 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (0.061 * faces + 0.054 * faces + 0.057 * faces + 0.053 * faces + 0.070 * faces + 0.070 * faces + 0.064 * faces + 0.065 * faces + 0.065 * faces + 0.068 * faces + 0.061 * faces + 0.067 * faces + 0.056 * faces + 0.062 * faces + 0.070 * faces + 0.056 * faces)
+            0 CTF compensation matrices available
+            nave = 8358 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
     In 0.13 the default is weights="nave", but in 0.14 the default will be removed and it will have to be explicitly set
+    Applying baseline correction (mode: mean)
+    Applying baseline correction (mode: mean)
+    Applying baseline correction (mode: mean)
+    Applying baseline correction (mode: mean)
+    Applying baseline correction (mode: mean)
     In 0.13 the default is weights="nave", but in 0.14 the default will be removed and it will have to be explicitly set
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
@@ -53,7 +114,7 @@ Run the group analysis.
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=1.87e+00 fmid=2.06e+00 fmax=3.65e+00 transparent=1
+    colormap: fmin=3.00e+00 fmid=3.31e+00 fmax=4.04e+00 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -65,7 +126,7 @@ Run the group analysis.
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=1.87e+00 fmid=2.06e+00 fmax=3.65e+00 transparent=1
+    colormap: fmin=3.00e+00 fmid=3.31e+00 fmax=4.04e+00 transparent=1
 
 
 
@@ -79,37 +140,34 @@ Run the group analysis.
 
     import mne
 
-    from library.config import study_path
+    from library.config import meg_dir, subjects_dir, study_path
 
-    subjects_dir = op.join(study_path, 'subjects')
-    meg_dir = op.join(study_path, 'MEG')
+    evokeds = mne.read_evokeds(op.join(study_path, 'MEG', 'grand_average-ave.fif'))
+    evoked_famous, evoked_scrambled, evoked_unfamiliar = evokeds[:3]
 
-    famous_fname = op.join(study_path, 'MEG', 'eeg_famous-ave.fif')
-    famous = mne.read_evokeds(famous_fname)[0]
+    evokeds[0].plot_joint(title='Famous')
+    evokeds[1].plot_joint(title='Scrambled')
+    evokeds[2].plot_joint(title='Unfamiliar')
 
-    unfamiliar_fname = op.join(study_path, 'MEG', 'eeg_unfamiliar-ave.fif')
-    unfamiliar = mne.read_evokeds(unfamiliar_fname)[0]
+    idx = evoked_famous.ch_names.index('EEG070')
+    mapping = {'Famous': evokeds[0], 'Scrambled': evokeds[1],
+               'Unfamiliar': evokeds[2]}
+    mne.viz.plot_compare_evokeds(mapping, [idx], title='EEG070 (No baseline)')
 
-    scrambled = mne.read_evokeds(op.join(study_path, 'MEG',
-                                         'eeg_scrambled-ave.fif'))[0]
-    scrambled.plot_joint()
-
-    idx = famous.ch_names.index('EEG070')
-    mne.viz.plot_compare_evokeds({'Famous': famous, 'Unfamiliar': unfamiliar,
-                                  'Scrambled': scrambled}, [idx])
-
-    for evoked in [famous, unfamiliar, scrambled]:
+    for evoked in evokeds:
         evoked.apply_baseline()
-    mne.viz.plot_compare_evokeds({'Famous': famous, 'Unfamiliar': unfamiliar,
-                                  'Scrambled': scrambled}, [idx])
+    mne.viz.plot_compare_evokeds(mapping, [idx],
+                                 title='EEG070 (Baseline from -200ms to 0ms)',)
 
-    fname = op.join(study_path, 'MEG', 'contrast-average')
+    fname = op.join(meg_dir, 'contrast-average')
     stc = mne.read_source_estimate(fname, subject='fsaverage')
-    brain = stc.plot(views=['cau'], hemi='both', subject='fsaverage',
-                     subjects_dir=subjects_dir)
-    brain.set_data_time_index(204)
 
-**Total running time of the script:** ( 0 minutes  34.263 seconds)
+    brain = stc.plot(views=['ven'], hemi='both', subject='fsaverage',
+                     subjects_dir=subjects_dir, initial_time=0.17, time_unit='s',
+                     clim={'lims':[99.75, 99.88, 99.98]})
+
+**Total running time of the script:**
+(0 minutes 12.583 seconds)
 
 
 
@@ -118,10 +176,9 @@ Run the group analysis.
     :download:`Download Python source code: plot_group.py <plot_group.py>`
 
 
-
 .. container:: sphx-glr-download
 
-    :download:`Download Jupyter notebook: plot_group.ipynb <plot_group.ipynb>`
+    :download:`Download IPython notebook: plot_group.ipynb <plot_group.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

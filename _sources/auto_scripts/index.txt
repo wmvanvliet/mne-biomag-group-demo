@@ -13,9 +13,9 @@ Processing scripts
 
 .. only:: html
 
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_08-make_watershed_thumb.png
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_11-make_watershed_thumb.png
 
-        :ref:`sphx_glr_auto_scripts_08-make_watershed.py`
+        :ref:`sphx_glr_auto_scripts_11-make_watershed.py`
 
 .. raw:: html
 
@@ -25,7 +25,27 @@ Processing scripts
 .. toctree::
    :hidden:
 
-   /auto_scripts/08-make_watershed
+   /auto_scripts/11-make_watershed
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The EEG-channel data are averaged for group averages. ">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_09-group_average_sensors_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_09-group_average_sensors.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/09-group_average_sensors
 
 .. raw:: html
 
@@ -49,6 +69,26 @@ Processing scripts
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Source estimates are computed for contrast between faces and scrambled and morphed to average b...">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_14-group_average_source_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_14-group_average_source.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/14-group_average_source
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="The data are bandpass filtered (1 - 40 Hz) using linear-phase fir filter with delay compensatio...">
 
 .. only:: html
@@ -69,7 +109,7 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip=" ">
+    <div class="sphx-glr-thumbcontainer" tooltip="ICA decomposition using fastICA. ">
 
 .. only:: html
 
@@ -133,9 +173,9 @@ Processing scripts
 
 .. only:: html
 
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_10-make_inverse_thumb.png
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_13-make_inverse_thumb.png
 
-        :ref:`sphx_glr_auto_scripts_10-make_inverse.py`
+        :ref:`sphx_glr_auto_scripts_13-make_inverse.py`
 
 .. raw:: html
 
@@ -145,7 +185,7 @@ Processing scripts
 .. toctree::
    :hidden:
 
-   /auto_scripts/10-make_inverse
+   /auto_scripts/13-make_inverse
 
 .. raw:: html
 
@@ -153,9 +193,9 @@ Processing scripts
 
 .. only:: html
 
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_09-make_forward_thumb.png
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_12-make_forward_thumb.png
 
-        :ref:`sphx_glr_auto_scripts_09-make_forward.py`
+        :ref:`sphx_glr_auto_scripts_12-make_forward.py`
 
 .. raw:: html
 
@@ -165,37 +205,17 @@ Processing scripts
 .. toctree::
    :hidden:
 
-   /auto_scripts/09-make_forward
+   /auto_scripts/12-make_forward
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The sensor level data are averaged for EEG channels. Source estimates are computed for contrast...">
+    <div class="sphx-glr-thumbcontainer" tooltip="Time decoding fits a Logistic Regression model for every time point in the epoch. In this examp...">
 
 .. only:: html
 
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_11-make_group_average_thumb.png
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_08-run_time_decoding_thumb.png
 
-        :ref:`sphx_glr_auto_scripts_11-make_group_average.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/11-make_group_average
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="fsd ">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_xx-sensor_stats_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_xx-sensor_stats.py`
+        :ref:`sphx_glr_auto_scripts_08-run_time_decoding.py`
 
 .. raw:: html
 
@@ -205,7 +225,7 @@ Processing scripts
 .. toctree::
    :hidden:
 
-   /auto_scripts/xx-sensor_stats
+   /auto_scripts/08-run_time_decoding
 
 .. raw:: html
 
@@ -246,41 +266,10 @@ Processing scripts
    :hidden:
 
    /auto_scripts/05-make_epochs
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="blabla ">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_02_03_04-run_filtering_epoching_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_02_03_04-run_filtering_epoching.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/02_03_04-run_filtering_epoching
 .. raw:: html
 
     <div style='clear:both'></div>
 
-
-
-.. container:: sphx-glr-download
-
-    :download:`Download all examples in Python source code: auto_scripts_python.zip </auto_scripts/auto_scripts_python.zip>`
-
-
-
-.. container:: sphx-glr-download
-
-    :download:`Download all examples in Jupyter notebook files: auto_scripts_jupyter.zip </auto_scripts/auto_scripts_jupyter.zip>`
 
 .. rst-class:: sphx-glr-signature
 

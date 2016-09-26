@@ -9,32 +9,28 @@ import os.path as op
 
 import mne
 
-from library.config import study_path
+from library.config import meg_dir, subjects_dir, study_path
 
-subjects_dir = op.join(study_path, 'subjects')
-meg_dir = op.join(study_path, 'MEG')
+evokeds = mne.read_evokeds(op.join(study_path, 'MEG', 'grand_average-ave.fif'))
+evoked_famous, evoked_scrambled, evoked_unfamiliar = evokeds[:3]
 
-famous_fname = op.join(study_path, 'MEG', 'eeg_famous-ave.fif')
-famous = mne.read_evokeds(famous_fname)[0]
+evokeds[0].plot_joint(title='Famous')
+evokeds[1].plot_joint(title='Scrambled')
+evokeds[2].plot_joint(title='Unfamiliar')
 
-unfamiliar_fname = op.join(study_path, 'MEG', 'eeg_unfamiliar-ave.fif')
-unfamiliar = mne.read_evokeds(unfamiliar_fname)[0]
+idx = evoked_famous.ch_names.index('EEG070')
+mapping = {'Famous': evokeds[0], 'Scrambled': evokeds[1],
+           'Unfamiliar': evokeds[2]}
+mne.viz.plot_compare_evokeds(mapping, [idx], title='EEG070 (No baseline)')
 
-scrambled = mne.read_evokeds(op.join(study_path, 'MEG',
-                                     'eeg_scrambled-ave.fif'))[0]
-scrambled.plot_joint()
-
-idx = famous.ch_names.index('EEG070')
-mne.viz.plot_compare_evokeds({'Famous': famous, 'Unfamiliar': unfamiliar,
-                              'Scrambled': scrambled}, [idx])
-
-for evoked in [famous, unfamiliar, scrambled]:
+for evoked in evokeds:
     evoked.apply_baseline()
-mne.viz.plot_compare_evokeds({'Famous': famous, 'Unfamiliar': unfamiliar,
-                              'Scrambled': scrambled}, [idx])
+mne.viz.plot_compare_evokeds(mapping, [idx],
+                             title='EEG070 (Baseline from -200ms to 0ms)',)
 
-fname = op.join(study_path, 'MEG', 'contrast-average')
+fname = op.join(meg_dir, 'contrast-average')
 stc = mne.read_source_estimate(fname, subject='fsaverage')
-brain = stc.plot(views=['cau'], hemi='both', subject='fsaverage',
-                 subjects_dir=subjects_dir)
-brain.set_data_time_index(204)
+
+brain = stc.plot(views=['ven'], hemi='both', subject='fsaverage',
+                 subjects_dir=subjects_dir, initial_time=0.17, time_unit='s',
+                 clim={'lims':[99.75, 99.88, 99.98]})

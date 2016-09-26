@@ -32,6 +32,884 @@ All the subjects compared.
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 260 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 265 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 253 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 175 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 513 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub002/sub002-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 258 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 258 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 256 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 172 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 514 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub003/sub003-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 228 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 221 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 226 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 149 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 454 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub004/sub004-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 240 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 233 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 239 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 157 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 479 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub005/sub005-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 186 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 187 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 202 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 126 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 388 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub006/sub006-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 219 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 224 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 224 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 149 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 443 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub007/sub007-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 295 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 291 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 293 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 195 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 588 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub008/sub008-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 294 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 293 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 289 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 195 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 583 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub009/sub009-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 266 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 263 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 267 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 176 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 533 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/sub010-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 274 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 279 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 273 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 185 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 547 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub011/sub011-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 269 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 273 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 276 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 182 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 545 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub012/sub012-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 286 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 276 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 285 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 186 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 571 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub013/sub013-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 248 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 236 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 258 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 161 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 506 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub014/sub014-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 281 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 275 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 276 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 184 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 557 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub015/sub015-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 232 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 198 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 238 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 139 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 470 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub016/sub016-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 221 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 188 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 219 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 132 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 440 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub017/sub017-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 261 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 222 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 255 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 155 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 516 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub018/sub018-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 291 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 278 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 291 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 188 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 582 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub019/sub019-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (famous)
+            0 CTF compensation matrices available
+            nave = 236 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (scrambled)
+            0 CTF compensation matrices available
+            nave = 234 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (unfamiliar)
+            0 CTF compensation matrices available
+            nave = 229 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (contrast)
+            0 CTF compensation matrices available
+            nave = 156 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (faces)
+            0 CTF compensation matrices available
+            nave = 465 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+    No baseline correction applied
 
 
 Evoked responses on EEG.
@@ -646,7 +1524,8 @@ Topomaps
 
 
 
-**Total running time of the script:** ( 7 minutes  57.023 seconds)
+**Total running time of the script:**
+(3 minutes 25.247 seconds)
 
 
 
@@ -655,10 +1534,9 @@ Topomaps
     :download:`Download Python source code: plot_compare.py <plot_compare.py>`
 
 
-
 .. container:: sphx-glr-download
 
-    :download:`Download Jupyter notebook: plot_compare.ipynb <plot_compare.ipynb>`
+    :download:`Download IPython notebook: plot_compare.ipynb <plot_compare.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 
