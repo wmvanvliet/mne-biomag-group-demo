@@ -30,6 +30,14 @@ a factor of 2.
 
     from library.config import meg_dir, N_JOBS, map_subjects
 
+
+We define the events and the onset and offset of the epochs
+
+
+
+.. code-block:: python
+
+
     events_id = {
         'face/famous/first': 5,
         'face/famous/immediate': 6,
@@ -45,6 +53,14 @@ a factor of 2.
     tmin, tmax = -0.2, 0.8
     reject = dict(grad=4000e-13, mag=4e-12, eog=180e-6)
     baseline = None
+
+
+
+Now we define a function to extract epochs for one subject
+
+
+
+.. code-block:: python
 
 
     def run_epochs(subject_id):
@@ -127,6 +143,14 @@ a factor of 2.
 
         epochs = mne.epochs.concatenate_epochs(all_epochs)
         epochs.save(op.join(data_path, '%s-epo.fif' % subject))
+
+
+
+Let us make the script parallel across subjects
+
+
+
+.. code-block:: python
 
 
     parallel, run_func, _ = parallel_func(run_epochs, n_jobs=N_JOBS)

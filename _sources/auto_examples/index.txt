@@ -129,6 +129,26 @@ Results
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Remove ICA using ECG. ">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_ica_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_ica.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_ica
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Run the analysis. ">
 
 .. only:: html

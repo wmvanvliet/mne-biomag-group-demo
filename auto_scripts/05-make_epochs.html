@@ -131,8 +131,10 @@ a factor of 2.</p>
 <span class="kn">from</span> <span class="nn">mne.preprocessing</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">,</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica"><span class="n">read_ica</span></a>
 
 <span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span><span class="p">,</span> <span class="n">map_subjects</span>
-
-<span class="n">events_id</span> <span class="o">=</span> <span class="p">{</span>
+</pre></div>
+</div>
+<p>We define the events and the onset and offset of the epochs</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events_id</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;face/famous/first&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
     <span class="s1">&#39;face/famous/immediate&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
     <span class="s1">&#39;face/famous/long&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
@@ -147,9 +149,10 @@ a factor of 2.</p>
 <span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span>
 <span class="n">reject</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">grad</span><span class="o">=</span><span class="mf">4000e-13</span><span class="p">,</span> <span class="n">mag</span><span class="o">=</span><span class="mf">4e-12</span><span class="p">,</span> <span class="n">eog</span><span class="o">=</span><span class="mf">180e-6</span><span class="p">)</span>
 <span class="n">baseline</span> <span class="o">=</span> <span class="bp">None</span>
-
-
-<span class="k">def</span> <span class="nf">run_epochs</span><span class="p">(</span><span class="n">subject_id</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Now we define a function to extract epochs for one subject</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_epochs</span><span class="p">(</span><span class="n">subject_id</span><span class="p">):</span>
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;processing subject: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
 
@@ -229,9 +232,10 @@ a factor of 2.</p>
 
     <span class="n">epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.concatenate_epochs.html#mne.concatenate_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">epochs</span><span class="o">.</span><span class="n">concatenate_epochs</span></a><span class="p">(</span><span class="n">all_epochs</span><span class="p">)</span>
     <span class="n">epochs</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-epo.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
-
-
-<span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">run_epochs</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let us make the script parallel across subjects</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">run_epochs</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">)</span>
 <span class="n">parallel</span><span class="p">(</span><span class="n">run_func</span><span class="p">(</span><span class="n">subject_id</span><span class="p">)</span> <span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 </pre></div>
 </div>
