@@ -31,9 +31,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="MNE Biomag Demo" href="../index.html" />
-    <link rel="up" title="Analysis Gallery" href="index.html" />
-    <link rel="next" title="Maxwell filtering" href="plot_maxfilter.html" />
-    <link rel="prev" title="Group analysis" href="plot_group.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -61,7 +58,6 @@
             
                 <li><a href="index.html">Results</a></li>
                 <li><a href="../auto_scripts/index.html">Processing Scripts</a></li>
-                <li><a href="../auto_library/index.html">Library</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -72,12 +68,7 @@
      href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../auto_scripts/index.html">Processing scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../auto_scripts/index.html#analysis-gallery">Analysis Gallery</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Analysis Gallery</a></li>
-</ul>
-</ul>
+      aria-labelledby="dLabelGlobalToc"></ul>
 </li>
               
                 <li class="dropdown">
@@ -164,7 +155,7 @@ combined into a single plot.</p>
 </div>
 <p>Let&#8217;s plot the mean AUC score across subjects</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">a_vs_b</span> <span class="ow">in</span> <span class="n">a_vs_bs</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">mean_scores</span><span class="p">[</span><span class="n">a_vs_b</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Area under curve (AUC)&#39;</span><span class="p">)</span>
@@ -173,7 +164,7 @@ combined into a single plot.</p>
                      <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.axhline"><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span></a><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Chance level&#39;</span><span class="p">)</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.axvline"><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span></a><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
     <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Time decoding (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">a_vs_b</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -206,7 +197,7 @@ due to bad subjects</p>
 </div>
 <img alt="../_images/sphx_glr_plot_time_decoding_003.png" class="align-center" src="../_images/sphx_glr_plot_time_decoding_003.png" />
 <p><strong>Total running time of the script:</strong>
-(0 minutes 1.853 seconds)</p>
+(0 minutes 1.780 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_time_decoding.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_time_decoding.py</span></code></a></div>
 <div class="sphx-glr-download container">

@@ -272,8 +272,8 @@ Processing scripts
 
 .. _library:
 
-Analysis Gallery
-================
+Library
+=======
 
 .. contents:: Contents
    :local:

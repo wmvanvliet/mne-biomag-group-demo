@@ -31,9 +31,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="MNE Biomag Demo" href="../index.html" />
-    <link rel="up" title="Analysis Gallery" href="index.html" />
-    <link rel="next" title="Analysis for subject 1" href="plot_analysis_1.html" />
-    <link rel="prev" title="Maxwell filtering" href="plot_maxfilter.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -61,7 +58,6 @@
             
                 <li><a href="index.html">Results</a></li>
                 <li><a href="../auto_scripts/index.html">Processing Scripts</a></li>
-                <li><a href="../auto_library/index.html">Library</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -72,12 +68,7 @@
      href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../auto_scripts/index.html">Processing scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../auto_scripts/index.html#analysis-gallery">Analysis Gallery</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Analysis Gallery</a></li>
-</ul>
-</ul>
+      aria-labelledby="dLabelGlobalToc"></ul>
 </li>
               
                 <li class="dropdown">
@@ -131,7 +122,7 @@ on the contrast faces vs. scrambled.</p>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
-<span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <span class="n">permutation_cluster_1samp_test</span>
+<span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.stats.permutation_cluster_1samp_test.html#mne.stats.permutation_cluster_1samp_test"><span class="n">permutation_cluster_1samp_test</span></a>
 
 <span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span>
 
@@ -147,7 +138,7 @@ on the contrast faces vs. scrambled.</p>
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;processing subject: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">data_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
-    <span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
+    <span class="n">contrast</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_evokeds.html#mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
                                 <span class="n">condition</span><span class="o">=</span><span class="s1">&#39;contrast&#39;</span><span class="p">)</span>
     <span class="n">contrast</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">contrast</span><span class="o">.</span><span class="n">apply_baseline</span><span class="p">((</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
@@ -377,7 +368,7 @@ In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be
 <span class="k">if</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.sign.html#numpy.sign"><span class="n">np</span><span class="o">.</span><span class="n">sign</span></a><span class="p">(</span><span class="n">tail</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
     <span class="n">threshold</span> <span class="o">=</span> <span class="o">-</span><span class="n">threshold</span>
 
-<span class="n">cluster_stats</span> <span class="o">=</span> <span class="n">permutation_cluster_1samp_test</span><span class="p">(</span>
+<span class="n">cluster_stats</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.stats.permutation_cluster_1samp_test.html#mne.stats.permutation_cluster_1samp_test"><span class="n">permutation_cluster_1samp_test</span></a><span class="p">(</span>
     <span class="n">data</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="n">tail</span><span class="p">,</span>
     <span class="n">step_down_p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">connectivity</span><span class="p">,</span>
     <span class="n">n_permutations</span><span class="o">=</span><span class="n">n_permutations</span><span class="p">)</span>
@@ -407,18 +398,18 @@ Done.
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="mf">1e6</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ERP Contrast&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;EEG (uV)&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i_c</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">cluster_p_values</span><span class="p">[</span><span class="n">i_c</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.05</span><span class="p">:</span>
-        <span class="n">h1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">start</span><span class="p">],</span> <span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">h1</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.axvspan"><span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span></a><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">start</span><span class="p">],</span> <span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
                          <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">h0</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">start</span><span class="p">],</span> <span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">h0</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.axvspan"><span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span></a><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">start</span><span class="p">],</span> <span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
                          <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 <span class="n">hf</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">T_obs</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">),</span>
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">((</span><span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">),</span>
            <span class="p">(</span><span class="s1">&#39;cluster p-value &gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p_accept</span><span class="p">,</span>
             <span class="s1">&#39;cluster p-value &lt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p_accept</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;time (ms)&quot;</span><span class="p">)</span>
@@ -429,7 +420,7 @@ Done.
 </div>
 <img alt="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_002.png" class="align-center" src="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_002.png" />
 <p><strong>Total running time of the script:</strong>
-(0 minutes 5.136 seconds)</p>
+(0 minutes 4.108 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_sensor_cluster_stats_eeg_channel.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_sensor_cluster_stats_eeg_channel.py</span></code></a></div>
 <div class="sphx-glr-download container">

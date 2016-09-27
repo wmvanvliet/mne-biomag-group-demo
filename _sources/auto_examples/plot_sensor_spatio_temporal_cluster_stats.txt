@@ -321,7 +321,7 @@ Assemble the data and run the cluster stats on channel data
     Permuting ...
     Computing cluster p-values
     Done.
-    Good clusters: [2 5]
+    Good clusters: [1 2 5]
 
 
 Visualize the spatio-temporal clusters
@@ -418,11 +418,16 @@ Visualize the spatio-temporal clusters
       .. image:: /auto_examples/images/sphx_glr_plot_sensor_spatio_temporal_cluster_stats_002.png
             :scale: 47
 
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_sensor_spatio_temporal_cluster_stats_003.png
+            :scale: 47
+
 
 
 
 **Total running time of the script:**
-(0 minutes 19.085 seconds)
+(0 minutes 19.865 seconds)
 
 
 

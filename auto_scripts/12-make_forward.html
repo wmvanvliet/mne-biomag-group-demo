@@ -31,9 +31,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="MNE Biomag Demo" href="../index.html" />
-    <link rel="up" title="Processing scripts" href="index.html" />
-    <link rel="next" title="Time Decoding" href="08-run_time_decoding.html" />
-    <link rel="prev" title="Inverse solution" href="13-make_inverse.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -61,7 +58,6 @@
             
                 <li><a href="../auto_examples/index.html">Results</a></li>
                 <li><a href="index.html">Processing Scripts</a></li>
-                <li><a href="../auto_library/index.html">Library</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -72,12 +68,7 @@
      href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Processing scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#analysis-gallery">Analysis Gallery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Analysis Gallery</a></li>
-</ul>
-</ul>
+      aria-labelledby="dLabelGlobalToc"></ul>
 </li>
               
                 <li class="dropdown">
@@ -143,22 +134,22 @@
     <span class="n">fname_trans</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span>
                           <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-trans.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
 
-    <span class="n">src</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">setup_source_space</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span>
+    <span class="n">src</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.setup_source_space.html#mne.setup_source_space"><span class="n">mne</span><span class="o">.</span><span class="n">setup_source_space</span></a><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span>
                                  <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                  <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">add_dist</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
     <span class="n">src_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-src.fif&#39;</span> <span class="o">%</span> <span class="n">spacing</span><span class="p">)</span>
-    <span class="n">mne</span><span class="o">.</span><span class="n">write_source_spaces</span><span class="p">(</span><span class="n">src_fname</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+    <a href="http://martinos.org/mne/stable/generated/mne.write_source_spaces.html#mne.write_source_spaces"><span class="n">mne</span><span class="o">.</span><span class="n">write_source_spaces</span></a><span class="p">(</span><span class="n">src_fname</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
 
-    <span class="n">bem_model</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">make_bem_model</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">ico</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span>
+    <span class="n">bem_model</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.make_bem_model.html#mne.make_bem_model"><span class="n">mne</span><span class="o">.</span><span class="n">make_bem_model</span></a><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">ico</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span>
                                    <span class="n">conductivity</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,))</span>
-    <span class="n">bem</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">make_bem_solution</span><span class="p">(</span><span class="n">bem_model</span><span class="p">)</span>
-    <span class="n">info</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">fname_ave</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">info</span>
-    <span class="n">fwd</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">make_forward_solution</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">fname_trans</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">,</span> <span class="n">bem</span><span class="o">=</span><span class="n">bem</span><span class="p">,</span>
+    <span class="n">bem</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.make_bem_solution.html#mne.make_bem_solution"><span class="n">mne</span><span class="o">.</span><span class="n">make_bem_solution</span></a><span class="p">(</span><span class="n">bem_model</span><span class="p">)</span>
+    <span class="n">info</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_evokeds.html#mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">fname_ave</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">info</span>
+    <span class="n">fwd</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.make_forward_solution.html#mne.make_forward_solution"><span class="n">mne</span><span class="o">.</span><span class="n">make_forward_solution</span></a><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">fname_trans</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">,</span> <span class="n">bem</span><span class="o">=</span><span class="n">bem</span><span class="p">,</span>
                                     <span class="n">fname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                                     <span class="n">mindist</span><span class="o">=</span><span class="n">mindist</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">fwd</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">convert_forward_solution</span><span class="p">(</span><span class="n">fwd</span><span class="p">,</span> <span class="n">surf_ori</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">mne</span><span class="o">.</span><span class="n">write_forward_solution</span><span class="p">(</span><span class="n">fname_fwd</span><span class="p">,</span> <span class="n">fwd</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <a href="http://martinos.org/mne/stable/generated/mne.write_forward_solution.html#mne.write_forward_solution"><span class="n">mne</span><span class="o">.</span><span class="n">write_forward_solution</span></a><span class="p">(</span><span class="n">fname_fwd</span><span class="p">,</span> <span class="n">fwd</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 
 <span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">run_forward</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">)</span>

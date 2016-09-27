@@ -31,9 +31,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="MNE Biomag Demo" href="../index.html" />
-    <link rel="up" title="Processing scripts" href="index.html" />
-    <link rel="next" title="Make report" href="99-make_reports.html" />
-    <link rel="prev" title="Forward solution" href="12-make_forward.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -61,7 +58,6 @@
             
                 <li><a href="../auto_examples/index.html">Results</a></li>
                 <li><a href="index.html">Processing Scripts</a></li>
-                <li><a href="../auto_library/index.html">Library</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -72,12 +68,7 @@
      href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Processing scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#analysis-gallery">Analysis Gallery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Analysis Gallery</a></li>
-</ul>
-</ul>
+      aria-labelledby="dLabelGlobalToc"></ul>
 </li>
               
                 <li class="dropdown">
@@ -134,35 +125,35 @@ The contrast across different sensors are combined into a single plot.</p>
 <span class="kn">import</span> <span class="nn">mne</span>
 <span class="kn">from</span> <span class="nn">mne.parallel</span> <span class="kn">import</span> <span class="n">parallel_func</span>
 
-<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span>
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span>
 </pre></div>
 </div>
 <p>Then we write a function to do time decoding on one subject</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_time_decoding</span><span class="p">(</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">condition1</span><span class="p">,</span> <span class="n">condition2</span><span class="p">):</span>
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="n">data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
-    <span class="n">epochs</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-epo.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
+    <span class="n">epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_epochs.html#mne.read_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span></a><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-epo.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
 
     <span class="c1"># We define the epochs and the labels</span>
     <span class="n">n_cond1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">epochs</span><span class="p">[</span><span class="n">condition1</span><span class="p">])</span>
     <span class="n">n_cond2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">epochs</span><span class="p">[</span><span class="n">condition2</span><span class="p">])</span>
-    <span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.r_.html#numpy.r_"><span class="n">np</span><span class="o">.</span><span class="n">r_</span></a><span class="p">[</span><a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.ones.html#numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">((</span><span class="n">n_cond1</span><span class="p">,</span> <span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_cond2</span><span class="p">,</span> <span class="p">))]</span>
+    <span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.r_.html#numpy.r_"><span class="n">np</span><span class="o">.</span><span class="n">r_</span></a><span class="p">[</span><a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.ones.html#numpy.ones"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">((</span><span class="n">n_cond1</span><span class="p">,</span> <span class="p">)),</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.zeros.html#numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">((</span><span class="n">n_cond2</span><span class="p">,</span> <span class="p">))]</span>
     <span class="n">epochs</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">concatenate_epochs</span><span class="p">([</span><span class="n">epochs</span><span class="p">[</span><span class="n">condition1</span><span class="p">],</span>
                                     <span class="n">epochs</span><span class="p">[</span><span class="n">condition2</span><span class="p">]])</span>
     <span class="n">epochs</span><span class="o">.</span><span class="n">apply_baseline</span><span class="p">()</span>
 
     <span class="c1"># Let us restrict ourselves to the occipital channels</span>
-    <span class="kn">from</span> <span class="nn">mne.selection</span> <span class="kn">import</span> <span class="n">read_selection</span>
+    <span class="kn">from</span> <span class="nn">mne.selection</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.read_selection.html#mne.read_selection"><span class="n">read_selection</span></a>
     <span class="n">ch_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch_name</span>
-                <span class="ow">in</span> <span class="n">read_selection</span><span class="p">(</span><span class="s1">&#39;occipital&#39;</span><span class="p">)]</span>
+                <span class="ow">in</span> <a href="http://martinos.org/mne/stable/generated/mne.read_selection.html#mne.read_selection"><span class="n">read_selection</span></a><span class="p">(</span><span class="s1">&#39;occipital&#39;</span><span class="p">)]</span>
     <span class="n">epochs</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="s1">&#39;mag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pick_channels</span><span class="p">(</span><span class="n">ch_names</span><span class="p">)</span>
 
     <span class="c1"># Now we fit and plot the time decoder</span>
-    <span class="kn">from</span> <span class="nn">mne.decoding</span> <span class="kn">import</span> <span class="n">TimeDecoding</span>
+    <span class="kn">from</span> <span class="nn">mne.decoding</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.decoding.TimeDecoding.html#mne.decoding.TimeDecoding"><span class="n">TimeDecoding</span></a>
 
     <span class="n">times</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mf">0.005</span><span class="p">)</span>  <span class="c1"># fit a classifier only every 5 ms</span>
     <span class="c1"># Use AUC because chance level is same regardless of the class balance</span>
-    <span class="n">td</span> <span class="o">=</span> <span class="n">TimeDecoding</span><span class="p">(</span><span class="n">predict_mode</span><span class="o">=</span><span class="s1">&#39;cross-validation&#39;</span><span class="p">,</span>
+    <span class="n">td</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.decoding.TimeDecoding.html#mne.decoding.TimeDecoding"><span class="n">TimeDecoding</span></a><span class="p">(</span><span class="n">predict_mode</span><span class="o">=</span><span class="s1">&#39;cross-validation&#39;</span><span class="p">,</span>
                       <span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">scorer</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">)</span>
     <span class="n">td</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
@@ -182,7 +173,7 @@ The contrast across different sensors are combined into a single plot.</p>
 <p class="last">This may take a large amount of memory because the epochs will be
 replicated for each parallel job</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">run_time_decoding</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">run_time_decoding</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">)</span>
 <span class="n">parallel</span><span class="p">(</span><span class="n">run_func</span><span class="p">(</span><span class="n">subject_id</span><span class="p">,</span> <span class="s1">&#39;face&#39;</span><span class="p">,</span> <span class="s1">&#39;scrambled&#39;</span><span class="p">)</span>
          <span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 <span class="n">parallel</span><span class="p">(</span><span class="n">run_func</span><span class="p">(</span><span class="n">subject_id</span><span class="p">,</span> <span class="s1">&#39;face/famous&#39;</span><span class="p">,</span> <span class="s1">&#39;face/unfamiliar&#39;</span><span class="p">)</span>

@@ -31,9 +31,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="MNE Biomag Demo" href="../index.html" />
-    <link rel="up" title="Analysis Gallery" href="index.html" />
-    <link rel="next" title="Time Decoding" href="plot_time_decoding.html" />
-    <link rel="prev" title="Comparison between subjects" href="plot_compare.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -61,7 +58,6 @@
             
                 <li><a href="index.html">Results</a></li>
                 <li><a href="../auto_scripts/index.html">Processing Scripts</a></li>
-                <li><a href="../auto_library/index.html">Library</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -72,12 +68,7 @@
      href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../auto_scripts/index.html">Processing scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../auto_scripts/index.html#analysis-gallery">Analysis Gallery</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Analysis Gallery</a></li>
-</ul>
-</ul>
+      aria-labelledby="dLabelGlobalToc"></ul>
 </li>
               
                 <li class="dropdown">
@@ -128,9 +119,9 @@
 
 <span class="kn">import</span> <span class="nn">mne</span>
 
-<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">subjects_dir</span>
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="p">,</span> <span class="n">ylim</span>
 
-<span class="n">evokeds</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="s1">&#39;grand_average-ave.fif&#39;</span><span class="p">))[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">evokeds</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_evokeds.html#mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="s1">&#39;grand_average-ave.fif&#39;</span><span class="p">))[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -183,9 +174,9 @@ No baseline correction applied
 </pre></div>
 </div>
 <p>Sensor-space. See <a class="reference internal" href="../auto_scripts/09-group_average_sensors.html#sphx-glr-auto-scripts-09-group-average-sensors-py"><span>Group average on sensor level</span></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">evokeds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Famous&#39;</span><span class="p">)</span>
-<span class="n">evokeds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scrambled&#39;</span><span class="p">)</span>
-<span class="n">evokeds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Unfamiliar&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">evokeds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Famous&#39;</span><span class="p">,</span> <span class="n">ts_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ylim&#39;</span><span class="p">:</span> <span class="n">ylim</span><span class="p">})</span>
+<span class="n">evokeds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scrambled&#39;</span><span class="p">,</span> <span class="n">ts_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ylim&#39;</span><span class="p">:</span> <span class="n">ylim</span><span class="p">})</span>
+<span class="n">evokeds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Unfamiliar&#39;</span><span class="p">,</span> <span class="n">ts_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ylim&#39;</span><span class="p">:</span> <span class="n">ylim</span><span class="p">})</span>
 
 <span class="n">idx</span> <span class="o">=</span> <span class="n">evokeds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;EEG070&#39;</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">evokeds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ch_names</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;EEG070&#39;</span>
@@ -270,7 +261,7 @@ colormap: fmin=3.00e+00 fmid=3.31e+00 fmax=4.04e+00 transparent=1
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 23.104 seconds)</p>
+(0 minutes 22.346 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_group.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_group.py</span></code></a></div>
 <div class="sphx-glr-download container">

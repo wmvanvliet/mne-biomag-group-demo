@@ -31,8 +31,6 @@
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="MNE Biomag Demo" href="../index.html" />
-    <link rel="up" title="Analysis Gallery" href="index.html" />
-    <link rel="prev" title="Analysis for subject 19" href="plot_analysis_19.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -60,7 +58,6 @@
             
                 <li><a href="index.html">Results</a></li>
                 <li><a href="../auto_scripts/index.html">Processing Scripts</a></li>
-                <li><a href="../auto_library/index.html">Library</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -71,12 +68,7 @@
      href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../auto_scripts/index.html">Processing scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../auto_scripts/index.html#analysis-gallery">Analysis Gallery</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Analysis Gallery</a></li>
-</ul>
-</ul>
+      aria-labelledby="dLabelGlobalToc"></ul>
 </li>
               
                 <li class="dropdown">
@@ -132,8 +124,8 @@ on the contrast faces vs. scrambled.</p>
 <span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="kn">import</span> <span class="n">make_axes_locatable</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
-<span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <span class="n">permutation_cluster_1samp_test</span>
-<span class="kn">from</span> <span class="nn">mne.viz</span> <span class="kn">import</span> <span class="n">plot_topomap</span>
+<span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.stats.permutation_cluster_1samp_test.html#mne.stats.permutation_cluster_1samp_test"><span class="n">permutation_cluster_1samp_test</span></a>
+<span class="kn">from</span> <span class="nn">mne.viz</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.viz.plot_topomap.html#mne.viz.plot_topomap"><span class="n">plot_topomap</span></a>
 
 <span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span>
 </pre></div>
@@ -149,13 +141,13 @@ on the contrast faces vs. scrambled.</p>
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;processing subject: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">data_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
-    <span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
+    <span class="n">contrast</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_evokeds.html#mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
                                 <span class="n">condition</span><span class="o">=</span><span class="s1">&#39;contrast&#39;</span><span class="p">)</span>
     <span class="n">contrast</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">contrast</span><span class="o">.</span><span class="n">apply_baseline</span><span class="p">((</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
     <span class="n">contrasts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
 
-<span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span><span class="p">(</span><span class="n">contrasts</span><span class="p">)</span>
+<span class="n">contrast</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.combine_evoked.html#mne.combine_evoked"><span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span></a><span class="p">(</span><span class="n">contrasts</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -377,12 +369,12 @@ In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be
 <span class="c1"># use as connectivity for cluster level stat</span>
 <span class="c1"># XXX : make a mne.channels.make_eeg_connectivity function</span>
 <span class="n">lay</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">make_eeg_layout</span><span class="p">(</span><span class="n">contrast</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
-<span class="n">neigh</span> <span class="o">=</span> <span class="n">spatial</span><span class="o">.</span><span class="n">Delaunay</span><span class="p">(</span><span class="n">lay</span><span class="o">.</span><span class="n">pos</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">vertices</span>
+<span class="n">neigh</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.17.0/reference/generated/scipy.spatial.Delaunay.lift_points.html#scipy.spatial.Delaunay"><span class="n">spatial</span><span class="o">.</span><span class="n">Delaunay</span></a><span class="p">(</span><span class="n">lay</span><span class="o">.</span><span class="n">pos</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">vertices</span>
 <span class="n">connectivity</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">mesh_edges</span><span class="p">(</span><span class="n">neigh</span><span class="p">)</span>
 
 <span class="n">data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.transpose.html#numpy.transpose"><span class="n">np</span><span class="o">.</span><span class="n">transpose</span></a><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># transpose for clustering</span>
 
-<span class="n">cluster_stats</span> <span class="o">=</span> <span class="n">permutation_cluster_1samp_test</span><span class="p">(</span>
+<span class="n">cluster_stats</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.stats.permutation_cluster_1samp_test.html#mne.stats.permutation_cluster_1samp_test"><span class="n">permutation_cluster_1samp_test</span></a><span class="p">(</span>
     <span class="n">data</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">connectivity</span><span class="o">=</span><span class="n">connectivity</span><span class="p">,</span> <span class="n">out_type</span><span class="o">=</span><span class="s1">&#39;indices&#39;</span><span class="p">,</span>
     <span class="n">check_disjoint</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -401,7 +393,7 @@ Found 9 clusters
 Permuting ...
 Computing cluster p-values
 Done.
-Good clusters: [2 5]
+Good clusters: [1 2 5]
 </pre></div>
 </div>
 <p>Visualize the spatio-temporal clusters</p>
@@ -438,7 +430,7 @@ Good clusters: [2 5]
     <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 
     <span class="c1"># plot average test statistic and mark significant sensors</span>
-    <span class="n">image</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">plot_topomap</span><span class="p">(</span><span class="n">T_obs_map</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">ax_topo</span><span class="p">,</span>
+    <span class="n">image</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.viz.plot_topomap.html#mne.viz.plot_topomap"><span class="n">plot_topomap</span></a><span class="p">(</span><span class="n">T_obs_map</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">ax_topo</span><span class="p">,</span>
                             <span class="n">vmin</span><span class="o">=</span><span class="n">T_obs_min</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">T_obs_max</span><span class="p">,</span>
                             <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
@@ -448,7 +440,7 @@ Good clusters: [2 5]
 
     <span class="c1"># add axes for colorbar</span>
     <span class="n">ax_colorbar</span> <span class="o">=</span> <span class="n">divider</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s1">&#39;5%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">ax_colorbar</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/colorbar_api.html#matplotlib.colorbar"><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span></a><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">ax_colorbar</span><span class="p">)</span>
     <span class="n">ax_topo</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Averaged T-map ({:0.1f} - {:0.1f} ms)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="o">*</span><span class="n">sig_times</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
     <span class="p">))</span>
@@ -483,9 +475,11 @@ Good clusters: [2 5]
 </li>
 <li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_sensor_spatio_temporal_cluster_stats_002.png"><img alt="../_images/sphx_glr_plot_sensor_spatio_temporal_cluster_stats_002.png" src="../_images/sphx_glr_plot_sensor_spatio_temporal_cluster_stats_002.png" style="width: 470.0px; height: 141.0px;" /></a>
 </li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_sensor_spatio_temporal_cluster_stats_003.png"><img alt="../_images/sphx_glr_plot_sensor_spatio_temporal_cluster_stats_003.png" src="../_images/sphx_glr_plot_sensor_spatio_temporal_cluster_stats_003.png" style="width: 470.0px; height: 141.0px;" /></a>
+</li>
 </ul>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 19.085 seconds)</p>
+(0 minutes 19.865 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_sensor_spatio_temporal_cluster_stats.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_sensor_spatio_temporal_cluster_stats.py</span></code></a></div>
 <div class="sphx-glr-download container">
