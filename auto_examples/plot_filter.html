@@ -123,7 +123,7 @@
 </div>
 <p>First we create some data with 30000 samples of zeros with an impulse at the
 middle. Then we construct a raw data structure and set a sampling frequency
-to 1000. Thus, we have 20 seconds of data with an impulse at 15 seconds.</p>
+to 1000. Thus, we have 30 seconds of data with an impulse at 15 seconds.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">30000</span>
 <span class="n">sfreq</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">info</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.create_info.html#mne.create_info"><span class="n">mne</span><span class="o">.</span><span class="n">create_info</span></a><span class="p">(</span><span class="n">ch_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">],</span> <span class="n">sfreq</span><span class="o">=</span><span class="n">sfreq</span><span class="p">,</span> <span class="n">ch_types</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;eeg&#39;</span><span class="p">])</span>
@@ -146,6 +146,7 @@ response of the filter.</p>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Impulse response&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">((</span><span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 <span class="n">raw</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">fmin</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
 </pre></div>
@@ -172,6 +173,7 @@ Effective window size : 2.048 (s)
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Impulse response&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">((</span><span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 <span class="n">raw</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -193,7 +195,7 @@ Effective window size : 2.048 (s)
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 4.944 seconds)</p>
+(0 minutes 1.391 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_filter.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_filter.py</span></code></a></div>
 <div class="sphx-glr-download container">

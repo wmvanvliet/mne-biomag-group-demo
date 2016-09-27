@@ -25,7 +25,7 @@ Plot filter properties.
 
 First we create some data with 30000 samples of zeros with an impulse at the
 middle. Then we construct a raw data structure and set a sampling frequency
-to 1000. Thus, we have 20 seconds of data with an impulse at 15 seconds.
+to 1000. Thus, we have 30 seconds of data with an impulse at 15 seconds.
 
 
 
@@ -64,6 +64,7 @@ response of the filter.
     plt.xlabel('Time (s)')
     plt.ylabel('Amplitude')
     plt.title('Impulse response')
+    plt.xlim((14, 16))
     plt.show()
     raw.plot_psd(fmin=20, fmax=60)
 
@@ -109,6 +110,7 @@ Let's do the same after highpass filtering at 1 Hz.
     plt.xlabel('Time (s)')
     plt.ylabel('Amplitude')
     plt.title('Impulse response')
+    plt.xlim((14, 16))
     plt.show()
     raw.plot_psd(fmax=10)
 
@@ -142,7 +144,7 @@ Let's do the same after highpass filtering at 1 Hz.
 
 
 **Total running time of the script:**
-(0 minutes 4.944 seconds)
+(0 minutes 1.391 seconds)
 
 
 
