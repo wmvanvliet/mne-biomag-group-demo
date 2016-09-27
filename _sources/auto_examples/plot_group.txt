@@ -11,39 +11,19 @@ Run the group analysis.
 
 
 
+.. code-block:: python
 
-.. rst-class:: sphx-glr-horizontal
+    import os.path as op
+
+    import mne
+
+    from library.config import meg_dir, subjects_dir, study_path
+
+    evokeds = mne.read_evokeds(op.join(study_path, 'MEG', 'grand_average-ave.fif'))
+    evoked_famous, evoked_scrambled, evoked_unfamiliar = evokeds[:3]
 
 
-    *
 
-      .. image:: /auto_examples/images/sphx_glr_plot_group_001.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/images/sphx_glr_plot_group_002.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/images/sphx_glr_plot_group_003.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/images/sphx_glr_plot_group_004.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/images/sphx_glr_plot_group_005.png
-            :scale: 47
-
-    *
-
-      .. image:: /auto_examples/images/sphx_glr_plot_group_006.png
-            :scale: 47
 
 
 .. rst-class:: sphx-glr-script-out
@@ -96,54 +76,13 @@ Run the group analysis.
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
-    In 0.13 the default is weights="nave", but in 0.14 the default will be removed and it will have to be explicitly set
-    Applying baseline correction (mode: mean)
-    Applying baseline correction (mode: mean)
-    Applying baseline correction (mode: mean)
-    Applying baseline correction (mode: mean)
-    Applying baseline correction (mode: mean)
-    In 0.13 the default is weights="nave", but in 0.14 the default will be removed and it will have to be explicitly set
-    Updating smoothing matrix, be patient..
-    Smoothing matrix creation, step 1
-    Smoothing matrix creation, step 2
-    Smoothing matrix creation, step 3
-    Smoothing matrix creation, step 4
-    Smoothing matrix creation, step 5
-    Smoothing matrix creation, step 6
-    Smoothing matrix creation, step 7
-    Smoothing matrix creation, step 8
-    Smoothing matrix creation, step 9
-    Smoothing matrix creation, step 10
-    colormap: fmin=3.00e+00 fmid=3.31e+00 fmax=4.04e+00 transparent=1
-    Updating smoothing matrix, be patient..
-    Smoothing matrix creation, step 1
-    Smoothing matrix creation, step 2
-    Smoothing matrix creation, step 3
-    Smoothing matrix creation, step 4
-    Smoothing matrix creation, step 5
-    Smoothing matrix creation, step 6
-    Smoothing matrix creation, step 7
-    Smoothing matrix creation, step 8
-    Smoothing matrix creation, step 9
-    Smoothing matrix creation, step 10
-    colormap: fmin=3.00e+00 fmid=3.31e+00 fmax=4.04e+00 transparent=1
 
 
+Sensor-space. See :ref:`sphx_glr_auto_scripts_09-group_average_sensors.py`
 
-
-|
 
 
 .. code-block:: python
-
-    import os.path as op
-
-    import mne
-
-    from library.config import meg_dir, subjects_dir, study_path
-
-    evokeds = mne.read_evokeds(op.join(study_path, 'MEG', 'grand_average-ave.fif'))
-    evoked_famous, evoked_scrambled, evoked_unfamiliar = evokeds[:3]
 
     evokeds[0].plot_joint(title='Famous')
     evokeds[1].plot_joint(title='Scrambled')
@@ -159,6 +98,87 @@ Run the group analysis.
     mne.viz.plot_compare_evokeds(mapping, [idx],
                                  title='EEG070 (Baseline from -200ms to 0ms)',)
 
+
+
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_001.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_002.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_003.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_004.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_005.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_006.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_007.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_008.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_009.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_010.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_group_011.png
+            :scale: 47
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    In 0.13 the default is weights="nave", but in 0.14 the default will be removed and it will have to be explicitly set
+    Applying baseline correction (mode: mean)
+    Applying baseline correction (mode: mean)
+    Applying baseline correction (mode: mean)
+    Applying baseline correction (mode: mean)
+    Applying baseline correction (mode: mean)
+    In 0.13 the default is weights="nave", but in 0.14 the default will be removed and it will have to be explicitly set
+
+
+Source-space. See :ref:`sphx_glr_auto_scripts_14-group_average_source.py`
+
+
+
+.. code-block:: python
+
     fname = op.join(meg_dir, 'contrast-average')
     stc = mne.read_source_estimate(fname, subject='fsaverage')
 
@@ -166,8 +186,44 @@ Run the group analysis.
                      subjects_dir=subjects_dir, initial_time=0.17, time_unit='s',
                      clim={'lims':[99.75, 99.88, 99.98]})
 
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_group_012.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=3.00e+00 fmid=3.31e+00 fmax=4.04e+00 transparent=1
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=3.00e+00 fmid=3.31e+00 fmax=4.04e+00 transparent=1
+
+
 **Total running time of the script:**
-(0 minutes 12.583 seconds)
+(0 minutes 26.078 seconds)
 
 
 

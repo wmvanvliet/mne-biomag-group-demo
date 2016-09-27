@@ -142,7 +142,6 @@
     <span class="n">evokeds</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span>
                                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">evoked</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">evokeds</span><span class="p">):</span>
-        <span class="n">evoked</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># Pick only EEG channels</span>
         <span class="n">all_evokeds</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evoked</span><span class="p">)</span>  <span class="c1"># Insert to the container</span>
 
 
@@ -174,7 +173,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-26.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-27.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>

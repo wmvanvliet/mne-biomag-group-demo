@@ -282,7 +282,7 @@ Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub004/sub004-ave.fif ...
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (famous)
         0 CTF compensation matrices available
-        nave = 240 - aspect type = 100
+        nave = 241 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -291,7 +291,7 @@ No baseline correction applied
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (scrambled)
         0 CTF compensation matrices available
-        nave = 233 - aspect type = 100
+        nave = 237 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -309,7 +309,7 @@ No baseline correction applied
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (contrast)
         0 CTF compensation matrices available
-        nave = 157 - aspect type = 100
+        nave = 159 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -318,7 +318,7 @@ No baseline correction applied
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (faces)
         0 CTF compensation matrices available
-        nave = 479 - aspect type = 100
+        nave = 480 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -346,7 +346,7 @@ No baseline correction applied
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (unfamiliar)
         0 CTF compensation matrices available
-        nave = 202 - aspect type = 100
+        nave = 203 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -364,7 +364,7 @@ No baseline correction applied
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (faces)
         0 CTF compensation matrices available
-        nave = 388 - aspect type = 100
+        nave = 389 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -567,7 +567,7 @@ No baseline correction applied
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (scrambled)
         0 CTF compensation matrices available
-        nave = 279 - aspect type = 100
+        nave = 280 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -834,7 +834,7 @@ Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub016/sub016-ave.fif ...
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (famous)
         0 CTF compensation matrices available
-        nave = 221 - aspect type = 100
+        nave = 223 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -870,7 +870,7 @@ No baseline correction applied
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (faces)
         0 CTF compensation matrices available
-        nave = 440 - aspect type = 100
+        nave = 442 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -972,7 +972,7 @@ Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub019/sub019-ave.fif ...
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (famous)
         0 CTF compensation matrices available
-        nave = 236 - aspect type = 100
+        nave = 238 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -990,7 +990,7 @@ No baseline correction applied
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (unfamiliar)
         0 CTF compensation matrices available
-        nave = 229 - aspect type = 100
+        nave = 231 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
@@ -1008,13 +1008,13 @@ No baseline correction applied
     Found the data of interest:
         t =    -200.00 ...     800.00 ms (faces)
         0 CTF compensation matrices available
-        nave = 465 - aspect type = 100
+        nave = 469 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
 No baseline correction applied
 </pre></div>
 </div>
-<p>Evoked responses on EEG.</p>
+<p>Evoked responses on EEG. <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span>Evoked data and covariance</span></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">picks</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">evokeds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">evoked</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">evokeds</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
@@ -1264,7 +1264,7 @@ No baseline correction applied
 </li>
 </ul>
 <p><strong>Total running time of the script:</strong>
-(3 minutes 25.247 seconds)</p>
+(3 minutes 26.437 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_compare.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare.py</span></code></a></div>
 <div class="sphx-glr-download container">
@@ -1284,7 +1284,7 @@ No baseline correction applied
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-26.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-27.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>

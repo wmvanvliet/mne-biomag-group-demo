@@ -112,6 +112,7 @@ Then Maxfiltered and tSSS'd data.
 
 
 
+
 .. rst-class:: sphx-glr-script-out
 
  Out::
@@ -310,7 +311,7 @@ Plotting
 
 
 **Total running time of the script:**
-(1 minutes 36.993 seconds)
+(1 minutes 50.495 seconds)
 
 
 

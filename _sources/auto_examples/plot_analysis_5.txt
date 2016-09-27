@@ -78,7 +78,7 @@ Configuration
     add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
 
 
-Filtering
+Filtering :ref:`sphx_glr_auto_scripts_02-python_filtering.py`.
 
 
 
@@ -116,7 +116,8 @@ Filtering
     Effective window size : 1.862 (s)
 
 
-Events
+Events :ref:`sphx_glr_auto_scripts_03-run_extract_events.py`.
+Epochs :ref:`sphx_glr_auto_scripts_05-make_epochs.py`.
 
 
 
@@ -165,7 +166,7 @@ Events
     1 projection items activated
 
 
-Evoked responses
+Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
 
 
 
@@ -362,7 +363,7 @@ Topomaps
 
 
 
-TFR
+TFR :ref:`sphx_glr_auto_scripts_07-time_frequency.py`.
 
 
 
@@ -429,7 +430,7 @@ TFR
     Applying baseline correction (mode: logratio)
 
 
-Covariance
+Covariance :ref:`sphx_glr_auto_scripts_06-make_evoked.py`.
 
 
 
@@ -505,7 +506,7 @@ Trans
     Getting helmet for system 306m
 
 
-Faces
+Faces :ref:`sphx_glr_auto_scripts_13-make_inverse.py`.
 
 
 
@@ -604,7 +605,7 @@ Faces - scrambled
 
 
 **Total running time of the script:**
-(0 minutes 53.161 seconds)
+(0 minutes 53.322 seconds)
 
 
 

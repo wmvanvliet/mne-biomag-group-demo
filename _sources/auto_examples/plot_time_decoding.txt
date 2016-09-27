@@ -61,6 +61,7 @@ Now we loop over subjects to load the scores
 
 
 ... and average them
+(see :ref:`sphx_glr_auto_scripts_08-run_time_decoding.py`)
 
 
 
@@ -150,7 +151,7 @@ due to bad subjects
 
 
 **Total running time of the script:**
-(0 minutes 1.765 seconds)
+(0 minutes 1.853 seconds)
 
 
 
