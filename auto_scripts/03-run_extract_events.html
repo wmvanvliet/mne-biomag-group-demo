@@ -142,9 +142,9 @@ to the subject&#8217;s MEG directory.</p>
             <span class="k">continue</span>
 
         <span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Raw</span><span class="p">(</span><span class="n">run_fname</span><span class="p">)</span>
-
+        <span class="n">mask</span> <span class="o">=</span> <span class="mi">4096</span> <span class="o">+</span> <span class="mi">256</span>  <span class="c1"># mask for excluding high order bits</span>
         <span class="n">events</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">find_events</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">stim_channel</span><span class="o">=</span><span class="s1">&#39;STI101&#39;</span><span class="p">,</span>
-                                 <span class="n">consecutive</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="mi">4352</span><span class="p">,</span>
+                                 <span class="n">consecutive</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span>
                                  <span class="n">mask_type</span><span class="o">=</span><span class="s1">&#39;not_and&#39;</span><span class="p">,</span> <span class="n">min_duration</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
                                  <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 

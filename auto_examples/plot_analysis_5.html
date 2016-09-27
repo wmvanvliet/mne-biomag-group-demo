@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Plotting the analysis chain (Subject 5) &mdash; MNE Biomag Demo</title>
+    <title>Analysis for subject 5 &mdash; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -32,8 +32,8 @@
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="MNE Biomag Demo" href="../index.html" />
     <link rel="up" title="Analysis Gallery" href="index.html" />
-    <link rel="next" title="Plotting the analysis chain (Subject 6)" href="plot_analysis_6.html" />
-    <link rel="prev" title="Plotting the analysis chain (Subject 4)" href="plot_analysis_4.html" />
+    <link rel="next" title="Analysis for subject 6" href="plot_analysis_6.html" />
+    <link rel="prev" title="Analysis for subject 4" href="plot_analysis_4.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -87,7 +87,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Plotting the analysis chain (Subject 5)</a></li>
+<li><a class="reference internal" href="#">Analysis for subject 5</a></li>
 </ul>
 </ul>
 </li>
@@ -119,8 +119,8 @@
   <div class="row">
     <div class="col-md-12 content">
       
-  <div class="section" id="plotting-the-analysis-chain-subject-5">
-<span id="sphx-glr-auto-examples-plot-analysis-5-py"></span><h1>Plotting the analysis chain (Subject 5)<a class="headerlink" href="#plotting-the-analysis-chain-subject-5" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="analysis-for-subject-5">
+<span id="sphx-glr-auto-examples-plot-analysis-5-py"></span><h1>Analysis for subject 5<a class="headerlink" href="#analysis-for-subject-5" title="Permalink to this headline">¶</a></h1>
 <p>Run the analysis.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
@@ -128,12 +128,11 @@
 
 <span class="kn">import</span> <span class="nn">mne</span>
 
-<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span>
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span><span class="p">,</span> <span class="n">meg_dir</span>
 </pre></div>
 </div>
 <p>Configuration</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">subjects_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;subjects&#39;</span><span class="p">)</span>
-<span class="n">meg_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">)</span>
 
 <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 
@@ -481,7 +480,7 @@ colormap: fmin=2.03e+00 fmid=2.28e+00 fmax=4.44e+00 transparent=1
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 53.322 seconds)</p>
+(0 minutes 51.574 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_analysis_5.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_analysis_5.py</span></code></a></div>
 <div class="sphx-glr-download container">

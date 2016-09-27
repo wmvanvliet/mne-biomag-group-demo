@@ -126,10 +126,9 @@
 
 <span class="kn">import</span> <span class="nn">mne</span>
 
-<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="p">,</span> <span class="n">study_path</span>
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">subjects_dir</span>
 
-<span class="n">evokeds</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;grand_average-ave.fif&#39;</span><span class="p">))</span>
-<span class="n">evoked_famous</span><span class="p">,</span> <span class="n">evoked_scrambled</span><span class="p">,</span> <span class="n">evoked_unfamiliar</span> <span class="o">=</span> <span class="n">evokeds</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">evokeds</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="s1">&#39;grand_average-ave.fif&#39;</span><span class="p">))[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -186,7 +185,9 @@ No baseline correction applied
 <span class="n">evokeds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scrambled&#39;</span><span class="p">)</span>
 <span class="n">evokeds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Unfamiliar&#39;</span><span class="p">)</span>
 
-<span class="n">idx</span> <span class="o">=</span> <span class="n">evoked_famous</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;EEG070&#39;</span><span class="p">)</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">evokeds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;EEG070&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">evokeds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ch_names</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;EEG070&#39;</span>
+<span class="k">assert</span> <span class="n">evokeds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">ch_names</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;EEG070&#39;</span>
 <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Famous&#39;</span><span class="p">:</span> <span class="n">evokeds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Scrambled&#39;</span><span class="p">:</span> <span class="n">evokeds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
            <span class="s1">&#39;Unfamiliar&#39;</span><span class="p">:</span> <span class="n">evokeds</span><span class="p">[</span><span class="mi">2</span><span class="p">]}</span>
 <span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_compare_evokeds</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;EEG070 (No baseline)&#39;</span><span class="p">)</span>
@@ -226,8 +227,6 @@ No baseline correction applied
 Applying baseline correction (mode: mean)
 Applying baseline correction (mode: mean)
 Applying baseline correction (mode: mean)
-Applying baseline correction (mode: mean)
-Applying baseline correction (mode: mean)
 In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be removed and it will have to be explicitly set
 </pre></div>
 </div>
@@ -237,7 +236,7 @@ In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be
 
 <span class="n">brain</span> <span class="o">=</span> <span class="n">stc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ven&#39;</span><span class="p">],</span> <span class="n">hemi</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;fsaverage&#39;</span><span class="p">,</span>
                  <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mf">0.17</span><span class="p">,</span> <span class="n">time_unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
-                 <span class="n">clim</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;lims&#39;</span><span class="p">:[</span><span class="mf">99.75</span><span class="p">,</span> <span class="mf">99.88</span><span class="p">,</span> <span class="mf">99.98</span><span class="p">]})</span>
+                 <span class="n">clim</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;lims&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">99.75</span><span class="p">,</span> <span class="mf">99.88</span><span class="p">,</span> <span class="mf">99.98</span><span class="p">]})</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_group_012.png" class="align-center" src="../_images/sphx_glr_plot_group_012.png" />
@@ -269,7 +268,7 @@ colormap: fmin=3.00e+00 fmid=3.31e+00 fmax=4.04e+00 transparent=1
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 26.078 seconds)</p>
+(0 minutes 23.104 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_group.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_group.py</span></code></a></div>
 <div class="sphx-glr-download container">

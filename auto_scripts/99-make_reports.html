@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Blabla &mdash; MNE Biomag Demo</title>
+    <title>Make report &mdash; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -87,7 +87,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Blabla</a></li>
+<li><a class="reference internal" href="#">Make report</a></li>
 </ul>
 </ul>
 </li>
@@ -119,26 +119,24 @@
   <div class="row">
     <div class="col-md-12 content">
       
-  <div class="section" id="blabla">
-<span id="sphx-glr-auto-scripts-99-make-reports-py"></span><h1>Blabla<a class="headerlink" href="#blabla" title="Permalink to this headline">¶</a></h1>
-<p>blabla</p>
+  <div class="section" id="make-report">
+<span id="sphx-glr-auto-scripts-99-make-reports-py"></span><h1>Make report<a class="headerlink" href="#make-report" title="Permalink to this headline">¶</a></h1>
+<p>Builds an html report containing all the relevant analysis plots.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
 <span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">mne.parallel</span> <span class="kn">import</span> <span class="n">parallel_func</span>
 <span class="kn">from</span> <span class="nn">mne</span> <span class="kn">import</span> <span class="n">Report</span>
 <span class="kn">import</span> <span class="nn">mne</span>
 
-<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="p">,</span> <span class="n">N_JOBS</span>
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="p">,</span> <span class="n">N_JOBS</span><span class="p">,</span> <span class="n">meg_dir</span>
 
 
 <span class="k">def</span> <span class="nf">make_report</span><span class="p">(</span><span class="n">subject_id</span><span class="p">):</span>
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;processing </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
 
-    <span class="n">meg_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+    <span class="n">meg_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">ave_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_path</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">-ave.fif&quot;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
 
     <span class="n">rep</span> <span class="o">=</span> <span class="n">Report</span><span class="p">(</span><span class="n">info_fname</span><span class="o">=</span><span class="n">ave_fname</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span>
@@ -168,14 +166,11 @@
     <span class="k">if</span> <span class="s1">&#39;EEG070&#39;</span> <span class="ow">in</span> <span class="n">fam</span><span class="o">.</span><span class="n">ch_names</span><span class="p">:</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="n">fam</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;EEG070&#39;</span><span class="p">)</span>
 
-        <span class="n">fig</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_compare_evokeds</span><span class="p">({</span><span class="s1">&#39;Famous&#39;</span><span class="p">:</span><span class="n">fam</span><span class="p">,</span> <span class="s1">&#39;Unfamiliar&#39;</span><span class="p">:</span><span class="n">unfam</span><span class="p">,</span>
-                                            <span class="s1">&#39;Scrambled&#39;</span><span class="p">:</span><span class="n">scramb</span><span class="p">},</span> <span class="n">idx</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_compare_evokeds</span><span class="p">({</span><span class="s1">&#39;Famous&#39;</span><span class="p">:</span> <span class="n">fam</span><span class="p">,</span> <span class="s1">&#39;Unfamiliar&#39;</span><span class="p">:</span> <span class="n">unfam</span><span class="p">,</span>
+                                            <span class="s1">&#39;Scrambled&#39;</span><span class="p">:</span> <span class="n">scramb</span><span class="p">},</span> <span class="n">idx</span><span class="p">,</span>
+                                           <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">figs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 
-        <span class="c1">#plt.plot(fam.data[idx], label=&#39;famous&#39;)</span>
-        <span class="c1">#plt.plot(unfam.data[idx], label=&#39;unfamiliar&#39;)</span>
-        <span class="c1">#plt.plot(scramb.data[idx], label=&#39;scrambled&#39;)</span>
-        <span class="c1">#plt.legend()</span>
         <span class="n">captions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Famous, unfamliliar and scrambled faces on EEG070&#39;</span><span class="p">)</span>
 
     <span class="n">fname_trans</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span>
@@ -198,26 +193,23 @@
         <span class="n">fig</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
         <span class="n">rep</span><span class="o">.</span><span class="n">_add_figs_to_section</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span>
 
-    <span class="n">rep</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;report</span><span class="si">%s</span><span class="s1">.html&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
-                           <span class="n">open_browser</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-    <span class="c1"># !mne report -p $meg_path -i $ave_fname -d $subjects_dir -s $subject --no-browser --overwrite</span>
+    <span class="n">rep</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="s1">&#39;report</span><span class="si">%s</span><span class="s1">.html&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
+             <span class="n">open_browser</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 
 <span class="c1"># Group report</span>
-<span class="n">faces_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;eeg_faces-ave.fif&#39;</span><span class="p">)</span>
+<span class="n">faces_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="s1">&#39;eeg_faces-ave.fif&#39;</span><span class="p">)</span>
 <span class="n">rep</span> <span class="o">=</span> <span class="n">Report</span><span class="p">(</span><span class="n">info_fname</span><span class="o">=</span><span class="n">faces_fname</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;fsaverage&#39;</span><span class="p">,</span>
              <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">)</span>
 <span class="n">faces</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">faces_fname</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">rep</span><span class="o">.</span><span class="n">add_figs_to_section</span><span class="p">(</span><span class="n">faces</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span>
                         <span class="s1">&#39;Average faces&#39;</span><span class="p">)</span>
 
-<span class="n">scrambled</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;eeg_scrambled-ave.fif&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">scrambled</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="s1">&#39;eeg_scrambled-ave.fif&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">rep</span><span class="o">.</span><span class="n">add_figs_to_section</span><span class="p">(</span><span class="n">scrambled</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">gfp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                        <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span> <span class="s1">&#39;Average scrambled&#39;</span><span class="p">)</span>
 
-<span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;contrast-average&#39;</span><span class="p">)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="s1">&#39;contrast-average&#39;</span><span class="p">)</span>
 <span class="n">stc</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;fsaverage&#39;</span><span class="p">)</span>
 <span class="n">brain</span> <span class="o">=</span> <span class="n">stc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ven&#39;</span><span class="p">],</span> <span class="n">hemi</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;fsaverage&#39;</span><span class="p">,</span>
                  <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">)</span>
@@ -226,7 +218,7 @@
 <span class="n">fig</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
 <span class="n">rep</span><span class="o">.</span><span class="n">add_figs_to_section</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s1">&#39;Avergae faces - scrambled&#39;</span><span class="p">)</span>
 
-<span class="n">rep</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;report_average.html&#39;</span><span class="p">),</span>
+<span class="n">rep</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="s1">&#39;report_average.html&#39;</span><span class="p">),</span>
          <span class="n">open_browser</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">make_report</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">)</span>
