@@ -117,20 +117,133 @@
 <p>Plot filter properties.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
+
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span>
+
+<span class="n">filt_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">l_trans_bandwidth</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">h_trans_bandwidth</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+                   <span class="n">filter_length</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span> <span class="n">fir_window</span><span class="o">=</span><span class="s1">&#39;hann&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>First we create some data with 30000 samples of zeros with an impulse at the
-middle. Then we construct a raw data structure and set a sampling frequency
-to 1000. Thus, we have 30 seconds of data with an impulse at 15 seconds.</p>
+<p>Let&#8217;s look at some data from the multimodal faces data set.
+First we read in the data from run 1 of subject 2.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="s1">&#39;sub002&#39;</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;run_01_sss.fif&#39;</span><span class="p">),</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">raw</span><span class="o">.</span><span class="n">set_channel_types</span><span class="p">({</span><span class="s1">&#39;EEG061&#39;</span><span class="p">:</span> <span class="s1">&#39;eog&#39;</span><span class="p">,</span> <span class="s1">&#39;EEG062&#39;</span><span class="p">:</span> <span class="s1">&#39;eog&#39;</span><span class="p">,</span> <span class="s1">&#39;EEG063&#39;</span><span class="p">:</span> <span class="s1">&#39;ecg&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;EEG064&#39;</span><span class="p">:</span> <span class="s1">&#39;misc&#39;</span><span class="p">})</span>  <span class="c1"># EEG064 free floating el.</span>
+<span class="n">raw</span><span class="o">.</span><span class="n">rename_channels</span><span class="p">({</span><span class="s1">&#39;EEG061&#39;</span><span class="p">:</span> <span class="s1">&#39;EOG061&#39;</span><span class="p">,</span> <span class="s1">&#39;EEG062&#39;</span><span class="p">:</span> <span class="s1">&#39;EOG062&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;EEG063&#39;</span><span class="p">:</span> <span class="s1">&#39;ECG063&#39;</span><span class="p">})</span>
+<span class="n">raw</span><span class="o">.</span><span class="n">set_eeg_reference</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub002/MEG/run_01_sss.fif...
+This filename (/tsi/doctorants/data_gramfort/dgw_faces/ds117/sub002/MEG/run_01_sss.fif) does not conform to MNE naming conventions. All raw files should end with raw.fif, raw_sss.fif, raw_tsss.fif, raw.fif.gz, raw_sss.fif.gz or raw_tsss.fif.gz
+    Range : 248600 ... 788699 =    226.000 ...   716.999 secs
+Ready.
+Current compensation grade : 0
+Adding average EEG reference projection.
+1 projection items deactivated
+</pre></div>
+</div>
+<p>Then we filter it at 1Hz with the defaults of MNE.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw_1</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">raw_1</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">raw_1</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filt_params</span><span class="p">)</span>
+
+<span class="n">raw_1</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_filter_001.png" class="align-center" src="../_images/sphx_glr_plot_filter_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading 0 ... 540099  =      0.000 ...   490.999 secs...
+Band-pass filtering from 1 - 40 Hz
+l_trans_bandwidth chosen to be 1.0 Hz
+h_trans_bandwidth chosen to be 10.0 Hz
+Filter length of 6820 samples (6.200 sec) selected
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+</pre></div>
+</div>
+<p>We see that even though the attenuation close to 0Hz is sufficient enough,
+the low frequency components at around 1Hz are still quite prominent. Lets
+see how the famous faces look after averaging. (Notice that we do not
+compensate for the delay or clean the data, so the figures are not comparable
+to the final results).</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.find_events.html#mne.find_events"><span class="n">mne</span><span class="o">.</span><span class="n">find_events</span></a><span class="p">(</span><span class="n">raw_1</span><span class="p">)</span>
+<span class="n">event_ids</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>  <span class="c1"># Famous faces</span>
+<span class="n">evoked_1</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.Epochs.html#mne.Epochs"><span class="n">mne</span><span class="o">.</span><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw_1</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span>
+                      <span class="n">baseline</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+<span class="n">evoked_1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_filter_002.png" class="align-center" src="../_images/sphx_glr_plot_filter_002.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>259 events found
+Events id: [   5    6    7   13   14   15   17   18   19  256  261  262  263  269  270
+  271  273  274  275 4096 4101 4102 4103 4109 4110 4111 4113 4114 4115 4352]
+49 matching events found
+No baseline correction applied
+add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+Created an SSP operator (subspace dimension = 1)
+1 projection items activated
+</pre></div>
+</div>
+<p>They&#8217;re all over the place! The baselining effect of high pass filtering does
+not seem to work. Let&#8217;s try removing the low frequency components by raising
+the cut-off frequency to 2.5 Hz.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw_2</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">raw_2</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">raw_2</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filt_params</span><span class="p">)</span>
+<span class="n">raw_2</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_filter_003.png" class="align-center" src="../_images/sphx_glr_plot_filter_003.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading 0 ... 540099  =      0.000 ...   490.999 secs...
+Band-pass filtering from 2.5 - 40 Hz
+l_trans_bandwidth chosen to be 2.0 Hz
+h_trans_bandwidth chosen to be 10.0 Hz
+Filter length of 3410 samples (3.100 sec) selected
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+</pre></div>
+</div>
+<p>We see that the low frequency &#8216;peak&#8217; is gone and the transition is more
+gradual. The &#8216;auto&#8217; param automatically fits the transition bandwidth to
+reduce ringing as much as possible.
+Finally we plot the evoked responses, and we see that the fanning of the
+signal is gone.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">evoked_2</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.Epochs.html#mne.Epochs"><span class="n">mne</span><span class="o">.</span><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw_2</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span>
+                      <span class="n">baseline</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+<span class="n">evoked_2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_filter_004.png" class="align-center" src="../_images/sphx_glr_plot_filter_004.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>49 matching events found
+No baseline correction applied
+add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+Created an SSP operator (subspace dimension = 1)
+1 projection items activated
+</pre></div>
+</div>
+<p>Let&#8217;s also plot the impulse response of the used filter. Here we create some
+data with 30000 samples of zeros with an impulse at the middle. Then we
+construct a raw data structure and set a sampling frequency to 1000. Thus,
+we have 30 seconds of data with an impulse at 15 seconds.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">30000</span>
 <span class="n">sfreq</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">info</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.create_info.html#mne.create_info"><span class="n">mne</span><span class="o">.</span><span class="n">create_info</span></a><span class="p">(</span><span class="n">ch_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">],</span> <span class="n">sfreq</span><span class="o">=</span><span class="n">sfreq</span><span class="p">,</span> <span class="n">ch_types</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;eeg&#39;</span><span class="p">])</span>
 <span class="n">data</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.zeros.html#numpy.zeros"><span class="n">np</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
 <span class="n">data</span><span class="p">[</span><span class="n">n_samples</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-6</span>
 <span class="n">times</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_samples</span> <span class="o">//</span> <span class="n">sfreq</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
-<span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">RawArray</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="n">data</span><span class="p">]),</span> <span class="n">info</span><span class="p">)</span>
+<span class="n">raw</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.RawArray.html#mne.io.RawArray"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">RawArray</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="n">data</span><span class="p">]),</span> <span class="n">info</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -139,9 +252,9 @@ to 1000. Thus, we have 30 seconds of data with an impulse at 15 seconds.</p>
 Ready.
 </pre></div>
 </div>
-<p>We lowpass filter the data and plot the frequency spectrum and the impulse
+<p>We low pass filter the data and plot the frequency spectrum and the impulse
 response of the filter.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filt_params</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">raw</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
@@ -152,23 +265,20 @@ response of the filter.</p>
 </pre></div>
 </div>
 <ul class="sphx-glr-horizontal">
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_filter_001.png"><img alt="../_images/sphx_glr_plot_filter_001.png" src="../_images/sphx_glr_plot_filter_001.png" style="width: 376.0px; height: 282.0px;" /></a>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_filter_005.png"><img alt="../_images/sphx_glr_plot_filter_005.png" src="../_images/sphx_glr_plot_filter_005.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_filter_002.png"><img alt="../_images/sphx_glr_plot_filter_002.png" src="../_images/sphx_glr_plot_filter_002.png" style="width: 376.0px; height: 282.0px;" /></a>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_filter_006.png"><img alt="../_images/sphx_glr_plot_filter_006.png" src="../_images/sphx_glr_plot_filter_006.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Low-pass filtering at 40 Hz
-Multiple deprecated filter parameters were used:
-phase in 0.13 is &quot;zero-double&quot; but will change to &quot;zero&quot; in 0.14
-fir_window in 0.13 is &quot;hann&quot; but will change to &quot;hamming&quot; in 0.14
-upper transition bandwidth in 0.13 is 0.5 Hz but will change to &quot;auto&quot; in 0.14
-The default filter length in 0.13 is &quot;10s&quot; but will change to &quot;auto&quot; in 0.14
+h_trans_bandwidth chosen to be 10.0 Hz
+Filter length of 620 samples (0.620 sec) selected
 Effective window size : 2.048 (s)
 </pre></div>
 </div>
-<p>Let&#8217;s do the same after highpass filtering at 1 Hz.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<p>Let&#8217;s do the same after high pass filtering at 2.5 Hz.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">filt_params</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">raw</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
@@ -179,23 +289,20 @@ Effective window size : 2.048 (s)
 </pre></div>
 </div>
 <ul class="sphx-glr-horizontal">
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_filter_003.png"><img alt="../_images/sphx_glr_plot_filter_003.png" src="../_images/sphx_glr_plot_filter_003.png" style="width: 376.0px; height: 282.0px;" /></a>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_filter_007.png"><img alt="../_images/sphx_glr_plot_filter_007.png" src="../_images/sphx_glr_plot_filter_007.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_filter_004.png"><img alt="../_images/sphx_glr_plot_filter_004.png" src="../_images/sphx_glr_plot_filter_004.png" style="width: 376.0px; height: 282.0px;" /></a>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_filter_008.png"><img alt="../_images/sphx_glr_plot_filter_008.png" src="../_images/sphx_glr_plot_filter_008.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>High-pass filtering at 1 Hz
-Multiple deprecated filter parameters were used:
-phase in 0.13 is &quot;zero-double&quot; but will change to &quot;zero&quot; in 0.14
-fir_window in 0.13 is &quot;hann&quot; but will change to &quot;hamming&quot; in 0.14
-lower transition bandwidth in 0.13 is 0.5 Hz but will change to &quot;auto&quot; in 0.14
-The default filter length in 0.13 is &quot;10s&quot; but will change to &quot;auto&quot; in 0.14
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>High-pass filtering at 2.5 Hz
+l_trans_bandwidth chosen to be 2.0 Hz
+Filter length of 3100 samples (3.100 sec) selected
 Effective window size : 2.048 (s)
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 0.645 seconds)</p>
+(0 minutes 48.229 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_filter.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_filter.py</span></code></a></div>
 <div class="sphx-glr-download container">

@@ -14,18 +14,194 @@ Plot filter properties.
 
     import numpy as np
     import matplotlib.pyplot as plt
+    import os.path as op
 
     import mne
 
+    from library.config import study_path
+
+    filt_params = dict(l_trans_bandwidth='auto', h_trans_bandwidth='auto',
+                       filter_length='auto', phase='zero', fir_window='hann')
 
 
 
 
 
 
-First we create some data with 30000 samples of zeros with an impulse at the
-middle. Then we construct a raw data structure and set a sampling frequency
-to 1000. Thus, we have 30 seconds of data with an impulse at 15 seconds.
+
+Let's look at some data from the multimodal faces data set.
+First we read in the data from run 1 of subject 2.
+
+
+
+.. code-block:: python
+
+    raw = mne.io.read_raw_fif(op.join(study_path, 'ds117', 'sub002', 'MEG',
+                                      'run_01_sss.fif'), add_eeg_ref=False)
+
+    raw.set_channel_types({'EEG061': 'eog', 'EEG062': 'eog', 'EEG063': 'ecg',
+                           'EEG064': 'misc'})  # EEG064 free floating el.
+    raw.rename_channels({'EEG061': 'EOG061', 'EEG062': 'EOG062',
+                         'EEG063': 'ECG063'})
+    raw.set_eeg_reference()
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub002/MEG/run_01_sss.fif...
+    This filename (/tsi/doctorants/data_gramfort/dgw_faces/ds117/sub002/MEG/run_01_sss.fif) does not conform to MNE naming conventions. All raw files should end with raw.fif, raw_sss.fif, raw_tsss.fif, raw.fif.gz, raw_sss.fif.gz or raw_tsss.fif.gz
+        Range : 248600 ... 788699 =    226.000 ...   716.999 secs
+    Ready.
+    Current compensation grade : 0
+    Adding average EEG reference projection.
+    1 projection items deactivated
+
+
+Then we filter it at 1Hz with the defaults of MNE.
+
+
+
+.. code-block:: python
+
+    raw_1 = raw.copy()
+    raw_1.load_data()
+    raw_1.filter(1, 40, **filt_params)
+
+    raw_1.plot_psd(fmax=10)
+
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_filter_001.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Reading 0 ... 540099  =      0.000 ...   490.999 secs...
+    Band-pass filtering from 1 - 40 Hz
+    l_trans_bandwidth chosen to be 1.0 Hz
+    h_trans_bandwidth chosen to be 10.0 Hz
+    Filter length of 6820 samples (6.200 sec) selected
+    Effective window size : 1.862 (s)
+    Effective window size : 1.862 (s)
+    Effective window size : 1.862 (s)
+
+
+We see that even though the attenuation close to 0Hz is sufficient enough,
+the low frequency components at around 1Hz are still quite prominent. Lets
+see how the famous faces look after averaging. (Notice that we do not
+compensate for the delay or clean the data, so the figures are not comparable
+to the final results).
+
+
+
+.. code-block:: python
+
+    events = mne.find_events(raw_1)
+    event_ids = [5, 6, 7]  # Famous faces
+    evoked_1 = mne.Epochs(raw_1, events, event_id=event_ids,
+                          baseline=None).average()
+    evoked_1.plot(spatial_colors=True)
+
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_filter_002.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    259 events found
+    Events id: [   5    6    7   13   14   15   17   18   19  256  261  262  263  269  270
+      271  273  274  275 4096 4101 4102 4103 4109 4110 4111 4113 4114 4115 4352]
+    49 matching events found
+    No baseline correction applied
+    add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+    Created an SSP operator (subspace dimension = 1)
+    1 projection items activated
+
+
+They're all over the place! The baselining effect of high pass filtering does
+not seem to work. Let's try removing the low frequency components by raising
+the cut-off frequency to 2.5 Hz.
+
+
+
+.. code-block:: python
+
+    raw_2 = raw.copy()
+    raw_2.load_data()
+    raw_2.filter(2.5, 40, **filt_params)
+    raw_2.plot_psd(fmax=10)
+
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_filter_003.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Reading 0 ... 540099  =      0.000 ...   490.999 secs...
+    Band-pass filtering from 2.5 - 40 Hz
+    l_trans_bandwidth chosen to be 2.0 Hz
+    h_trans_bandwidth chosen to be 10.0 Hz
+    Filter length of 3410 samples (3.100 sec) selected
+    Effective window size : 1.862 (s)
+    Effective window size : 1.862 (s)
+    Effective window size : 1.862 (s)
+
+
+We see that the low frequency 'peak' is gone and the transition is more
+gradual. The 'auto' param automatically fits the transition bandwidth to
+reduce ringing as much as possible.
+Finally we plot the evoked responses, and we see that the fanning of the
+signal is gone.
+
+
+
+.. code-block:: python
+
+    evoked_2 = mne.Epochs(raw_2, events, event_id=event_ids,
+                          baseline=None).average()
+    evoked_2.plot(spatial_colors=True)
+
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_filter_004.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    49 matching events found
+    No baseline correction applied
+    add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+    Created an SSP operator (subspace dimension = 1)
+    1 projection items activated
+
+
+Let's also plot the impulse response of the used filter. Here we create some
+data with 30000 samples of zeros with an impulse at the middle. Then we
+construct a raw data structure and set a sampling frequency to 1000. Thus,
+we have 30 seconds of data with an impulse at 15 seconds.
 
 
 
@@ -52,14 +228,14 @@ to 1000. Thus, we have 30 seconds of data with an impulse at 15 seconds.
     Ready.
 
 
-We lowpass filter the data and plot the frequency spectrum and the impulse
+We low pass filter the data and plot the frequency spectrum and the impulse
 response of the filter.
 
 
 
 .. code-block:: python
 
-    raw.filter(None, 40)
+    raw.filter(None, 40, **filt_params)
     plt.plot(times, raw[0][0][0])
     plt.xlabel('Time (s)')
     plt.ylabel('Amplitude')
@@ -71,18 +247,17 @@ response of the filter.
 
 
 
-
 .. rst-class:: sphx-glr-horizontal
 
 
     *
 
-      .. image:: /auto_examples/images/sphx_glr_plot_filter_001.png
+      .. image:: /auto_examples/images/sphx_glr_plot_filter_005.png
             :scale: 47
 
     *
 
-      .. image:: /auto_examples/images/sphx_glr_plot_filter_002.png
+      .. image:: /auto_examples/images/sphx_glr_plot_filter_006.png
             :scale: 47
 
 
@@ -91,21 +266,18 @@ response of the filter.
  Out::
 
     Low-pass filtering at 40 Hz
-    Multiple deprecated filter parameters were used:
-    phase in 0.13 is "zero-double" but will change to "zero" in 0.14
-    fir_window in 0.13 is "hann" but will change to "hamming" in 0.14
-    upper transition bandwidth in 0.13 is 0.5 Hz but will change to "auto" in 0.14
-    The default filter length in 0.13 is "10s" but will change to "auto" in 0.14
+    h_trans_bandwidth chosen to be 10.0 Hz
+    Filter length of 620 samples (0.620 sec) selected
     Effective window size : 2.048 (s)
 
 
-Let's do the same after highpass filtering at 1 Hz.
+Let's do the same after high pass filtering at 2.5 Hz.
 
 
 
 .. code-block:: python
 
-    raw.filter(1, None)
+    raw.filter(2.5, None, **filt_params)
     plt.plot(times, raw[0][0][0])
     plt.xlabel('Time (s)')
     plt.ylabel('Amplitude')
@@ -121,12 +293,12 @@ Let's do the same after highpass filtering at 1 Hz.
 
     *
 
-      .. image:: /auto_examples/images/sphx_glr_plot_filter_003.png
+      .. image:: /auto_examples/images/sphx_glr_plot_filter_007.png
             :scale: 47
 
     *
 
-      .. image:: /auto_examples/images/sphx_glr_plot_filter_004.png
+      .. image:: /auto_examples/images/sphx_glr_plot_filter_008.png
             :scale: 47
 
 
@@ -134,17 +306,14 @@ Let's do the same after highpass filtering at 1 Hz.
 
  Out::
 
-    High-pass filtering at 1 Hz
-    Multiple deprecated filter parameters were used:
-    phase in 0.13 is "zero-double" but will change to "zero" in 0.14
-    fir_window in 0.13 is "hann" but will change to "hamming" in 0.14
-    lower transition bandwidth in 0.13 is 0.5 Hz but will change to "auto" in 0.14
-    The default filter length in 0.13 is "10s" but will change to "auto" in 0.14
+    High-pass filtering at 2.5 Hz
+    l_trans_bandwidth chosen to be 2.0 Hz
+    Filter length of 3100 samples (3.100 sec) selected
     Effective window size : 2.048 (s)
 
 
 **Total running time of the script:**
-(0 minutes 0.645 seconds)
+(0 minutes 48.229 seconds)
 
 
 

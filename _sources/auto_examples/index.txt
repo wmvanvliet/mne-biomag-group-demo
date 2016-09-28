@@ -9,26 +9,6 @@ Results
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Plot filter properties. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_filter_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_filter.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_filter
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="All the subjects compared. ">
 
 .. only:: html
@@ -86,6 +66,26 @@ Results
    :hidden:
 
    /auto_examples/plot_ica
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Plot filter properties. ">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_filter_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_filter.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_filter
 
 .. raw:: html
 
