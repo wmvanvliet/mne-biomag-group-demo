@@ -7,7 +7,7 @@
 Remove ECG using ICA
 ====================
 
-Remove ICA using ECG.
+Remove ECG for sub005 using ICA.
 
 
 
@@ -45,7 +45,6 @@ Now we get the bad channels.
 .. code-block:: python
 
 
-    # Get all bad channels
     mapping = map_subjects[subject_id]  # map to correct subject
     all_bads = list()
 
@@ -70,7 +69,7 @@ We read the data.
 
 
     run_fname = op.join(data_path, 'run_%02d_filt_sss_raw.fif' % run)
-    raw = mne.io.Raw(run_fname, preload=True, add_eeg_ref=False)
+    raw = mne.io.read_raw_fif(run_fname, preload=True, add_eeg_ref=False)
 
 
 
@@ -145,7 +144,7 @@ Now let's get to some serious ICA preprocessing
                                              threshold=0.8)
     ica.plot_sources(raw, exclude=ecg_inds)
     ica.plot_scores(scores_ecg, exclude=ecg_inds)
-    ica.plot_components(ecg_inds)
+    ica.plot_properties(raw, ecg_inds)
     ica.exclude += ecg_inds[:n_max_ecg]
 
 
@@ -187,7 +186,7 @@ Now let's get to some serious ICA preprocessing
 
 
 **Total running time of the script:**
-(1 minutes 23.227 seconds)
+(0 minutes 45.490 seconds)
 
 
 

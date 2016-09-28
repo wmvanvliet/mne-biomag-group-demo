@@ -69,7 +69,7 @@ Results
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Remove ICA using ECG. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="Remove ECG for sub005 using ICA. ">
 
 .. only:: html
 
