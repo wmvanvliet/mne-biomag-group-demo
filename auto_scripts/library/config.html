@@ -114,10 +114,13 @@
       
   <div class="section" id="config-file">
 <span id="sphx-glr-auto-scripts-library-config-py"></span><h1>Config file<a class="headerlink" href="#config-file" title="Permalink to this headline">¶</a></h1>
-<p>Configuration parameters for the study</p>
+<p>Configuration parameters for the study. Place them in a folder called
+<code class="docutils literal"><span class="pre">library/</span></code> inside the <code class="docutils literal"><span class="pre">results/</span></code> and <code class="docutils literal"><span class="pre">processing/</span></code> folders.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-
-<span class="n">user</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;USER&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Let&#8217;s set the path where the data is downloaded and stored.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">user</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;USER&#39;</span><span class="p">]</span>
 <span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="s1">&#39;gramfort&#39;</span><span class="p">:</span>
     <span class="n">study_path</span> <span class="o">=</span> <span class="s1">&#39;/tsi/doctorants/data_gramfort/dgw_faces&#39;</span>
     <span class="n">N_JOBS</span> <span class="o">=</span> <span class="mi">8</span>
@@ -130,15 +133,20 @@
 <span class="k">else</span><span class="p">:</span>
     <span class="n">study_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">)</span>
     <span class="n">N_JOBS</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="n">subjects_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;subjects&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">subjects_dir</span></code> and <code class="docutils literal"><span class="pre">meg_dir</span></code> for reading anatomical and MEG files.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">subjects_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;subjects&#39;</span><span class="p">)</span>
 <span class="n">meg_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">)</span>
 
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SUBJECTS_DIR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subjects_dir</span>
 
 <span class="n">spacing</span> <span class="o">=</span> <span class="s1">&#39;oct6&#39;</span>
 <span class="n">mindist</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">map_subjects</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;subject_01&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;subject_02&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;subject_03&#39;</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>Some mapping betwen filenames for bad sensors and subjects</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">map_subjects</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;subject_01&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;subject_02&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;subject_03&#39;</span><span class="p">,</span>
                 <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;subject_05&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;subject_06&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="s1">&#39;subject_08&#39;</span><span class="p">,</span>
                 <span class="mi">7</span><span class="p">:</span> <span class="s1">&#39;subject_09&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="s1">&#39;subject_10&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span> <span class="s1">&#39;subject_11&#39;</span><span class="p">,</span>
                 <span class="mi">10</span><span class="p">:</span> <span class="s1">&#39;subject_12&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span> <span class="s1">&#39;subject_14&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span> <span class="s1">&#39;subject_15&#39;</span><span class="p">,</span>
@@ -148,8 +156,12 @@
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">subjects_dir</span><span class="p">):</span>
     <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">subjects_dir</span><span class="p">)</span>
-
-<span class="n">ctc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;ct_sparse.fif&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="https://github.com/mne-tools/mne-biomag-group-demo/blob/master/scripts/results/library/ct_sparse.fif">cross talk file</a>
+and <a class="reference external" href="https://github.com/mne-tools/mne-biomag-group-demo/blob/master/scripts/results/library/sss_cal.dat">calibration file</a>
+are placed in the same folder.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ctc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;ct_sparse.fif&#39;</span><span class="p">)</span>
 <span class="n">cal</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;sss_cal.dat&#39;</span><span class="p">)</span>
 
 <span class="n">ylim</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;eeg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span> <span class="s1">&#39;grad&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">]}</span>

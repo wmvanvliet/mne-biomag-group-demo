@@ -301,7 +301,7 @@ Library
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Configuration parameters for the study ">
+    <div class="sphx-glr-thumbcontainer" tooltip="Configuration parameters for the study. Place them in a folder called ``library/`` inside the `...">
 
 .. only:: html
 
