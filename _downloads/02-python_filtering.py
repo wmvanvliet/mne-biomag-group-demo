@@ -3,8 +3,11 @@ Filter using MNE-python
 =======================
 
 The data are bandpass filtered (1 - 40 Hz) using linear-phase fir filter with
-delay compensation. The filtered data are saved to separate files to the
-subject's'MEG' directory.
+delay compensation. For the lowpass filter the transition bandwidth is
+automatically defined. See
+`Background information on filtering <http://mne-tools.github.io/dev/auto_tutorials/plot_background_filtering.html>`_
+for more. The filtered data are saved to separate files to the subject's'MEG'
+directory.
 """
 
 import os
@@ -29,7 +32,7 @@ def run_filter(subject_id):
     for run in range(1, 7):
         raw_in = raw_fname_in % run
         try:
-            raw = mne.io.read_raw_fif(raw_in, preload=True)
+            raw = mne.io.read_raw_fif(raw_in, preload=True, add_eeg_ref=False)
         except AttributeError:
             # Some files on openfmri are corrupted and cannot be read.
             warn('Could not read file %s. '
@@ -39,7 +42,8 @@ def run_filter(subject_id):
         if not op.exists(op.join(meg_dir, subject)):
             os.mkdir(op.join(meg_dir, subject))
 
-        raw.filter(1, 40)
+        raw.filter(1, 40, l_trans_bandwidth=0.5, h_trans_bandwidth='auto',
+                   filter_length='auto', phase='zero', fir_window='hann')
         raw.save(raw_out, overwrite=True)
 
 

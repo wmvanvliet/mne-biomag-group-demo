@@ -15,42 +15,11 @@ Remove ICA using ECG.
 
     import os
     import os.path as op
-    import numpy as np
 
     import mne
-    from mne.io.constants import FIFF
     from mne.preprocessing import create_ecg_epochs, read_ica
 
     from library.config import meg_dir, map_subjects
-
-
-
-
-
-
-
-We define the events and the onset and offset of the epochs
-
-
-
-.. code-block:: python
-
-
-    events_id = {
-        'face/famous/first': 5,
-        'face/famous/immediate': 6,
-        'face/famous/long': 7,
-        'face/unfamiliar/first': 13,
-        'face/unfamiliar/immediate': 14,
-        'face/unfamiliar/long': 15,
-        'scrambled/first': 17,
-        'scrambled/immediate': 18,
-        'scrambled/long': 19,
-    }
-
-    tmin, tmax = -0.2, 0.8
-    reject = dict(grad=4000e-13, mag=4e-12, eog=180e-6)
-    baseline = None
 
     subject_id, run = 5, 1
     subject = "sub%03d" % subject_id
@@ -69,7 +38,7 @@ We define the events and the onset and offset of the epochs
     processing subject: sub005
 
 
-Now we get the bad channels
+Now we get the bad channels.
 
 
 
@@ -93,8 +62,7 @@ Now we get the bad channels
 
 
 
-We remove the EEG reference so that we can change the channel type
-for ECG and EOG
+We read the data.
 
 
 
@@ -103,11 +71,6 @@ for ECG and EOG
 
     run_fname = op.join(data_path, 'run_%02d_filt_sss_raw.fif' % run)
     raw = mne.io.Raw(run_fname, preload=True, add_eeg_ref=False)
-    for idx, proj in enumerate(raw.info['projs']):  # find idx for EEG-ref
-        if proj['kind'] == FIFF.FIFFV_MNE_PROJ_ITEM_EEG_AVREF:
-            proj_idx = idx
-            break
-    raw.del_proj(proj_idx)  # remove EEG average ref
 
 
 
@@ -118,15 +81,13 @@ for ECG and EOG
  Out::
 
     Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub005/run_01_filt_sss_raw.fif...
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 74)  idle
         Range : 154000 ... 699599 =    140.000 ...   635.999 secs
     Ready.
     Current compensation grade : 0
     Reading 0 ... 545599  =      0.000 ...   495.999 secs...
 
 
-Then we change the channel type for ECG and EOG
+We change the channel type for ECG and EOG.
 
 
 
@@ -144,58 +105,7 @@ Then we change the channel type for ECG and EOG
 
 
 
-We remove the bad eye blink segments from the raw by marking
-``raw.annotations``. They will be removed before constructing epochs
-
-
-
-.. code-block:: python
-
-
-    eog_events = mne.preprocessing.find_eog_events(raw)
-    eog_events[:, 0] -= int(0.25 * raw.info['sfreq'])
-    annotations = mne.Annotations(eog_events[:, 0] / raw.info['sfreq'],
-                                  np.repeat(0.5, len(eog_events)),
-                                  'BAD_blink', raw.info['meas_date'])
-    raw.annotations = annotations  # Remove epochs with blinks
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    EOG channel index for this subject is: [366 367]
-    Filtering the data to remove DC offset to help distinguish blinks from saccades
-    Band-pass filtering from 2 - 45 Hz
-    Band-pass filtering from 2 - 45 Hz
-    Band-pass filtering from 1 - 10 Hz
-    Now detecting blinks and generating corresponding events
-    Number of EOG events detected : 328
-    Annotation expanding outside the data range. Limiting to the end of data.
-
-
-must take into account the 34 ms delay in the trigger channel
-
-
-
-.. code-block:: python
-
-
-    delay = int(0.0345 * raw.info['sfreq'])
-    events = mne.read_events(op.join(data_path,
-                                     'run_%02d_filt_sss-eve.fif' % run))
-    events[:, 0] = events[:, 0] + delay
-
-
-
-
-
-
-
-Bad sensors are repaired
+Bad sensors are repaired.
 
 
 
@@ -220,44 +130,6 @@ Bad sensors are repaired
     1 projection items deactivated
 
 
-... and finally ``Epochs`` are constructed
-
-
-
-.. code-block:: python
-
-
-    picks = mne.pick_types(raw.info, meg=True, eeg=True, stim=True,
-                           eog=True)
-
-    # Read epochs
-    epochs = mne.Epochs(raw, events, events_id, tmin, tmax, proj=True,
-                        picks=picks, baseline=baseline, preload=True,
-                        decim=2, reject=reject)
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- Out::
-
-    146 matching events found
-    No baseline correction applied
-    add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
-    Created an SSP operator (subspace dimension = 1)
-    1 projection items activated
-    Loading data for 146 events and 1101 original time points ...
-        Rejecting  epoch based on MAG : [u'MEG1131', u'MEG1631', u'MEG1911', u'MEG2231', u'MEG2311', u'MEG2441']
-        Rejecting  epoch based on EOG : ['EOG062']
-        Rejecting  epoch based on EOG : ['EOG062']
-        Rejecting  epoch based on EOG : ['EOG062']
-        Rejecting  epoch based on EOG : ['EOG062']
-        Rejecting  epoch based on EOG : ['EOG062']
-    67 bad epochs dropped
-
-
 Now let's get to some serious ICA preprocessing
 
 
@@ -275,8 +147,6 @@ Now let's get to some serious ICA preprocessing
     ica.plot_scores(scores_ecg, exclude=ecg_inds)
     ica.plot_components(ecg_inds)
     ica.exclude += ecg_inds[:n_max_ecg]
-
-    ica.apply(epochs)
 
 
 
@@ -304,8 +174,6 @@ Now let's get to some serious ICA preprocessing
  Out::
 
     Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub005/run_01-ica.fif ...
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 74)  idle
     Now restoring ICA solution ...
     Ready.
     Using channel ECG063 to identify heart beats.
@@ -315,13 +183,11 @@ Now let's get to some serious ICA preprocessing
     No baseline correction applied
     Created an SSP operator (subspace dimension = 1)
     Loading data for 593 events and 1101 original time points ...
-    445 bad epochs dropped
-    Transforming to ICA space (39 components)
-    Zeroing out 1 ICA components
+    2 bad epochs dropped
 
 
 **Total running time of the script:**
-(0 minutes 17.852 seconds)
+(0 minutes 37.256 seconds)
 
 
 

@@ -128,7 +128,7 @@
 <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub003&quot;</span>
 <span class="n">bads</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MEG1031&#39;</span><span class="p">,</span> <span class="s1">&#39;MEG1111&#39;</span><span class="p">,</span> <span class="s1">&#39;MEG2113&#39;</span><span class="p">]</span>
 <span class="n">filter_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">fir_window</span><span class="o">=</span><span class="s1">&#39;hann&#39;</span><span class="p">,</span> <span class="n">l_trans_bandwidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span>
-                     <span class="n">h_trans_bandwidth</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="s1">&#39;10s&#39;</span><span class="p">)</span>
+                     <span class="n">h_trans_bandwidth</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
 
 <span class="n">raw_fname_in</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;run_01_raw.fif&#39;</span><span class="p">)</span>
 <span class="n">sss_fname_in</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;run_01_sss.fif&#39;</span><span class="p">)</span>
@@ -164,6 +164,7 @@ Current compensation grade : 0
 Reading 0 ... 543399  =      0.000 ...   493.999 secs...
 Band-pass filtering from 1 - 40 Hz
 h_trans_bandwidth chosen to be 10.0 Hz
+Filter length of 13640 samples (12.400 sec) selected
 147 events found
 Events id: [ 5  6  7 13 14 15 17 18 19]
 48 matching events found
@@ -226,8 +227,10 @@ Overwriting existing file.
 [done]
 Band-pass filtering from 1 - 40 Hz
 h_trans_bandwidth chosen to be 10.0 Hz
+Filter length of 13640 samples (12.400 sec) selected
 Band-pass filtering from 1 - 40 Hz
 h_trans_bandwidth chosen to be 10.0 Hz
+Filter length of 13640 samples (12.400 sec) selected
 48 matching events found
 Applying baseline correction (mode: mean)
 0 projection items activated
@@ -242,8 +245,8 @@ Applying baseline correction (mode: mean)
                    <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grad&#39;</span><span class="p">:</span> <span class="s1">&#39;Gradiometers before SSS&#39;</span><span class="p">,</span>
                            <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;Magnetometers before SSS&#39;</span><span class="p">})</span>
 <span class="n">evoked_after</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">,</span>
-                  <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grad&#39;</span><span class="p">:</span> <span class="s1">&#39;SSS gradiometers&#39;</span><span class="p">,</span>
-                          <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;SSS magnetometers&#39;</span><span class="p">})</span>
+                  <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grad&#39;</span><span class="p">:</span> <span class="s1">&#39;tSSS gradiometers&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;tSSS magnetometers&#39;</span><span class="p">})</span>
 <span class="n">evoked_sss</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">,</span>
                 <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grad&#39;</span><span class="p">:</span> <span class="s1">&#39;Maxfilter (TM) gradiometers&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;Maxfilter (TM) magnetometers&#39;</span><span class="p">})</span>
@@ -258,7 +261,7 @@ Applying baseline correction (mode: mean)
 </li>
 </ul>
 <p><strong>Total running time of the script:</strong>
-(1 minutes 6.107 seconds)</p>
+(1 minutes 4.672 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_maxfilter.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_maxfilter.py</span></code></a></div>
 <div class="sphx-glr-download container">
@@ -278,7 +281,7 @@ Applying baseline correction (mode: mean)
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-27.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-28.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>

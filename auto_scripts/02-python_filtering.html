@@ -115,8 +115,11 @@
   <div class="section" id="filter-using-mne-python">
 <span id="sphx-glr-auto-scripts-02-python-filtering-py"></span><h1>Filter using MNE-python<a class="headerlink" href="#filter-using-mne-python" title="Permalink to this headline">¶</a></h1>
 <p>The data are bandpass filtered (1 - 40 Hz) using linear-phase fir filter with
-delay compensation. The filtered data are saved to separate files to the
-subject&#8217;s&#8217;MEG&#8217; directory.</p>
+delay compensation. For the lowpass filter the transition bandwidth is
+automatically defined. See
+<a class="reference external" href="http://mne-tools.github.io/dev/auto_tutorials/plot_background_filtering.html">Background information on filtering</a>
+for more. The filtered data are saved to separate files to the subject&#8217;s&#8217;MEG&#8217;
+directory.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
@@ -139,7 +142,7 @@ subject&#8217;s&#8217;MEG&#8217; directory.</p>
     <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
         <span class="n">raw_in</span> <span class="o">=</span> <span class="n">raw_fname_in</span> <span class="o">%</span> <span class="n">run</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">raw_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">raw_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="c1"># Some files on openfmri are corrupted and cannot be read.</span>
             <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Could not read file </span><span class="si">%s</span><span class="s1">. &#39;</span>
@@ -149,7 +152,8 @@ subject&#8217;s&#8217;MEG&#8217; directory.</p>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">op</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">))</span>
 
-        <span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">l_trans_bandwidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">h_trans_bandwidth</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+                   <span class="n">filter_length</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span> <span class="n">fir_window</span><span class="o">=</span><span class="s1">&#39;hann&#39;</span><span class="p">)</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">raw_out</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 
@@ -178,7 +182,7 @@ subject&#8217;s&#8217;MEG&#8217; directory.</p>
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-27.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-28.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>

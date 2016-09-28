@@ -117,31 +117,11 @@
 <p>Remove ICA using ECG.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
-<span class="kn">from</span> <span class="nn">mne.io.constants</span> <span class="kn">import</span> <span class="n">FIFF</span>
 <span class="kn">from</span> <span class="nn">mne.preprocessing</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">,</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica"><span class="n">read_ica</span></a>
 
 <span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">map_subjects</span>
-</pre></div>
-</div>
-<p>We define the events and the onset and offset of the epochs</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events_id</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;face/famous/first&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="s1">&#39;face/famous/immediate&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="s1">&#39;face/famous/long&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-    <span class="s1">&#39;face/unfamiliar/first&#39;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
-    <span class="s1">&#39;face/unfamiliar/immediate&#39;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
-    <span class="s1">&#39;face/unfamiliar/long&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
-    <span class="s1">&#39;scrambled/first&#39;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
-    <span class="s1">&#39;scrambled/immediate&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-    <span class="s1">&#39;scrambled/long&#39;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span>
-<span class="n">reject</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">grad</span><span class="o">=</span><span class="mf">4000e-13</span><span class="p">,</span> <span class="n">mag</span><span class="o">=</span><span class="mf">4e-12</span><span class="p">,</span> <span class="n">eog</span><span class="o">=</span><span class="mf">180e-6</span><span class="p">)</span>
-<span class="n">baseline</span> <span class="o">=</span> <span class="bp">None</span>
 
 <span class="n">subject_id</span><span class="p">,</span> <span class="n">run</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span>
 <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
@@ -154,7 +134,7 @@
 <div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>processing subject: sub005
 </pre></div>
 </div>
-<p>Now we get the bad channels</p>
+<p>Now we get the bad channels.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Get all bad channels</span>
 <span class="n">mapping</span> <span class="o">=</span> <span class="n">map_subjects</span><span class="p">[</span><span class="n">subject_id</span><span class="p">]</span>  <span class="c1"># map to correct subject</span>
 <span class="n">all_bads</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -167,63 +147,27 @@
             <span class="n">bads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>We remove the EEG reference so that we can change the channel type
-for ECG and EOG</p>
+<p>We read the data.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">run_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">_filt_sss_raw.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
-<span class="n">raw</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.Raw.html#mne.io.Raw"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Raw</span></a><span class="p">(</span><span class="n">run_fname</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">proj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;projs&#39;</span><span class="p">]):</span>  <span class="c1"># find idx for EEG-ref</span>
-    <span class="k">if</span> <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;kind&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">FIFF</span><span class="o">.</span><span class="n">FIFFV_MNE_PROJ_ITEM_EEG_AVREF</span><span class="p">:</span>
-        <span class="n">proj_idx</span> <span class="o">=</span> <span class="n">idx</span>
-        <span class="k">break</span>
-<span class="n">raw</span><span class="o">.</span><span class="n">del_proj</span><span class="p">(</span><span class="n">proj_idx</span><span class="p">)</span>  <span class="c1"># remove EEG average ref</span>
+<span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Raw</span><span class="p">(</span><span class="n">run_fname</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub005/run_01_filt_sss_raw.fif...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 74)  idle
     Range : 154000 ... 699599 =    140.000 ...   635.999 secs
 Ready.
 Current compensation grade : 0
 Reading 0 ... 545599  =      0.000 ...   495.999 secs...
 </pre></div>
 </div>
-<p>Then we change the channel type for ECG and EOG</p>
+<p>We change the channel type for ECG and EOG.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">set_channel_types</span><span class="p">({</span><span class="s1">&#39;EEG061&#39;</span><span class="p">:</span> <span class="s1">&#39;eog&#39;</span><span class="p">,</span> <span class="s1">&#39;EEG062&#39;</span><span class="p">:</span> <span class="s1">&#39;eog&#39;</span><span class="p">,</span> <span class="s1">&#39;EEG063&#39;</span><span class="p">:</span> <span class="s1">&#39;ecg&#39;</span><span class="p">,</span>
                        <span class="s1">&#39;EEG064&#39;</span><span class="p">:</span> <span class="s1">&#39;misc&#39;</span><span class="p">})</span>  <span class="c1"># EEG064 free floating el.</span>
 <span class="n">raw</span><span class="o">.</span><span class="n">rename_channels</span><span class="p">({</span><span class="s1">&#39;EEG061&#39;</span><span class="p">:</span> <span class="s1">&#39;EOG061&#39;</span><span class="p">,</span> <span class="s1">&#39;EEG062&#39;</span><span class="p">:</span> <span class="s1">&#39;EOG062&#39;</span><span class="p">,</span>
                      <span class="s1">&#39;EEG063&#39;</span><span class="p">:</span> <span class="s1">&#39;ECG063&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
-<p>We remove the bad eye blink segments from the raw by marking
-<code class="docutils literal"><span class="pre">raw.annotations</span></code>. They will be removed before constructing epochs</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">eog_events</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">find_eog_events</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
-<span class="n">eog_events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.25</span> <span class="o">*</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">])</span>
-<span class="n">annotations</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.Annotations.html#mne.Annotations"><span class="n">mne</span><span class="o">.</span><span class="n">Annotations</span></a><span class="p">(</span><span class="n">eog_events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">],</span>
-                              <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.repeat.html#numpy.repeat"><span class="n">np</span><span class="o">.</span><span class="n">repeat</span></a><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">eog_events</span><span class="p">)),</span>
-                              <span class="s1">&#39;BAD_blink&#39;</span><span class="p">,</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;meas_date&#39;</span><span class="p">])</span>
-<span class="n">raw</span><span class="o">.</span><span class="n">annotations</span> <span class="o">=</span> <span class="n">annotations</span>  <span class="c1"># Remove epochs with blinks</span>
-</pre></div>
-</div>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>EOG channel index for this subject is: [366 367]
-Filtering the data to remove DC offset to help distinguish blinks from saccades
-Band-pass filtering from 2 - 45 Hz
-Band-pass filtering from 2 - 45 Hz
-Band-pass filtering from 1 - 10 Hz
-Now detecting blinks and generating corresponding events
-Number of EOG events detected : 328
-Annotation expanding outside the data range. Limiting to the end of data.
-</pre></div>
-</div>
-<p>must take into account the 34 ms delay in the trigger channel</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">delay</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.0345</span> <span class="o">*</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">])</span>
-<span class="n">events</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_events.html#mne.read_events"><span class="n">mne</span><span class="o">.</span><span class="n">read_events</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span>
-                                 <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">_filt_sss-eve.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">))</span>
-<span class="n">events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">delay</span>
-</pre></div>
-</div>
-<p>Bad sensors are repaired</p>
+<p>Bad sensors are repaired.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;bads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bads</span>
 <span class="n">raw</span><span class="o">.</span><span class="n">interpolate_bads</span><span class="p">()</span>
 <span class="n">raw</span><span class="o">.</span><span class="n">set_eeg_reference</span><span class="p">()</span>
@@ -234,32 +178,6 @@ Annotation expanding outside the data range. Limiting to the end of data.
 Interpolating 0 sensors
 Adding average EEG reference projection.
 1 projection items deactivated
-</pre></div>
-</div>
-<p>... and finally <code class="docutils literal"><span class="pre">Epochs</span></code> are constructed</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">picks</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.pick_types.html#mne.pick_types"><span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span></a><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stim</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                       <span class="n">eog</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-<span class="c1"># Read epochs</span>
-<span class="n">epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.Epochs.html#mne.Epochs"><span class="n">mne</span><span class="o">.</span><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">events_id</span><span class="p">,</span> <span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                    <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                    <span class="n">decim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">reject</span><span class="o">=</span><span class="n">reject</span><span class="p">)</span>
-</pre></div>
-</div>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>146 matching events found
-No baseline correction applied
-add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
-Created an SSP operator (subspace dimension = 1)
-1 projection items activated
-Loading data for 146 events and 1101 original time points ...
-    Rejecting  epoch based on MAG : [u&#39;MEG1131&#39;, u&#39;MEG1631&#39;, u&#39;MEG1911&#39;, u&#39;MEG2231&#39;, u&#39;MEG2311&#39;, u&#39;MEG2441&#39;]
-    Rejecting  epoch based on EOG : [&#39;EOG062&#39;]
-    Rejecting  epoch based on EOG : [&#39;EOG062&#39;]
-    Rejecting  epoch based on EOG : [&#39;EOG062&#39;]
-    Rejecting  epoch based on EOG : [&#39;EOG062&#39;]
-    Rejecting  epoch based on EOG : [&#39;EOG062&#39;]
-67 bad epochs dropped
 </pre></div>
 </div>
 <p>Now let&#8217;s get to some serious ICA preprocessing</p>
@@ -273,8 +191,6 @@ Loading data for 146 events and 1101 original time points ...
 <span class="n">ica</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">(</span><span class="n">scores_ecg</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="n">ecg_inds</span><span class="p">)</span>
 <span class="n">ica</span><span class="o">.</span><span class="n">plot_components</span><span class="p">(</span><span class="n">ecg_inds</span><span class="p">)</span>
 <span class="n">ica</span><span class="o">.</span><span class="n">exclude</span> <span class="o">+=</span> <span class="n">ecg_inds</span><span class="p">[:</span><span class="n">n_max_ecg</span><span class="p">]</span>
-
-<span class="n">ica</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="sphx-glr-horizontal">
@@ -287,8 +203,6 @@ Loading data for 146 events and 1101 original time points ...
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub005/run_01-ica.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 74)  idle
 Now restoring ICA solution ...
 Ready.
 Using channel ECG063 to identify heart beats.
@@ -298,13 +212,11 @@ Number of ECG events detected : 593 (average pulse 71 / min.)
 No baseline correction applied
 Created an SSP operator (subspace dimension = 1)
 Loading data for 593 events and 1101 original time points ...
-445 bad epochs dropped
-Transforming to ICA space (39 components)
-Zeroing out 1 ICA components
+2 bad epochs dropped
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 17.852 seconds)</p>
+(0 minutes 37.256 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_ica.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_ica.py</span></code></a></div>
 <div class="sphx-glr-download container">
@@ -324,7 +236,7 @@ Zeroing out 1 ICA components
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-27.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-28.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>
