@@ -70,12 +70,12 @@ Configuration
     Adding average EEG reference projection.
     1 projection items deactivated
     Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub019/run_01_filt_sss_raw.fif...
-        Read a total of 1 projection items:
-            Average EEG reference (1 x 74)  idle
         Range : 24200 ... 566499 =     22.000 ...   514.999 secs
     Ready.
     Current compensation grade : 0
     add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
+    Adding average EEG reference projection.
+    1 projection items deactivated
 
 
 Filtering :ref:`sphx_glr_auto_scripts_02-python_filtering.py`.
@@ -157,10 +157,10 @@ Epochs :ref:`sphx_glr_auto_scripts_05-make_epochs.py`.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (None)
             0 CTF compensation matrices available
-    703 matching events found
+    696 matching events found
     No baseline correction applied
     Created an SSP operator (subspace dimension = 1)
-    703 matching events found
+    696 matching events found
     No baseline correction applied
     Created an SSP operator (subspace dimension = 1)
     1 projection items activated
@@ -189,7 +189,7 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 238 - aspect type = 100
+            nave = 237 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -198,7 +198,7 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 234 - aspect type = 100
+            nave = 230 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -207,7 +207,7 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 231 - aspect type = 100
+            nave = 229 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -216,7 +216,7 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 156 - aspect type = 100
+            nave = 154 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -225,7 +225,7 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 469 - aspect type = 100
+            nave = 466 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -545,7 +545,7 @@ Faces :ref:`sphx_glr_auto_scripts_13-make_inverse.py`.
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=5.17e+00 fmid=6.16e+00 fmax=1.70e+01 transparent=1
+    colormap: fmin=5.22e+00 fmid=6.18e+00 fmax=1.69e+01 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -557,7 +557,7 @@ Faces :ref:`sphx_glr_auto_scripts_13-make_inverse.py`.
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=5.17e+00 fmid=6.16e+00 fmax=1.70e+01 transparent=1
+    colormap: fmin=5.22e+00 fmid=6.18e+00 fmax=1.69e+01 transparent=1
 
 
 Faces - scrambled
@@ -589,7 +589,7 @@ Faces - scrambled
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=2.39e+00 fmid=2.73e+00 fmax=6.84e+00 transparent=1
+    colormap: fmin=2.42e+00 fmid=2.75e+00 fmax=6.76e+00 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -601,11 +601,11 @@ Faces - scrambled
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=2.39e+00 fmid=2.73e+00 fmax=6.84e+00 transparent=1
+    colormap: fmin=2.42e+00 fmid=2.75e+00 fmax=6.76e+00 transparent=1
 
 
 **Total running time of the script:**
-(0 minutes 55.462 seconds)
+(0 minutes 55.715 seconds)
 
 
 

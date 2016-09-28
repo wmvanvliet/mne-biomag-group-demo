@@ -33,45 +33,45 @@ Run the group analysis.
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
-            t =    -200.00 ...     800.00 ms (0.062 * famous + 0.055 * famous + 0.058 * famous + 0.052 * famous + 0.071 * famous + 0.070 * famous + 0.064 * famous + 0.066 * famous + 0.064 * famous + 0.068 * famous + 0.059 * famous + 0.067 * famous + 0.055 * famous + 0.062 * famous + 0.070 * famous + 0.057 * famous)
+            t =    -200.00 ...     800.00 ms (0.061 * famous + 0.054 * famous + 0.058 * famous + 0.053 * famous + 0.071 * famous + 0.070 * famous + 0.064 * famous + 0.065 * famous + 0.063 * famous + 0.069 * famous + 0.060 * famous + 0.067 * famous + 0.056 * famous + 0.063 * famous + 0.070 * famous + 0.057 * famous)
             0 CTF compensation matrices available
-            nave = 4181 - aspect type = 100
+            nave = 4175 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
-            t =    -200.00 ...     800.00 ms (0.064 * scrambled + 0.054 * scrambled + 0.058 * scrambled + 0.055 * scrambled + 0.072 * scrambled + 0.072 * scrambled + 0.065 * scrambled + 0.069 * scrambled + 0.067 * scrambled + 0.068 * scrambled + 0.058 * scrambled + 0.068 * scrambled + 0.049 * scrambled + 0.055 * scrambled + 0.068 * scrambled + 0.058 * scrambled)
+            t =    -200.00 ...     800.00 ms (0.063 * scrambled + 0.054 * scrambled + 0.058 * scrambled + 0.056 * scrambled + 0.072 * scrambled + 0.072 * scrambled + 0.065 * scrambled + 0.069 * scrambled + 0.066 * scrambled + 0.068 * scrambled + 0.058 * scrambled + 0.068 * scrambled + 0.049 * scrambled + 0.055 * scrambled + 0.069 * scrambled + 0.057 * scrambled)
             0 CTF compensation matrices available
-            nave = 4059 - aspect type = 100
+            nave = 4053 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
-            t =    -200.00 ...     800.00 ms (0.061 * unfamiliar + 0.054 * unfamiliar + 0.057 * unfamiliar + 0.054 * unfamiliar + 0.070 * unfamiliar + 0.069 * unfamiliar + 0.064 * unfamiliar + 0.065 * unfamiliar + 0.066 * unfamiliar + 0.068 * unfamiliar + 0.062 * unfamiliar + 0.066 * unfamiliar + 0.057 * unfamiliar + 0.061 * unfamiliar + 0.070 * unfamiliar + 0.055 * unfamiliar)
+            t =    -200.00 ...     800.00 ms (0.061 * unfamiliar + 0.054 * unfamiliar + 0.057 * unfamiliar + 0.054 * unfamiliar + 0.070 * unfamiliar + 0.070 * unfamiliar + 0.064 * unfamiliar + 0.065 * unfamiliar + 0.066 * unfamiliar + 0.068 * unfamiliar + 0.062 * unfamiliar + 0.066 * unfamiliar + 0.057 * unfamiliar + 0.061 * unfamiliar + 0.070 * unfamiliar + 0.055 * unfamiliar)
             0 CTF compensation matrices available
-            nave = 4177 - aspect type = 100
+            nave = 4169 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
-            t =    -200.00 ...     800.00 ms (0.063 * contrast + 0.055 * contrast + 0.058 * contrast + 0.055 * contrast + 0.071 * contrast + 0.071 * contrast + 0.064 * contrast + 0.068 * contrast + 0.067 * contrast + 0.068 * contrast + 0.059 * contrast + 0.067 * contrast + 0.051 * contrast + 0.057 * contrast + 0.069 * contrast + 0.057 * contrast)
+            t =    -200.00 ...     800.00 ms (0.063 * contrast + 0.054 * contrast + 0.058 * contrast + 0.055 * contrast + 0.072 * contrast + 0.072 * contrast + 0.065 * contrast + 0.068 * contrast + 0.066 * contrast + 0.068 * contrast + 0.059 * contrast + 0.067 * contrast + 0.051 * contrast + 0.057 * contrast + 0.069 * contrast + 0.056 * contrast)
             0 CTF compensation matrices available
-            nave = 2731 - aspect type = 100
+            nave = 2727 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
-            t =    -200.00 ...     800.00 ms (0.061 * faces + 0.054 * faces + 0.057 * faces + 0.053 * faces + 0.070 * faces + 0.070 * faces + 0.064 * faces + 0.065 * faces + 0.065 * faces + 0.068 * faces + 0.061 * faces + 0.067 * faces + 0.056 * faces + 0.062 * faces + 0.070 * faces + 0.056 * faces)
+            t =    -200.00 ...     800.00 ms (0.061 * faces + 0.054 * faces + 0.057 * faces + 0.053 * faces + 0.070 * faces + 0.070 * faces + 0.064 * faces + 0.065 * faces + 0.064 * faces + 0.068 * faces + 0.061 * faces + 0.067 * faces + 0.056 * faces + 0.062 * faces + 0.070 * faces + 0.056 * faces)
             0 CTF compensation matrices available
-            nave = 8358 - aspect type = 100
+            nave = 8344 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -206,7 +206,7 @@ Source-space. See :ref:`sphx_glr_auto_scripts_14-group_average_source.py`
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=3.00e+00 fmid=3.31e+00 fmax=4.04e+00 transparent=1
+    colormap: fmin=2.98e+00 fmid=3.28e+00 fmax=3.98e+00 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -218,11 +218,11 @@ Source-space. See :ref:`sphx_glr_auto_scripts_14-group_average_source.py`
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=3.00e+00 fmid=3.31e+00 fmax=4.04e+00 transparent=1
+    colormap: fmin=2.98e+00 fmid=3.28e+00 fmax=3.98e+00 transparent=1
 
 
 **Total running time of the script:**
-(0 minutes 22.346 seconds)
+(0 minutes 26.615 seconds)
 
 
 

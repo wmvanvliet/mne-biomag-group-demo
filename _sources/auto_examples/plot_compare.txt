@@ -41,7 +41,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 260 - aspect type = 100
+            nave = 262 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -59,7 +59,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 253 - aspect type = 100
+            nave = 257 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -77,7 +77,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 513 - aspect type = 100
+            nave = 519 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -87,7 +87,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 258 - aspect type = 100
+            nave = 256 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -96,7 +96,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 258 - aspect type = 100
+            nave = 257 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -114,7 +114,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 172 - aspect type = 100
+            nave = 171 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -123,7 +123,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 514 - aspect type = 100
+            nave = 512 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -133,7 +133,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 228 - aspect type = 100
+            nave = 227 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -142,7 +142,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 221 - aspect type = 100
+            nave = 219 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -160,7 +160,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 149 - aspect type = 100
+            nave = 148 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -169,7 +169,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 454 - aspect type = 100
+            nave = 453 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -197,7 +197,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 239 - aspect type = 100
+            nave = 238 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -215,7 +215,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 480 - aspect type = 100
+            nave = 479 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -225,7 +225,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 186 - aspect type = 100
+            nave = 187 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -234,7 +234,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 187 - aspect type = 100
+            nave = 189 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -243,7 +243,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 203 - aspect type = 100
+            nave = 197 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -252,7 +252,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 126 - aspect type = 100
+            nave = 127 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -261,7 +261,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 389 - aspect type = 100
+            nave = 384 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -271,7 +271,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 219 - aspect type = 100
+            nave = 221 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -280,7 +280,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 224 - aspect type = 100
+            nave = 225 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -307,7 +307,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 443 - aspect type = 100
+            nave = 445 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -381,7 +381,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 289 - aspect type = 100
+            nave = 291 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -399,7 +399,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 583 - aspect type = 100
+            nave = 585 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -427,7 +427,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 267 - aspect type = 100
+            nave = 268 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -445,7 +445,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 533 - aspect type = 100
+            nave = 534 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -455,7 +455,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 274 - aspect type = 100
+            nave = 272 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -464,7 +464,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 280 - aspect type = 100
+            nave = 281 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -473,7 +473,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 273 - aspect type = 100
+            nave = 271 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -491,7 +491,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 547 - aspect type = 100
+            nave = 543 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -501,7 +501,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 269 - aspect type = 100
+            nave = 264 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -510,7 +510,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 273 - aspect type = 100
+            nave = 268 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -519,7 +519,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 276 - aspect type = 100
+            nave = 274 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -528,7 +528,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 182 - aspect type = 100
+            nave = 179 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -537,7 +537,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 545 - aspect type = 100
+            nave = 538 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -593,7 +593,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 248 - aspect type = 100
+            nave = 250 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -602,7 +602,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 236 - aspect type = 100
+            nave = 237 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -620,7 +620,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 161 - aspect type = 100
+            nave = 162 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -629,7 +629,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 506 - aspect type = 100
+            nave = 508 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -648,7 +648,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 275 - aspect type = 100
+            nave = 276 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -657,7 +657,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 276 - aspect type = 100
+            nave = 275 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -675,7 +675,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 557 - aspect type = 100
+            nave = 556 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -694,7 +694,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 198 - aspect type = 100
+            nave = 199 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -703,7 +703,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 238 - aspect type = 100
+            nave = 237 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -712,7 +712,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 139 - aspect type = 100
+            nave = 140 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -721,7 +721,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 470 - aspect type = 100
+            nave = 469 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -731,7 +731,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 223 - aspect type = 100
+            nave = 225 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -749,7 +749,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 219 - aspect type = 100
+            nave = 220 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -767,7 +767,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 442 - aspect type = 100
+            nave = 445 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -786,7 +786,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 222 - aspect type = 100
+            nave = 223 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -795,7 +795,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 255 - aspect type = 100
+            nave = 253 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -804,7 +804,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 155 - aspect type = 100
+            nave = 156 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -813,7 +813,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 516 - aspect type = 100
+            nave = 514 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -823,7 +823,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 291 - aspect type = 100
+            nave = 292 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -859,7 +859,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 582 - aspect type = 100
+            nave = 583 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -869,7 +869,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (famous)
             0 CTF compensation matrices available
-            nave = 238 - aspect type = 100
+            nave = 237 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -878,7 +878,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (scrambled)
             0 CTF compensation matrices available
-            nave = 234 - aspect type = 100
+            nave = 230 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -887,7 +887,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (unfamiliar)
             0 CTF compensation matrices available
-            nave = 231 - aspect type = 100
+            nave = 229 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -896,7 +896,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 156 - aspect type = 100
+            nave = 154 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -905,7 +905,7 @@ All the subjects compared.
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (faces)
             0 CTF compensation matrices available
-            nave = 469 - aspect type = 100
+            nave = 466 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -1524,7 +1524,7 @@ Topomaps
 
 
 **Total running time of the script:**
-(3 minutes 28.558 seconds)
+(3 minutes 21.150 seconds)
 
 
 

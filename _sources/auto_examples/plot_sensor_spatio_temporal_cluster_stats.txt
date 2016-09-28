@@ -74,7 +74,7 @@ Read all the data
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 172 - aspect type = 100
+            nave = 171 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -86,7 +86,7 @@ Read all the data
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 149 - aspect type = 100
+            nave = 148 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -170,7 +170,7 @@ Read all the data
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 182 - aspect type = 100
+            nave = 179 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -194,7 +194,7 @@ Read all the data
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 161 - aspect type = 100
+            nave = 162 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -218,7 +218,7 @@ Read all the data
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 139 - aspect type = 100
+            nave = 140 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -230,7 +230,7 @@ Read all the data
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 155 - aspect type = 100
+            nave = 156 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -254,7 +254,7 @@ Read all the data
         Found the data of interest:
             t =    -200.00 ...     800.00 ms (contrast)
             0 CTF compensation matrices available
-            nave = 156 - aspect type = 100
+            nave = 154 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
     No baseline correction applied
@@ -314,14 +314,14 @@ Assemble the data and run the cluster stats on channel data
 
  Out::
 
-    stat_fun(H1): min=-9.839633 max=9.197854
+    stat_fun(H1): min=-10.767136 max=9.053101
     No disjoint connectivity sets found
     Running initial clustering
-    Found 9 clusters
+    Found 11 clusters
     Permuting ...
     Computing cluster p-values
     Done.
-    Good clusters: [1 2 5]
+    Good clusters: [2 4]
 
 
 Visualize the spatio-temporal clusters
@@ -418,16 +418,11 @@ Visualize the spatio-temporal clusters
       .. image:: /auto_examples/images/sphx_glr_plot_sensor_spatio_temporal_cluster_stats_002.png
             :scale: 47
 
-    *
-
-      .. image:: /auto_examples/images/sphx_glr_plot_sensor_spatio_temporal_cluster_stats_003.png
-            :scale: 47
-
 
 
 
 **Total running time of the script:**
-(0 minutes 19.865 seconds)
+(0 minutes 18.609 seconds)
 
 
 
