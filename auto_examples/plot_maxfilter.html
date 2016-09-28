@@ -173,7 +173,7 @@ Created an SSP operator (subspace dimension = 8)
 8 projection items activated
 </pre></div>
 </div>
-<p>Then Maxfiltered and tSSS&#8217;d data.</p>
+<p>Then Maxfiltered and SSS&#8217;d data.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">raw_fname_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">raw_sss</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">sss_fname_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;bads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bads</span>
@@ -261,7 +261,7 @@ Applying baseline correction (mode: mean)
 </li>
 </ul>
 <p><strong>Total running time of the script:</strong>
-(1 minutes 6.627 seconds)</p>
+(1 minutes 4.798 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_maxfilter.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_maxfilter.py</span></code></a></div>
 <div class="sphx-glr-download container">

@@ -87,7 +87,7 @@ First the filtered raw data.
     8 projection items activated
 
 
-Then Maxfiltered and tSSS'd data.
+Then Maxfiltered and SSS'd data.
 
 
 
@@ -205,7 +205,7 @@ Plotting
 
 
 **Total running time of the script:**
-(1 minutes 6.627 seconds)
+(1 minutes 4.798 seconds)
 
 
 
