@@ -9,7 +9,7 @@ and `'famous'` vs `'unfamiliar'` using this approach. The end result is an
 averaging effect across sensors. The contrast across different sensors are
 combined into a single plot.
 
-Analysis script: :ref:`sphx_glr_auto_scripts_08-run_time_decoding.py`)
+Analysis script: :ref:`sphx_glr_auto_scripts_08-run_time_decoding.py`
 """
 
 ###############################################################################

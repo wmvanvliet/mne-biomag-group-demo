@@ -193,7 +193,7 @@ Created an SSP operator (subspace dimension = 1)
 1 projection items activated
 </pre></div>
 </div>
-<p>They&#8217;re all over the place! The baselining effect of high pass filtering does
+<p>They&#8217;re all over the place! The baselining effect of high-pass filtering does
 not seem to work. Let&#8217;s try removing the low frequency components by raising
 the cut-off frequency to 2.5 Hz.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw_2</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -252,16 +252,17 @@ we have 30 seconds of data with an impulse at 15 seconds.</p>
 Ready.
 </pre></div>
 </div>
-<p>We low pass filter the data and plot the frequency spectrum and the impulse
+<p>We low-pass filter the data and plot the frequency spectrum and the impulse
 response of the filter.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filt_params</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">raw</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw_1</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">raw_1</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filt_params</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">raw_1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Impulse response&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">((</span><span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
-<span class="n">raw</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">fmin</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">raw_1</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">fmin</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="sphx-glr-horizontal">
@@ -277,15 +278,15 @@ Filter length of 620 samples (0.620 sec) selected
 Effective window size : 2.048 (s)
 </pre></div>
 </div>
-<p>Let&#8217;s do the same after high pass filtering at 2.5 Hz.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">filt_params</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">raw</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<p>Let&#8217;s do the same after high-pass filtering at 2.5 Hz.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw_1</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">filt_params</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">raw_1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Impulse response&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">((</span><span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
-<span class="n">raw</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">raw_1</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="sphx-glr-horizontal">
@@ -301,8 +302,36 @@ Filter length of 3100 samples (3.100 sec) selected
 Effective window size : 2.048 (s)
 </pre></div>
 </div>
+<p>We see that with the old defaults (MNE versions &lt; 0.13) the transition is
+much steeper.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">l_trans_bandwidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">raw</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Impulse response&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">((</span><span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+<span class="n">raw</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_filter_009.png"><img alt="../_images/sphx_glr_plot_filter_009.png" src="../_images/sphx_glr_plot_filter_009.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_filter_010.png"><img alt="../_images/sphx_glr_plot_filter_010.png" src="../_images/sphx_glr_plot_filter_010.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Band-pass filtering from 2.5 - 40 Hz
+Multiple deprecated filter parameters were used:
+phase in 0.13 is &quot;zero-double&quot; but will change to &quot;zero&quot; in 0.14
+fir_window in 0.13 is &quot;hann&quot; but will change to &quot;hamming&quot; in 0.14
+upper transition bandwidth in 0.13 is 0.5 Hz but will change to &quot;auto&quot; in 0.14
+The default filter length in 0.13 is &quot;10s&quot; but will change to &quot;auto&quot; in 0.14
+Effective window size : 2.048 (s)
+</pre></div>
+</div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 48.229 seconds)</p>
+(0 minutes 44.051 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_filter.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_filter.py</span></code></a></div>
 <div class="sphx-glr-download container">

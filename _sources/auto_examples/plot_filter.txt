@@ -132,7 +132,7 @@ to the final results).
     1 projection items activated
 
 
-They're all over the place! The baselining effect of high pass filtering does
+They're all over the place! The baselining effect of high-pass filtering does
 not seem to work. Let's try removing the low frequency components by raising
 the cut-off frequency to 2.5 Hz.
 
@@ -228,21 +228,22 @@ we have 30 seconds of data with an impulse at 15 seconds.
     Ready.
 
 
-We low pass filter the data and plot the frequency spectrum and the impulse
+We low-pass filter the data and plot the frequency spectrum and the impulse
 response of the filter.
 
 
 
 .. code-block:: python
 
-    raw.filter(None, 40, **filt_params)
-    plt.plot(times, raw[0][0][0])
+    raw_1 = raw.copy()
+    raw_1.filter(None, 40, **filt_params)
+    plt.plot(times, raw_1[0][0][0])
     plt.xlabel('Time (s)')
     plt.ylabel('Amplitude')
     plt.title('Impulse response')
     plt.xlim((14, 16))
     plt.show()
-    raw.plot_psd(fmin=20, fmax=60)
+    raw_1.plot_psd(fmin=20, fmax=60)
 
 
 
@@ -271,20 +272,21 @@ response of the filter.
     Effective window size : 2.048 (s)
 
 
-Let's do the same after high pass filtering at 2.5 Hz.
+Let's do the same after high-pass filtering at 2.5 Hz.
 
 
 
 .. code-block:: python
 
-    raw.filter(2.5, None, **filt_params)
-    plt.plot(times, raw[0][0][0])
+    raw_1.filter(2.5, None, **filt_params)
+    plt.plot(times, raw_1[0][0][0])
     plt.xlabel('Time (s)')
     plt.ylabel('Amplitude')
     plt.title('Impulse response')
     plt.xlim((14, 16))
     plt.show()
-    raw.plot_psd(fmax=10)
+    raw_1.plot_psd(fmax=10)
+
 
 
 
@@ -312,8 +314,53 @@ Let's do the same after high pass filtering at 2.5 Hz.
     Effective window size : 2.048 (s)
 
 
+We see that with the old defaults (MNE versions < 0.13) the transition is
+much steeper.
+
+
+
+.. code-block:: python
+
+    raw.filter(2.5, 40, l_trans_bandwidth=0.5)
+    plt.plot(times, raw[0][0][0])
+    plt.xlabel('Time (s)')
+    plt.ylabel('Amplitude')
+    plt.title('Impulse response')
+    plt.xlim((14, 16))
+    plt.show()
+    raw.plot_psd(fmax=10)
+
+
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_filter_009.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_filter_010.png
+            :scale: 47
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Band-pass filtering from 2.5 - 40 Hz
+    Multiple deprecated filter parameters were used:
+    phase in 0.13 is "zero-double" but will change to "zero" in 0.14
+    fir_window in 0.13 is "hann" but will change to "hamming" in 0.14
+    upper transition bandwidth in 0.13 is 0.5 Hz but will change to "auto" in 0.14
+    The default filter length in 0.13 is "10s" but will change to "auto" in 0.14
+    Effective window size : 2.048 (s)
+
+
 **Total running time of the script:**
-(0 minutes 48.229 seconds)
+(0 minutes 44.051 seconds)
 
 
 
