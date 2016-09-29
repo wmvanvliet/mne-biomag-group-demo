@@ -10,6 +10,7 @@ import os.path as op
 import numpy as np
 
 import mne
+
 from library.config import meg_dir, ylim
 
 evokeds = list()
