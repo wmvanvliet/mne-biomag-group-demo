@@ -123,15 +123,15 @@ pass.</p>
 <span class="n">sfreq</span> <span class="o">=</span> <span class="mf">1100.</span>
 </pre></div>
 </div>
-<p>The defaults in MNE 0.13 are slightly different from the defaults in
-MNE 0.14. We define a convenience function to get the defaults for each
+<p>The defaults in MNE 0.12 are slightly different from the defaults in
+MNE 0.13. We define a convenience function to get the defaults for each
 version. For more detailed information regarding these choices, head over
 to the <a class="reference external" href="http://mne-tools.github.io/stable/auto_tutorials/plot_background_filtering.html">filtering tutorial</a>
 on the MNE website.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_filter_defaults</span><span class="p">(</span><span class="n">version</span><span class="p">,</span> <span class="n">filter_type</span><span class="p">):</span>
     <span class="n">window</span> <span class="o">=</span> <span class="s1">&#39;hann&#39;</span>
     <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;0.12&#39;</span><span class="p">:</span>
-        <span class="n">f_w</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># Transition band (Hz)</span>
+        <span class="n">f_w</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># Transition bandwidth (Hz)</span>
         <span class="n">filter_dur</span> <span class="o">=</span> <span class="mf">10.</span>  <span class="c1"># seconds</span>
     <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;0.13&#39;</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">filter_type</span> <span class="o">==</span> <span class="s1">&#39;highpass&#39;</span><span class="p">:</span>
@@ -171,7 +171,6 @@ Higher attenuation is good for reducing noise.</p>
             <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Frequency (Hz)&#39;</span><span class="p">,</span>
            <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Amplitude (dB)&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">box_off</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -205,7 +204,7 @@ and highpass filters in MNE versions 0.12 and 0.13.</p>
 
 <span class="n">xlim</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">highpass</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">4.</span><span class="p">],</span> <span class="n">lowpass</span><span class="o">=</span><span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">])</span>
 <span class="n">ylim</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>  <span class="c1"># for dB plots</span>
-<span class="n">f_ps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">]</span>
+<span class="n">f_ps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">]</span>  <span class="c1"># corner frequencies (Hz)</span>
 <span class="n">filter_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;highpass&#39;</span><span class="p">,</span> <span class="s1">&#39;lowpass&#39;</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">f_p</span><span class="p">,</span> <span class="n">filter_type</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">f_ps</span><span class="p">,</span> <span class="n">filter_types</span><span class="p">):</span>
@@ -225,16 +224,15 @@ and highpass filters in MNE versions 0.12 and 0.13.</p>
     <span class="n">plot_impulse_response</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">h</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">lbl</span><span class="p">)</span>
 
     <span class="c1"># Ideal gain</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">f_p</span><span class="p">,</span> <span class="n">f_p</span><span class="p">,</span> <span class="n">sfreq</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">]</span>
+    <span class="n">min_gain</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">ylim</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">20</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">filter_type</span> <span class="o">==</span> <span class="s2">&quot;highpass&quot;</span><span class="p">:</span>
-        <span class="n">ideal_gain</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">gain</span> <span class="o">=</span> <span class="p">[</span><span class="n">min_gain</span><span class="p">,</span> <span class="n">min_gain</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">ideal_gain</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">ideal_freq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">f_p</span><span class="p">,</span> <span class="n">f_p</span><span class="p">,</span> <span class="n">sfreq</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">]</span>
-    <span class="n">ideal_gain</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">ideal_gain</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-    <span class="n">ideal_gain</span><span class="p">[</span><span class="n">ideal_gain</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">ylim</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">20</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ideal_freq</span><span class="p">,</span> <span class="mi">20</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.log10.html#numpy.log10"><span class="n">np</span><span class="o">.</span><span class="n">log10</span></a><span class="p">(</span><span class="n">ideal_gain</span><span class="p">),</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">gain</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">min_gain</span><span class="p">,</span> <span class="n">min_gain</span><span class="p">]</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="mi">20</span> <span class="o">*</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.log10.html#numpy.log10"><span class="n">np</span><span class="o">.</span><span class="n">log10</span></a><span class="p">(</span><span class="n">gain</span><span class="p">),</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
                <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ideal&#39;</span><span class="p">)</span>
-
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">filter_type</span> <span class="o">+</span> <span class="s2">&quot; (cutoff </span><span class="si">%s</span><span class="s2"> Hz)&quot;</span> <span class="o">%</span> <span class="n">f_p</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -243,7 +241,7 @@ and highpass filters in MNE versions 0.12 and 0.13.</p>
 </div>
 <img alt="../_images/sphx_glr_plot_filter_001.png" class="align-center" src="../_images/sphx_glr_plot_filter_001.png" />
 <p><strong>Total running time of the script:</strong>
-(0 minutes 0.652 seconds)</p>
+(0 minutes 0.675 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_filter.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_filter.py</span></code></a></div>
 <div class="sphx-glr-download container">
