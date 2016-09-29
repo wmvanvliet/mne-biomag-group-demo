@@ -129,7 +129,7 @@ Results
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Plot filter properties. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="Here we look at the choice of filters both for low and high pass. ">
 
 .. only:: html
 

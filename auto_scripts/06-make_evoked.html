@@ -144,7 +144,7 @@ The evoked data is saved using categories &#8216;famous&#8217;, &#8216;scrambled
     <span class="n">contrast</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.combine_evoked.html#mne.combine_evoked"><span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span></a><span class="p">([</span><span class="n">evoked_famous</span><span class="p">,</span> <span class="n">evoked_unfamiliar</span><span class="p">,</span>
                                    <span class="n">evoked_scrambled</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">])</span>
     <span class="n">contrast</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s1">&#39;contrast&#39;</span>
-    <span class="n">faces</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.combine_evoked.html#mne.combine_evoked"><span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span></a><span class="p">([</span><span class="n">evoked_famous</span><span class="p">,</span> <span class="n">evoked_unfamiliar</span><span class="p">])</span>
+    <span class="n">faces</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.combine_evoked.html#mne.combine_evoked"><span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span></a><span class="p">([</span><span class="n">evoked_famous</span><span class="p">,</span> <span class="n">evoked_unfamiliar</span><span class="p">],</span> <span class="s1">&#39;nave&#39;</span><span class="p">)</span>
     <span class="n">faces</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s1">&#39;faces&#39;</span>
 
     <span class="n">mne</span><span class="o">.</span><span class="n">evoked</span><span class="o">.</span><span class="n">write_evokeds</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
@@ -181,7 +181,7 @@ The evoked data is saved using categories &#8216;famous&#8217;, &#8216;scrambled
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-28.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-29.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>

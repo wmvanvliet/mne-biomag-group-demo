@@ -144,7 +144,7 @@ on the contrast faces vs. scrambled.</p>
     <span class="n">contrast</span><span class="o">.</span><span class="n">apply_baseline</span><span class="p">((</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
     <span class="n">contrasts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
 
-<span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span><span class="p">(</span><span class="n">contrasts</span><span class="p">)</span>
+<span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span><span class="p">(</span><span class="n">contrasts</span><span class="p">,</span> <span class="s1">&#39;equal&#39;</span><span class="p">)</span>
 
 <span class="n">channel</span> <span class="o">=</span> <span class="s1">&#39;EEG070&#39;</span>
 <span class="n">idx</span> <span class="o">=</span> <span class="n">contrast</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
@@ -346,7 +346,6 @@ No baseline correction applied
 No baseline correction applied
 Applying baseline correction (mode: mean)
 In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be removed and it will have to be explicitly set
-In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be removed and it will have to be explicitly set
 </pre></div>
 </div>
 <p>Assemble the data and run the cluster stats on channel data</p>
@@ -382,13 +381,10 @@ Running initial clustering
 Found 5 clusters
 Permuting ...
 Computing cluster p-values
-Step-down-in-jumps iteration #1 found 2 clusters to exclude from subsequent iterations
+Step-down-in-jumps iteration #1 found 3 clusters to exclude from subsequent iterations
 Permuting ...
 Computing cluster p-values
-Step-down-in-jumps iteration #2 found 1 additional cluster to exclude from subsequent iterations
-Permuting ...
-Computing cluster p-values
-Step-down-in-jumps iteration #3 found 0 additional clusters to exclude from subsequent iterations
+Step-down-in-jumps iteration #2 found 0 additional clusters to exclude from subsequent iterations
 Done.
 </pre></div>
 </div>
@@ -423,7 +419,7 @@ Done.
 </div>
 <img alt="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_002.png" class="align-center" src="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_002.png" />
 <p><strong>Total running time of the script:</strong>
-(0 minutes 7.030 seconds)</p>
+(0 minutes 2.634 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_sensor_cluster_stats_eeg_channel.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_sensor_cluster_stats_eeg_channel.py</span></code></a></div>
 <div class="sphx-glr-download container">
@@ -443,7 +439,7 @@ Done.
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-28.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-29.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>
