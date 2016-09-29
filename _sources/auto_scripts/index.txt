@@ -69,26 +69,6 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Source estimates are computed for contrast between faces and scrambled and morphed to average b...">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_14-group_average_source_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_14-group_average_source.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/14-group_average_source
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="ICA decomposition using fastICA. ">
 
 .. only:: html
@@ -226,6 +206,26 @@ Processing scripts
    :hidden:
 
    /auto_scripts/08-run_time_decoding
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Source estimates are computed for contrast between faces and scrambled and morphed to average b...">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_14-group_average_source_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_14-group_average_source.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/14-group_average_source
 
 .. raw:: html
 

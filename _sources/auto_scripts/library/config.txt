@@ -52,7 +52,7 @@ The ``subjects_dir`` and ``meg_dir`` for reading anatomical and MEG files.
 
     os.environ["SUBJECTS_DIR"] = subjects_dir
 
-    spacing = 'oct6'
+    spacing = 'oct5'
     mindist = 5
 
 
