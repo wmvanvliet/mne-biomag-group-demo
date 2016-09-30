@@ -175,7 +175,7 @@ Applying baseline correction (mode: mean)
 0 projection items activated
 </pre></div>
 </div>
-<p>Next, we highpass filter (but now lowpass filter as we have already done it)
+<p>Next, we highpass filter (but no lowpass filter as we have already done it)
 but don&#8217;t baseline. Now, the late effects in the topography are no longer
 visible and the &#8220;fanning&#8221; has disappeared.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">l_trans_bandwidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
@@ -200,7 +200,7 @@ No baseline correction applied
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 41.661 seconds)</p>
+(0 minutes 41.623 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_fanning.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_fanning.py</span></code></a></div>
 <div class="sphx-glr-download container">

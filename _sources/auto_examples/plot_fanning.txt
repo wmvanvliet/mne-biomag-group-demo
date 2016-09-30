@@ -107,7 +107,7 @@ of "fanning"
     0 projection items activated
 
 
-Next, we highpass filter (but now lowpass filter as we have already done it)
+Next, we highpass filter (but no lowpass filter as we have already done it)
 but don't baseline. Now, the late effects in the topography are no longer
 visible and the "fanning" has disappeared.
 
@@ -149,7 +149,7 @@ visible and the "fanning" has disappeared.
 
 
 **Total running time of the script:**
-(0 minutes 41.661 seconds)
+(0 minutes 41.623 seconds)
 
 
 
