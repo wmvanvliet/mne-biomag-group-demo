@@ -107,16 +107,17 @@ of "fanning"
     0 projection items activated
 
 
-Next, we highpass filter but don't baseline. Now, the late effects in the
-topography are no longer visible and the "fanning" has disappeared.
+Next, we highpass filter (but now lowpass filter as we have already done it)
+but don't baseline. Now, the late effects in the topography are no longer
+visible and the "fanning" has disappeared.
 
 
 
 .. code-block:: python
 
-    raw.filter(1, 40, l_trans_bandwidth=0.5, **filter_params)
+    raw.filter(1, None, l_trans_bandwidth=0.5, **filter_params)
     evoked = Epochs(raw, events, event_id=event_ids, picks=picks,
-                    baseline=(None, 0)).average()
+                    baseline=None).average()
     evoked.plot()
     evoked.plot_topomap()
 
@@ -140,16 +141,15 @@ topography are no longer visible and the "fanning" has disappeared.
 
  Out::
 
-    Band-pass filtering from 1 - 40 Hz
-    h_trans_bandwidth chosen to be 10.0 Hz
+    High-pass filtering at 1 Hz
     Filter length of 13640 samples (12.400 sec) selected
     48 matching events found
-    Applying baseline correction (mode: mean)
+    No baseline correction applied
     0 projection items activated
 
 
 **Total running time of the script:**
-(0 minutes 41.965 seconds)
+(0 minutes 41.661 seconds)
 
 
 
