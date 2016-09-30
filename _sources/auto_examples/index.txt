@@ -89,6 +89,26 @@ Results
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Clustering in source space. ">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_source_stats_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_source_stats.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_source_stats
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Time decoding fits a Logistic Regression model for every time point in the epoch. In this examp...">
 
 .. only:: html
