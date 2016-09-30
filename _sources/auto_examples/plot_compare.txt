@@ -18,7 +18,6 @@ All the subjects compared.
     import numpy as np
 
     import mne
-
     from library.config import meg_dir, ylim
 
     evokeds = list()
@@ -918,11 +917,10 @@ Evoked responses on EEG. :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
 
 .. code-block:: python
 
-    picks = mne.pick_types(evokeds[0][0].info, meg=False, eeg=True)
     for idx, evoked in enumerate(evokeds):
         for cond in range(3):
             comm = evoked[cond].comment
-            evoked[cond].plot_joint(picks=picks, ts_args={'ylim': ylim},
+            evoked[cond].plot_joint(ts_args={'ylim': ylim},
                                     title='Subject %s %s' % (idx + 1, comm))
 
 
@@ -1216,26 +1214,6 @@ Evoked responses on EEG. :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
       .. image:: /auto_examples/images/sphx_glr_plot_compare_057.png
             :scale: 47
 
-
-
-
-Topomaps
-
-
-
-.. code-block:: python
-
-    for idx, evoked in enumerate(evokeds):
-        for cond in range(3):
-            comm = evoked[cond].comment
-            evoked[cond].plot_topomap(times=times,
-                                      title='Subject %s %s' % (idx + 1, comm))
-
-
-
-.. rst-class:: sphx-glr-horizontal
-
-
     *
 
       .. image:: /auto_examples/images/sphx_glr_plot_compare_058.png
@@ -1521,11 +1499,601 @@ Topomaps
       .. image:: /auto_examples/images/sphx_glr_plot_compare_114.png
             :scale: 47
 
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_115.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_116.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_117.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_118.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_119.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_120.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_121.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_122.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_123.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_124.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_125.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_126.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_127.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_128.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_129.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_130.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_131.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_132.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_133.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_134.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_135.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_136.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_137.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_138.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_139.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_140.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_141.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_142.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_143.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_144.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_145.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_146.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_147.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_148.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_149.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_150.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_151.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_152.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_153.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_154.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_155.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_156.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_157.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_158.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_159.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_160.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_161.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_162.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_163.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_164.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_165.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_166.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_167.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_168.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_169.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_170.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_171.png
+            :scale: 47
+
+
+
+
+Topomaps
+
+
+
+.. code-block:: python
+
+    for idx, evoked in enumerate(evokeds):
+        for cond in range(3):
+            comm = evoked[cond].comment
+            evoked[cond].plot_topomap(times=times,
+                                      title='Subject %s %s' % (idx + 1, comm))
+
+
+
+.. rst-class:: sphx-glr-horizontal
+
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_172.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_173.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_174.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_175.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_176.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_177.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_178.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_179.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_180.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_181.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_182.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_183.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_184.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_185.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_186.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_187.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_188.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_189.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_190.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_191.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_192.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_193.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_194.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_195.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_196.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_197.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_198.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_199.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_200.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_201.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_202.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_203.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_204.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_205.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_206.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_207.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_208.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_209.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_210.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_211.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_212.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_213.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_214.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_215.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_216.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_217.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_218.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_219.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_220.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_221.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_222.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_223.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_224.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_225.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_226.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_227.png
+            :scale: 47
+
+    *
+
+      .. image:: /auto_examples/images/sphx_glr_plot_compare_228.png
+            :scale: 47
+
 
 
 
 **Total running time of the script:**
-(3 minutes 24.091 seconds)
+(6 minutes 35.978 seconds)
 
 
 

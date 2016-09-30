@@ -545,7 +545,7 @@ Faces :ref:`sphx_glr_auto_scripts_13-make_inverse.py`.
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=6.87e+00 fmid=8.06e+00 fmax=2.48e+01 transparent=1
+    colormap: fmin=6.85e+00 fmid=8.04e+00 fmax=2.47e+01 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -557,7 +557,7 @@ Faces :ref:`sphx_glr_auto_scripts_13-make_inverse.py`.
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=6.87e+00 fmid=8.06e+00 fmax=2.48e+01 transparent=1
+    colormap: fmin=6.85e+00 fmid=8.04e+00 fmax=2.47e+01 transparent=1
 
 
 Faces - scrambled
@@ -567,6 +567,7 @@ Faces - scrambled
 .. code-block:: python
 
     brain = plot_stc('contrast')
+
 
 
 
@@ -589,7 +590,7 @@ Faces - scrambled
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=2.73e+00 fmid=3.10e+00 fmax=8.09e+00 transparent=1
+    colormap: fmin=2.71e+00 fmid=3.08e+00 fmax=8.05e+00 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -601,11 +602,37 @@ Faces - scrambled
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=2.73e+00 fmid=3.10e+00 fmax=8.09e+00 transparent=1
+    colormap: fmin=2.71e+00 fmid=3.08e+00 fmax=8.05e+00 transparent=1
+
+
+BEM
+
+
+
+.. code-block:: python
+
+    mne.viz.plot_bem(subject, subjects_dir)
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_analysis_17_024.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub017/bem/inner_skull.surf
+    Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub017/bem/outer_skull.surf
+    Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub017/bem/outer_skin.surf
+    Triangle file: created by jleppakangas on Tue Sep 27 11:30:38 2016 nvert = 10242 ntri = 20480
+    Triangle file: created by jleppakangas on Tue Sep 27 11:37:33 2016 nvert = 10242 ntri = 20480
+    Triangle file: created by jleppakangas on Tue Sep 27 11:37:33 2016 nvert = 10242 ntri = 20480
 
 
 **Total running time of the script:**
-(0 minutes 54.151 seconds)
+(0 minutes 57.106 seconds)
 
 
 
