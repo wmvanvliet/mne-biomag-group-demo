@@ -381,10 +381,13 @@ Running initial clustering
 Found 5 clusters
 Permuting ...
 Computing cluster p-values
-Step-down-in-jumps iteration #1 found 3 clusters to exclude from subsequent iterations
+Step-down-in-jumps iteration #1 found 2 clusters to exclude from subsequent iterations
 Permuting ...
 Computing cluster p-values
-Step-down-in-jumps iteration #2 found 0 additional clusters to exclude from subsequent iterations
+Step-down-in-jumps iteration #2 found 1 additional cluster to exclude from subsequent iterations
+Permuting ...
+Computing cluster p-values
+Step-down-in-jumps iteration #3 found 0 additional clusters to exclude from subsequent iterations
 Done.
 </pre></div>
 </div>
@@ -401,7 +404,7 @@ Done.
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i_c</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">cluster_p_values</span><span class="p">[</span><span class="n">i_c</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cluster_p_values</span><span class="p">[</span><span class="n">i_c</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">p_accept</span><span class="p">:</span>
         <span class="n">h1</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.axvspan"><span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span></a><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">start</span><span class="p">],</span> <span class="n">times</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
                          <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -419,7 +422,7 @@ Done.
 </div>
 <img alt="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_002.png" class="align-center" src="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_002.png" />
 <p><strong>Total running time of the script:</strong>
-(0 minutes 2.634 seconds)</p>
+(0 minutes 3.580 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_sensor_cluster_stats_eeg_channel.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_sensor_cluster_stats_eeg_channel.py</span></code></a></div>
 <div class="sphx-glr-download container">
@@ -439,7 +442,7 @@ Done.
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-09-30.<br/>
+        &copy; Copyright 2016, MNE Developers. Last updated on 2016-10-01.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>

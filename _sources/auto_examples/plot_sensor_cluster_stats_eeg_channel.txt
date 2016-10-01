@@ -311,10 +311,13 @@ Assemble the data and run the cluster stats on channel data
     Found 5 clusters
     Permuting ...
     Computing cluster p-values
-    Step-down-in-jumps iteration #1 found 3 clusters to exclude from subsequent iterations
+    Step-down-in-jumps iteration #1 found 2 clusters to exclude from subsequent iterations
     Permuting ...
     Computing cluster p-values
-    Step-down-in-jumps iteration #2 found 0 additional clusters to exclude from subsequent iterations
+    Step-down-in-jumps iteration #2 found 1 additional cluster to exclude from subsequent iterations
+    Permuting ...
+    Computing cluster p-values
+    Step-down-in-jumps iteration #3 found 0 additional clusters to exclude from subsequent iterations
     Done.
 
 
@@ -337,7 +340,7 @@ Visualize results
     plt.subplot(212)
     for i_c, c in enumerate(clusters):
         c = c[0]
-        if cluster_p_values[i_c] <= 0.05:
+        if cluster_p_values[i_c] <= p_accept:
             h1 = plt.axvspan(times[c.start], times[c.stop - 1],
                              color='r', alpha=0.3)
         else:
@@ -361,7 +364,7 @@ Visualize results
 
 
 **Total running time of the script:**
-(0 minutes 2.634 seconds)
+(0 minutes 3.580 seconds)
 
 
 
