@@ -1,3 +1,5 @@
+:orphan:
+
 .. _processing_scripts:
 
 Processing scripts
@@ -6,6 +8,8 @@ Processing scripts
 .. contents:: Contents
    :local:
    :depth: 2
+
+
 
 .. raw:: html
 
@@ -29,6 +33,26 @@ Processing scripts
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Source estimates are computed for contrast between faces and scrambled and morphed to average b...">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_16-group_average_lcmv_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_16-group_average_lcmv.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/16-group_average_lcmv
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="The EEG-channel data are averaged for group averages. ">
 
 .. only:: html
@@ -46,6 +70,26 @@ Processing scripts
    :hidden:
 
    /auto_scripts/09-group_average_sensors
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Compute LCMV beamformer. ">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_15-lcmv_beamformer_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_15-lcmv_beamformer.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/15-lcmv_beamformer
 
 .. raw:: html
 
@@ -89,26 +133,6 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="ICA decomposition using fastICA. ">
-
-.. only:: html
-
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_04-run_ica_thumb.png
-
-        :ref:`sphx_glr_auto_scripts_04-run_ica.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_scripts/04-run_ica
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="The data are bandpass filtered (1 - 40 Hz) using linear-phase fir filter with delay compensatio...">
 
 .. only:: html
@@ -149,13 +173,13 @@ Processing scripts
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The evoked data sets are created by averaging different categories of epochs. The evoked data i...">
+    <div class="sphx-glr-thumbcontainer" tooltip="ICA decomposition using fastICA. ">
 
 .. only:: html
 
-    .. figure:: /auto_scripts/images/thumb/sphx_glr_06-make_evoked_thumb.png
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_04-run_ica_thumb.png
 
-        :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
+        :ref:`sphx_glr_auto_scripts_04-run_ica.py`
 
 .. raw:: html
 
@@ -165,7 +189,7 @@ Processing scripts
 .. toctree::
    :hidden:
 
-   /auto_scripts/06-make_evoked
+   /auto_scripts/04-run_ica
 
 .. raw:: html
 
@@ -229,6 +253,46 @@ Processing scripts
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="The evoked data sets are created by averaging different categories of epochs. The evoked data i...">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_06-make_evoked_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/06-make_evoked
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The data are maxwell filtered using tSSS. This works as an alternative for highpass filtering. ...">
+
+.. only:: html
+
+    .. figure:: /auto_scripts/images/thumb/sphx_glr_02-maxwell_filtering_thumb.png
+
+        :ref:`sphx_glr_auto_scripts_02-maxwell_filtering.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_scripts/02-maxwell_filtering
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Builds an html report containing all the relevant analysis plots. ">
 
 .. only:: html
@@ -279,6 +343,8 @@ Library
    :local:
    :depth: 2
 
+
+
 .. raw:: html
 
     <div class="sphx-glr-thumbcontainer" tooltip="This is the __init__ file.">
@@ -322,6 +388,20 @@ Library
 
     <div style='clear:both'></div>
 
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+    :download:`Download all examples in Python source code: auto_scripts_python.zip <//tsi/doctorants/mainak/mne-biomag-group-demo/scripts/doc/auto_scripts/auto_scripts_python.zip>`
+
+
+
+  .. container:: sphx-glr-download
+
+    :download:`Download all examples in Jupyter notebooks: auto_scripts_jupyter.zip <//tsi/doctorants/mainak/mne-biomag-group-demo/scripts/doc/auto_scripts/auto_scripts_jupyter.zip>`
 
 .. rst-class:: sphx-glr-signature
 

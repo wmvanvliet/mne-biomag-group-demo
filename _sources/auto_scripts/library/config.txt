@@ -29,9 +29,12 @@ Let's set the path where the data is downloaded and stored.
     if user == 'gramfort':
         study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
         N_JOBS = 8
-    elif user == 'jleppakangas' or user == 'mjas':
+    elif user == 'mjas':
         study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
         N_JOBS = 4
+    elif user == 'jleppakangas':
+        study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
+        N_JOBS = 8
     elif user == 'alex':
         study_path = '/Users/alex/work/data/mne-biomag-group-demo/'
         N_JOBS = 1
@@ -84,24 +87,29 @@ are placed in the same folder.
 .. code-block:: python
 
 
-    ctc = os.path.join(os.path.dirname(__file__), 'ct_sparse.fif')
-    cal = os.path.join(os.path.dirname(__file__), 'sss_cal.dat')
+    ctc = os.path.join(os.path.dirname(__file__), '..', '..', 'results', 'library',
+                       'ct_sparse.fif')
+    cal = os.path.join(os.path.dirname(__file__), '..', '..', 'results', 'library',
+                       'sss_cal.dat')
 
     ylim = {'eeg': [-10, 10], 'mag': [-300, 300], 'grad': [-80, 80]}
 
-**Total running time of the script:**
-(0 minutes 0.000 seconds)
+**Total running time of the script:** ( 0 minutes  0.000 seconds)
 
 
 
-.. container:: sphx-glr-download
-
-    :download:`Download Python source code: config.py <config.py>`
+.. container:: sphx-glr-footer
 
 
-.. container:: sphx-glr-download
+  .. container:: sphx-glr-download
 
-    :download:`Download IPython notebook: config.ipynb <config.ipynb>`
+     :download:`Download Python source code: config.py <config.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: config.ipynb <config.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

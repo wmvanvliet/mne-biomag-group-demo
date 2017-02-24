@@ -66,16 +66,10 @@ Configuration
         Range : 140800 ... 680899 =    128.000 ...   618.999 secs
     Ready.
     Current compensation grade : 0
-    add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
-    Adding average EEG reference projection.
-    1 projection items deactivated
     Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/run_01_filt_sss_raw.fif...
         Range : 140800 ... 680899 =    128.000 ...   618.999 secs
     Ready.
     Current compensation grade : 0
-    add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
-    Adding average EEG reference projection.
-    1 projection items deactivated
 
 
 Filtering :ref:`sphx_glr_auto_scripts_02-python_filtering.py`.
@@ -108,9 +102,11 @@ Filtering :ref:`sphx_glr_auto_scripts_02-python_filtering.py`.
 
  Out::
 
+    tmax defaults to 60. in 0.14 but will change to np.inf in 0.15. Set it explicitly to avoid this warning
     Effective window size : 1.862 (s)
     Effective window size : 1.862 (s)
     Effective window size : 1.862 (s)
+    tmax defaults to 60. in 0.14 but will change to np.inf in 0.15. Set it explicitly to avoid this warning
     Effective window size : 1.862 (s)
     Effective window size : 1.862 (s)
     Effective window size : 1.862 (s)
@@ -192,7 +188,6 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
             nave = 272 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
-    No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
@@ -200,7 +195,6 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
             0 CTF compensation matrices available
             nave = 281 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
-    No baseline correction applied
     No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
@@ -210,7 +204,6 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
             nave = 271 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
-    No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
@@ -219,7 +212,6 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
             nave = 185 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
-    No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
@@ -227,7 +219,6 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
             0 CTF compensation matrices available
             nave = 543 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
-    No baseline correction applied
     No baseline correction applied
 
 
@@ -472,11 +463,11 @@ Covariance :ref:`sphx_glr_auto_scripts_06-make_evoked.py`.
     SSS has been applied to data. Showing mag and grad whitening jointly.
     estimated rank (eeg): 70
     estimated rank (mag + grad): 306
+        Created an SSP operator (subspace dimension = 1)
     Setting small MEG eigenvalues to zero.
     Not doing PCA for MEG.
     Setting small EEG eigenvalues to zero.
     Not doing PCA for EEG.
-    No average EEG reference present in info["projs"], covariance may be adversely affected. Consider recomputing covariance using a raw file with an average eeg reference projector added.
 
 
 Trans
@@ -590,7 +581,7 @@ Faces - scrambled
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=2.81e+00 fmid=3.25e+00 fmax=7.60e+00 transparent=1
+    colormap: fmin=2.81e+00 fmid=3.25e+00 fmax=7.59e+00 transparent=1
     Updating smoothing matrix, be patient..
     Smoothing matrix creation, step 1
     Smoothing matrix creation, step 2
@@ -602,7 +593,55 @@ Faces - scrambled
     Smoothing matrix creation, step 8
     Smoothing matrix creation, step 9
     Smoothing matrix creation, step 10
-    colormap: fmin=2.81e+00 fmid=3.25e+00 fmax=7.60e+00 transparent=1
+    colormap: fmin=2.81e+00 fmid=3.25e+00 fmax=7.59e+00 transparent=1
+
+
+LCMV Faces - scrambled
+
+
+
+.. code-block:: python
+
+    fname = op.join(meg_dir, subject, 'mne_LCMV_inverse-contrast')
+    stc = mne.read_source_estimate(fname, subject)
+    stc.plot(subject=subject, subjects_dir=subjects_dir, views=['ven'],
+             hemi='both', initial_time=0.17, time_unit='s')
+
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_analysis_10_024.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=2.00e-01 fmid=2.22e-01 fmax=4.37e-01 transparent=1
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=2.00e-01 fmid=2.22e-01 fmax=4.37e-01 transparent=1
 
 
 BEM
@@ -615,7 +654,7 @@ BEM
 
 
 
-.. image:: /auto_examples/images/sphx_glr_plot_analysis_10_024.png
+.. image:: /auto_examples/images/sphx_glr_plot_analysis_10_025.png
     :align: center
 
 
@@ -626,13 +665,10 @@ BEM
     Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub010/bem/inner_skull.surf
     Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub010/bem/outer_skull.surf
     Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub010/bem/outer_skin.surf
-    Triangle file: created by jleppakangas on Tue Sep 27 09:47:24 2016 nvert = 10242 ntri = 20480
-    Triangle file: created by jleppakangas on Tue Sep 27 09:54:42 2016 nvert = 10242 ntri = 20480
-    Triangle file: created by jleppakangas on Tue Sep 27 09:54:41 2016 nvert = 10242 ntri = 20480
 
 
 **Total running time of the script:**
-(0 minutes 58.328 seconds)
+(1 minutes 8.848 seconds)
 
 
 

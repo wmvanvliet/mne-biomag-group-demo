@@ -1,3 +1,5 @@
+:orphan:
+
 .. _general_analysis:
 
 Results
@@ -6,6 +8,8 @@ Results
 .. contents:: Contents
    :local:
    :depth: 2
+
+
 
 .. raw:: html
 
@@ -106,6 +110,26 @@ Results
    :hidden:
 
    /auto_examples/plot_source_stats
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Run the analysis. ">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_tsss_analysis_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_tsss_analysis.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_tsss_analysis
 
 .. raw:: html
 
@@ -590,6 +614,20 @@ Results
 
     <div style='clear:both'></div>
 
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+    :download:`Download all examples in Python source code: auto_examples_python.zip <//tsi/doctorants/mainak/mne-biomag-group-demo/scripts/doc/auto_examples/auto_examples_python.zip>`
+
+
+
+  .. container:: sphx-glr-download
+
+    :download:`Download all examples in Jupyter notebooks: auto_examples_jupyter.zip <//tsi/doctorants/mainak/mne-biomag-group-demo/scripts/doc/auto_examples/auto_examples_jupyter.zip>`
 
 .. rst-class:: sphx-glr-signature
 

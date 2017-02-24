@@ -42,19 +42,22 @@ The EEG-channel data are averaged for group averages.
     mne.evoked.write_evokeds(op.join(meg_dir, 'grand_average-ave.fif'),
                              all_evokeds)
 
-**Total running time of the script:**
-(0 minutes 0.000 seconds)
+**Total running time of the script:** ( 0 minutes  0.000 seconds)
 
 
 
-.. container:: sphx-glr-download
-
-    :download:`Download Python source code: 09-group_average_sensors.py <09-group_average_sensors.py>`
+.. container:: sphx-glr-footer
 
 
-.. container:: sphx-glr-download
+  .. container:: sphx-glr-download
 
-    :download:`Download IPython notebook: 09-group_average_sensors.ipynb <09-group_average_sensors.ipynb>`
+     :download:`Download Python source code: 09-group_average_sensors.py <09-group_average_sensors.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: 09-group_average_sensors.ipynb <09-group_average_sensors.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

@@ -112,19 +112,22 @@ Builds an html report containing all the relevant analysis plots.
              open_browser=False, overwrite=True)
 
 
-**Total running time of the script:**
-(0 minutes 0.000 seconds)
+**Total running time of the script:** ( 0 minutes  0.000 seconds)
 
 
 
-.. container:: sphx-glr-download
-
-    :download:`Download Python source code: 99-make_reports.py <99-make_reports.py>`
+.. container:: sphx-glr-footer
 
 
-.. container:: sphx-glr-download
+  .. container:: sphx-glr-download
 
-    :download:`Download IPython notebook: 99-make_reports.ipynb <99-make_reports.ipynb>`
+     :download:`Download Python source code: 99-make_reports.py <99-make_reports.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: 99-make_reports.ipynb <99-make_reports.ipynb>`
 
 .. rst-class:: sphx-glr-signature
 

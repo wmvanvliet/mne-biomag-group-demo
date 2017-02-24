@@ -126,7 +126,7 @@
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="n">fname_in</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">evokeds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span><span class="p">(</span><span class="n">fname_in</span><span class="p">))</span>
-<span class="n">times</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">)</span>
+<span class="n">times</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -1011,7 +1011,7 @@ No baseline correction applied
 <span class="k">for</span> <span class="n">ch_type_kwarg</span> <span class="ow">in</span> <span class="n">ch_type_kwargs</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">evoked</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">evokeds</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-            <span class="n">picks</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.pick_types.html#mne.pick_types"><span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span></a><span class="p">(</span><span class="n">evoked</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="o">**</span><span class="n">ch_type_kwarg</span><span class="p">)</span>
+            <span class="n">picks</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.pick_types.html#mne.pick_types" title="View documentation for mne.pick_types"><span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span></a><span class="p">(</span><span class="n">evoked</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="o">**</span><span class="n">ch_type_kwarg</span><span class="p">)</span>
             <span class="n">comm</span> <span class="o">=</span> <span class="n">evoked</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span><span class="o">.</span><span class="n">comment</span>
             <span class="n">evoked</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span><span class="o">.</span><span class="n">plot_joint</span><span class="p">(</span><span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">,</span> <span class="n">ts_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ylim&#39;</span><span class="p">:</span> <span class="n">ylim</span><span class="p">},</span>
                                     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Subject </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">comm</span><span class="p">))</span>
@@ -1736,7 +1736,7 @@ No baseline correction applied
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-10-01.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>

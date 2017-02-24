@@ -19,6 +19,7 @@ from mne.parallel import parallel_func
 
 from library.config import study_path, meg_dir, N_JOBS
 
+
 if not op.exists(meg_dir):
     os.mkdir(meg_dir)
 
@@ -38,6 +39,7 @@ def run_filter(subject_id):
             warn('Could not read file %s. '
                  'Skipping run %s from subject %s.' % (raw_in, run, subject))
             continue
+
         raw_out = raw_fname_out % run
         if not op.exists(op.join(meg_dir, subject)):
             os.mkdir(op.join(meg_dir, subject))

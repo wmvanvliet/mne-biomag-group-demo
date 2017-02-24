@@ -16,9 +16,12 @@ user = os.environ['USER']
 if user == 'gramfort':
     study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
     N_JOBS = 8
-elif user == 'jleppakangas' or user == 'mjas':
+elif user == 'mjas':
     study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
     N_JOBS = 4
+elif user == 'jleppakangas':
+    study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
+    N_JOBS = 8
 elif user == 'alex':
     study_path = '/Users/alex/work/data/mne-biomag-group-demo/'
     N_JOBS = 1
@@ -56,7 +59,9 @@ if not os.path.isdir(subjects_dir):
 # and `calibration file <https://github.com/mne-tools/mne-biomag-group-demo/blob/master/scripts/results/library/sss_cal.dat>`_
 # are placed in the same folder.
 
-ctc = os.path.join(os.path.dirname(__file__), 'ct_sparse.fif')
-cal = os.path.join(os.path.dirname(__file__), 'sss_cal.dat')
+ctc = os.path.join(os.path.dirname(__file__), '..', '..', 'results', 'library',
+                   'ct_sparse.fif')
+cal = os.path.join(os.path.dirname(__file__), '..', '..', 'results', 'library',
+                   'sss_cal.dat')
 
 ylim = {'eeg': [-10, 10], 'mag': [-300, 300], 'grad': [-80, 80]}

@@ -130,10 +130,10 @@
 <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
 
 <span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;run_01_raw.fif&#39;</span><span class="p">)</span>
-<span class="n">raw</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="n">raw</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
 <span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss_raw.fif&#39;</span><span class="p">)</span>
-<span class="n">raw_filt</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="n">raw_filt</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -150,16 +150,10 @@
     Range : 258500 ... 808499 =    235.000 ...   734.999 secs
 Ready.
 Current compensation grade : 0
-add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
-Adding average EEG reference projection.
-1 projection items deactivated
 Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub009/run_01_filt_sss_raw.fif...
     Range : 258500 ... 808499 =    235.000 ...   734.999 secs
 Ready.
 Current compensation grade : 0
-add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
-Adding average EEG reference projection.
-1 projection items deactivated
 </pre></div>
 </div>
 <p>Filtering <a class="reference internal" href="../auto_scripts/02-python_filtering.html#sphx-glr-auto-scripts-02-python-filtering-py"><span>Filter using MNE-python</span></a>.</p>
@@ -174,9 +168,11 @@ Adding average EEG reference projection.
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Effective window size : 1.862 (s)
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>tmax defaults to 60. in 0.14 but will change to np.inf in 0.15. Set it explicitly to avoid this warning
 Effective window size : 1.862 (s)
 Effective window size : 1.862 (s)
+Effective window size : 1.862 (s)
+tmax defaults to 60. in 0.14 but will change to np.inf in 0.15. Set it explicitly to avoid this warning
 Effective window size : 1.862 (s)
 Effective window size : 1.862 (s)
 Effective window size : 1.862 (s)
@@ -184,11 +180,11 @@ Effective window size : 1.862 (s)
 </div>
 <p>Events <a class="reference internal" href="../auto_scripts/03-run_extract_events.html#sphx-glr-auto-scripts-03-run-extract-events-py"><span>Extract events from the stimulus channel</span></a>.
 Epochs <a class="reference internal" href="../auto_scripts/05-make_epochs.html#sphx-glr-auto-scripts-05-make-epochs-py"><span>Construct epochs</span></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_events.html#mne.read_events"><span class="n">mne</span><span class="o">.</span><span class="n">read_events</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss-eve.fif&#39;</span><span class="p">))</span>
-<span class="n">fig</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.viz.plot_events.html#mne.viz.plot_events"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_events</span></a><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_events.html#mne.read_events" title="View documentation for mne.read_events"><span class="n">mne</span><span class="o">.</span><span class="n">read_events</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss-eve.fif&#39;</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.viz.plot_events.html#mne.viz.plot_events" title="View documentation for mne.viz.plot_events"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_events</span></a><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Events from run 01&#39;</span><span class="p">)</span>
 
-<span class="n">epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_epochs.html#mne.read_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">subject</span> <span class="o">+</span> <span class="s1">&#39;-epo.fif&#39;</span><span class="p">))</span>
+<span class="n">epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_epochs.html#mne.read_epochs" title="View documentation for mne.read_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">subject</span> <span class="o">+</span> <span class="s1">&#39;-epo.fif&#39;</span><span class="p">))</span>
 <span class="n">epochs</span><span class="o">.</span><span class="n">plot_drop_log</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -216,7 +212,7 @@ Created an SSP operator (subspace dimension = 1)
 </div>
 <p>Evoked responses <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span>Evoked data and covariance</span></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">evo_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
-<span class="n">evoked</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_evokeds.html#mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">evo_fname</span><span class="p">)</span>
+<span class="n">evoked</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_evokeds.html#mne.read_evokeds" title="View documentation for mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">evo_fname</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -229,7 +225,6 @@ Created an SSP operator (subspace dimension = 1)
         nave = 266 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
-No baseline correction applied
     Read a total of 1 projection items:
         Average EEG reference (1 x 70) active
     Found the data of interest:
@@ -237,7 +232,6 @@ No baseline correction applied
         0 CTF compensation matrices available
         nave = 263 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
 No baseline correction applied
     Read a total of 1 projection items:
         Average EEG reference (1 x 70) active
@@ -247,7 +241,6 @@ No baseline correction applied
         nave = 268 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
-No baseline correction applied
     Read a total of 1 projection items:
         Average EEG reference (1 x 70) active
     Found the data of interest:
@@ -256,7 +249,6 @@ No baseline correction applied
         nave = 176 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
 No baseline correction applied
-No baseline correction applied
     Read a total of 1 projection items:
         Average EEG reference (1 x 70) active
     Found the data of interest:
@@ -264,7 +256,6 @@ No baseline correction applied
         0 CTF compensation matrices available
         nave = 534 - aspect type = 100
 Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
 No baseline correction applied
 </pre></div>
 </div>
@@ -300,7 +291,7 @@ No baseline correction applied
 </div>
 <img alt="../_images/sphx_glr_plot_analysis_9_009.png" class="align-center" src="../_images/sphx_glr_plot_analysis_9_009.png" />
 <p>Topomaps</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">times</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.arange.html#numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">times</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">)</span>
 <span class="n">famous_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Famous </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
 <span class="n">scrambled_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scrambled </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
 <span class="n">unfamiliar_evo</span><span class="o">.</span><span class="n">plot_topomap</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Unfamiliar </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
@@ -360,8 +351,8 @@ Applying baseline correction (mode: logratio)
 </pre></div>
 </div>
 <p>Covariance <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span>Evoked data and covariance</span></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_cov.html#mne.read_cov"><span class="n">mne</span><span class="o">.</span><span class="n">read_cov</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-cov.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
-<a href="http://martinos.org/mne/stable/generated/mne.viz.plot_cov.html#mne.viz.plot_cov"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_cov</span></a><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">faces_evo</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_cov.html#mne.read_cov" title="View documentation for mne.read_cov"><span class="n">mne</span><span class="o">.</span><span class="n">read_cov</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-cov.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
+<a href="http://martinos.org/mne/stable/generated/mne.viz.plot_cov.html#mne.viz.plot_cov" title="View documentation for mne.viz.plot_cov"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_cov</span></a><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">faces_evo</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
 <span class="n">faces_evo</span><span class="o">.</span><span class="n">plot_white</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -380,17 +371,17 @@ Applying baseline correction (mode: logratio)
 SSS has been applied to data. Showing mag and grad whitening jointly.
 estimated rank (eeg): 70
 estimated rank (mag + grad): 306
+    Created an SSP operator (subspace dimension = 1)
 Setting small MEG eigenvalues to zero.
 Not doing PCA for MEG.
 Setting small EEG eigenvalues to zero.
 Not doing PCA for EEG.
-No average EEG reference present in info[&quot;projs&quot;], covariance may be adversely affected. Consider recomputing covariance using a raw file with an average eeg reference projector added.
 </pre></div>
 </div>
 <p>Trans</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fname_trans</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span>
                       <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-trans.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
-<a href="http://martinos.org/mne/stable/generated/mne.viz.plot_trans.html#mne.viz.plot_trans"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_trans</span></a><span class="p">(</span><span class="n">famous_evo</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">fname_trans</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span>
+<a href="http://martinos.org/mne/stable/generated/mne.viz.plot_trans.html#mne.viz.plot_trans" title="View documentation for mne.viz.plot_trans"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_trans</span></a><span class="p">(</span><span class="n">famous_evo</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">fname_trans</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span>
                    <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">meg_sensors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                    <span class="n">eeg_sensors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
@@ -404,7 +395,7 @@ Getting helmet for system 306m
 <p>Faces <a class="reference internal" href="../auto_scripts/13-make_inverse.html#sphx-glr-auto-scripts-13-make-inverse-py"><span>Inverse solution</span></a>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_stc</span><span class="p">(</span><span class="n">cond</span><span class="p">):</span>
     <span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;mne_dSPM_inverse-</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">cond</span><span class="p">)</span>
-    <span class="n">stc</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_source_estimate.html#mne.read_source_estimate"><span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span></a><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+    <span class="n">stc</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_source_estimate.html#mne.read_source_estimate" title="View documentation for mne.read_source_estimate"><span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span></a><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">brain</span> <span class="o">=</span> <span class="n">stc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ven&#39;</span><span class="p">],</span>
                      <span class="n">hemi</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mf">0.17</span><span class="p">,</span> <span class="n">time_unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">brain</span>
@@ -472,22 +463,54 @@ Smoothing matrix creation, step 10
 colormap: fmin=3.73e+00 fmid=4.30e+00 fmax=1.02e+01 transparent=1
 </pre></div>
 </div>
-<p>BEM</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://martinos.org/mne/stable/generated/mne.viz.plot_bem.html#mne.viz.plot_bem"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_bem</span></a><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="p">)</span>
+<p>LCMV Faces - scrambled</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;mne_LCMV_inverse-contrast&#39;</span><span class="p">)</span>
+<span class="n">stc</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_source_estimate.html#mne.read_source_estimate" title="View documentation for mne.read_source_estimate"><span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span></a><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">stc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ven&#39;</span><span class="p">],</span>
+         <span class="n">hemi</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mf">0.17</span><span class="p">,</span> <span class="n">time_unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_analysis_9_024.png" class="align-center" src="../_images/sphx_glr_plot_analysis_9_024.png" />
 <p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.93e-01 fmid=3.32e-01 fmax=7.32e-01 transparent=1
+Updating smoothing matrix, be patient..
+Smoothing matrix creation, step 1
+Smoothing matrix creation, step 2
+Smoothing matrix creation, step 3
+Smoothing matrix creation, step 4
+Smoothing matrix creation, step 5
+Smoothing matrix creation, step 6
+Smoothing matrix creation, step 7
+Smoothing matrix creation, step 8
+Smoothing matrix creation, step 9
+Smoothing matrix creation, step 10
+colormap: fmin=2.93e-01 fmid=3.32e-01 fmax=7.32e-01 transparent=1
+</pre></div>
+</div>
+<p>BEM</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://martinos.org/mne/stable/generated/mne.viz.plot_bem.html#mne.viz.plot_bem" title="View documentation for mne.viz.plot_bem"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_bem</span></a><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_9_025.png" class="align-center" src="../_images/sphx_glr_plot_analysis_9_025.png" />
+<p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub009/bem/inner_skull.surf
 Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub009/bem/outer_skull.surf
 Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub009/bem/outer_skin.surf
-Triangle file: created by jleppakangas on Tue Sep 27 09:33:34 2016 nvert = 10242 ntri = 20480
-Triangle file: created by jleppakangas on Tue Sep 27 09:40:02 2016 nvert = 10242 ntri = 20480
-Triangle file: created by jleppakangas on Tue Sep 27 09:40:02 2016 nvert = 10242 ntri = 20480
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong>
-(0 minutes 58.349 seconds)</p>
+(1 minutes 9.111 seconds)</p>
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_analysis_9.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_analysis_9.py</span></code></a></div>
 <div class="sphx-glr-download container">
@@ -507,7 +530,7 @@ Triangle file: created by jleppakangas on Tue Sep 27 09:40:02 2016 nvert = 10242
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-10-01.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>

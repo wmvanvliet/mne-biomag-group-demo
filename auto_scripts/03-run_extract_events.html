@@ -136,7 +136,7 @@ to the subject&#8217;s MEG directory.</p>
 
         <span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Raw</span><span class="p">(</span><span class="n">run_fname</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="mi">4096</span> <span class="o">+</span> <span class="mi">256</span>  <span class="c1"># mask for excluding high order bits</span>
-        <span class="n">events</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.find_events.html#mne.find_events"><span class="n">mne</span><span class="o">.</span><span class="n">find_events</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">stim_channel</span><span class="o">=</span><span class="s1">&#39;STI101&#39;</span><span class="p">,</span>
+        <span class="n">events</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.find_events.html#mne.find_events" title="View documentation for mne.find_events"><span class="n">mne</span><span class="o">.</span><span class="n">find_events</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">stim_channel</span><span class="o">=</span><span class="s1">&#39;STI101&#39;</span><span class="p">,</span>
                                  <span class="n">consecutive</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span>
                                  <span class="n">mask_type</span><span class="o">=</span><span class="s1">&#39;not_and&#39;</span><span class="p">,</span> <span class="n">min_duration</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
                                  <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -144,18 +144,19 @@ to the subject&#8217;s MEG directory.</p>
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;S </span><span class="si">%s</span><span class="s2"> - R </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">run</span><span class="p">))</span>
 
         <span class="n">fname_events</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">_filt_sss-eve.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
-        <a href="http://martinos.org/mne/stable/generated/mne.write_events.html#mne.write_events"><span class="n">mne</span><span class="o">.</span><span class="n">write_events</span></a><span class="p">(</span><span class="n">fname_events</span><span class="p">,</span> <span class="n">events</span><span class="p">)</span>
+        <a href="http://martinos.org/mne/stable/generated/mne.write_events.html#mne.write_events" title="View documentation for mne.write_events"><span class="n">mne</span><span class="o">.</span><span class="n">write_events</span></a><span class="p">(</span><span class="n">fname_events</span><span class="p">,</span> <span class="n">events</span><span class="p">)</span>
 
 <span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">run_events</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">)</span>
 <span class="n">parallel</span><span class="p">(</span><span class="n">run_func</span><span class="p">(</span><span class="n">subject_id</span><span class="p">)</span> <span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong>
-(0 minutes 0.000 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/03-run_extract_events.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">03-run_extract_events.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/03-run_extract_events.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">03-run_extract_events.ipynb</span></code></a></div>
+<a class="reference download internal" href="../_downloads/03-run_extract_events.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">03-run_extract_events.ipynb</span></code></a></div>
+</div>
 <p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
@@ -171,7 +172,7 @@ to the subject&#8217;s MEG directory.</p>
       
     </p>
     <p>
-        &copy; Copyright 2016, MNE Developers. Last updated on 2016-10-01.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
     </p>
   </div>

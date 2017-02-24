@@ -66,16 +66,10 @@ Configuration
         Range : 258500 ... 808499 =    235.000 ...   734.999 secs
     Ready.
     Current compensation grade : 0
-    add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
-    Adding average EEG reference projection.
-    1 projection items deactivated
     Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub009/run_01_filt_sss_raw.fif...
         Range : 258500 ... 808499 =    235.000 ...   734.999 secs
     Ready.
     Current compensation grade : 0
-    add_eeg_ref defaults to True in 0.13, will default to False in 0.14, and will be removed in 0.15. We recommend to use add_eeg_ref=False and set_eeg_reference() instead.
-    Adding average EEG reference projection.
-    1 projection items deactivated
 
 
 Filtering :ref:`sphx_glr_auto_scripts_02-python_filtering.py`.
@@ -108,9 +102,11 @@ Filtering :ref:`sphx_glr_auto_scripts_02-python_filtering.py`.
 
  Out::
 
+    tmax defaults to 60. in 0.14 but will change to np.inf in 0.15. Set it explicitly to avoid this warning
     Effective window size : 1.862 (s)
     Effective window size : 1.862 (s)
     Effective window size : 1.862 (s)
+    tmax defaults to 60. in 0.14 but will change to np.inf in 0.15. Set it explicitly to avoid this warning
     Effective window size : 1.862 (s)
     Effective window size : 1.862 (s)
     Effective window size : 1.862 (s)
@@ -192,7 +188,6 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
             nave = 266 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
-    No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
@@ -200,7 +195,6 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
             0 CTF compensation matrices available
             nave = 263 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
-    No baseline correction applied
     No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
@@ -210,7 +204,6 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
             nave = 268 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
-    No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
@@ -219,7 +212,6 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
             nave = 176 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
     No baseline correction applied
-    No baseline correction applied
         Read a total of 1 projection items:
             Average EEG reference (1 x 70) active
         Found the data of interest:
@@ -227,7 +219,6 @@ Evoked responses :ref:`sphx_glr_auto_scripts_06-make_evoked.py`
             0 CTF compensation matrices available
             nave = 534 - aspect type = 100
     Projections have already been applied. Setting proj attribute to True.
-    No baseline correction applied
     No baseline correction applied
 
 
@@ -472,11 +463,11 @@ Covariance :ref:`sphx_glr_auto_scripts_06-make_evoked.py`.
     SSS has been applied to data. Showing mag and grad whitening jointly.
     estimated rank (eeg): 70
     estimated rank (mag + grad): 306
+        Created an SSP operator (subspace dimension = 1)
     Setting small MEG eigenvalues to zero.
     Not doing PCA for MEG.
     Setting small EEG eigenvalues to zero.
     Not doing PCA for EEG.
-    No average EEG reference present in info["projs"], covariance may be adversely affected. Consider recomputing covariance using a raw file with an average eeg reference projector added.
 
 
 Trans
@@ -605,13 +596,17 @@ Faces - scrambled
     colormap: fmin=3.73e+00 fmid=4.30e+00 fmax=1.02e+01 transparent=1
 
 
-BEM
+LCMV Faces - scrambled
 
 
 
 .. code-block:: python
 
-    mne.viz.plot_bem(subject, subjects_dir)
+    fname = op.join(meg_dir, subject, 'mne_LCMV_inverse-contrast')
+    stc = mne.read_source_estimate(fname, subject)
+    stc.plot(subject=subject, subjects_dir=subjects_dir, views=['ven'],
+             hemi='both', initial_time=0.17, time_unit='s')
+
 
 
 
@@ -623,16 +618,57 @@ BEM
 
  Out::
 
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=2.93e-01 fmid=3.32e-01 fmax=7.32e-01 transparent=1
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=2.93e-01 fmid=3.32e-01 fmax=7.32e-01 transparent=1
+
+
+BEM
+
+
+
+.. code-block:: python
+
+    mne.viz.plot_bem(subject, subjects_dir)
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_analysis_9_025.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
     Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub009/bem/inner_skull.surf
     Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub009/bem/outer_skull.surf
     Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub009/bem/outer_skin.surf
-    Triangle file: created by jleppakangas on Tue Sep 27 09:33:34 2016 nvert = 10242 ntri = 20480
-    Triangle file: created by jleppakangas on Tue Sep 27 09:40:02 2016 nvert = 10242 ntri = 20480
-    Triangle file: created by jleppakangas on Tue Sep 27 09:40:02 2016 nvert = 10242 ntri = 20480
 
 
 **Total running time of the script:**
-(0 minutes 58.349 seconds)
+(1 minutes 9.111 seconds)
 
 
 
