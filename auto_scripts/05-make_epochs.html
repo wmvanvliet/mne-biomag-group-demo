@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Construct epochs &mdash; MNE Biomag Demo</title>
+    <title>Construct epochs &#8212; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -19,25 +18,27 @@
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body role="document">
+  <body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -127,9 +128,9 @@ a factor of 2.</p>
 
 <span class="kn">import</span> <span class="nn">mne</span>
 <span class="kn">from</span> <span class="nn">mne.parallel</span> <span class="kn">import</span> <span class="n">parallel_func</span>
-<span class="kn">from</span> <span class="nn">mne.preprocessing</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">,</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">read_ica</span></a>
+<span class="kn">from</span> <span class="nn">mne.preprocessing</span> <span class="kn">import</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">,</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">read_ica</span></a>
 
-<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span><span class="p">,</span> <span class="n">map_subjects</span>
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span><span class="p">,</span> <span class="n">map_subjects</span><span class="p">,</span> <span class="n">l_freq</span>
 </pre></div>
 </div>
 <p>We define the events and the onset and offset of the epochs</p>
@@ -146,7 +147,7 @@ a factor of 2.</p>
 <span class="p">}</span>
 
 <span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span>
-<span class="n">reject</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">grad</span><span class="o">=</span><span class="mf">4000e-13</span><span class="p">,</span> <span class="n">mag</span><span class="o">=</span><span class="mf">4e-12</span><span class="p">,</span> <span class="n">eog</span><span class="o">=</span><span class="mf">180e-6</span><span class="p">)</span>
+<span class="n">reject</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">grad</span><span class="o">=</span><span class="mf">4000e-13</span><span class="p">,</span> <span class="n">mag</span><span class="o">=</span><span class="mf">4e-12</span><span class="p">)</span>
 <span class="n">baseline</span> <span class="o">=</span> <span class="bp">None</span>
 </pre></div>
 </div>
@@ -172,33 +173,26 @@ a factor of 2.</p>
         <span class="n">all_bads</span> <span class="o">+=</span> <span class="p">[</span><span class="n">bad</span> <span class="k">for</span> <span class="n">bad</span> <span class="ow">in</span> <span class="n">bads</span> <span class="k">if</span> <span class="n">bad</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_bads</span><span class="p">]</span>
 
     <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&quot; - Run </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">run</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot; - Run </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">tsss</span><span class="p">:</span>
             <span class="n">run_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">_filt_tsss_raw.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">run_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">_filt_sss_raw.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
+            <span class="n">run_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">_filt_sss_&#39;</span>
+                                <span class="s1">&#39;highpass-</span><span class="si">%s</span><span class="s1">Hz_raw.fif&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">l_freq</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">run_fname</span><span class="p">):</span>
             <span class="k">continue</span>
 
-        <span class="n">raw</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.Raw.html#mne.io.Raw" title="View documentation for mne.io.Raw"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Raw</span></a><span class="p">(</span><span class="n">run_fname</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">raw</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.io.Raw.html#mne.io.Raw" title="View documentation for mne.io.Raw"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">Raw</span></a><span class="p">(</span><span class="n">run_fname</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-        <span class="n">raw</span><span class="o">.</span><span class="n">set_channel_types</span><span class="p">({</span><span class="s1">&#39;EEG061&#39;</span><span class="p">:</span> <span class="s1">&#39;eog&#39;</span><span class="p">,</span>
-                               <span class="s1">&#39;EEG062&#39;</span><span class="p">:</span> <span class="s1">&#39;eog&#39;</span><span class="p">,</span>
-                               <span class="s1">&#39;EEG063&#39;</span><span class="p">:</span> <span class="s1">&#39;ecg&#39;</span><span class="p">,</span>
-                               <span class="s1">&#39;EEG064&#39;</span><span class="p">:</span> <span class="s1">&#39;misc&#39;</span><span class="p">})</span>  <span class="c1"># EEG064 free floating el.</span>
-        <span class="n">raw</span><span class="o">.</span><span class="n">rename_channels</span><span class="p">({</span><span class="s1">&#39;EEG061&#39;</span><span class="p">:</span> <span class="s1">&#39;EOG061&#39;</span><span class="p">,</span>
-                             <span class="s1">&#39;EEG062&#39;</span><span class="p">:</span> <span class="s1">&#39;EOG062&#39;</span><span class="p">,</span>
-                             <span class="s1">&#39;EEG063&#39;</span><span class="p">:</span> <span class="s1">&#39;ECG063&#39;</span><span class="p">})</span>
-
-        <span class="n">eog_events</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">find_eog_events</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+        <span class="n">eog_events</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.find_eog_events.html#mne.preprocessing.find_eog_events" title="View documentation for mne.preprocessing.find_eog_events"><span class="n">mne</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">find_eog_events</span></a><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
         <span class="n">eog_events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.25</span> <span class="o">*</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">])</span>
-        <span class="n">annotations</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.Annotations.html#mne.Annotations" title="View documentation for mne.Annotations"><span class="n">mne</span><span class="o">.</span><span class="n">Annotations</span></a><span class="p">(</span><span class="n">eog_events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">],</span>
+        <span class="n">annotations</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.Annotations.html#mne.Annotations" title="View documentation for mne.Annotations"><span class="n">mne</span><span class="o">.</span><span class="n">Annotations</span></a><span class="p">(</span><span class="n">eog_events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">],</span>
                                       <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.repeat.html#numpy.repeat" title="View documentation for numpy.repeat"><span class="n">np</span><span class="o">.</span><span class="n">repeat</span></a><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">eog_events</span><span class="p">)),</span>
                                       <span class="s1">&#39;BAD_blink&#39;</span><span class="p">,</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;meas_date&#39;</span><span class="p">])</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">annotations</span> <span class="o">=</span> <span class="n">annotations</span>  <span class="c1"># Remove epochs with blinks</span>
 
         <span class="n">delay</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.0345</span> <span class="o">*</span> <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">])</span>
-        <span class="n">events</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_events.html#mne.read_events" title="View documentation for mne.read_events"><span class="n">mne</span><span class="o">.</span><span class="n">read_events</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span>
+        <span class="n">events</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_events.html#mne.read_events" title="View documentation for mne.read_events"><span class="n">mne</span><span class="o">.</span><span class="n">read_events</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span>
                                          <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">_filt_sss-eve.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">))</span>
 
         <span class="n">events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">events</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">delay</span>
@@ -207,38 +201,42 @@ a factor of 2.</p>
         <span class="n">raw</span><span class="o">.</span><span class="n">interpolate_bads</span><span class="p">()</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">set_eeg_reference</span><span class="p">()</span>
 
-        <span class="n">picks</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.pick_types.html#mne.pick_types" title="View documentation for mne.pick_types"><span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span></a><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stim</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">picks</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.pick_types.html#mne.pick_types" title="View documentation for mne.pick_types"><span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span></a><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stim</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                                <span class="n">eog</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
         <span class="c1"># Read epochs</span>
-        <span class="n">epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">mne</span><span class="o">.</span><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">events_id</span><span class="p">,</span> <span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                            <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                            <span class="n">decim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">reject</span><span class="o">=</span><span class="n">reject</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">epochs</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">mne</span><span class="o">.</span><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">events_id</span><span class="p">,</span> <span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">proj</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                            <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">decim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">reject</span><span class="o">=</span><span class="n">reject</span><span class="p">)</span>
 
         <span class="c1"># ICA</span>
         <span class="k">if</span> <span class="n">tsss</span><span class="p">:</span>
             <span class="n">ica_name</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">-tsss-ica.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ica_name</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">-ica.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
-        <span class="n">ica</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">read_ica</span></a><span class="p">(</span><span class="n">ica_name</span><span class="p">)</span>
-        <span class="n">n_max_ecg</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># use max 3 components</span>
-        <span class="n">ecg_epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">tmin</span><span class="o">=-.</span><span class="mi">5</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
-        <span class="n">ecg_inds</span><span class="p">,</span> <span class="n">scores_ecg</span> <span class="o">=</span> <span class="n">ica</span><span class="o">.</span><span class="n">find_bads_ecg</span><span class="p">(</span><span class="n">ecg_epochs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ctps&#39;</span><span class="p">,</span>
-                                                 <span class="n">threshold</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-        <span class="n">ica</span><span class="o">.</span><span class="n">exclude</span> <span class="o">+=</span> <span class="n">ecg_inds</span><span class="p">[:</span><span class="n">n_max_ecg</span><span class="p">]</span>
-
-        <span class="n">ica</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">l_freq</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">epochs</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+            <span class="n">ica</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">read_ica</span></a><span class="p">(</span><span class="n">ica_name</span><span class="p">)</span>
+            <span class="n">n_max_ecg</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># use max 3 components</span>
+            <span class="n">ecg_epochs</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">tmin</span><span class="o">=-.</span><span class="mi">5</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+            <span class="n">ecg_inds</span><span class="p">,</span> <span class="n">scores_ecg</span> <span class="o">=</span> <span class="n">ica</span><span class="o">.</span><span class="n">find_bads_ecg</span><span class="p">(</span><span class="n">ecg_epochs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ctps&#39;</span><span class="p">,</span>
+                                                     <span class="n">threshold</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+            <span class="n">ica</span><span class="o">.</span><span class="n">exclude</span> <span class="o">+=</span> <span class="n">ecg_inds</span><span class="p">[:</span><span class="n">n_max_ecg</span><span class="p">]</span>
+            <span class="n">ica</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">ica_name</span><span class="p">)</span>
+            <span class="n">ica</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">raw</span>
         <span class="n">all_epochs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
 
-    <span class="n">epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.concatenate_epochs.html#mne.concatenate_epochs" title="View documentation for mne.epochs.concatenate_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">epochs</span><span class="o">.</span><span class="n">concatenate_epochs</span></a><span class="p">(</span><span class="n">all_epochs</span><span class="p">)</span>
+    <span class="n">epochs</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.concatenate_epochs.html#mne.concatenate_epochs" title="View documentation for mne.epochs.concatenate_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">epochs</span><span class="o">.</span><span class="n">concatenate_epochs</span></a><span class="p">(</span><span class="n">all_epochs</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">tsss</span><span class="p">:</span>
         <span class="n">epochs</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-tsss-epo.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">epochs</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-epo.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
+        <span class="n">epochs</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_highpass-</span><span class="si">%s</span><span class="s1">Hz-epo.fif&#39;</span>
+                    <span class="o">%</span> <span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">l_freq</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p>Let us make the script parallel across subjects</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">run_epochs</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">run_epochs</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">parallel</span><span class="p">(</span><span class="n">run_func</span><span class="p">(</span><span class="n">subject_id</span><span class="p">)</span> <span class="k">for</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 <span class="n">run_epochs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>  <span class="c1"># run on maxwell filtered data</span>
 </pre></div>
@@ -246,11 +244,11 @@ a factor of 2.</p>
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/05-make_epochs.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">05-make_epochs.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/05-make_epochs.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">05-make_epochs.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/05-make_epochs.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">05-make_epochs.ipynb</span></code></a></div>
+<a class="reference download internal" href="../_downloads/05-make_epochs.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">05-make_epochs.ipynb</span></code></a></div>
 </div>
-<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
 
@@ -265,8 +263,8 @@ a factor of 2.</p>
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-07-11.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>
 </footer>

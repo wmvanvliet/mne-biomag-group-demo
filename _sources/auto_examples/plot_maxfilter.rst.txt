@@ -1,0 +1,268 @@
+
+
+.. _sphx_glr_auto_examples_plot_maxfilter.py:
+
+
+Maxwell filtering
+=================
+
+Demonstrates maxwell filtering for one run (sub003, run01) using MNE-python.
+
+
+
+.. code-block:: python
+
+
+    import os.path as op
+
+    import mne
+    from mne import Epochs
+    from mne.preprocessing import maxwell_filter
+
+    from library.config import study_path, cal, ctc, set_matplotlib_defaults
+
+    event_ids = [5, 6, 7]  # Famous faces
+
+    subject = "sub001"
+    bads = ['MEG1031', 'MEG1111', 'MEG2113']
+    filter_params = dict(fir_window='hann', l_trans_bandwidth=0.5, phase='zero',
+                         h_trans_bandwidth='auto', filter_length='auto',
+                         fir_design='firwin')
+
+    raw_fname_in = op.join(study_path, 'ds117', subject, 'MEG', 'run_01_raw.fif')
+    sss_fname_in = op.join(study_path, 'ds117', subject, 'MEG', 'run_01_sss.fif')
+
+
+
+
+
+
+
+First the filtered raw data.
+
+
+
+.. code-block:: python
+
+    raw = mne.io.read_raw_fif(raw_fname_in, preload=True)
+
+    raw.info['bads'] = bads
+    picks = mne.pick_types(raw.info, meg=True, exclude='bads')
+    raw.filter(None, 40, **filter_params)
+
+    events = mne.find_events(raw, stim_channel='STI101', consecutive='increasing',
+                             mask=4352, mask_type='not_and', min_duration=0.003,
+                             verbose=True)
+    evoked_before = Epochs(raw, events, event_id=event_ids, picks=picks).average()
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub001/MEG/run_01_raw.fif...
+        Read a total of 8 projection items:
+            mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
+            grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
+            grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
+            grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
+        Range : 268400 ... 815099 =    244.000 ...   740.999 secs
+    Ready.
+    Current compensation grade : 0
+    Reading 0 ... 546699  =      0.000 ...   496.999 secs...
+    Setting up low-pass filter at 40 Hz
+    h_trans_bandwidth chosen to be 10.0 Hz
+    Filter length of 341 samples (0.310 sec) selected
+    148 events found
+    Events id: [ 5  6  7 13 14 15 17 18 19]
+    50 matching events found
+    Created an SSP operator (subspace dimension = 8)
+    8 projection items activated
+
+
+Then Maxfiltered and SSS'd data.
+
+
+
+.. code-block:: python
+
+    raw = mne.io.read_raw_fif(raw_fname_in, preload=True)
+    raw_sss = mne.io.read_raw_fif(sss_fname_in, preload=True)
+    raw.info['bads'] = bads
+    raw_sss.info['bads'] = bads
+
+    raw = maxwell_filter(raw, calibration=cal, cross_talk=ctc, st_duration=10.)
+
+    raw.filter(None, 40, **filter_params)
+    raw_sss.filter(None, 40, **filter_params)
+
+    evoked_after = Epochs(raw, events, event_id=event_ids, picks=picks).average()
+    evoked_sss = Epochs(raw_sss, events, event_id=event_ids, picks=picks).average()
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub001/MEG/run_01_raw.fif...
+        Read a total of 8 projection items:
+            mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
+            mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
+            grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
+            grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
+            grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
+        Range : 268400 ... 815099 =    244.000 ...   740.999 secs
+    Ready.
+    Current compensation grade : 0
+    Reading 0 ... 546699  =      0.000 ...   496.999 secs...
+    Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub001/MEG/run_01_sss.fif...
+    This filename (/tsi/doctorants/data_gramfort/dgw_faces/ds117/sub001/MEG/run_01_sss.fif) does not conform to MNE naming conventions. All raw files should end with raw.fif, raw_sss.fif, raw_tsss.fif, raw.fif.gz, raw_sss.fif.gz or raw_tsss.fif.gz
+        Range : 268400 ... 815099 =    244.000 ...   740.999 secs
+    Ready.
+    Current compensation grade : 0
+    Reading 0 ... 546699  =      0.000 ...   496.999 secs...
+    Maxwell filtering raw data
+        Using loaded raw data
+    100 T1/T2 magnetometer channel types found. If using SSS, it is advised to replace coil types using "fix_mag_coil_types".
+        Bad MEG channels being reconstructed: ['MEG1031', 'MEG1111', 'MEG2113']
+        Processing 204 gradiometers and 102 magnetometers
+        Using fine calibration sss_cal.dat
+            Adjusting non-orthogonal EX and EY
+            Adjusted coil positions by (μ ± σ): 0.3° ± 0.3° (max: 1.3°)
+    (X, Y) fit (1.5, 27.5) more than 20 mm from head frame origin
+        Automatic origin fit: head of radius 83.1 mm
+        Using origin 1.5, 27.5, 26.0 mm in the head frame
+        Processing data using tSSS with st_duration=10.0
+        Spatiotemporal window did not fit evenly into raw object. The final 17.00 seconds were lumped onto the previous window.
+        Computing regularization
+            Using 80/95 harmonic components for    0.000  (65/80 in, 15/15 out)
+        Processing 49 data chunks of (at least) 10.0 sec
+            Projecting  1 intersecting tSSS components for    0.000 -    9.999 sec  (#1/49)
+            Projecting  1 intersecting tSSS components for   10.000 -   19.999 sec  (#2/49)
+            Projecting 11 intersecting tSSS components for   20.000 -   29.999 sec  (#3/49)
+            Projecting 11 intersecting tSSS components for   30.000 -   39.999 sec  (#4/49)
+            Projecting 11 intersecting tSSS components for   40.000 -   49.999 sec  (#5/49)
+            Projecting 11 intersecting tSSS components for   50.000 -   59.999 sec  (#6/49)
+            Projecting 11 intersecting tSSS components for   60.000 -   69.999 sec  (#7/49)
+            Projecting 11 intersecting tSSS components for   70.000 -   79.999 sec  (#8/49)
+            Projecting 11 intersecting tSSS components for   80.000 -   89.999 sec  (#9/49)
+            Projecting 11 intersecting tSSS components for   90.000 -   99.999 sec (#10/49)
+            Projecting 11 intersecting tSSS components for  100.000 -  109.999 sec (#11/49)
+            Projecting 11 intersecting tSSS components for  110.000 -  119.999 sec (#12/49)
+            Projecting 11 intersecting tSSS components for  120.000 -  129.999 sec (#13/49)
+            Projecting 11 intersecting tSSS components for  130.000 -  139.999 sec (#14/49)
+            Projecting 11 intersecting tSSS components for  140.000 -  149.999 sec (#15/49)
+            Projecting 11 intersecting tSSS components for  150.000 -  159.999 sec (#16/49)
+            Projecting 11 intersecting tSSS components for  160.000 -  169.999 sec (#17/49)
+            Projecting 11 intersecting tSSS components for  170.000 -  179.999 sec (#18/49)
+            Projecting 12 intersecting tSSS components for  180.000 -  189.999 sec (#19/49)
+            Projecting 12 intersecting tSSS components for  190.000 -  199.999 sec (#20/49)
+            Projecting 12 intersecting tSSS components for  200.000 -  209.999 sec (#21/49)
+            Projecting 11 intersecting tSSS components for  210.000 -  219.999 sec (#22/49)
+            Projecting 11 intersecting tSSS components for  220.000 -  229.999 sec (#23/49)
+            Projecting 11 intersecting tSSS components for  230.000 -  239.999 sec (#24/49)
+            Projecting 11 intersecting tSSS components for  240.000 -  249.999 sec (#25/49)
+            Projecting 11 intersecting tSSS components for  250.000 -  259.999 sec (#26/49)
+            Projecting 11 intersecting tSSS components for  260.000 -  269.999 sec (#27/49)
+            Projecting 11 intersecting tSSS components for  270.000 -  279.999 sec (#28/49)
+            Projecting 11 intersecting tSSS components for  280.000 -  289.999 sec (#29/49)
+            Projecting 11 intersecting tSSS components for  290.000 -  299.999 sec (#30/49)
+            Projecting 11 intersecting tSSS components for  300.000 -  309.999 sec (#31/49)
+            Projecting 11 intersecting tSSS components for  310.000 -  319.999 sec (#32/49)
+            Projecting 11 intersecting tSSS components for  320.000 -  329.999 sec (#33/49)
+            Projecting 11 intersecting tSSS components for  330.000 -  339.999 sec (#34/49)
+            Projecting 11 intersecting tSSS components for  340.000 -  349.999 sec (#35/49)
+            Projecting 11 intersecting tSSS components for  350.000 -  359.999 sec (#36/49)
+            Projecting 11 intersecting tSSS components for  360.000 -  369.999 sec (#37/49)
+            Projecting 11 intersecting tSSS components for  370.000 -  379.999 sec (#38/49)
+            Projecting 11 intersecting tSSS components for  380.000 -  389.999 sec (#39/49)
+            Projecting 11 intersecting tSSS components for  390.000 -  399.999 sec (#40/49)
+            Projecting 11 intersecting tSSS components for  400.000 -  409.999 sec (#41/49)
+            Projecting 11 intersecting tSSS components for  410.000 -  419.999 sec (#42/49)
+            Projecting 11 intersecting tSSS components for  420.000 -  429.999 sec (#43/49)
+            Projecting 11 intersecting tSSS components for  430.000 -  439.999 sec (#44/49)
+            Projecting 11 intersecting tSSS components for  440.000 -  449.999 sec (#45/49)
+            Projecting 11 intersecting tSSS components for  450.000 -  459.999 sec (#46/49)
+            Projecting 11 intersecting tSSS components for  460.000 -  469.999 sec (#47/49)
+            Projecting 11 intersecting tSSS components for  470.000 -  479.999 sec (#48/49)
+            Projecting 11 intersecting tSSS components for  480.000 -  496.999 sec (#49/49)
+    [done]
+    Setting up low-pass filter at 40 Hz
+    h_trans_bandwidth chosen to be 10.0 Hz
+    Filter length of 341 samples (0.310 sec) selected
+    Setting up low-pass filter at 40 Hz
+    h_trans_bandwidth chosen to be 10.0 Hz
+    Filter length of 341 samples (0.310 sec) selected
+    50 matching events found
+    0 projection items activated
+    50 matching events found
+    0 projection items activated
+
+
+Plotting
+
+
+
+.. code-block:: python
+
+    import matplotlib.pyplot as plt  # noqa
+    set_matplotlib_defaults(plt)
+
+    ylim = dict(mag=(-400, 400))
+
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+    plt.tight_layout()
+    evoked_before.pick_types(meg='mag').plot(axes=axes[0], spatial_colors=True,
+                                             ylim=ylim,
+                                             titles={'mag': 'Before SSS'})
+    axes[0].set_title('A')
+    evoked_after.pick_types(meg='mag').plot(axes=axes[1], spatial_colors=True,
+                                            ylim=ylim, titles={'mag': 'After SSS'})
+    axes[1].set_title('B')
+    evoked_sss.pick_types(meg='mag').plot(axes=axes[2], spatial_colors=True,
+                                          ylim=ylim,
+                                          titles={'mag': 'After Maxfilter (TM)'})
+    axes[2].set_title('C')
+    fig.savefig('Maxfilter.pdf', bbox_to_inches='tight')
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_maxfilter_001.png
+    :align: center
+
+
+
+
+**Total running time of the script:** ( 3 minutes  36.288 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: plot_maxfilter.py <plot_maxfilter.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: plot_maxfilter.ipynb <plot_maxfilter.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <https://sphinx-gallery.readthedocs.io>`_

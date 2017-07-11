@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Analysis for subject 7 &mdash; MNE Biomag Demo</title>
+    <title>Analysis for subject 7 &#8212; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -19,25 +18,27 @@
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body role="document">
+  <body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -121,7 +122,7 @@
 
 <span class="kn">import</span> <span class="nn">mne</span>
 
-<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span><span class="p">,</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">ylim</span>
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span><span class="p">,</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">ylim</span><span class="p">,</span> <span class="n">l_freq</span>
 </pre></div>
 </div>
 <p>Configuration</p>
@@ -130,34 +131,36 @@
 <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;run_01_raw.fif&#39;</span><span class="p">)</span>
-<span class="n">raw</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="n">raw</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
-<span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss_raw.fif&#39;</span><span class="p">)</span>
-<span class="n">raw_filt</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span>
+                <span class="s1">&#39;run_01_filt_sss_highpass-</span><span class="si">%s</span><span class="s1">Hz_raw.fif&#39;</span> <span class="o">%</span> <span class="n">l_freq</span><span class="p">)</span>
+<span class="n">ica_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_highpass-</span><span class="si">%s</span><span class="s1">Hz-ica.fif&#39;</span> <span class="o">%</span> <span class="n">l_freq</span><span class="p">)</span>
+<span class="n">raw_filt</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub007/MEG/run_01_raw.fif...
-    Read a total of 8 projection items:
-        mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
-        grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
-        grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
-        grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
-    Range : 132000 ... 669899 =    120.000 ...   608.999 secs
-Ready.
-Current compensation grade : 0
-Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub007/run_01_filt_sss_raw.fif...
-    Range : 132000 ... 669899 =    120.000 ...   608.999 secs
-Ready.
-Current compensation grade : 0
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Opening</span> <span class="n">raw</span> <span class="n">data</span> <span class="n">file</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">ds117</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">run_01_raw</span><span class="o">.</span><span class="n">fif</span><span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">8</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v1</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v2</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v3</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v4</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v5</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">grad_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">grad</span><span class="o">-</span><span class="n">v1</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">grad_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">grad</span><span class="o">-</span><span class="n">v2</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">grad_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">grad</span><span class="o">-</span><span class="n">v3</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+    <span class="n">Range</span> <span class="p">:</span> <span class="mi">132000</span> <span class="o">...</span> <span class="mi">669899</span> <span class="o">=</span>    <span class="mf">120.000</span> <span class="o">...</span>   <span class="mf">608.999</span> <span class="n">secs</span>
+<span class="n">Ready</span><span class="o">.</span>
+<span class="n">Current</span> <span class="n">compensation</span> <span class="n">grade</span> <span class="p">:</span> <span class="mi">0</span>
+<span class="n">Opening</span> <span class="n">raw</span> <span class="n">data</span> <span class="n">file</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">run_01_filt_sss_highpass</span><span class="o">-</span><span class="mi">1</span><span class="n">Hz_raw</span><span class="o">.</span><span class="n">fif</span><span class="o">...</span>
+    <span class="n">Range</span> <span class="p">:</span> <span class="mi">132000</span> <span class="o">...</span> <span class="mi">669899</span> <span class="o">=</span>    <span class="mf">120.000</span> <span class="o">...</span>   <span class="mf">608.999</span> <span class="n">secs</span>
+<span class="n">Ready</span><span class="o">.</span>
+<span class="n">Current</span> <span class="n">compensation</span> <span class="n">grade</span> <span class="p">:</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p>Filtering <a class="reference internal" href="../auto_scripts/02-python_filtering.html#sphx-glr-auto-scripts-02-python-filtering-py"><span>Filter using MNE-python</span></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">()</span>
+<p>Filtering <a class="reference internal" href="../auto_scripts/02-python_filtering.html#sphx-glr-auto-scripts-02-python-filtering-py"><span class="std std-ref">Filter using MNE-python</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">(</span><span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">n_overlap</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
 <span class="n">raw_filt</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -168,23 +171,21 @@ Current compensation grade : 0
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>tmax defaults to 60. in 0.14 but will change to np.inf in 0.15. Set it explicitly to avoid this warning
-Effective window size : 1.862 (s)
-Effective window size : 1.862 (s)
-Effective window size : 1.862 (s)
-tmax defaults to 60. in 0.14 but will change to np.inf in 0.15. Set it explicitly to avoid this warning
-Effective window size : 1.862 (s)
-Effective window size : 1.862 (s)
-Effective window size : 1.862 (s)
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Events <a class="reference internal" href="../auto_scripts/03-run_extract_events.html#sphx-glr-auto-scripts-03-run-extract-events-py"><span>Extract events from the stimulus channel</span></a>.
-Epochs <a class="reference internal" href="../auto_scripts/05-make_epochs.html#sphx-glr-auto-scripts-05-make-epochs-py"><span>Construct epochs</span></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_events.html#mne.read_events" title="View documentation for mne.read_events"><span class="n">mne</span><span class="o">.</span><span class="n">read_events</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss-eve.fif&#39;</span><span class="p">))</span>
-<span class="n">fig</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.viz.plot_events.html#mne.viz.plot_events" title="View documentation for mne.viz.plot_events"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_events</span></a><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<p>Events <a class="reference internal" href="../auto_scripts/03-run_extract_events.html#sphx-glr-auto-scripts-03-run-extract-events-py"><span class="std std-ref">Extract events from the stimulus channel</span></a>.
+Epochs <a class="reference internal" href="../auto_scripts/05-make_epochs.html#sphx-glr-auto-scripts-05-make-epochs-py"><span class="std std-ref">Construct epochs</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_events.html#mne.read_events" title="View documentation for mne.read_events"><span class="n">mne</span><span class="o">.</span><span class="n">read_events</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss-eve.fif&#39;</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.viz.plot_events.html#mne.viz.plot_events" title="View documentation for mne.viz.plot_events"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_events</span></a><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Events from run 01&#39;</span><span class="p">)</span>
 
-<span class="n">epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_epochs.html#mne.read_epochs" title="View documentation for mne.read_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">subject</span> <span class="o">+</span> <span class="s1">&#39;-epo.fif&#39;</span><span class="p">))</span>
+<span class="n">epochs</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_epochs.html#mne.read_epochs" title="View documentation for mne.read_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">subject</span> <span class="o">+</span> <span class="s1">&#39;-epo.fif&#39;</span><span class="p">))</span>
 <span class="n">epochs</span><span class="o">.</span><span class="n">plot_drop_log</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -195,68 +196,66 @@ Epochs <a class="reference internal" href="../auto_scripts/05-make_epochs.html#s
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub007/sub007-epo.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (None)
-        0 CTF compensation matrices available
-879 matching events found
-No baseline correction applied
-Created an SSP operator (subspace dimension = 1)
-879 matching events found
-No baseline correction applied
-Created an SSP operator (subspace dimension = 1)
-1 projection items activated
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">sub007</span><span class="o">-</span><span class="n">epo</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+<span class="mi">878</span> <span class="n">matching</span> <span class="n">events</span> <span class="n">found</span>
+<span class="n">Created</span> <span class="n">an</span> <span class="n">SSP</span> <span class="n">operator</span> <span class="p">(</span><span class="n">subspace</span> <span class="n">dimension</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">878</span> <span class="n">matching</span> <span class="n">events</span> <span class="n">found</span>
+<span class="n">Created</span> <span class="n">an</span> <span class="n">SSP</span> <span class="n">operator</span> <span class="p">(</span><span class="n">subspace</span> <span class="n">dimension</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span> <span class="n">activated</span>
 </pre></div>
 </div>
-<p>Evoked responses <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span>Evoked data and covariance</span></a></p>
+<p>Evoked responses <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span class="std std-ref">Evoked data and covariance</span></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">evo_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
-<span class="n">evoked</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_evokeds.html#mne.read_evokeds" title="View documentation for mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">evo_fname</span><span class="p">)</span>
+<span class="n">evoked</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_evokeds.html#mne.read_evokeds" title="View documentation for mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">evo_fname</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub007/sub007-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (famous)
-        0 CTF compensation matrices available
-        nave = 295 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (scrambled)
-        0 CTF compensation matrices available
-        nave = 291 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (unfamiliar)
-        0 CTF compensation matrices available
-        nave = 293 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 195 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (faces)
-        0 CTF compensation matrices available
-        nave = 588 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">sub007</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">famous</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">295</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">scrambled</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">290</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">unfamiliar</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">293</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">194</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">faces</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">588</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
 </pre></div>
 </div>
 <p>Faces</p>
@@ -308,16 +307,28 @@ No baseline correction applied
 <li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_013.png"><img alt="../_images/sphx_glr_plot_analysis_7_013.png" src="../_images/sphx_glr_plot_analysis_7_013.png" style="width: 517.0px; height: 84.6px;" /></a>
 </li>
 </ul>
-<p>TFR <a class="reference internal" href="../auto_scripts/07-time_frequency.html#sphx-glr-auto-scripts-07-time-frequency-py"><span>Time-frequency representation</span></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fpower</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+<p>ICA</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ica</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">mne</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">read_ica</span></a><span class="p">(</span><span class="n">ica_fname</span><span class="p">)</span>
+<span class="n">ica</span><span class="o">.</span><span class="n">plot_sources</span><span class="p">(</span><span class="n">raw_filt</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_analysis_7_014.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_014.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">run_01_highpass</span><span class="o">-</span><span class="mi">1</span><span class="n">Hz</span><span class="o">-</span><span class="n">ica</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+<span class="n">Now</span> <span class="n">restoring</span> <span class="n">ICA</span> <span class="n">solution</span> <span class="o">...</span>
+<span class="n">Ready</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>TFR <a class="reference internal" href="../auto_scripts/07-time_frequency.html#sphx-glr-auto-scripts-07-time-frequency-py"><span class="std std-ref">Time-frequency representation</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fpower</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.time_frequency.read_tfrs.html#mne.time_frequency.read_tfrs" title="View documentation for mne.time_frequency.read_tfrs"><span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span></a><span class="p">(</span>
     <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-faces-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">fitc</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+<span class="n">fitc</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.time_frequency.read_tfrs.html#mne.time_frequency.read_tfrs" title="View documentation for mne.time_frequency.read_tfrs"><span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span></a><span class="p">(</span>
     <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-itc_faces-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">spower</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+<span class="n">spower</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.time_frequency.read_tfrs.html#mne.time_frequency.read_tfrs" title="View documentation for mne.time_frequency.read_tfrs"><span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span></a><span class="p">(</span>
     <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-scrambled-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">sitc</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span><span class="p">(</span>
+<span class="n">sitc</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.time_frequency.read_tfrs.html#mne.time_frequency.read_tfrs" title="View documentation for mne.time_frequency.read_tfrs"><span class="n">mne</span><span class="o">.</span><span class="n">time_frequency</span><span class="o">.</span><span class="n">read_tfrs</span></a><span class="p">(</span>
     <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-itc_scrambled-tfr.h5&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">channel</span> <span class="o">=</span> <span class="s1">&#39;EEG070&#39;</span>
+<span class="n">channel</span> <span class="o">=</span> <span class="s1">&#39;EEG065&#39;</span>
 <span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">fpower</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">channel</span><span class="p">)]</span>
 <span class="n">fpower</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Faces power </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;logratio&#39;</span><span class="p">)</span>
@@ -330,72 +341,72 @@ No baseline correction applied
 </pre></div>
 </div>
 <ul class="sphx-glr-horizontal">
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_014.png"><img alt="../_images/sphx_glr_plot_analysis_7_014.png" src="../_images/sphx_glr_plot_analysis_7_014.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
 <li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_015.png"><img alt="../_images/sphx_glr_plot_analysis_7_015.png" src="../_images/sphx_glr_plot_analysis_7_015.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
 <li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_016.png"><img alt="../_images/sphx_glr_plot_analysis_7_016.png" src="../_images/sphx_glr_plot_analysis_7_016.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
 <li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_017.png"><img alt="../_images/sphx_glr_plot_analysis_7_017.png" src="../_images/sphx_glr_plot_analysis_7_017.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_018.png"><img alt="../_images/sphx_glr_plot_analysis_7_018.png" src="../_images/sphx_glr_plot_analysis_7_018.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub007/sub007-faces-tfr.h5 ...
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub007/sub007-itc_faces-tfr.h5 ...
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub007/sub007-scrambled-tfr.h5 ...
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub007/sub007-itc_scrambled-tfr.h5 ...
-Applying baseline correction (mode: logratio)
-Applying baseline correction (mode: logratio)
-Applying baseline correction (mode: logratio)
-Applying baseline correction (mode: logratio)
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">sub007</span><span class="o">-</span><span class="n">faces</span><span class="o">-</span><span class="n">tfr</span><span class="o">.</span><span class="n">h5</span> <span class="o">...</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">sub007</span><span class="o">-</span><span class="n">itc_faces</span><span class="o">-</span><span class="n">tfr</span><span class="o">.</span><span class="n">h5</span> <span class="o">...</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">sub007</span><span class="o">-</span><span class="n">scrambled</span><span class="o">-</span><span class="n">tfr</span><span class="o">.</span><span class="n">h5</span> <span class="o">...</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">sub007</span><span class="o">-</span><span class="n">itc_scrambled</span><span class="o">-</span><span class="n">tfr</span><span class="o">.</span><span class="n">h5</span> <span class="o">...</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">logratio</span><span class="p">)</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">logratio</span><span class="p">)</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">logratio</span><span class="p">)</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">logratio</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Covariance <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span>Evoked data and covariance</span></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_cov.html#mne.read_cov" title="View documentation for mne.read_cov"><span class="n">mne</span><span class="o">.</span><span class="n">read_cov</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-cov.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
-<a href="http://martinos.org/mne/stable/generated/mne.viz.plot_cov.html#mne.viz.plot_cov" title="View documentation for mne.viz.plot_cov"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_cov</span></a><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">faces_evo</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
+<p>Covariance <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span class="std std-ref">Evoked data and covariance</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_cov.html#mne.read_cov" title="View documentation for mne.read_cov"><span class="n">mne</span><span class="o">.</span><span class="n">read_cov</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-cov.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
+<a href="http://mne-tools.github.io/stable/generated/mne.viz.plot_cov.html#mne.viz.plot_cov" title="View documentation for mne.viz.plot_cov"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_cov</span></a><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">faces_evo</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
 <span class="n">faces_evo</span><span class="o">.</span><span class="n">plot_white</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="sphx-glr-horizontal">
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_018.png"><img alt="../_images/sphx_glr_plot_analysis_7_018.png" src="../_images/sphx_glr_plot_analysis_7_018.png" style="width: 352.5px; height: 126.9px;" /></a>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_019.png"><img alt="../_images/sphx_glr_plot_analysis_7_019.png" src="../_images/sphx_glr_plot_analysis_7_019.png" style="width: 352.5px; height: 126.9px;" /></a>
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_019.png"><img alt="../_images/sphx_glr_plot_analysis_7_019.png" src="../_images/sphx_glr_plot_analysis_7_019.png" style="width: 376.0px; height: 282.0px;" /></a>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_020.png"><img alt="../_images/sphx_glr_plot_analysis_7_020.png" src="../_images/sphx_glr_plot_analysis_7_020.png" style="width: 376.0px; height: 282.0px;" /></a>
 </li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_020.png"><img alt="../_images/sphx_glr_plot_analysis_7_020.png" src="../_images/sphx_glr_plot_analysis_7_020.png" style="width: 413.6px; height: 310.2px;" /></a>
+<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_analysis_7_021.png"><img alt="../_images/sphx_glr_plot_analysis_7_021.png" src="../_images/sphx_glr_plot_analysis_7_021.png" style="width: 413.6px; height: 310.2px;" /></a>
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>376 x 376 full covariance (kind = 1) found.
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-SSS has been applied to data. Showing mag and grad whitening jointly.
-estimated rank (eeg): 70
-estimated rank (mag + grad): 306
-    Created an SSP operator (subspace dimension = 1)
-Setting small MEG eigenvalues to zero.
-Not doing PCA for MEG.
-Setting small EEG eigenvalues to zero.
-Not doing PCA for EEG.
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mi">376</span> <span class="n">x</span> <span class="mi">376</span> <span class="n">full</span> <span class="n">covariance</span> <span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="n">found</span><span class="o">.</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+<span class="n">SSS</span> <span class="n">has</span> <span class="n">been</span> <span class="n">applied</span> <span class="n">to</span> <span class="n">data</span><span class="o">.</span> <span class="n">Showing</span> <span class="n">mag</span> <span class="ow">and</span> <span class="n">grad</span> <span class="n">whitening</span> <span class="n">jointly</span><span class="o">.</span>
+<span class="n">estimated</span> <span class="n">rank</span> <span class="p">(</span><span class="n">eeg</span><span class="p">):</span> <span class="mi">70</span>
+<span class="n">estimated</span> <span class="n">rank</span> <span class="p">(</span><span class="n">mag</span> <span class="o">+</span> <span class="n">grad</span><span class="p">):</span> <span class="mi">306</span>
+    <span class="n">Created</span> <span class="n">an</span> <span class="n">SSP</span> <span class="n">operator</span> <span class="p">(</span><span class="n">subspace</span> <span class="n">dimension</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Setting</span> <span class="n">small</span> <span class="n">MEG</span> <span class="n">eigenvalues</span> <span class="n">to</span> <span class="n">zero</span><span class="o">.</span>
+<span class="n">Not</span> <span class="n">doing</span> <span class="n">PCA</span> <span class="k">for</span> <span class="n">MEG</span><span class="o">.</span>
+<span class="n">Setting</span> <span class="n">small</span> <span class="n">EEG</span> <span class="n">eigenvalues</span> <span class="n">to</span> <span class="n">zero</span><span class="o">.</span>
+<span class="n">Not</span> <span class="n">doing</span> <span class="n">PCA</span> <span class="k">for</span> <span class="n">EEG</span><span class="o">.</span>
 </pre></div>
 </div>
 <p>Trans</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fname_trans</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span>
                       <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-trans.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
-<a href="http://martinos.org/mne/stable/generated/mne.viz.plot_trans.html#mne.viz.plot_trans" title="View documentation for mne.viz.plot_trans"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_trans</span></a><span class="p">(</span><span class="n">famous_evo</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">fname_trans</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span>
+<a href="http://mne-tools.github.io/stable/generated/mne.viz.plot_trans.html#mne.viz.plot_trans" title="View documentation for mne.viz.plot_trans"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_trans</span></a><span class="p">(</span><span class="n">famous_evo</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">fname_trans</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span>
                    <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">meg_sensors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                    <span class="n">eeg_sensors</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/sphx_glr_plot_analysis_7_021.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_021.png" />
+<img alt="../_images/sphx_glr_plot_analysis_7_022.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_022.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Using surface from /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub007/bem/sub007-head.fif
-Getting helmet for system 306m
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Using</span> <span class="n">surface</span> <span class="kn">from</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">subjects</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">bem</span><span class="o">/</span><span class="n">sub007</span><span class="o">-</span><span class="n">head</span><span class="o">.</span><span class="n">fif</span><span class="o">.</span>
+<span class="n">Getting</span> <span class="n">helmet</span> <span class="k">for</span> <span class="n">system</span> <span class="mi">306</span><span class="n">m</span>
 </pre></div>
 </div>
-<p>Faces <a class="reference internal" href="../auto_scripts/13-make_inverse.html#sphx-glr-auto-scripts-13-make-inverse-py"><span>Inverse solution</span></a>.</p>
+<p>Faces <a class="reference internal" href="../auto_scripts/13-make_inverse.html#sphx-glr-auto-scripts-13-make-inverse-py"><span class="std std-ref">Inverse solution</span></a>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_stc</span><span class="p">(</span><span class="n">cond</span><span class="p">):</span>
     <span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;mne_dSPM_inverse-</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">cond</span><span class="p">)</span>
-    <span class="n">stc</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_source_estimate.html#mne.read_source_estimate" title="View documentation for mne.read_source_estimate"><span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span></a><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+    <span class="n">stc</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_source_estimate.html#mne.read_source_estimate" title="View documentation for mne.read_source_estimate"><span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span></a><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">brain</span> <span class="o">=</span> <span class="n">stc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ven&#39;</span><span class="p">],</span>
                      <span class="n">hemi</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mf">0.17</span><span class="p">,</span> <span class="n">time_unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">brain</span>
@@ -403,119 +414,120 @@ Getting helmet for system 306m
 <span class="n">brain</span> <span class="o">=</span> <span class="n">plot_stc</span><span class="p">(</span><span class="s1">&#39;faces&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/sphx_glr_plot_analysis_7_022.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_022.png" />
+<img alt="../_images/sphx_glr_plot_analysis_7_023.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_023.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Updating smoothing matrix, be patient..
-Smoothing matrix creation, step 1
-Smoothing matrix creation, step 2
-Smoothing matrix creation, step 3
-Smoothing matrix creation, step 4
-Smoothing matrix creation, step 5
-Smoothing matrix creation, step 6
-Smoothing matrix creation, step 7
-Smoothing matrix creation, step 8
-Smoothing matrix creation, step 9
-Smoothing matrix creation, step 10
-colormap: fmin=5.27e+00 fmid=6.13e+00 fmax=1.78e+01 transparent=1
-Updating smoothing matrix, be patient..
-Smoothing matrix creation, step 1
-Smoothing matrix creation, step 2
-Smoothing matrix creation, step 3
-Smoothing matrix creation, step 4
-Smoothing matrix creation, step 5
-Smoothing matrix creation, step 6
-Smoothing matrix creation, step 7
-Smoothing matrix creation, step 8
-Smoothing matrix creation, step 9
-Smoothing matrix creation, step 10
-colormap: fmin=5.27e+00 fmid=6.13e+00 fmax=1.78e+01 transparent=1
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Updating</span> <span class="n">smoothing</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">be</span> <span class="n">patient</span><span class="o">..</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">1</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">2</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">3</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">4</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">5</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">6</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">7</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">8</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">9</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">10</span>
+<span class="n">colormap</span><span class="p">:</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">5.92e+00</span> <span class="n">fmid</span><span class="o">=</span><span class="mf">6.81e+00</span> <span class="n">fmax</span><span class="o">=</span><span class="mf">1.73e+01</span> <span class="n">transparent</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">Updating</span> <span class="n">smoothing</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">be</span> <span class="n">patient</span><span class="o">..</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">1</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">2</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">3</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">4</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">5</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">6</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">7</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">8</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">9</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">10</span>
+<span class="n">colormap</span><span class="p">:</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">5.92e+00</span> <span class="n">fmid</span><span class="o">=</span><span class="mf">6.81e+00</span> <span class="n">fmax</span><span class="o">=</span><span class="mf">1.73e+01</span> <span class="n">transparent</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
 <p>Faces - scrambled</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">brain</span> <span class="o">=</span> <span class="n">plot_stc</span><span class="p">(</span><span class="s1">&#39;contrast&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/sphx_glr_plot_analysis_7_023.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_023.png" />
+<img alt="../_images/sphx_glr_plot_analysis_7_024.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_024.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Updating smoothing matrix, be patient..
-Smoothing matrix creation, step 1
-Smoothing matrix creation, step 2
-Smoothing matrix creation, step 3
-Smoothing matrix creation, step 4
-Smoothing matrix creation, step 5
-Smoothing matrix creation, step 6
-Smoothing matrix creation, step 7
-Smoothing matrix creation, step 8
-Smoothing matrix creation, step 9
-Smoothing matrix creation, step 10
-colormap: fmin=2.27e+00 fmid=2.56e+00 fmax=5.52e+00 transparent=1
-Updating smoothing matrix, be patient..
-Smoothing matrix creation, step 1
-Smoothing matrix creation, step 2
-Smoothing matrix creation, step 3
-Smoothing matrix creation, step 4
-Smoothing matrix creation, step 5
-Smoothing matrix creation, step 6
-Smoothing matrix creation, step 7
-Smoothing matrix creation, step 8
-Smoothing matrix creation, step 9
-Smoothing matrix creation, step 10
-colormap: fmin=2.27e+00 fmid=2.56e+00 fmax=5.52e+00 transparent=1
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Updating</span> <span class="n">smoothing</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">be</span> <span class="n">patient</span><span class="o">..</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">1</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">2</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">3</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">4</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">5</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">6</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">7</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">8</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">9</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">10</span>
+<span class="n">colormap</span><span class="p">:</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">2.28e+00</span> <span class="n">fmid</span><span class="o">=</span><span class="mf">2.57e+00</span> <span class="n">fmax</span><span class="o">=</span><span class="mf">5.35e+00</span> <span class="n">transparent</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">Updating</span> <span class="n">smoothing</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">be</span> <span class="n">patient</span><span class="o">..</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">1</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">2</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">3</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">4</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">5</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">6</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">7</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">8</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">9</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">10</span>
+<span class="n">colormap</span><span class="p">:</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">2.28e+00</span> <span class="n">fmid</span><span class="o">=</span><span class="mf">2.57e+00</span> <span class="n">fmax</span><span class="o">=</span><span class="mf">5.35e+00</span> <span class="n">transparent</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
 <p>LCMV Faces - scrambled</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;mne_LCMV_inverse-contrast&#39;</span><span class="p">)</span>
-<span class="n">stc</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_source_estimate.html#mne.read_source_estimate" title="View documentation for mne.read_source_estimate"><span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span></a><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+<span class="n">stc</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_source_estimate.html#mne.read_source_estimate" title="View documentation for mne.read_source_estimate"><span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span></a><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
 <span class="n">stc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">views</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ven&#39;</span><span class="p">],</span>
          <span class="n">hemi</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mf">0.17</span><span class="p">,</span> <span class="n">time_unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/sphx_glr_plot_analysis_7_024.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_024.png" />
+<img alt="../_images/sphx_glr_plot_analysis_7_025.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_025.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Updating smoothing matrix, be patient..
-Smoothing matrix creation, step 1
-Smoothing matrix creation, step 2
-Smoothing matrix creation, step 3
-Smoothing matrix creation, step 4
-Smoothing matrix creation, step 5
-Smoothing matrix creation, step 6
-Smoothing matrix creation, step 7
-Smoothing matrix creation, step 8
-Smoothing matrix creation, step 9
-Smoothing matrix creation, step 10
-colormap: fmin=1.52e-01 fmid=1.73e-01 fmax=4.63e-01 transparent=1
-Updating smoothing matrix, be patient..
-Smoothing matrix creation, step 1
-Smoothing matrix creation, step 2
-Smoothing matrix creation, step 3
-Smoothing matrix creation, step 4
-Smoothing matrix creation, step 5
-Smoothing matrix creation, step 6
-Smoothing matrix creation, step 7
-Smoothing matrix creation, step 8
-Smoothing matrix creation, step 9
-Smoothing matrix creation, step 10
-colormap: fmin=1.52e-01 fmid=1.73e-01 fmax=4.63e-01 transparent=1
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Updating</span> <span class="n">smoothing</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">be</span> <span class="n">patient</span><span class="o">..</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">1</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">2</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">3</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">4</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">5</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">6</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">7</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">8</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">9</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">10</span>
+<span class="n">colormap</span><span class="p">:</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">1.52e-01</span> <span class="n">fmid</span><span class="o">=</span><span class="mf">1.73e-01</span> <span class="n">fmax</span><span class="o">=</span><span class="mf">4.63e-01</span> <span class="n">transparent</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">Updating</span> <span class="n">smoothing</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">be</span> <span class="n">patient</span><span class="o">..</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">1</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">2</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">3</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">4</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">5</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">6</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">7</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">8</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">9</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">10</span>
+<span class="n">colormap</span><span class="p">:</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">1.52e-01</span> <span class="n">fmid</span><span class="o">=</span><span class="mf">1.73e-01</span> <span class="n">fmax</span><span class="o">=</span><span class="mf">4.63e-01</span> <span class="n">transparent</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
 <p>BEM</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://martinos.org/mne/stable/generated/mne.viz.plot_bem.html#mne.viz.plot_bem" title="View documentation for mne.viz.plot_bem"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_bem</span></a><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><a href="http://mne-tools.github.io/stable/generated/mne.viz.plot_bem.html#mne.viz.plot_bem" title="View documentation for mne.viz.plot_bem"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_bem</span></a><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/sphx_glr_plot_analysis_7_025.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_025.png" />
+<img alt="../_images/sphx_glr_plot_analysis_7_026.png" class="align-center" src="../_images/sphx_glr_plot_analysis_7_026.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub007/bem/inner_skull.surf
-Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub007/bem/outer_skull.surf
-Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub007/bem/outer_skin.surf
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Using</span> <span class="n">surface</span><span class="p">:</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">subjects</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">bem</span><span class="o">/</span><span class="n">inner_skull</span><span class="o">.</span><span class="n">surf</span>
+<span class="n">Using</span> <span class="n">surface</span><span class="p">:</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">subjects</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">bem</span><span class="o">/</span><span class="n">outer_skull</span><span class="o">.</span><span class="n">surf</span>
+<span class="n">Using</span> <span class="n">surface</span><span class="p">:</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">subjects</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">bem</span><span class="o">/</span><span class="n">outer_skin</span><span class="o">.</span><span class="n">surf</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong>
-(1 minutes 14.597 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 2 minutes  19.778 seconds)</p>
+<div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_analysis_7.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_analysis_7.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/plot_analysis_7.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_analysis_7.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_analysis_7.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">plot_analysis_7.ipynb</span></code></a></div>
-<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<a class="reference download internal" href="../_downloads/plot_analysis_7.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_analysis_7.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
 
@@ -530,8 +542,8 @@ Using surface: /tsi/doctorants/data_gramfort/dgw_faces/subjects/sub007/bem/outer
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-07-11.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>
 </footer>

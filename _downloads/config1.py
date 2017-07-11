@@ -17,8 +17,8 @@ if user == 'gramfort':
     study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
     N_JOBS = 8
 elif user == 'mjas':
-    study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
-    N_JOBS = 4
+    study_path = '/tsi/doctorants/data_gramfort/dgw_faces_reproduce'
+    N_JOBS = 1
 elif user == 'jleppakangas':
     study_path = '/tsi/doctorants/data_gramfort/dgw_faces'
     N_JOBS = 8
@@ -37,7 +37,7 @@ meg_dir = os.path.join(study_path, 'MEG')
 
 os.environ["SUBJECTS_DIR"] = subjects_dir
 
-spacing = 'oct5'
+spacing = 'oct6'
 mindist = 5
 
 ###############################################################################
@@ -51,9 +51,6 @@ map_subjects = {1: 'subject_01', 2: 'subject_02', 3: 'subject_03',
                 16: 'subject_19', 17: 'subject_23', 18: 'subject_24',
                 19: 'subject_25'}
 
-if not os.path.isdir(subjects_dir):
-    os.mkdir(subjects_dir)
-
 ###############################################################################
 # The `cross talk file <https://github.com/mne-tools/mne-biomag-group-demo/blob/master/scripts/results/library/ct_sparse.fif>`_
 # and `calibration file <https://github.com/mne-tools/mne-biomag-group-demo/blob/master/scripts/results/library/sss_cal.dat>`_
@@ -65,3 +62,5 @@ cal = os.path.join(os.path.dirname(__file__), '..', '..', 'results', 'library',
                    'sss_cal.dat')
 
 ylim = {'eeg': [-10, 10], 'mag': [-300, 300], 'grad': [-80, 80]}
+
+l_freq = 1

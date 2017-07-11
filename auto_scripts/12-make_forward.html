@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Forward solution &mdash; MNE Biomag Demo</title>
+    <title>Forward solution &#8212; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -19,25 +18,27 @@
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body role="document">
+  <body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -124,32 +125,37 @@
                             <span class="n">mindist</span><span class="p">)</span>
 
 
+<span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>  <span class="c1"># Excluded subjects</span>
+
+
 <span class="k">def</span> <span class="nf">run_forward</span><span class="p">(</span><span class="n">subject_id</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">subject_id</span> <span class="ow">in</span> <span class="n">exclude</span><span class="p">:</span>
+        <span class="k">return</span>
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;processing subject: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">data_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
 
-    <span class="n">fname_ave</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
+    <span class="n">fname_ave</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_highpass-1Hz_ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">fname_fwd</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-meg-</span><span class="si">%s</span><span class="s1">-fwd.fif&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">spacing</span><span class="p">))</span>
     <span class="n">fname_trans</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span>
                           <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-trans.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
 
-    <span class="n">src</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.setup_source_space.html#mne.setup_source_space" title="View documentation for mne.setup_source_space"><span class="n">mne</span><span class="o">.</span><span class="n">setup_source_space</span></a><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span>
-                                 <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">src</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.setup_source_space.html#mne.setup_source_space" title="View documentation for mne.setup_source_space"><span class="n">mne</span><span class="o">.</span><span class="n">setup_source_space</span></a><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span>
+                                 <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span>
                                  <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">add_dist</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
     <span class="n">src_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subjects_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-src.fif&#39;</span> <span class="o">%</span> <span class="n">spacing</span><span class="p">)</span>
-    <a href="http://martinos.org/mne/stable/generated/mne.write_source_spaces.html#mne.write_source_spaces" title="View documentation for mne.write_source_spaces"><span class="n">mne</span><span class="o">.</span><span class="n">write_source_spaces</span></a><span class="p">(</span><span class="n">src_fname</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <a href="http://mne-tools.github.io/stable/generated/mne.write_source_spaces.html#mne.write_source_spaces" title="View documentation for mne.write_source_spaces"><span class="n">mne</span><span class="o">.</span><span class="n">write_source_spaces</span></a><span class="p">(</span><span class="n">src_fname</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-    <span class="n">bem_model</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.make_bem_model.html#mne.make_bem_model" title="View documentation for mne.make_bem_model"><span class="n">mne</span><span class="o">.</span><span class="n">make_bem_model</span></a><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">ico</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span>
+    <span class="n">bem_model</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.make_bem_model.html#mne.make_bem_model" title="View documentation for mne.make_bem_model"><span class="n">mne</span><span class="o">.</span><span class="n">make_bem_model</span></a><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">ico</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">subjects_dir</span><span class="o">=</span><span class="n">subjects_dir</span><span class="p">,</span>
                                    <span class="n">conductivity</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,))</span>
-    <span class="n">bem</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.make_bem_solution.html#mne.make_bem_solution" title="View documentation for mne.make_bem_solution"><span class="n">mne</span><span class="o">.</span><span class="n">make_bem_solution</span></a><span class="p">(</span><span class="n">bem_model</span><span class="p">)</span>
-    <span class="n">info</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_evokeds.html#mne.read_evokeds" title="View documentation for mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">fname_ave</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">info</span>
-    <span class="n">fwd</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.make_forward_solution.html#mne.make_forward_solution" title="View documentation for mne.make_forward_solution"><span class="n">mne</span><span class="o">.</span><span class="n">make_forward_solution</span></a><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">fname_trans</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">,</span> <span class="n">bem</span><span class="o">=</span><span class="n">bem</span><span class="p">,</span>
-                                    <span class="n">fname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-                                    <span class="n">mindist</span><span class="o">=</span><span class="n">mindist</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">fwd</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">convert_forward_solution</span><span class="p">(</span><span class="n">fwd</span><span class="p">,</span> <span class="n">surf_ori</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <a href="http://martinos.org/mne/stable/generated/mne.write_forward_solution.html#mne.write_forward_solution" title="View documentation for mne.write_forward_solution"><span class="n">mne</span><span class="o">.</span><span class="n">write_forward_solution</span></a><span class="p">(</span><span class="n">fname_fwd</span><span class="p">,</span> <span class="n">fwd</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">bem</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.make_bem_solution.html#mne.make_bem_solution" title="View documentation for mne.make_bem_solution"><span class="n">mne</span><span class="o">.</span><span class="n">make_bem_solution</span></a><span class="p">(</span><span class="n">bem_model</span><span class="p">)</span>
+    <span class="n">info</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_evokeds.html#mne.read_evokeds" title="View documentation for mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">fname_ave</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">info</span>
+    <span class="n">fwd</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.make_forward_solution.html#mne.make_forward_solution" title="View documentation for mne.make_forward_solution"><span class="n">mne</span><span class="o">.</span><span class="n">make_forward_solution</span></a><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">fname_trans</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">,</span> <span class="n">bem</span><span class="o">=</span><span class="n">bem</span><span class="p">,</span>
+                                    <span class="n">meg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">mindist</span><span class="o">=</span><span class="n">mindist</span><span class="p">,</span>
+                                    <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fwd</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.convert_forward_solution.html#mne.convert_forward_solution" title="View documentation for mne.convert_forward_solution"><span class="n">mne</span><span class="o">.</span><span class="n">convert_forward_solution</span></a><span class="p">(</span><span class="n">fwd</span><span class="p">,</span> <span class="n">surf_ori</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <a href="http://mne-tools.github.io/stable/generated/mne.write_forward_solution.html#mne.write_forward_solution" title="View documentation for mne.write_forward_solution"><span class="n">mne</span><span class="o">.</span><span class="n">write_forward_solution</span></a><span class="p">(</span><span class="n">fname_fwd</span><span class="p">,</span> <span class="n">fwd</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 
 <span class="n">parallel</span><span class="p">,</span> <span class="n">run_func</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parallel_func</span><span class="p">(</span><span class="n">run_forward</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">)</span>
@@ -159,11 +165,11 @@
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/12-make_forward.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">12-make_forward.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/12-make_forward.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">12-make_forward.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/12-make_forward.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">12-make_forward.ipynb</span></code></a></div>
+<a class="reference download internal" href="../_downloads/12-make_forward.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">12-make_forward.ipynb</span></code></a></div>
 </div>
-<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
 
@@ -178,8 +184,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-07-11.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>
 </footer>

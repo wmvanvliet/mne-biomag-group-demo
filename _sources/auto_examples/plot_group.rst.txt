@@ -1,0 +1,293 @@
+
+
+.. _sphx_glr_auto_examples_plot_group.py:
+
+
+==============
+Group analysis
+==============
+
+Run the group analysis.
+
+
+
+.. code-block:: python
+
+    import os.path as op
+
+    import matplotlib.pyplot as plt
+    import mne
+
+    from library.config import (meg_dir, subjects_dir, set_matplotlib_defaults,
+                                l_freq)
+
+    evokeds = mne.read_evokeds(op.join(meg_dir,
+                               'grand_average_highpass-%sHz-ave.fif' % l_freq))[:3]
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/grand_average_highpass-1Hz-ave.fif ...
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous + 0.062 * famous)
+            0 CTF compensation matrices available
+            nave = 4187 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled + 0.062 * scrambled)
+            0 CTF compensation matrices available
+            nave = 4068 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar + 0.062 * unfamiliar)
+            0 CTF compensation matrices available
+            nave = 4202 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast + 0.062 * contrast)
+            0 CTF compensation matrices available
+            nave = 2741 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+        Read a total of 1 projection items:
+            Average EEG reference (1 x 70) active
+        Found the data of interest:
+            t =    -200.00 ...     800.00 ms (0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces + 0.062 * faces)
+            0 CTF compensation matrices available
+            nave = 8390 - aspect type = 100
+    Projections have already been applied. Setting proj attribute to True.
+    No baseline correction applied
+
+
+Sensor-space. See :ref:`sphx_glr_auto_scripts_09-group_average_sensors.py`
+We use the same sensor EEG065 as in Wakeman et al.
+
+
+
+.. code-block:: python
+
+
+    idx = evokeds[0].ch_names.index('EEG065')
+    assert evokeds[1].ch_names[idx] == 'EEG065'
+    assert evokeds[2].ch_names[idx] == 'EEG065'
+    mapping = {'Famous': evokeds[0], 'Scrambled': evokeds[1],
+               'Unfamiliar': evokeds[2]}
+
+
+
+
+
+
+
+Let us apply baseline correction now. Here we are dealing with a single
+sensor
+
+
+
+.. code-block:: python
+
+
+    for evoked in evokeds:
+        evoked.apply_baseline(baseline=(-100, 0))
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Applying baseline correction (mode: mean)
+    Applying baseline correction (mode: mean)
+    Applying baseline correction (mode: mean)
+
+
+We could have used the one-line MNE function for the comparison.
+
+
+
+.. code-block:: python
+
+
+    # mne.viz.plot_compare_evokeds(mapping, [idx],
+    #                              title='EEG065 (Baseline from -200ms to 0ms)',)
+
+
+
+
+
+
+
+But here we prefer a slightly more involved plotting script to make a
+publication ready graph.
+
+
+
+.. code-block:: python
+
+
+    set_matplotlib_defaults(plt)
+
+    scale = 1e6
+    plt.figure(figsize=(7, 5))
+    plt.plot(evoked.times * 1000, mapping['Scrambled'].data[idx] * scale,
+             'r', linewidth=2, label='Scrambled')
+    plt.plot(evoked.times * 1000, mapping['Unfamiliar'].data[idx] * scale,
+             'g', linewidth=2, label='Unfamiliar')
+    plt.plot(evoked.times * 1000, mapping['Famous'].data[idx] * scale, 'b',
+             linewidth=2, label='Famous')
+    plt.grid(True)
+    plt.xlim([-100, 800])
+    ax = plt.gca()
+    plt.xlabel('Time (in ms after stimulus onset)')
+    plt.ylabel(r'Potential difference ($\mu$V)')
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+    plt.savefig('grand_average_highpass-%sHz.pdf' % l_freq)
+
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_group_001.png
+    :align: center
+
+
+
+
+Source-space. See :ref:`sphx_glr_auto_scripts_14-group_average_source.py`
+
+
+
+.. code-block:: python
+
+    fname = op.join(meg_dir, 'contrast-average')
+    stc = mne.read_source_estimate(fname, subject='fsaverage')
+
+    brain = stc.plot(views=['ven'], hemi='both', subject='fsaverage',
+                     subjects_dir=subjects_dir, initial_time=0.17, time_unit='s',
+                     clim={'lims': [99.75, 99.88, 99.98]})
+
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_group_002.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=3.00e+00 fmid=3.26e+00 fmax=3.87e+00 transparent=1
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=3.00e+00 fmid=3.26e+00 fmax=3.87e+00 transparent=1
+
+
+LCMV beamformer
+
+
+
+.. code-block:: python
+
+    fname = op.join(meg_dir, 'contrast-average-lcmv')
+    stc = mne.read_source_estimate(fname, subject='fsaverage')
+
+    brain = stc.plot(views=['ven'], hemi='both', subject='fsaverage',
+                     subjects_dir=subjects_dir, initial_time=0.17, time_unit='s',
+                     clim={'lims': [99.75, 99.88, 99.98]})
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_group_003.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=2.82e-01 fmid=3.11e-01 fmax=3.67e-01 transparent=1
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=2.82e-01 fmid=3.11e-01 fmax=3.67e-01 transparent=1
+
+
+**Total running time of the script:** ( 0 minutes  15.455 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: plot_group.py <plot_group.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: plot_group.ipynb <plot_group.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <https://sphinx-gallery.readthedocs.io>`_

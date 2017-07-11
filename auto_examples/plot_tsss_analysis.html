@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Analysis for subject 1 with maxwell filtered data with tSSS &mdash; MNE Biomag Demo</title>
+    <title>Analysis for subject 1 with maxwell filtered data with tSSS &#8212; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -19,25 +18,27 @@
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body role="document">
+  <body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -130,33 +131,33 @@
 <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;run_01_raw.fif&#39;</span><span class="p">)</span>
-<span class="n">raw</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="n">raw</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
 <span class="n">fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss_raw.fif&#39;</span><span class="p">)</span>
-<span class="n">raw_filt</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="n">raw_filt</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub001/MEG/run_01_raw.fif...
-    Read a total of 8 projection items:
-        mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
-        grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
-        grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
-        grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
-    Range : 268400 ... 815099 =    244.000 ...   740.999 secs
-Ready.
-Current compensation grade : 0
-Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/run_01_filt_sss_raw.fif...
-    Range : 268400 ... 815099 =    244.000 ...   740.999 secs
-Ready.
-Current compensation grade : 0
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Opening</span> <span class="n">raw</span> <span class="n">data</span> <span class="n">file</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">ds117</span><span class="o">/</span><span class="n">sub001</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">run_01_raw</span><span class="o">.</span><span class="n">fif</span><span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">8</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v1</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v2</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v3</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v4</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v5</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">grad_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">grad</span><span class="o">-</span><span class="n">v1</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">grad_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">grad</span><span class="o">-</span><span class="n">v2</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">grad_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">grad</span><span class="o">-</span><span class="n">v3</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+    <span class="n">Range</span> <span class="p">:</span> <span class="mi">268400</span> <span class="o">...</span> <span class="mi">815099</span> <span class="o">=</span>    <span class="mf">244.000</span> <span class="o">...</span>   <span class="mf">740.999</span> <span class="n">secs</span>
+<span class="n">Ready</span><span class="o">.</span>
+<span class="n">Current</span> <span class="n">compensation</span> <span class="n">grade</span> <span class="p">:</span> <span class="mi">0</span>
+<span class="n">Opening</span> <span class="n">raw</span> <span class="n">data</span> <span class="n">file</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub001</span><span class="o">/</span><span class="n">run_01_filt_sss_raw</span><span class="o">.</span><span class="n">fif</span><span class="o">...</span>
+    <span class="n">Range</span> <span class="p">:</span> <span class="mi">268400</span> <span class="o">...</span> <span class="mi">815099</span> <span class="o">=</span>    <span class="mf">244.000</span> <span class="o">...</span>   <span class="mf">740.999</span> <span class="n">secs</span>
+<span class="n">Ready</span><span class="o">.</span>
+<span class="n">Current</span> <span class="n">compensation</span> <span class="n">grade</span> <span class="p">:</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p>Filtering <a class="reference internal" href="../auto_scripts/02-python_filtering.html#sphx-glr-auto-scripts-02-python-filtering-py"><span>Filter using MNE-python</span></a>.</p>
+<p>Filtering <a class="reference internal" href="../auto_scripts/02-python_filtering.html#sphx-glr-auto-scripts-02-python-filtering-py"><span class="std std-ref">Filter using MNE-python</span></a>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">()</span>
 <span class="n">raw_filt</span><span class="o">.</span><span class="n">plot_psd</span><span class="p">()</span>
 </pre></div>
@@ -168,23 +169,21 @@ Current compensation grade : 0
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>tmax defaults to 60. in 0.14 but will change to np.inf in 0.15. Set it explicitly to avoid this warning
-Effective window size : 1.862 (s)
-Effective window size : 1.862 (s)
-Effective window size : 1.862 (s)
-tmax defaults to 60. in 0.14 but will change to np.inf in 0.15. Set it explicitly to avoid this warning
-Effective window size : 1.862 (s)
-Effective window size : 1.862 (s)
-Effective window size : 1.862 (s)
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Effective</span> <span class="n">window</span> <span class="n">size</span> <span class="p">:</span> <span class="mf">1.862</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Events <a class="reference internal" href="../auto_scripts/03-run_extract_events.html#sphx-glr-auto-scripts-03-run-extract-events-py"><span>Extract events from the stimulus channel</span></a>.
-Epochs <a class="reference internal" href="../auto_scripts/05-make_epochs.html#sphx-glr-auto-scripts-05-make-epochs-py"><span>Construct epochs</span></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_events.html#mne.read_events" title="View documentation for mne.read_events"><span class="n">mne</span><span class="o">.</span><span class="n">read_events</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss-eve.fif&#39;</span><span class="p">))</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_events</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<p>Events <a class="reference internal" href="../auto_scripts/03-run_extract_events.html#sphx-glr-auto-scripts-03-run-extract-events-py"><span class="std std-ref">Extract events from the stimulus channel</span></a>.
+Epochs <a class="reference internal" href="../auto_scripts/05-make_epochs.html#sphx-glr-auto-scripts-05-make-epochs-py"><span class="std std-ref">Construct epochs</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_events.html#mne.read_events" title="View documentation for mne.read_events"><span class="n">mne</span><span class="o">.</span><span class="n">read_events</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_01_filt_sss-eve.fif&#39;</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.viz.plot_events.html#mne.viz.plot_events" title="View documentation for mne.viz.plot_events"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_events</span></a><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Events from run 01&#39;</span><span class="p">)</span>
 
-<span class="n">epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_epochs.html#mne.read_epochs" title="View documentation for mne.read_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">subject</span> <span class="o">+</span> <span class="s1">&#39;-epo.fif&#39;</span><span class="p">))</span>
+<span class="n">epochs</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_epochs.html#mne.read_epochs" title="View documentation for mne.read_epochs"><span class="n">mne</span><span class="o">.</span><span class="n">read_epochs</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">subject</span> <span class="o">+</span> <span class="s1">&#39;-epo.fif&#39;</span><span class="p">))</span>
 <span class="n">epochs</span><span class="o">.</span><span class="n">plot_drop_log</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -195,68 +194,66 @@ Epochs <a class="reference internal" href="../auto_scripts/05-make_epochs.html#s
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-epo.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (None)
-        0 CTF compensation matrices available
-784 matching events found
-No baseline correction applied
-Created an SSP operator (subspace dimension = 1)
-784 matching events found
-No baseline correction applied
-Created an SSP operator (subspace dimension = 1)
-1 projection items activated
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub001</span><span class="o">/</span><span class="n">sub001</span><span class="o">-</span><span class="n">epo</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+<span class="mi">785</span> <span class="n">matching</span> <span class="n">events</span> <span class="n">found</span>
+<span class="n">Created</span> <span class="n">an</span> <span class="n">SSP</span> <span class="n">operator</span> <span class="p">(</span><span class="n">subspace</span> <span class="n">dimension</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">785</span> <span class="n">matching</span> <span class="n">events</span> <span class="n">found</span>
+<span class="n">Created</span> <span class="n">an</span> <span class="n">SSP</span> <span class="n">operator</span> <span class="p">(</span><span class="n">subspace</span> <span class="n">dimension</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span> <span class="n">activated</span>
 </pre></div>
 </div>
-<p>Evoked responses <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span>Evoked data and covariance</span></a></p>
+<p>Evoked responses <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span class="std std-ref">Evoked data and covariance</span></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">evo_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
-<span class="n">evoked</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_evokeds.html#mne.read_evokeds" title="View documentation for mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">evo_fname</span><span class="p">)</span>
+<span class="n">evoked</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_evokeds.html#mne.read_evokeds" title="View documentation for mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">evo_fname</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub001/sub001-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (famous)
-        0 CTF compensation matrices available
-        nave = 262 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (scrambled)
-        0 CTF compensation matrices available
-        nave = 265 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (unfamiliar)
-        0 CTF compensation matrices available
-        nave = 257 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 175 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (faces)
-        0 CTF compensation matrices available
-        nave = 519 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub001</span><span class="o">/</span><span class="n">sub001</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">famous</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">264</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">scrambled</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">264</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">unfamiliar</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">257</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">175</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">faces</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">521</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
 </pre></div>
 </div>
 <p>Faces</p>
@@ -308,9 +305,9 @@ No baseline correction applied
 <li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_tsss_analysis_013.png"><img alt="../_images/sphx_glr_plot_tsss_analysis_013.png" src="../_images/sphx_glr_plot_tsss_analysis_013.png" style="width: 517.0px; height: 84.6px;" /></a>
 </li>
 </ul>
-<p>Covariance <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span>Evoked data and covariance</span></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_cov.html#mne.read_cov" title="View documentation for mne.read_cov"><span class="n">mne</span><span class="o">.</span><span class="n">read_cov</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-cov.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
-<a href="http://martinos.org/mne/stable/generated/mne.viz.plot_cov.html#mne.viz.plot_cov" title="View documentation for mne.viz.plot_cov"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_cov</span></a><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">faces_evo</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
+<p>Covariance <a class="reference internal" href="../auto_scripts/06-make_evoked.html#sphx-glr-auto-scripts-06-make-evoked-py"><span class="std std-ref">Evoked data and covariance</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_cov.html#mne.read_cov" title="View documentation for mne.read_cov"><span class="n">mne</span><span class="o">.</span><span class="n">read_cov</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-cov.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">))</span>
+<a href="http://mne-tools.github.io/stable/generated/mne.viz.plot_cov.html#mne.viz.plot_cov" title="View documentation for mne.viz.plot_cov"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_cov</span></a><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">faces_evo</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
 <span class="n">faces_evo</span><span class="o">.</span><span class="n">plot_white</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -323,26 +320,27 @@ No baseline correction applied
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>376 x 376 full covariance (kind = 1) found.
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-SSS has been applied to data. Showing mag and grad whitening jointly.
-estimated rank (eeg): 70
-estimated rank (mag + grad): 306
-    Created an SSP operator (subspace dimension = 1)
-Setting small MEG eigenvalues to zero.
-Not doing PCA for MEG.
-Setting small EEG eigenvalues to zero.
-Not doing PCA for EEG.
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="mi">376</span> <span class="n">x</span> <span class="mi">376</span> <span class="n">full</span> <span class="n">covariance</span> <span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="n">found</span><span class="o">.</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+<span class="n">SSS</span> <span class="n">has</span> <span class="n">been</span> <span class="n">applied</span> <span class="n">to</span> <span class="n">data</span><span class="o">.</span> <span class="n">Showing</span> <span class="n">mag</span> <span class="ow">and</span> <span class="n">grad</span> <span class="n">whitening</span> <span class="n">jointly</span><span class="o">.</span>
+<span class="n">estimated</span> <span class="n">rank</span> <span class="p">(</span><span class="n">eeg</span><span class="p">):</span> <span class="mi">70</span>
+<span class="n">estimated</span> <span class="n">rank</span> <span class="p">(</span><span class="n">mag</span> <span class="o">+</span> <span class="n">grad</span><span class="p">):</span> <span class="mi">306</span>
+    <span class="n">Created</span> <span class="n">an</span> <span class="n">SSP</span> <span class="n">operator</span> <span class="p">(</span><span class="n">subspace</span> <span class="n">dimension</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Setting</span> <span class="n">small</span> <span class="n">MEG</span> <span class="n">eigenvalues</span> <span class="n">to</span> <span class="n">zero</span><span class="o">.</span>
+<span class="n">Not</span> <span class="n">doing</span> <span class="n">PCA</span> <span class="k">for</span> <span class="n">MEG</span><span class="o">.</span>
+<span class="n">Setting</span> <span class="n">small</span> <span class="n">EEG</span> <span class="n">eigenvalues</span> <span class="n">to</span> <span class="n">zero</span><span class="o">.</span>
+<span class="n">Not</span> <span class="n">doing</span> <span class="n">PCA</span> <span class="k">for</span> <span class="n">EEG</span><span class="o">.</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong>
-(0 minutes 48.307 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 1 minutes  38.800 seconds)</p>
+<div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_tsss_analysis.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tsss_analysis.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/plot_tsss_analysis.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tsss_analysis.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_tsss_analysis.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">plot_tsss_analysis.ipynb</span></code></a></div>
-<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<a class="reference download internal" href="../_downloads/plot_tsss_analysis.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_tsss_analysis.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
 
@@ -357,8 +355,8 @@ Not doing PCA for EEG.
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-07-11.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>
 </footer>

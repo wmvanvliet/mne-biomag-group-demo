@@ -5,14 +5,13 @@ Analysis for subject 5
 
 Run the analysis.
 """
-
 import os
 import os.path as op
 import numpy as np
 
 import mne
 
-from library.config import study_path, meg_dir, ylim
+from library.config import study_path, meg_dir, ylim, l_freq
 
 ###############################################################################
 # Configuration
@@ -24,12 +23,14 @@ subject = "sub%03d" % int(5)
 fname = op.join(study_path, 'ds117', subject, 'MEG', 'run_01_raw.fif')
 raw = mne.io.read_raw_fif(fname)
 
-fname = op.join(meg_dir, subject, 'run_01_filt_sss_raw.fif')
+fname = op.join(meg_dir, subject,
+                'run_01_filt_sss_highpass-%sHz_raw.fif' % l_freq)
+ica_fname = op.join(meg_dir, subject, 'run_01_highpass-%sHz-ica.fif' % l_freq)
 raw_filt = mne.io.read_raw_fif(fname)
 
 ###############################################################################
 # Filtering :ref:`sphx_glr_auto_scripts_02-python_filtering.py`.
-raw.plot_psd()
+raw.plot_psd(n_fft=2048, n_overlap=1024)
 raw_filt.plot_psd()
 
 ###############################################################################
@@ -82,6 +83,11 @@ unfamiliar_evo.plot_topomap(times=times, title='Unfamiliar %s' % subject)
 contrast_evo.plot_topomap(times=times, title='Faces - scrambled %s' % subject)
 
 ###############################################################################
+# ICA
+ica = mne.preprocessing.read_ica(ica_fname)
+ica.plot_sources(raw_filt)
+
+###############################################################################
 # TFR :ref:`sphx_glr_auto_scripts_07-time_frequency.py`.
 fpower = mne.time_frequency.read_tfrs(
     op.join(meg_dir, subject, '%s-faces-tfr.h5' % subject))[0]
@@ -91,7 +97,7 @@ spower = mne.time_frequency.read_tfrs(
     op.join(meg_dir, subject, '%s-scrambled-tfr.h5' % subject))[0]
 sitc = mne.time_frequency.read_tfrs(
     op.join(meg_dir, subject, '%s-itc_scrambled-tfr.h5' % subject))[0]
-channel = 'EEG070'
+channel = 'EEG065'
 idx = [fpower.ch_names.index(channel)]
 fpower.plot(idx, title='Faces power %s' % channel, baseline=(-0.1, 0.0),
             mode='logratio')

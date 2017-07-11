@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Source space clusters &mdash; MNE Biomag Demo</title>
+    <title>Source space clusters &#8212; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -19,25 +18,27 @@
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body role="document">
+  <body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -117,87 +118,87 @@
 <p>Clustering in source space.</p>
 <img alt="../_images/sphx_glr_plot_source_stats_001.png" class="align-center" src="../_images/sphx_glr_plot_source_stats_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>processing subject: sub002
-processing subject: sub003
-processing subject: sub004
-processing subject: sub006
-processing subject: sub007
-processing subject: sub008
-processing subject: sub009
-processing subject: sub010
-processing subject: sub011
-processing subject: sub012
-processing subject: sub013
-processing subject: sub014
-processing subject: sub015
-processing subject: sub017
-processing subject: sub018
-processing subject: sub019
--- number of connected vertices : 5124
-stat_fun(H1): min=0.207936 max=4.816666
-Provided stat_fun does not treat variables independently. Setting buffer_size to None.
-Running initial clustering
-Found 69 clusters
-Permuting ...
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub002</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub003</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub004</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub006</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub007</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub008</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub009</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub010</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub011</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub012</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub013</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub014</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub015</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub017</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub018</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub019</span>
+<span class="o">--</span> <span class="n">number</span> <span class="n">of</span> <span class="n">connected</span> <span class="n">vertices</span> <span class="p">:</span> <span class="mi">5124</span>
+<span class="n">stat_fun</span><span class="p">(</span><span class="n">H1</span><span class="p">):</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.242443</span> <span class="nb">max</span><span class="o">=</span><span class="mf">5.202197</span>
+<span class="n">Provided</span> <span class="n">stat_fun</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">treat</span> <span class="n">variables</span> <span class="n">independently</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">buffer_size</span> <span class="n">to</span> <span class="kc">None</span><span class="o">.</span>
+<span class="n">Running</span> <span class="n">initial</span> <span class="n">clustering</span>
+<span class="n">Found</span> <span class="mi">98</span> <span class="n">clusters</span>
+<span class="n">Permuting</span> <span class="o">...</span>
 
-[                                        ] 0.09766 |
-[.                                       ] 3.12500 /
-[..                                      ] 6.25000 -
-[...                                     ] 9.37500 \
-[.....                                   ] 12.50000 |
-[......                                  ] 15.62500 /
-[.......                                 ] 18.75000 -
-[........                                ] 21.87500 \
-[..........                              ] 25.00000 |
-[...........                             ] 28.12500 /
-[............                            ] 31.25000 -
-[.............                           ] 34.37500 \
-[...............                         ] 37.50000 |
-[................                        ] 40.62500 /
-[.................                       ] 43.75000 -
-[..................                      ] 46.87500 \
-[....................                    ] 50.00000 |
-[.....................                   ] 53.12500 /
-[......................                  ] 56.25000 -
-[.......................                 ] 59.37500 \
-[.........................               ] 62.50000 |
-[..........................              ] 65.62500 /
-[...........................             ] 68.75000 -
-[............................            ] 71.87500 \
-[..............................          ] 75.00000 |
-[...............................         ] 78.12500 /
-[................................        ] 81.25000 -
-[.................................       ] 84.37500 \
-[...................................     ] 87.50000 |
-[....................................    ] 90.62500 /
-[.....................................   ] 93.75000 -
-[......................................  ] 96.87500 \
-[........................................] 100.00000 |    Computing cluster p-values
-Done.
-Updating smoothing matrix, be patient..
-Smoothing matrix creation, step 1
-Smoothing matrix creation, step 2
-Smoothing matrix creation, step 3
-Smoothing matrix creation, step 4
-Smoothing matrix creation, step 5
-Smoothing matrix creation, step 6
-Smoothing matrix creation, step 7
-Smoothing matrix creation, step 8
-Smoothing matrix creation, step 9
-Smoothing matrix creation, step 10
-colormap: fmin=0.00e+00 fmid=1.50e+01 fmax=3.00e+01 transparent=1
-Updating smoothing matrix, be patient..
-Smoothing matrix creation, step 1
-Smoothing matrix creation, step 2
-Smoothing matrix creation, step 3
-Smoothing matrix creation, step 4
-Smoothing matrix creation, step 5
-Smoothing matrix creation, step 6
-Smoothing matrix creation, step 7
-Smoothing matrix creation, step 8
-Smoothing matrix creation, step 9
-Smoothing matrix creation, step 10
-colormap: fmin=0.00e+00 fmid=1.50e+01 fmax=3.00e+01 transparent=1
+<span class="p">[</span>                                        <span class="p">]</span> <span class="mf">0.09766</span> <span class="o">|</span>
+<span class="p">[</span><span class="o">.</span>                                       <span class="p">]</span> <span class="mf">3.12500</span> <span class="o">/</span>
+<span class="p">[</span><span class="o">..</span>                                      <span class="p">]</span> <span class="mf">6.25000</span> <span class="o">-</span>
+<span class="p">[</span><span class="o">...</span>                                     <span class="p">]</span> <span class="mf">9.37500</span> \
+<span class="p">[</span><span class="o">.....</span>                                   <span class="p">]</span> <span class="mf">12.50000</span> <span class="o">|</span>
+<span class="p">[</span><span class="o">......</span>                                  <span class="p">]</span> <span class="mf">15.62500</span> <span class="o">/</span>
+<span class="p">[</span><span class="o">.......</span>                                 <span class="p">]</span> <span class="mf">18.75000</span> <span class="o">-</span>
+<span class="p">[</span><span class="o">........</span>                                <span class="p">]</span> <span class="mf">21.87500</span> \
+<span class="p">[</span><span class="o">..........</span>                              <span class="p">]</span> <span class="mf">25.00000</span> <span class="o">|</span>
+<span class="p">[</span><span class="o">...........</span>                             <span class="p">]</span> <span class="mf">28.12500</span> <span class="o">/</span>
+<span class="p">[</span><span class="o">............</span>                            <span class="p">]</span> <span class="mf">31.25000</span> <span class="o">-</span>
+<span class="p">[</span><span class="o">.............</span>                           <span class="p">]</span> <span class="mf">34.37500</span> \
+<span class="p">[</span><span class="o">...............</span>                         <span class="p">]</span> <span class="mf">37.50000</span> <span class="o">|</span>
+<span class="p">[</span><span class="o">................</span>                        <span class="p">]</span> <span class="mf">40.62500</span> <span class="o">/</span>
+<span class="p">[</span><span class="o">.................</span>                       <span class="p">]</span> <span class="mf">43.75000</span> <span class="o">-</span>
+<span class="p">[</span><span class="o">..................</span>                      <span class="p">]</span> <span class="mf">46.87500</span> \
+<span class="p">[</span><span class="o">....................</span>                    <span class="p">]</span> <span class="mf">50.00000</span> <span class="o">|</span>
+<span class="p">[</span><span class="o">.....................</span>                   <span class="p">]</span> <span class="mf">53.12500</span> <span class="o">/</span>
+<span class="p">[</span><span class="o">......................</span>                  <span class="p">]</span> <span class="mf">56.25000</span> <span class="o">-</span>
+<span class="p">[</span><span class="o">.......................</span>                 <span class="p">]</span> <span class="mf">59.37500</span> \
+<span class="p">[</span><span class="o">.........................</span>               <span class="p">]</span> <span class="mf">62.50000</span> <span class="o">|</span>
+<span class="p">[</span><span class="o">..........................</span>              <span class="p">]</span> <span class="mf">65.62500</span> <span class="o">/</span>
+<span class="p">[</span><span class="o">...........................</span>             <span class="p">]</span> <span class="mf">68.75000</span> <span class="o">-</span>
+<span class="p">[</span><span class="o">............................</span>            <span class="p">]</span> <span class="mf">71.87500</span> \
+<span class="p">[</span><span class="o">..............................</span>          <span class="p">]</span> <span class="mf">75.00000</span> <span class="o">|</span>
+<span class="p">[</span><span class="o">...............................</span>         <span class="p">]</span> <span class="mf">78.12500</span> <span class="o">/</span>
+<span class="p">[</span><span class="o">................................</span>        <span class="p">]</span> <span class="mf">81.25000</span> <span class="o">-</span>
+<span class="p">[</span><span class="o">.................................</span>       <span class="p">]</span> <span class="mf">84.37500</span> \
+<span class="p">[</span><span class="o">...................................</span>     <span class="p">]</span> <span class="mf">87.50000</span> <span class="o">|</span>
+<span class="p">[</span><span class="o">....................................</span>    <span class="p">]</span> <span class="mf">90.62500</span> <span class="o">/</span>
+<span class="p">[</span><span class="o">.....................................</span>   <span class="p">]</span> <span class="mf">93.75000</span> <span class="o">-</span>
+<span class="p">[</span><span class="o">......................................</span>  <span class="p">]</span> <span class="mf">96.87500</span> \
+<span class="p">[</span><span class="o">........................................</span><span class="p">]</span> <span class="mf">100.00000</span> <span class="o">|</span>    <span class="n">Computing</span> <span class="n">cluster</span> <span class="n">p</span><span class="o">-</span><span class="n">values</span>
+<span class="n">Done</span><span class="o">.</span>
+<span class="n">Updating</span> <span class="n">smoothing</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">be</span> <span class="n">patient</span><span class="o">..</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">1</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">2</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">3</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">4</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">5</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">6</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">7</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">8</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">9</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">10</span>
+<span class="n">colormap</span><span class="p">:</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">0.00e+00</span> <span class="n">fmid</span><span class="o">=</span><span class="mf">1.50e+01</span> <span class="n">fmax</span><span class="o">=</span><span class="mf">3.00e+01</span> <span class="n">transparent</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">Updating</span> <span class="n">smoothing</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">be</span> <span class="n">patient</span><span class="o">..</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">1</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">2</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">3</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">4</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">5</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">6</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">7</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">8</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">9</span>
+<span class="n">Smoothing</span> <span class="n">matrix</span> <span class="n">creation</span><span class="p">,</span> <span class="n">step</span> <span class="mi">10</span>
+<span class="n">colormap</span><span class="p">:</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">0.00e+00</span> <span class="n">fmid</span><span class="o">=</span><span class="mf">1.50e+01</span> <span class="n">fmax</span><span class="o">=</span><span class="mf">3.00e+01</span> <span class="n">transparent</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -209,9 +210,9 @@ colormap: fmin=0.00e+00 fmid=1.50e+01 fmax=3.00e+01 transparent=1
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
-<span class="kn">from</span> <span class="nn">mne</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.spatial_tris_connectivity.html#mne.spatial_tris_connectivity" title="View documentation for mne.spatial_tris_connectivity"><span class="n">spatial_tris_connectivity</span></a><span class="p">,</span> <a href="http://martinos.org/mne/stable/generated/mne.grade_to_tris.html#mne.grade_to_tris" title="View documentation for mne.grade_to_tris"><span class="n">grade_to_tris</span></a>
-<span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <span class="p">(</span><a href="http://martinos.org/mne/stable/generated/mne.stats.spatio_temporal_cluster_1samp_test.html#mne.stats.spatio_temporal_cluster_1samp_test" title="View documentation for mne.stats.spatio_temporal_cluster_1samp_test"><span class="n">spatio_temporal_cluster_1samp_test</span></a><span class="p">,</span>
-                       <a href="http://martinos.org/mne/stable/generated/mne.stats.summarize_clusters_stc.html#mne.stats.summarize_clusters_stc" title="View documentation for mne.stats.summarize_clusters_stc"><span class="n">summarize_clusters_stc</span></a><span class="p">,</span> <a href="http://martinos.org/mne/stable/generated/mne.stats.ttest_1samp_no_p.html#mne.stats.ttest_1samp_no_p" title="View documentation for mne.stats.ttest_1samp_no_p"><span class="n">ttest_1samp_no_p</span></a><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">mne</span> <span class="kn">import</span> <a href="http://mne-tools.github.io/stable/generated/mne.spatial_tris_connectivity.html#mne.spatial_tris_connectivity" title="View documentation for mne.spatial_tris_connectivity"><span class="n">spatial_tris_connectivity</span></a><span class="p">,</span> <a href="http://mne-tools.github.io/stable/generated/mne.grade_to_tris.html#mne.grade_to_tris" title="View documentation for mne.grade_to_tris"><span class="n">grade_to_tris</span></a>
+<span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <span class="p">(</span><a href="http://mne-tools.github.io/stable/generated/mne.stats.spatio_temporal_cluster_1samp_test.html#mne.stats.spatio_temporal_cluster_1samp_test" title="View documentation for mne.stats.spatio_temporal_cluster_1samp_test"><span class="n">spatio_temporal_cluster_1samp_test</span></a><span class="p">,</span>
+                       <a href="http://mne-tools.github.io/stable/generated/mne.stats.summarize_clusters_stc.html#mne.stats.summarize_clusters_stc" title="View documentation for mne.stats.summarize_clusters_stc"><span class="n">summarize_clusters_stc</span></a><span class="p">,</span> <a href="http://mne-tools.github.io/stable/generated/mne.stats.ttest_1samp_no_p.html#mne.stats.ttest_1samp_no_p" title="View documentation for mne.stats.ttest_1samp_no_p"><span class="n">ttest_1samp_no_p</span></a><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">subjects_dir</span>
 
@@ -223,27 +224,27 @@ colormap: fmin=0.00e+00 fmid=1.50e+01 fmax=3.00e+01 transparent=1
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;processing subject: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">data_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
-    <span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;contrast-morphed&#39;</span><span class="p">))</span>
+    <span class="n">contrast</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_source_estimate.html#mne.read_source_estimate" title="View documentation for mne.read_source_estimate"><span class="n">mne</span><span class="o">.</span><span class="n">read_source_estimate</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;contrast-morphed&#39;</span><span class="p">))</span>
     <span class="n">contrast</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">contrast</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
     <span class="n">contrasts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contrast</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.array.html#numpy.array" title="View documentation for numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">contrasts</span><span class="p">))</span>
 
-<span class="n">connectivity</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.spatial_tris_connectivity.html#mne.spatial_tris_connectivity" title="View documentation for mne.spatial_tris_connectivity"><span class="n">spatial_tris_connectivity</span></a><span class="p">(</span><a href="http://martinos.org/mne/stable/generated/mne.grade_to_tris.html#mne.grade_to_tris" title="View documentation for mne.grade_to_tris"><span class="n">grade_to_tris</span></a><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">connectivity</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.spatial_tris_connectivity.html#mne.spatial_tris_connectivity" title="View documentation for mne.spatial_tris_connectivity"><span class="n">spatial_tris_connectivity</span></a><span class="p">(</span><a href="http://mne-tools.github.io/stable/generated/mne.grade_to_tris.html#mne.grade_to_tris" title="View documentation for mne.grade_to_tris"><span class="n">grade_to_tris</span></a><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 <span class="n">p_threshold</span> <span class="o">=</span> <span class="mf">0.001</span>
 <span class="n">t_threshold</span> <span class="o">=</span> <span class="o">-</span><span class="n">stats</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p_threshold</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 
-<span class="n">stat_fun</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><a href="http://martinos.org/mne/stable/generated/mne.stats.ttest_1samp_no_p.html#mne.stats.ttest_1samp_no_p" title="View documentation for mne.stats.ttest_1samp_no_p"><span class="n">ttest_1samp_no_p</span></a><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">stat_fun</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><a href="http://mne-tools.github.io/stable/generated/mne.stats.ttest_1samp_no_p.html#mne.stats.ttest_1samp_no_p" title="View documentation for mne.stats.ttest_1samp_no_p"><span class="n">ttest_1samp_no_p</span></a><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">T_obs</span><span class="p">,</span> <span class="n">clusters</span><span class="p">,</span> <span class="n">cluster_p_values</span><span class="p">,</span> <span class="n">H0</span> <span class="o">=</span> <span class="n">clu</span> <span class="o">=</span> \
-    <a href="http://martinos.org/mne/stable/generated/mne.stats.spatio_temporal_cluster_1samp_test.html#mne.stats.spatio_temporal_cluster_1samp_test" title="View documentation for mne.stats.spatio_temporal_cluster_1samp_test"><span class="n">spatio_temporal_cluster_1samp_test</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">connectivity</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <a href="http://mne-tools.github.io/stable/generated/mne.stats.spatio_temporal_cluster_1samp_test.html#mne.stats.spatio_temporal_cluster_1samp_test" title="View documentation for mne.stats.spatio_temporal_cluster_1samp_test"><span class="n">spatio_temporal_cluster_1samp_test</span></a><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">connectivity</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                        <span class="n">threshold</span><span class="o">=</span><span class="n">t_threshold</span><span class="p">,</span>
                                        <span class="n">stat_fun</span><span class="o">=</span><span class="n">stat_fun</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="n">good_cluster_inds</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.where.html#numpy.where" title="View documentation for numpy.where"><span class="n">np</span><span class="o">.</span><span class="n">where</span></a><span class="p">(</span><span class="n">cluster_p_values</span> <span class="o">&lt;</span> <span class="n">p_threshold</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">tstep</span> <span class="o">=</span> <span class="n">contrast</span><span class="o">.</span><span class="n">tstep</span>
 <span class="n">fsave_vertices</span> <span class="o">=</span> <span class="p">[</span><a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">2562</span><span class="p">),</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.arange.html#numpy.arange" title="View documentation for numpy.arange"><span class="n">np</span><span class="o">.</span><span class="n">arange</span></a><span class="p">(</span><span class="mi">2562</span><span class="p">)]</span>
-<span class="n">stc_all_cluster_vis</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.stats.summarize_clusters_stc.html#mne.stats.summarize_clusters_stc" title="View documentation for mne.stats.summarize_clusters_stc"><span class="n">summarize_clusters_stc</span></a><span class="p">(</span><span class="n">clu</span><span class="p">,</span> <span class="n">tstep</span><span class="o">=</span><span class="n">tstep</span><span class="p">,</span>
+<span class="n">stc_all_cluster_vis</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.stats.summarize_clusters_stc.html#mne.stats.summarize_clusters_stc" title="View documentation for mne.stats.summarize_clusters_stc"><span class="n">summarize_clusters_stc</span></a><span class="p">(</span><span class="n">clu</span><span class="p">,</span> <span class="n">tstep</span><span class="o">=</span><span class="n">tstep</span><span class="p">,</span>
                                              <span class="n">vertices</span><span class="o">=</span><span class="n">fsave_vertices</span><span class="p">,</span>
                                              <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;fsaverage&#39;</span><span class="p">)</span>
 
@@ -253,13 +254,14 @@ colormap: fmin=0.00e+00 fmid=1.50e+01 fmax=3.00e+01 transparent=1
                                  <span class="n">clim</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">lims</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong>
-(1 minutes 2.315 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 1 minutes  32.456 seconds)</p>
+<div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_source_stats.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_source_stats.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/plot_source_stats.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_source_stats.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_source_stats.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">plot_source_stats.ipynb</span></code></a></div>
-<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<a class="reference download internal" href="../_downloads/plot_source_stats.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_source_stats.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
 
@@ -274,8 +276,8 @@ colormap: fmin=0.00e+00 fmid=1.50e+01 fmax=3.00e+01 transparent=1
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-07-11.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>
 </footer>

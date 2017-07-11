@@ -1,0 +1,148 @@
+
+
+.. _sphx_glr_auto_examples_plot_source_stats.py:
+
+
+=====================
+Source space clusters
+=====================
+
+Clustering in source space.
+
+
+
+
+.. image:: /auto_examples/images/sphx_glr_plot_source_stats_001.png
+    :align: center
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out::
+
+    processing subject: sub002
+    processing subject: sub003
+    processing subject: sub004
+    processing subject: sub006
+    processing subject: sub007
+    processing subject: sub008
+    processing subject: sub009
+    processing subject: sub010
+    processing subject: sub011
+    processing subject: sub012
+    processing subject: sub013
+    processing subject: sub014
+    processing subject: sub015
+    processing subject: sub017
+    processing subject: sub018
+    processing subject: sub019
+    -- number of connected vertices : 5124
+    stat_fun(H1): min=0.242443 max=5.202197
+    Provided stat_fun does not treat variables independently. Setting buffer_size to None.
+    Running initial clustering
+    Found 98 clusters
+    Permuting ...
+    [                                        ] 0.09766 |        [.                                       ] 3.12500 /        [..                                      ] 6.25000 -        [...                                     ] 9.37500 \        [.....                                   ] 12.50000 |        [......                                  ] 15.62500 /        [.......                                 ] 18.75000 -        [........                                ] 21.87500 \        [..........                              ] 25.00000 |        [...........                             ] 28.12500 /        [............                            ] 31.25000 -        [.............                           ] 34.37500 \        [...............                         ] 37.50000 |        [................                        ] 40.62500 /        [.................                       ] 43.75000 -        [..................                      ] 46.87500 \        [....................                    ] 50.00000 |        [.....................                   ] 53.12500 /        [......................                  ] 56.25000 -        [.......................                 ] 59.37500 \        [.........................               ] 62.50000 |        [..........................              ] 65.62500 /        [...........................             ] 68.75000 -        [............................            ] 71.87500 \        [..............................          ] 75.00000 |        [...............................         ] 78.12500 /        [................................        ] 81.25000 -        [.................................       ] 84.37500 \        [...................................     ] 87.50000 |        [....................................    ] 90.62500 /        [.....................................   ] 93.75000 -        [......................................  ] 96.87500 \        [........................................] 100.00000 |    Computing cluster p-values
+    Done.
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=0.00e+00 fmid=1.50e+01 fmax=3.00e+01 transparent=1
+    Updating smoothing matrix, be patient..
+    Smoothing matrix creation, step 1
+    Smoothing matrix creation, step 2
+    Smoothing matrix creation, step 3
+    Smoothing matrix creation, step 4
+    Smoothing matrix creation, step 5
+    Smoothing matrix creation, step 6
+    Smoothing matrix creation, step 7
+    Smoothing matrix creation, step 8
+    Smoothing matrix creation, step 9
+    Smoothing matrix creation, step 10
+    colormap: fmin=0.00e+00 fmid=1.50e+01 fmax=3.00e+01 transparent=1
+
+
+
+
+|
+
+
+.. code-block:: python
+
+    import os.path as op
+    import numpy as np
+    from scipy import stats
+    from functools import partial
+
+    import mne
+    from mne import spatial_tris_connectivity, grade_to_tris
+    from mne.stats import (spatio_temporal_cluster_1samp_test,
+                           summarize_clusters_stc, ttest_1samp_no_p)
+
+    from library.config import meg_dir, subjects_dir
+
+    exclude = [1, 5, 16]  # Excluded subjects
+    contrasts = list()
+    for subject_id in range(1, 20):
+        if subject_id in exclude:
+            continue
+        subject = "sub%03d" % subject_id
+        print("processing subject: %s" % subject)
+        data_path = op.join(meg_dir, subject)
+        contrast = mne.read_source_estimate(op.join(data_path, 'contrast-morphed'))
+        contrast.resample(100)
+        contrast.crop(0., None)
+        contrasts.append(contrast.data.T)
+
+    X = np.abs(np.array(contrasts))
+
+    connectivity = spatial_tris_connectivity(grade_to_tris(4))
+    p_threshold = 0.001
+    t_threshold = -stats.distributions.t.ppf(p_threshold / 2., 15)
+
+    stat_fun = partial(ttest_1samp_no_p, sigma=0.5)
+    T_obs, clusters, cluster_p_values, H0 = clu = \
+        spatio_temporal_cluster_1samp_test(X, connectivity=connectivity, n_jobs=1,
+                                           threshold=t_threshold,
+                                           stat_fun=stat_fun, verbose=True)
+
+    good_cluster_inds = np.where(cluster_p_values < p_threshold)[0]
+    tstep = contrast.tstep
+    fsave_vertices = [np.arange(2562), np.arange(2562)]
+    stc_all_cluster_vis = summarize_clusters_stc(clu, tstep=tstep,
+                                                 vertices=fsave_vertices,
+                                                 subject='fsaverage')
+
+    brain = stc_all_cluster_vis.plot(hemi='both', subjects_dir=subjects_dir,
+                                     time_label='Duration significant (ms)',
+                                     views='ven',
+                                     clim=dict(lims=[0, 15, 30], kind='value'))
+
+**Total running time of the script:** ( 1 minutes  32.456 seconds)
+
+
+
+.. container:: sphx-glr-footer
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: plot_source_stats.py <plot_source_stats.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: plot_source_stats.ipynb <plot_source_stats.ipynb>`
+
+.. rst-class:: sphx-glr-signature
+
+    `Generated by Sphinx-Gallery <https://sphinx-gallery.readthedocs.io>`_

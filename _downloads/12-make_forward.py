@@ -14,18 +14,23 @@ from library.config import (study_path, meg_dir, subjects_dir, spacing, N_JOBS,
                             mindist)
 
 
+exclude = [1, 5, 16]  # Excluded subjects
+
+
 def run_forward(subject_id):
+    if subject_id in exclude:
+        return
     subject = "sub%03d" % subject_id
     print("processing subject: %s" % subject)
     data_path = op.join(meg_dir, subject)
 
-    fname_ave = op.join(data_path, '%s-ave.fif' % subject)
+    fname_ave = op.join(data_path, '%s_highpass-1Hz_ave.fif' % subject)
     fname_fwd = op.join(data_path, '%s-meg-%s-fwd.fif' % (subject, spacing))
     fname_trans = op.join(study_path, 'ds117', subject, 'MEG',
                           '%s-trans.fif' % subject)
 
     src = mne.setup_source_space(subject, spacing=spacing,
-                                 subjects_dir=subjects_dir, overwrite=True,
+                                 subjects_dir=subjects_dir,
                                  n_jobs=1, add_dist=False)
 
     src_fname = op.join(subjects_dir, subject, '%s-src.fif' % spacing)
@@ -36,8 +41,8 @@ def run_forward(subject_id):
     bem = mne.make_bem_solution(bem_model)
     info = mne.read_evokeds(fname_ave, condition=0).info
     fwd = mne.make_forward_solution(info, trans=fname_trans, src=src, bem=bem,
-                                    fname=None, meg=True, eeg=False,
-                                    mindist=mindist, n_jobs=1, overwrite=True)
+                                    meg=True, eeg=False, mindist=mindist,
+                                    n_jobs=1)
     fwd = mne.convert_forward_solution(fwd, surf_ori=True)
     mne.write_forward_solution(fname_fwd, fwd, overwrite=True)
 

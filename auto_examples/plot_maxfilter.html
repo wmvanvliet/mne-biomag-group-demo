@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Maxwell filtering &mdash; MNE Biomag Demo</title>
+    <title>Maxwell filtering &#8212; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -19,25 +18,27 @@
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body role="document">
+  <body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -118,78 +119,78 @@
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
-<span class="kn">from</span> <span class="nn">mne</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">Epochs</span></a>
-<span class="kn">from</span> <span class="nn">mne.preprocessing</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.maxwell_filter.html#mne.preprocessing.maxwell_filter" title="View documentation for mne.preprocessing.maxwell_filter"><span class="n">maxwell_filter</span></a>
+<span class="kn">from</span> <span class="nn">mne</span> <span class="kn">import</span> <a href="http://mne-tools.github.io/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">Epochs</span></a>
+<span class="kn">from</span> <span class="nn">mne.preprocessing</span> <span class="kn">import</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.maxwell_filter.html#mne.preprocessing.maxwell_filter" title="View documentation for mne.preprocessing.maxwell_filter"><span class="n">maxwell_filter</span></a>
 
-<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span><span class="p">,</span> <span class="n">cal</span><span class="p">,</span> <span class="n">ctc</span>
+<span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">study_path</span><span class="p">,</span> <span class="n">cal</span><span class="p">,</span> <span class="n">ctc</span><span class="p">,</span> <span class="n">set_matplotlib_defaults</span>
 
 <span class="n">event_ids</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>  <span class="c1"># Famous faces</span>
 
-<span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub003&quot;</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub001&quot;</span>
 <span class="n">bads</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MEG1031&#39;</span><span class="p">,</span> <span class="s1">&#39;MEG1111&#39;</span><span class="p">,</span> <span class="s1">&#39;MEG2113&#39;</span><span class="p">]</span>
 <span class="n">filter_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">fir_window</span><span class="o">=</span><span class="s1">&#39;hann&#39;</span><span class="p">,</span> <span class="n">l_trans_bandwidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span>
-                     <span class="n">h_trans_bandwidth</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+                     <span class="n">h_trans_bandwidth</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">filter_length</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+                     <span class="n">fir_design</span><span class="o">=</span><span class="s1">&#39;firwin&#39;</span><span class="p">)</span>
 
 <span class="n">raw_fname_in</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;run_01_raw.fif&#39;</span><span class="p">)</span>
 <span class="n">sss_fname_in</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">study_path</span><span class="p">,</span> <span class="s1">&#39;ds117&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;MEG&#39;</span><span class="p">,</span> <span class="s1">&#39;run_01_sss.fif&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>First the filtered raw data.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">raw_fname_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">raw_fname_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;bads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bads</span>
-<span class="n">picks</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.pick_types.html#mne.pick_types" title="View documentation for mne.pick_types"><span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span></a><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="s1">&#39;bads&#39;</span><span class="p">)</span>
-<span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
+<span class="n">picks</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.pick_types.html#mne.pick_types" title="View documentation for mne.pick_types"><span class="n">mne</span><span class="o">.</span><span class="n">pick_types</span></a><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">meg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="s1">&#39;bads&#39;</span><span class="p">)</span>
+<span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
 
-<span class="n">events</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.find_events.html#mne.find_events" title="View documentation for mne.find_events"><span class="n">mne</span><span class="o">.</span><span class="n">find_events</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">stim_channel</span><span class="o">=</span><span class="s1">&#39;STI101&#39;</span><span class="p">,</span> <span class="n">consecutive</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">,</span>
+<span class="n">events</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.find_events.html#mne.find_events" title="View documentation for mne.find_events"><span class="n">mne</span><span class="o">.</span><span class="n">find_events</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">stim_channel</span><span class="o">=</span><span class="s1">&#39;STI101&#39;</span><span class="p">,</span> <span class="n">consecutive</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">,</span>
                          <span class="n">mask</span><span class="o">=</span><span class="mi">4352</span><span class="p">,</span> <span class="n">mask_type</span><span class="o">=</span><span class="s1">&#39;not_and&#39;</span><span class="p">,</span> <span class="n">min_duration</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
                          <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">evoked_before</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+<span class="n">evoked_before</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub003/MEG/run_01_raw.fif...
-    Read a total of 8 projection items:
-        mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v3 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v4 (1 x 306)  idle
-        mag_ssp_upright.fif : PCA-mags-v5 (1 x 306)  idle
-        grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
-        grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
-        grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
-    Range : 222200 ... 765599 =    202.000 ...   695.999 secs
-Ready.
-Current compensation grade : 0
-Reading 0 ... 543399  =      0.000 ...   493.999 secs...
-Band-pass filtering from 1 - 40 Hz
-h_trans_bandwidth chosen to be 10.0 Hz
-Filter length of 13640 samples (12.400 sec) selected
-147 events found
-Events id: [ 5  6  7 13 14 15 17 18 19]
-48 matching events found
-Applying baseline correction (mode: mean)
-Created an SSP operator (subspace dimension = 8)
-8 projection items activated
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Opening</span> <span class="n">raw</span> <span class="n">data</span> <span class="n">file</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">ds117</span><span class="o">/</span><span class="n">sub001</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">run_01_raw</span><span class="o">.</span><span class="n">fif</span><span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">8</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v1</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v2</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v3</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v4</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">mag_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">mags</span><span class="o">-</span><span class="n">v5</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">grad_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">grad</span><span class="o">-</span><span class="n">v1</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">grad_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">grad</span><span class="o">-</span><span class="n">v2</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+        <span class="n">grad_ssp_upright</span><span class="o">.</span><span class="n">fif</span> <span class="p">:</span> <span class="n">PCA</span><span class="o">-</span><span class="n">grad</span><span class="o">-</span><span class="n">v3</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">306</span><span class="p">)</span>  <span class="n">idle</span>
+    <span class="n">Range</span> <span class="p">:</span> <span class="mi">268400</span> <span class="o">...</span> <span class="mi">815099</span> <span class="o">=</span>    <span class="mf">244.000</span> <span class="o">...</span>   <span class="mf">740.999</span> <span class="n">secs</span>
+<span class="n">Ready</span><span class="o">.</span>
+<span class="n">Current</span> <span class="n">compensation</span> <span class="n">grade</span> <span class="p">:</span> <span class="mi">0</span>
+<span class="n">Reading</span> <span class="mi">0</span> <span class="o">...</span> <span class="mi">546699</span>  <span class="o">=</span>      <span class="mf">0.000</span> <span class="o">...</span>   <span class="mf">496.999</span> <span class="n">secs</span><span class="o">...</span>
+<span class="n">Setting</span> <span class="n">up</span> <span class="n">low</span><span class="o">-</span><span class="k">pass</span> <span class="nb">filter</span> <span class="n">at</span> <span class="mi">40</span> <span class="n">Hz</span>
+<span class="n">h_trans_bandwidth</span> <span class="n">chosen</span> <span class="n">to</span> <span class="n">be</span> <span class="mf">10.0</span> <span class="n">Hz</span>
+<span class="n">Filter</span> <span class="n">length</span> <span class="n">of</span> <span class="mi">341</span> <span class="n">samples</span> <span class="p">(</span><span class="mf">0.310</span> <span class="n">sec</span><span class="p">)</span> <span class="n">selected</span>
+<span class="mi">148</span> <span class="n">events</span> <span class="n">found</span>
+<span class="n">Events</span> <span class="nb">id</span><span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>  <span class="mi">6</span>  <span class="mi">7</span> <span class="mi">13</span> <span class="mi">14</span> <span class="mi">15</span> <span class="mi">17</span> <span class="mi">18</span> <span class="mi">19</span><span class="p">]</span>
+<span class="mi">50</span> <span class="n">matching</span> <span class="n">events</span> <span class="n">found</span>
+<span class="n">Created</span> <span class="n">an</span> <span class="n">SSP</span> <span class="n">operator</span> <span class="p">(</span><span class="n">subspace</span> <span class="n">dimension</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span>
+<span class="mi">8</span> <span class="n">projection</span> <span class="n">items</span> <span class="n">activated</span>
 </pre></div>
 </div>
-<p>Then Maxfiltered and SSS&#8217;d data.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">raw_fname_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="n">raw_sss</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">sss_fname_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<p>Then Maxfiltered and SSS’d data.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">raw</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">raw_fname_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">raw_sss</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">sss_fname_in</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">raw</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;bads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bads</span>
 <span class="n">raw_sss</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;bads&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bads</span>
 
-<span class="n">raw</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.maxwell_filter.html#mne.preprocessing.maxwell_filter" title="View documentation for mne.preprocessing.maxwell_filter"><span class="n">maxwell_filter</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">calibration</span><span class="o">=</span><span class="n">cal</span><span class="p">,</span> <span class="n">cross_talk</span><span class="o">=</span><span class="n">ctc</span><span class="p">)</span>
+<span class="n">raw</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.maxwell_filter.html#mne.preprocessing.maxwell_filter" title="View documentation for mne.preprocessing.maxwell_filter"><span class="n">maxwell_filter</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">calibration</span><span class="o">=</span><span class="n">cal</span><span class="p">,</span> <span class="n">cross_talk</span><span class="o">=</span><span class="n">ctc</span><span class="p">,</span> <span class="n">st_duration</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span>
 
-<span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
-<span class="n">raw_sss</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
+<span class="n">raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
+<span class="n">raw_sss</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="o">**</span><span class="n">filter_params</span><span class="p">)</span>
 
-<span class="n">evoked_after</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
-<span class="n">evoked_sss</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw_sss</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+<span class="n">evoked_after</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
+<span class="n">evoked_sss</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.Epochs.html#mne.Epochs" title="View documentation for mne.Epochs"><span class="n">Epochs</span></a><span class="p">(</span><span class="n">raw_sss</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="n">event_ids</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="n">picks</span><span class="p">)</span><span class="o">.</span><span class="n">average</span><span class="p">()</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub003/MEG/run_01_raw.fif...
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub001/MEG/run_01_raw.fif...
     Read a total of 8 projection items:
         mag_ssp_upright.fif : PCA-mags-v1 (1 x 306)  idle
         mag_ssp_upright.fif : PCA-mags-v2 (1 x 306)  idle
@@ -199,74 +200,125 @@ Created an SSP operator (subspace dimension = 8)
         grad_ssp_upright.fif : PCA-grad-v1 (1 x 306)  idle
         grad_ssp_upright.fif : PCA-grad-v2 (1 x 306)  idle
         grad_ssp_upright.fif : PCA-grad-v3 (1 x 306)  idle
-    Range : 222200 ... 765599 =    202.000 ...   695.999 secs
+    Range : 268400 ... 815099 =    244.000 ...   740.999 secs
 Ready.
 Current compensation grade : 0
-Reading 0 ... 543399  =      0.000 ...   493.999 secs...
-Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub003/MEG/run_01_sss.fif...
-This filename (/tsi/doctorants/data_gramfort/dgw_faces/ds117/sub003/MEG/run_01_sss.fif) does not conform to MNE naming conventions. All raw files should end with raw.fif, raw_sss.fif, raw_tsss.fif, raw.fif.gz, raw_sss.fif.gz or raw_tsss.fif.gz
-    Range : 222200 ... 765599 =    202.000 ...   695.999 secs
+Reading 0 ... 546699  =      0.000 ...   496.999 secs...
+Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/ds117/sub001/MEG/run_01_sss.fif...
+This filename (/tsi/doctorants/data_gramfort/dgw_faces/ds117/sub001/MEG/run_01_sss.fif) does not conform to MNE naming conventions. All raw files should end with raw.fif, raw_sss.fif, raw_tsss.fif, raw.fif.gz, raw_sss.fif.gz or raw_tsss.fif.gz
+    Range : 268400 ... 815099 =    244.000 ...   740.999 secs
 Ready.
 Current compensation grade : 0
-Reading 0 ... 543399  =      0.000 ...   493.999 secs...
+Reading 0 ... 546699  =      0.000 ...   496.999 secs...
 Maxwell filtering raw data
     Using loaded raw data
 100 T1/T2 magnetometer channel types found. If using SSS, it is advised to replace coil types using &quot;fix_mag_coil_types&quot;.
     Bad MEG channels being reconstructed: [&#39;MEG1031&#39;, &#39;MEG1111&#39;, &#39;MEG2113&#39;]
     Processing 204 gradiometers and 102 magnetometers
     Using fine calibration sss_cal.dat
-Overwriting existing file.
         Adjusting non-orthogonal EX and EY
         Adjusted coil positions by (μ ± σ): 0.3° ± 0.3° (max: 1.3°)
-(X, Y) fit (0.4, 20.7) more than 20 mm from head frame origin
-    Automatic origin fit: head of radius 106.5 mm
-    Using origin 0.4, 20.7, 79.3 mm in the head frame
+(X, Y) fit (1.5, 27.5) more than 20 mm from head frame origin
+    Automatic origin fit: head of radius 83.1 mm
+    Using origin 1.5, 27.5, 26.0 mm in the head frame
+    Processing data using tSSS with st_duration=10.0
+    Spatiotemporal window did not fit evenly into raw object. The final 17.00 seconds were lumped onto the previous window.
     Computing regularization
-        Using 94/95 harmonic components for    0.000  (79/80 in, 15/15 out)
+        Using 80/95 harmonic components for    0.000  (65/80 in, 15/15 out)
     Processing 49 data chunks of (at least) 10.0 sec
+        Projecting  1 intersecting tSSS components for    0.000 -    9.999 sec  (#1/49)
+        Projecting  1 intersecting tSSS components for   10.000 -   19.999 sec  (#2/49)
+        Projecting 11 intersecting tSSS components for   20.000 -   29.999 sec  (#3/49)
+        Projecting 11 intersecting tSSS components for   30.000 -   39.999 sec  (#4/49)
+        Projecting 11 intersecting tSSS components for   40.000 -   49.999 sec  (#5/49)
+        Projecting 11 intersecting tSSS components for   50.000 -   59.999 sec  (#6/49)
+        Projecting 11 intersecting tSSS components for   60.000 -   69.999 sec  (#7/49)
+        Projecting 11 intersecting tSSS components for   70.000 -   79.999 sec  (#8/49)
+        Projecting 11 intersecting tSSS components for   80.000 -   89.999 sec  (#9/49)
+        Projecting 11 intersecting tSSS components for   90.000 -   99.999 sec (#10/49)
+        Projecting 11 intersecting tSSS components for  100.000 -  109.999 sec (#11/49)
+        Projecting 11 intersecting tSSS components for  110.000 -  119.999 sec (#12/49)
+        Projecting 11 intersecting tSSS components for  120.000 -  129.999 sec (#13/49)
+        Projecting 11 intersecting tSSS components for  130.000 -  139.999 sec (#14/49)
+        Projecting 11 intersecting tSSS components for  140.000 -  149.999 sec (#15/49)
+        Projecting 11 intersecting tSSS components for  150.000 -  159.999 sec (#16/49)
+        Projecting 11 intersecting tSSS components for  160.000 -  169.999 sec (#17/49)
+        Projecting 11 intersecting tSSS components for  170.000 -  179.999 sec (#18/49)
+        Projecting 12 intersecting tSSS components for  180.000 -  189.999 sec (#19/49)
+        Projecting 12 intersecting tSSS components for  190.000 -  199.999 sec (#20/49)
+        Projecting 12 intersecting tSSS components for  200.000 -  209.999 sec (#21/49)
+        Projecting 11 intersecting tSSS components for  210.000 -  219.999 sec (#22/49)
+        Projecting 11 intersecting tSSS components for  220.000 -  229.999 sec (#23/49)
+        Projecting 11 intersecting tSSS components for  230.000 -  239.999 sec (#24/49)
+        Projecting 11 intersecting tSSS components for  240.000 -  249.999 sec (#25/49)
+        Projecting 11 intersecting tSSS components for  250.000 -  259.999 sec (#26/49)
+        Projecting 11 intersecting tSSS components for  260.000 -  269.999 sec (#27/49)
+        Projecting 11 intersecting tSSS components for  270.000 -  279.999 sec (#28/49)
+        Projecting 11 intersecting tSSS components for  280.000 -  289.999 sec (#29/49)
+        Projecting 11 intersecting tSSS components for  290.000 -  299.999 sec (#30/49)
+        Projecting 11 intersecting tSSS components for  300.000 -  309.999 sec (#31/49)
+        Projecting 11 intersecting tSSS components for  310.000 -  319.999 sec (#32/49)
+        Projecting 11 intersecting tSSS components for  320.000 -  329.999 sec (#33/49)
+        Projecting 11 intersecting tSSS components for  330.000 -  339.999 sec (#34/49)
+        Projecting 11 intersecting tSSS components for  340.000 -  349.999 sec (#35/49)
+        Projecting 11 intersecting tSSS components for  350.000 -  359.999 sec (#36/49)
+        Projecting 11 intersecting tSSS components for  360.000 -  369.999 sec (#37/49)
+        Projecting 11 intersecting tSSS components for  370.000 -  379.999 sec (#38/49)
+        Projecting 11 intersecting tSSS components for  380.000 -  389.999 sec (#39/49)
+        Projecting 11 intersecting tSSS components for  390.000 -  399.999 sec (#40/49)
+        Projecting 11 intersecting tSSS components for  400.000 -  409.999 sec (#41/49)
+        Projecting 11 intersecting tSSS components for  410.000 -  419.999 sec (#42/49)
+        Projecting 11 intersecting tSSS components for  420.000 -  429.999 sec (#43/49)
+        Projecting 11 intersecting tSSS components for  430.000 -  439.999 sec (#44/49)
+        Projecting 11 intersecting tSSS components for  440.000 -  449.999 sec (#45/49)
+        Projecting 11 intersecting tSSS components for  450.000 -  459.999 sec (#46/49)
+        Projecting 11 intersecting tSSS components for  460.000 -  469.999 sec (#47/49)
+        Projecting 11 intersecting tSSS components for  470.000 -  479.999 sec (#48/49)
+        Projecting 11 intersecting tSSS components for  480.000 -  496.999 sec (#49/49)
 [done]
-Band-pass filtering from 1 - 40 Hz
+Setting up low-pass filter at 40 Hz
 h_trans_bandwidth chosen to be 10.0 Hz
-Filter length of 13640 samples (12.400 sec) selected
-Band-pass filtering from 1 - 40 Hz
+Filter length of 341 samples (0.310 sec) selected
+Setting up low-pass filter at 40 Hz
 h_trans_bandwidth chosen to be 10.0 Hz
-Filter length of 13640 samples (12.400 sec) selected
-48 matching events found
-Applying baseline correction (mode: mean)
+Filter length of 341 samples (0.310 sec) selected
+50 matching events found
 0 projection items activated
-48 matching events found
-Applying baseline correction (mode: mean)
+50 matching events found
 0 projection items activated
 </pre></div>
 </div>
 <p>Plotting</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ylim</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">grad</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">mag</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">))</span>
-<span class="n">evoked_before</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">,</span>
-                   <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grad&#39;</span><span class="p">:</span> <span class="s1">&#39;Gradiometers before SSS&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;Magnetometers before SSS&#39;</span><span class="p">})</span>
-<span class="n">evoked_after</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">,</span>
-                  <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grad&#39;</span><span class="p">:</span> <span class="s1">&#39;SSS gradiometers&#39;</span><span class="p">,</span>
-                          <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;SSS magnetometers&#39;</span><span class="p">})</span>
-<span class="n">evoked_sss</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">,</span>
-                <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grad&#39;</span><span class="p">:</span> <span class="s1">&#39;Maxfilter (TM) gradiometers&#39;</span><span class="p">,</span>
-                        <span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;Maxfilter (TM) magnetometers&#39;</span><span class="p">})</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># noqa</span>
+<span class="n">set_matplotlib_defaults</span><span class="p">(</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot" title="View documentation for matplotlib.pyplot"><span class="n">plt</span></a><span class="p">)</span>
+
+<span class="n">ylim</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mag</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots" title="View documentation for matplotlib.pyplot.subplots"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" title="View documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
+<span class="n">evoked_before</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="s1">&#39;mag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                         <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">,</span>
+                                         <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;Before SSS&#39;</span><span class="p">})</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<span class="n">evoked_after</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="s1">&#39;mag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                        <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;After SSS&#39;</span><span class="p">})</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+<span class="n">evoked_sss</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="s1">&#39;mag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">spatial_colors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                      <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">,</span>
+                                      <span class="n">titles</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mag&#39;</span><span class="p">:</span> <span class="s1">&#39;After Maxfilter (TM)&#39;</span><span class="p">})</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;Maxfilter.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_to_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<ul class="sphx-glr-horizontal">
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_maxfilter_001.png"><img alt="../_images/sphx_glr_plot_maxfilter_001.png" src="../_images/sphx_glr_plot_maxfilter_001.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_maxfilter_002.png"><img alt="../_images/sphx_glr_plot_maxfilter_002.png" src="../_images/sphx_glr_plot_maxfilter_002.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-<li><a class="first reference internal image-reference" href="../_images/sphx_glr_plot_maxfilter_003.png"><img alt="../_images/sphx_glr_plot_maxfilter_003.png" src="../_images/sphx_glr_plot_maxfilter_003.png" style="width: 376.0px; height: 282.0px;" /></a>
-</li>
-</ul>
-<p><strong>Total running time of the script:</strong>
-(1 minutes 52.193 seconds)</p>
+<img alt="../_images/sphx_glr_plot_maxfilter_001.png" class="align-center" src="../_images/sphx_glr_plot_maxfilter_001.png" />
+<p><strong>Total running time of the script:</strong> ( 3 minutes  36.288 seconds)</p>
+<div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_maxfilter.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_maxfilter.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/plot_maxfilter.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_maxfilter.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_maxfilter.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">plot_maxfilter.ipynb</span></code></a></div>
-<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<a class="reference download internal" href="../_downloads/plot_maxfilter.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_maxfilter.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
 
@@ -281,8 +333,8 @@ Applying baseline correction (mode: mean)
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-07-11.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>
 </footer>

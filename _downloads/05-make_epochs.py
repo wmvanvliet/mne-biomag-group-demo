@@ -19,7 +19,7 @@ import mne
 from mne.parallel import parallel_func
 from mne.preprocessing import create_ecg_epochs, read_ica
 
-from library.config import meg_dir, N_JOBS, map_subjects
+from library.config import meg_dir, N_JOBS, map_subjects, l_freq
 
 ###############################################################################
 # We define the events and the onset and offset of the epochs
@@ -37,7 +37,7 @@ events_id = {
 }
 
 tmin, tmax = -0.2, 0.8
-reject = dict(grad=4000e-13, mag=4e-12, eog=180e-6)
+reject = dict(grad=4000e-13, mag=4e-12)
 baseline = None
 
 
@@ -65,23 +65,16 @@ def run_epochs(subject_id, tsss=False):
         all_bads += [bad for bad in bads if bad not in all_bads]
 
     for run in range(1, 7):
-        print " - Run %s" % run
+        print(" - Run %s" % run)
         if tsss:
             run_fname = op.join(data_path, 'run_%02d_filt_tsss_raw.fif' % run)
         else:
-            run_fname = op.join(data_path, 'run_%02d_filt_sss_raw.fif' % run)
+            run_fname = op.join(data_path, 'run_%02d_filt_sss_'
+                                'highpass-%sHz_raw.fif' % (run, l_freq))
         if not os.path.exists(run_fname):
             continue
 
-        raw = mne.io.Raw(run_fname, preload=True, add_eeg_ref=False)
-
-        raw.set_channel_types({'EEG061': 'eog',
-                               'EEG062': 'eog',
-                               'EEG063': 'ecg',
-                               'EEG064': 'misc'})  # EEG064 free floating el.
-        raw.rename_channels({'EEG061': 'EOG061',
-                             'EEG062': 'EOG062',
-                             'EEG063': 'ECG063'})
+        raw = mne.io.Raw(run_fname, preload=True)
 
         eog_events = mne.preprocessing.find_eog_events(raw)
         eog_events[:, 0] -= int(0.25 * raw.info['sfreq'])
@@ -105,34 +98,38 @@ def run_epochs(subject_id, tsss=False):
 
         # Read epochs
         epochs = mne.Epochs(raw, events, events_id, tmin, tmax, proj=True,
-                            picks=picks, baseline=baseline, preload=True,
-                            decim=2, reject=reject, add_eeg_ref=False)
+                            picks=picks, baseline=baseline, preload=False,
+                            decim=2, reject=reject)
 
         # ICA
         if tsss:
             ica_name = op.join(meg_dir, subject, 'run_%02d-tsss-ica.fif' % run)
         else:
             ica_name = op.join(meg_dir, subject, 'run_%02d-ica.fif' % run)
-        ica = read_ica(ica_name)
-        n_max_ecg = 3  # use max 3 components
-        ecg_epochs = create_ecg_epochs(raw, tmin=-.5, tmax=.5)
-        ecg_inds, scores_ecg = ica.find_bads_ecg(ecg_epochs, method='ctps',
-                                                 threshold=0.8)
-        ica.exclude += ecg_inds[:n_max_ecg]
-
-        ica.apply(epochs)
+        if l_freq is not None:
+            epochs.load_data()
+            ica = read_ica(ica_name)
+            n_max_ecg = 3  # use max 3 components
+            ecg_epochs = create_ecg_epochs(raw, tmin=-.5, tmax=.5)
+            ecg_inds, scores_ecg = ica.find_bads_ecg(ecg_epochs, method='ctps',
+                                                     threshold=0.8)
+            ica.exclude += ecg_inds[:n_max_ecg]
+            ica.save(ica_name)
+            ica.apply(epochs)
+        del raw
         all_epochs.append(epochs)
 
     epochs = mne.epochs.concatenate_epochs(all_epochs)
     if tsss:
         epochs.save(op.join(data_path, '%s-tsss-epo.fif' % subject))
     else:
-        epochs.save(op.join(data_path, '%s-epo.fif' % subject))
+        epochs.save(op.join(data_path, '%s_highpass-%sHz-epo.fif'
+                    % (subject, l_freq)))
 
 
 ###############################################################################
 # Let us make the script parallel across subjects
 
-parallel, run_func, _ = parallel_func(run_epochs, n_jobs=N_JOBS)
+parallel, run_func, _ = parallel_func(run_epochs, n_jobs=1)
 parallel(run_func(subject_id) for subject_id in range(1, 20))
 run_epochs(1, True)  # run on maxwell filtered data

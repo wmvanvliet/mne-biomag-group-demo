@@ -15,12 +15,17 @@ from mne.minimum_norm import (make_inverse_operator, apply_inverse,
 from library.config import meg_dir, spacing, N_JOBS
 
 
+exclude = [1, 5, 16]  # Excluded subjects
+
+
 def run_inverse(subject_id):
+    if subject_id in exclude:
+        return
     subject = "sub%03d" % subject_id
     print("processing subject: %s" % subject)
     data_path = op.join(meg_dir, subject)
 
-    fname_ave = op.join(data_path, '%s-ave.fif' % subject)
+    fname_ave = op.join(data_path, '%s_highpass-1Hz_ave.fif' % subject)
     fname_cov = op.join(data_path, '%s-cov.fif' % subject)
     fname_fwd = op.join(data_path, '%s-meg-%s-fwd.fif' % (subject, spacing))
     fname_inv = op.join(data_path, '%s-meg-%s-inv.fif' % (subject, spacing))

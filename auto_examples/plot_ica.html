@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Remove ECG using ICA &mdash; MNE Biomag Demo</title>
+    <title>Remove ECG using ICA &#8212; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -19,25 +18,27 @@
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body role="document">
+  <body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -119,7 +120,7 @@
 <span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
-<span class="kn">from</span> <span class="nn">mne.preprocessing</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">,</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">read_ica</span></a>
+<span class="kn">from</span> <span class="nn">mne.preprocessing</span> <span class="kn">import</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">,</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">read_ica</span></a>
 
 <span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">map_subjects</span>
 
@@ -131,7 +132,7 @@
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>processing subject: sub005
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub005</span>
 </pre></div>
 </div>
 <p>Now we get the bad channels.</p>
@@ -148,15 +149,15 @@
 </div>
 <p>We read the data.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">run_fname</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">_filt_sss_raw.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
-<span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span><span class="p">(</span><span class="n">run_fname</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">add_eeg_ref</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">raw</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.io.read_raw_fif.html#mne.io.read_raw_fif" title="View documentation for mne.io.read_raw_fif"><span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_fif</span></a><span class="p">(</span><span class="n">run_fname</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Opening raw data file /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub005/run_01_filt_sss_raw.fif...
-    Range : 154000 ... 699599 =    140.000 ...   635.999 secs
-Ready.
-Current compensation grade : 0
-Reading 0 ... 545599  =      0.000 ...   495.999 secs...
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Opening</span> <span class="n">raw</span> <span class="n">data</span> <span class="n">file</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub005</span><span class="o">/</span><span class="n">run_01_filt_sss_raw</span><span class="o">.</span><span class="n">fif</span><span class="o">...</span>
+    <span class="n">Range</span> <span class="p">:</span> <span class="mi">154000</span> <span class="o">...</span> <span class="mi">699599</span> <span class="o">=</span>    <span class="mf">140.000</span> <span class="o">...</span>   <span class="mf">635.999</span> <span class="n">secs</span>
+<span class="n">Ready</span><span class="o">.</span>
+<span class="n">Current</span> <span class="n">compensation</span> <span class="n">grade</span> <span class="p">:</span> <span class="mi">0</span>
+<span class="n">Reading</span> <span class="mi">0</span> <span class="o">...</span> <span class="mi">545599</span>  <span class="o">=</span>      <span class="mf">0.000</span> <span class="o">...</span>   <span class="mf">495.999</span> <span class="n">secs</span><span class="o">...</span>
 </pre></div>
 </div>
 <p>We change the channel type for ECG and EOG.</p>
@@ -173,17 +174,18 @@ Reading 0 ... 545599  =      0.000 ...   495.999 secs...
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Computing interpolation matrix from 70 sensor positions
-Interpolating 0 sensors
-Adding average EEG reference projection.
-1 projection items deactivated
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Computing</span> <span class="n">interpolation</span> <span class="n">matrix</span> <span class="kn">from</span> <span class="mi">70</span> <span class="n">sensor</span> <span class="n">positions</span>
+<span class="n">Interpolating</span> <span class="mi">0</span> <span class="n">sensors</span>
+<span class="n">Adding</span> <span class="n">average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="n">projection</span><span class="o">.</span>
+<span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span> <span class="n">deactivated</span>
+<span class="n">Average</span> <span class="n">reference</span> <span class="n">projection</span> <span class="n">was</span> <span class="n">added</span><span class="p">,</span> <span class="n">but</span> <span class="n">hasn</span><span class="s1">&#39;t been applied yet. Use the .apply_proj() method function to apply projections.</span>
 </pre></div>
 </div>
-<p>Now let&#8217;s get to some serious ICA preprocessing</p>
+<p>Now let’s get to some serious ICA preprocessing</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ica_name</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;run_</span><span class="si">%02d</span><span class="s1">-ica.fif&#39;</span> <span class="o">%</span> <span class="n">run</span><span class="p">)</span>
-<span class="n">ica</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">read_ica</span></a><span class="p">(</span><span class="n">ica_name</span><span class="p">)</span>
+<span class="n">ica</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.read_ica.html#mne.preprocessing.read_ica" title="View documentation for mne.preprocessing.read_ica"><span class="n">read_ica</span></a><span class="p">(</span><span class="n">ica_name</span><span class="p">)</span>
 <span class="n">n_max_ecg</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># use max 3 components</span>
-<span class="n">ecg_epochs</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">tmin</span><span class="o">=-.</span><span class="mi">5</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ecg_epochs</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.preprocessing.create_ecg_epochs.html#mne.preprocessing.create_ecg_epochs" title="View documentation for mne.preprocessing.create_ecg_epochs"><span class="n">create_ecg_epochs</span></a><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">tmin</span><span class="o">=-.</span><span class="mi">5</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">ecg_inds</span><span class="p">,</span> <span class="n">scores_ecg</span> <span class="o">=</span> <span class="n">ica</span><span class="o">.</span><span class="n">find_bads_ecg</span><span class="p">(</span><span class="n">ecg_epochs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ctps&#39;</span><span class="p">,</span>
                                          <span class="n">threshold</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
 <span class="n">ica</span><span class="o">.</span><span class="n">plot_sources</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="n">ecg_inds</span><span class="p">)</span>
@@ -201,26 +203,26 @@ Adding average EEG reference projection.
 </li>
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub005/run_01-ica.fif ...
-Now restoring ICA solution ...
-Ready.
-Using channel ECG063 to identify heart beats.
-Band-pass filtering from 8 - 16 Hz
-Number of ECG events detected : 593 (average pulse 71 / min.)
-593 matching events found
-No baseline correction applied
-Created an SSP operator (subspace dimension = 1)
-Loading data for 593 events and 1101 original time points ...
-2 bad epochs dropped
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub005</span><span class="o">/</span><span class="n">run_01</span><span class="o">-</span><span class="n">ica</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+<span class="n">Now</span> <span class="n">restoring</span> <span class="n">ICA</span> <span class="n">solution</span> <span class="o">...</span>
+<span class="n">Ready</span><span class="o">.</span>
+<span class="n">Using</span> <span class="n">channel</span> <span class="n">ECG063</span> <span class="n">to</span> <span class="n">identify</span> <span class="n">heart</span> <span class="n">beats</span><span class="o">.</span>
+<span class="n">Setting</span> <span class="n">up</span> <span class="n">band</span><span class="o">-</span><span class="k">pass</span> <span class="nb">filter</span> <span class="kn">from</span> <span class="mi">8</span> <span class="o">-</span> <span class="mi">16</span> <span class="n">Hz</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">ECG</span> <span class="n">events</span> <span class="n">detected</span> <span class="p">:</span> <span class="mi">593</span> <span class="p">(</span><span class="n">average</span> <span class="n">pulse</span> <span class="mi">71</span> <span class="o">/</span> <span class="nb">min</span><span class="o">.</span><span class="p">)</span>
+<span class="mi">593</span> <span class="n">matching</span> <span class="n">events</span> <span class="n">found</span>
+<span class="n">Created</span> <span class="n">an</span> <span class="n">SSP</span> <span class="n">operator</span> <span class="p">(</span><span class="n">subspace</span> <span class="n">dimension</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Loading</span> <span class="n">data</span> <span class="k">for</span> <span class="mi">593</span> <span class="n">events</span> <span class="ow">and</span> <span class="mi">1101</span> <span class="n">original</span> <span class="n">time</span> <span class="n">points</span> <span class="o">...</span>
+<span class="mi">2</span> <span class="n">bad</span> <span class="n">epochs</span> <span class="n">dropped</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong>
-(0 minutes 45.490 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 1 minutes  38.852 seconds)</p>
+<div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_ica.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_ica.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/plot_ica.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_ica.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_ica.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">plot_ica.ipynb</span></code></a></div>
-<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<a class="reference download internal" href="../_downloads/plot_ica.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_ica.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
 
@@ -235,8 +237,8 @@ Loading data for 593 events and 1101 original time points ...
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-07-11.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>
 </footer>

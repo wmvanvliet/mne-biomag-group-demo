@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Non-parametric statistics on one EEG sensor &mdash; MNE Biomag Demo</title>
+    <title>Non-parametric statistics on one EEG sensor &#8212; MNE Biomag Demo</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -19,25 +18,27 @@
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="MNE Biomag Demo" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body role="document">
+  <body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -122,7 +123,7 @@ on the contrast faces vs. scrambled.</p>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="kn">import</span> <span class="nn">mne</span>
-<span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <a href="http://martinos.org/mne/stable/generated/mne.stats.permutation_cluster_1samp_test.html#mne.stats.permutation_cluster_1samp_test" title="View documentation for mne.stats.permutation_cluster_1samp_test"><span class="n">permutation_cluster_1samp_test</span></a>
+<span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <a href="http://mne-tools.github.io/stable/generated/mne.stats.permutation_cluster_1samp_test.html#mne.stats.permutation_cluster_1samp_test" title="View documentation for mne.stats.permutation_cluster_1samp_test"><span class="n">permutation_cluster_1samp_test</span></a>
 
 <span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">meg_dir</span><span class="p">,</span> <span class="n">N_JOBS</span>
 
@@ -138,214 +139,197 @@ on the contrast faces vs. scrambled.</p>
     <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub</span><span class="si">%03d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject_id</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;processing subject: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">)</span>
     <span class="n">data_path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">meg_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
-    <span class="n">contrast</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.read_evokeds.html#mne.read_evokeds" title="View documentation for mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
+    <span class="n">contrast</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.read_evokeds.html#mne.read_evokeds" title="View documentation for mne.read_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">read_evokeds</span></a><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-ave.fif&#39;</span> <span class="o">%</span> <span class="n">subject</span><span class="p">),</span>
                                 <span class="n">condition</span><span class="o">=</span><span class="s1">&#39;contrast&#39;</span><span class="p">)</span>
     <span class="n">contrast</span><span class="o">.</span><span class="n">pick_types</span><span class="p">(</span><span class="n">meg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">contrast</span><span class="o">.</span><span class="n">apply_baseline</span><span class="p">((</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
     <span class="n">contrasts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
 
-<span class="n">contrast</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span><span class="p">(</span><span class="n">contrasts</span><span class="p">,</span> <span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">contrast</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.combine_evoked.html#mne.combine_evoked" title="View documentation for mne.combine_evoked"><span class="n">mne</span><span class="o">.</span><span class="n">combine_evoked</span></a><span class="p">(</span><span class="n">contrasts</span><span class="p">,</span> <span class="s1">&#39;equal&#39;</span><span class="p">)</span>
 
-<span class="n">channel</span> <span class="o">=</span> <span class="s1">&#39;EEG070&#39;</span>
+<span class="n">channel</span> <span class="o">=</span> <span class="s1">&#39;EEG065&#39;</span>
 <span class="n">idx</span> <span class="o">=</span> <span class="n">contrast</span><span class="o">.</span><span class="n">ch_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
-<span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_compare_evokeds</span><span class="p">(</span><span class="n">contrast</span><span class="p">,</span> <span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+<a href="http://mne-tools.github.io/stable/generated/mne.viz.plot_compare_evokeds.html#mne.viz.plot_compare_evokeds" title="View documentation for mne.viz.plot_compare_evokeds"><span class="n">mne</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">plot_compare_evokeds</span></a><span class="p">(</span><span class="n">contrast</span><span class="p">,</span> <span class="p">[</span><span class="n">idx</span><span class="p">])</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_001.png" class="align-center" src="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>processing subject: sub002
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub002/sub002-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 171 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub003
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub003/sub003-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 148 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub004
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub004/sub004-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 159 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub006
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub006/sub006-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 149 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub007
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub007/sub007-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 195 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub008
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub008/sub008-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 195 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub009
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub009/sub009-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 176 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub010
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub010/sub010-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 185 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub011
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub011/sub011-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 179 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub012
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub012/sub012-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 186 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub013
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub013/sub013-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 162 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub014
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub014/sub014-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 184 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub015
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub015/sub015-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 140 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub017
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub017/sub017-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 156 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub018
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub018/sub018-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 188 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-processing subject: sub019
-Reading /tsi/doctorants/data_gramfort/dgw_faces/MEG/sub019/sub019-ave.fif ...
-    Read a total of 1 projection items:
-        Average EEG reference (1 x 70) active
-    Found the data of interest:
-        t =    -200.00 ...     800.00 ms (contrast)
-        0 CTF compensation matrices available
-        nave = 154 - aspect type = 100
-Projections have already been applied. Setting proj attribute to True.
-No baseline correction applied
-No baseline correction applied
-Applying baseline correction (mode: mean)
-In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be removed and it will have to be explicitly set
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub002</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub002</span><span class="o">/</span><span class="n">sub002</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">169</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub003</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub003</span><span class="o">/</span><span class="n">sub003</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">147</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub004</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub004</span><span class="o">/</span><span class="n">sub004</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">158</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub006</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub006</span><span class="o">/</span><span class="n">sub006</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">149</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub007</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub007</span><span class="o">/</span><span class="n">sub007</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">194</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub008</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub008</span><span class="o">/</span><span class="n">sub008</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">195</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub009</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub009</span><span class="o">/</span><span class="n">sub009</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">176</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub010</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub010</span><span class="o">/</span><span class="n">sub010</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">185</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub011</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub011</span><span class="o">/</span><span class="n">sub011</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">178</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub012</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub012</span><span class="o">/</span><span class="n">sub012</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">186</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub013</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub013</span><span class="o">/</span><span class="n">sub013</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">163</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub014</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub014</span><span class="o">/</span><span class="n">sub014</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">184</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub015</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub015</span><span class="o">/</span><span class="n">sub015</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">140</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub017</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub017</span><span class="o">/</span><span class="n">sub017</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">155</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub018</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub018</span><span class="o">/</span><span class="n">sub018</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">188</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">processing</span> <span class="n">subject</span><span class="p">:</span> <span class="n">sub019</span>
+<span class="n">Reading</span> <span class="o">/</span><span class="n">tsi</span><span class="o">/</span><span class="n">doctorants</span><span class="o">/</span><span class="n">data_gramfort</span><span class="o">/</span><span class="n">dgw_faces</span><span class="o">/</span><span class="n">MEG</span><span class="o">/</span><span class="n">sub019</span><span class="o">/</span><span class="n">sub019</span><span class="o">-</span><span class="n">ave</span><span class="o">.</span><span class="n">fif</span> <span class="o">...</span>
+    <span class="n">Read</span> <span class="n">a</span> <span class="n">total</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">projection</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">Average</span> <span class="n">EEG</span> <span class="n">reference</span> <span class="p">(</span><span class="mi">1</span> <span class="n">x</span> <span class="mi">70</span><span class="p">)</span> <span class="n">active</span>
+    <span class="n">Found</span> <span class="n">the</span> <span class="n">data</span> <span class="n">of</span> <span class="n">interest</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span>    <span class="o">-</span><span class="mf">200.00</span> <span class="o">...</span>     <span class="mf">800.00</span> <span class="n">ms</span> <span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="mi">0</span> <span class="n">CTF</span> <span class="n">compensation</span> <span class="n">matrices</span> <span class="n">available</span>
+        <span class="n">nave</span> <span class="o">=</span> <span class="mi">152</span> <span class="o">-</span> <span class="n">aspect</span> <span class="nb">type</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Projections</span> <span class="n">have</span> <span class="n">already</span> <span class="n">been</span> <span class="n">applied</span><span class="o">.</span> <span class="n">Setting</span> <span class="n">proj</span> <span class="n">attribute</span> <span class="n">to</span> <span class="kc">True</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="n">applied</span>
+<span class="n">Applying</span> <span class="n">baseline</span> <span class="n">correction</span> <span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">mean</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Assemble the data and run the cluster stats on channel data</p>
@@ -354,7 +338,7 @@ In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be
 <span class="n">n_permutations</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># number of permutations to run</span>
 
 <span class="c1"># set family-wise p-value</span>
-<span class="n">p_accept</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">p_accept</span> <span class="o">=</span> <span class="mf">0.001</span>
 
 <span class="n">connectivity</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="n">tail</span> <span class="o">=</span> <span class="mf">0.</span>  <span class="c1"># for two sided test</span>
@@ -367,7 +351,7 @@ In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be
 <span class="k">if</span> <a href="http://docs.scipy.org/doc/numpy-1.9.1/reference/generated/numpy.sign.html#numpy.sign" title="View documentation for numpy.sign"><span class="n">np</span><span class="o">.</span><span class="n">sign</span></a><span class="p">(</span><span class="n">tail</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
     <span class="n">threshold</span> <span class="o">=</span> <span class="o">-</span><span class="n">threshold</span>
 
-<span class="n">cluster_stats</span> <span class="o">=</span> <a href="http://martinos.org/mne/stable/generated/mne.stats.permutation_cluster_1samp_test.html#mne.stats.permutation_cluster_1samp_test" title="View documentation for mne.stats.permutation_cluster_1samp_test"><span class="n">permutation_cluster_1samp_test</span></a><span class="p">(</span>
+<span class="n">cluster_stats</span> <span class="o">=</span> <a href="http://mne-tools.github.io/stable/generated/mne.stats.permutation_cluster_1samp_test.html#mne.stats.permutation_cluster_1samp_test" title="View documentation for mne.stats.permutation_cluster_1samp_test"><span class="n">permutation_cluster_1samp_test</span></a><span class="p">(</span>
     <span class="n">data</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">N_JOBS</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="n">tail</span><span class="p">,</span>
     <span class="n">step_down_p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">connectivity</span><span class="p">,</span>
     <span class="n">n_permutations</span><span class="o">=</span><span class="n">n_permutations</span><span class="p">)</span>
@@ -376,30 +360,30 @@ In 0.13 the default is weights=&quot;nave&quot;, but in 0.14 the default will be
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-python"><div class="highlight"><pre><span></span>stat_fun(H1): min=-6.426765 max=9.053101
-Running initial clustering
-Found 5 clusters
-Permuting ...
-Computing cluster p-values
-Step-down-in-jumps iteration #1 found 2 clusters to exclude from subsequent iterations
-Permuting ...
-Computing cluster p-values
-Step-down-in-jumps iteration #2 found 1 additional cluster to exclude from subsequent iterations
-Permuting ...
-Computing cluster p-values
-Step-down-in-jumps iteration #3 found 0 additional clusters to exclude from subsequent iterations
-Done.
+<div class="sphx-glr-script-out highlight-default"><div class="highlight"><pre><span></span><span class="n">stat_fun</span><span class="p">(</span><span class="n">H1</span><span class="p">):</span> <span class="nb">min</span><span class="o">=-</span><span class="mf">8.220223</span> <span class="nb">max</span><span class="o">=</span><span class="mf">5.105649</span>
+<span class="n">Running</span> <span class="n">initial</span> <span class="n">clustering</span>
+<span class="n">Found</span> <span class="mi">10</span> <span class="n">clusters</span>
+<span class="n">Permuting</span> <span class="o">...</span>
+<span class="n">Computing</span> <span class="n">cluster</span> <span class="n">p</span><span class="o">-</span><span class="n">values</span>
+<span class="n">Step</span><span class="o">-</span><span class="n">down</span><span class="o">-</span><span class="ow">in</span><span class="o">-</span><span class="n">jumps</span> <span class="n">iteration</span> <span class="c1">#1 found 10 clusters to exclude from subsequent iterations</span>
+<span class="n">Permuting</span> <span class="o">...</span>
+<span class="n">Computing</span> <span class="n">cluster</span> <span class="n">p</span><span class="o">-</span><span class="n">values</span>
+<span class="n">Step</span><span class="o">-</span><span class="n">down</span><span class="o">-</span><span class="ow">in</span><span class="o">-</span><span class="n">jumps</span> <span class="n">iteration</span> <span class="c1">#2 found 0 additional clusters to exclude from subsequent iterations</span>
+<span class="n">Done</span><span class="o">.</span>
 </pre></div>
 </div>
 <p>Visualize results</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">times</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">contrast</span><span class="o">.</span><span class="n">times</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">library.config</span> <span class="kn">import</span> <span class="n">set_matplotlib_defaults</span>
+<span class="n">set_matplotlib_defaults</span><span class="p">(</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot" title="View documentation for matplotlib.pyplot"><span class="n">plt</span></a><span class="p">)</span>
+
+<span class="n">times</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">contrast</span><span class="o">.</span><span class="n">times</span>
 
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.close" title="View documentation for matplotlib.pyplot.close"><span class="n">plt</span><span class="o">.</span><span class="n">close</span></a><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title" title="View documentation for matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Channel : &#39;</span> <span class="o">+</span> <span class="n">channel</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="View documentation for matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="mf">1e6</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ERP Contrast&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel" title="View documentation for matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;EEG (uV)&quot;</span><span class="p">)</span>
-<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim" title="View documentation for matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim" title="View documentation for matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
 <a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend" title="View documentation for matplotlib.pyplot.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplot" title="View documentation for matplotlib.pyplot.subplot"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i_c</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
@@ -413,21 +397,26 @@ Done.
 <span class="n">hf</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="View documentation for matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">T_obs</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend" title="View documentation for matplotlib.pyplot.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">((</span><span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">),</span>
            <span class="p">(</span><span class="s1">&#39;cluster p-value &gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p_accept</span><span class="p">,</span>
-            <span class="s1">&#39;cluster p-value &lt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p_accept</span><span class="p">))</span>
+            <span class="s1">&#39;cluster p-value &lt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p_accept</span><span class="p">),</span>
+           <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel" title="View documentation for matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;time (ms)&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel" title="View documentation for matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;T-values&quot;</span><span class="p">)</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim" title="View documentation for matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">([</span><span class="o">-</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">])</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim" title="View documentation for matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">([</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">800</span><span class="p">])</span>
+<a href="http://matplotlib.org/api/tight_layout_api.html#matplotlib.tight_layout" title="View documentation for matplotlib.pyplot.tight_layout"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span></a><span class="p">()</span>
 <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show" title="View documentation for matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.savefig" title="View documentation for matplotlib.pyplot.savefig"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span></a><span class="p">(</span><span class="s1">&#39;sensorstat.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_to_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_002.png" class="align-center" src="../_images/sphx_glr_plot_sensor_cluster_stats_eeg_channel_002.png" />
-<p><strong>Total running time of the script:</strong>
-(0 minutes 3.580 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  8.933 seconds)</p>
+<div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_sensor_cluster_stats_eeg_channel.py"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_sensor_cluster_stats_eeg_channel.py</span></code></a></div>
+<a class="reference download internal" href="../_downloads/plot_sensor_cluster_stats_eeg_channel.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_sensor_cluster_stats_eeg_channel.py</span></code></a></div>
 <div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_sensor_cluster_stats_eeg_channel.ipynb"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">IPython</span> <span class="pre">notebook:</span> <span class="pre">plot_sensor_cluster_stats_eeg_channel.ipynb</span></code></a></div>
-<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<a class="reference download internal" href="../_downloads/plot_sensor_cluster_stats_eeg_channel.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_sensor_cluster_stats_eeg_channel.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
 </div>
 
 
@@ -442,8 +431,8 @@ Done.
       
     </p>
     <p>
-        &copy; Copyright 2017, MNE Developers. Last updated on 2017-02-24.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+        &copy; Copyright 2017, MNE Developers. Last updated on 2017-07-11.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.<br/>
     </p>
   </div>
 </footer>

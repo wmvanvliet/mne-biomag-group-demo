@@ -22,7 +22,6 @@ from mne.parallel import parallel_func
 
 from library.config import study_path, meg_dir, N_JOBS, cal, ctc
 
-
 if not op.exists(meg_dir):
     os.mkdir(meg_dir)
 
@@ -45,16 +44,29 @@ def run_filter(subject_id):
     for run in range(1, 7):
         raw_in = raw_fname_in % run
         try:
-            raw = mne.io.read_raw_fif(raw_in, preload=True, add_eeg_ref=False)
+            raw = mne.io.read_raw_fif(raw_in, preload=True)
         except AttributeError:
             # Some files on openfmri are corrupted and cannot be read.
             warn('Could not read file %s. '
                  'Skipping run %s from subject %s.' % (raw_in, run, subject))
             continue
 
+        raw.set_channel_types({
+            'EEG061': 'eog',
+            'EEG062': 'eog',
+            'EEG063': 'ecg',
+            'EEG064': 'misc'
+        })  # EEG064 free floating el.
+        raw.rename_channels({
+            'EEG061': 'EOG061',
+            'EEG062': 'EOG062',
+            'EEG063': 'ECG063'
+        })
+
         # Hackish way of reading bad channels from the log.
-        with open(op.join(study_path, 'ds117', subject, 'MEG',
-                          'run_%02d_sss_log.txt' % run)) as fid:
+        with open(
+                op.join(study_path, 'ds117', subject, 'MEG',
+                        'run_%02d_sss_log.txt' % run)) as fid:
             for line in fid:
                 if line.startswith('Static bad channels'):
                     chs = line.split(':')[-1].split()
@@ -63,20 +75,18 @@ def run_filter(subject_id):
         raw.info['bads'] += bads
         print("BAD CHANNELS:\n")
         print(raw.info['bads'])
-        raw = mne.preprocessing.maxwell_filter(raw, calibration=cal,
-                                               cross_talk=ctc,
-                                               st_duration=10.,
-                                               origin=(0., 0., 0.04),
-                                               destination=destination)
+        raw = mne.preprocessing.maxwell_filter(
+            raw, calibration=cal, cross_talk=ctc, st_duration=10., origin=(
+                0., 0., 0.04), destination=destination)
 
         raw_out = raw_fname_out % run
         if not op.exists(op.join(meg_dir, subject)):
             os.mkdir(op.join(meg_dir, subject))
 
-        raw.filter(None, 40, l_trans_bandwidth=0.5, h_trans_bandwidth='auto',
-                   filter_length='auto', phase='zero', fir_window='hann')
+        raw.filter(None, 40, l_trans_bandwidth='auto',
+                   h_trans_bandwidth='auto', filter_length='auto',
+                   phase='zero', fir_window='hann', fir_design='firwin')
         raw.save(raw_out, overwrite=True)
 
 
-parallel, run_func, _ = parallel_func(run_filter, n_jobs=N_JOBS)
-parallel(run_func(subject_id) for subject_id in range(1, 2))  # Only for sub01.
+run_filter(subject_id=1)  # Only for sub01.
