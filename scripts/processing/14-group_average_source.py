@@ -12,7 +12,7 @@ import numpy as np
 import mne
 from mne.minimum_norm import apply_inverse, read_inverse_operator
 
-from library.config import meg_dir, subjects_dir, spacing
+from library.config import meg_dir, subjects_dir, spacing, l_freq
 
 stcs = list()
 exclude = [1, 5, 16]  # Excluded subjects
@@ -25,7 +25,7 @@ for run in range(1, 20):
     data_path = op.join(meg_dir, subject)
 
     evokeds = mne.read_evokeds(op.join(meg_dir, subject,
-                                       '%s_highpass-1Hz_ave.fif' % subject))
+                                       '%s_highpass-%sHz-ave.fif' % (subject, l_freq))
 
     contrast = evokeds[3]
     fname_inv = op.join(data_path, '%s-meg-%s-inv.fif' % (subject, spacing))
