@@ -25,7 +25,7 @@ for run in range(1, 20):
     stc = mne.read_source_estimate(op.join(data_path,
                                            'mne_LCMV_inverse-contrast'))
     morphed = stc.morph(subject_from=subject, subject_to='fsaverage',
-			subjects_dir=subjects_dir, grade=4, n_jobs=N_JOBS,
+                        subjects_dir=subjects_dir, grade=4, n_jobs=N_JOBS,
                         verbose=True)
     stcs.append(morphed)
 

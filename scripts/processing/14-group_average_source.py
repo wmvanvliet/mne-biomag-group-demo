@@ -12,7 +12,7 @@ import numpy as np
 import mne
 from mne.minimum_norm import apply_inverse, read_inverse_operator
 
-from library.config import meg_dir, subjects_dir, spacing, l_freq
+from library.config import meg_dir, subjects_dir, spacing, l_freq, N_JOBS
 
 stcs = list()
 exclude = [1, 5, 16]  # Excluded subjects
@@ -24,8 +24,8 @@ for run in range(1, 20):
     print("processing subject: %s" % subject)
     data_path = op.join(meg_dir, subject)
 
-    evokeds = mne.read_evokeds(op.join(meg_dir, subject,
-                                       '%s_highpass-%sHz-ave.fif' % (subject, l_freq))
+    evokeds = mne.read_evokeds(op.join(
+        meg_dir, subject, '%s_highpass-%sHz-ave.fif' % (subject, l_freq)))
 
     contrast = evokeds[3]
     fname_inv = op.join(data_path, '%s-meg-%s-inv.fif' % (subject, spacing))
@@ -36,7 +36,8 @@ for run in range(1, 20):
     lambda2 = 1.0 / snr ** 2
     stc = apply_inverse(contrast, inv, lambda2, "dSPM", pick_ori=None)
     morphed = stc.morph(subject_from=subject, subject_to='fsaverage',
-                        subjects_dir=subjects_dir, grade=4)
+                        subjects_dir=subjects_dir, grade=4, n_jobs=N_JOBS,
+                        verbose=True)
     morphed.save(op.join(data_path, 'contrast-morphed'))
     stcs.append(morphed)
 
