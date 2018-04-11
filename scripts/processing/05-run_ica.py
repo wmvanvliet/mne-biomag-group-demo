@@ -12,7 +12,7 @@ import mne
 from mne.preprocessing import ICA
 from mne.parallel import parallel_func
 
-from library.config import meg_dir, random_state, N_JOBS
+from library.config import meg_dir, random_state, N_JOBS, l_freq
 
 # Here we always process with the 1 Hz highpass data (instead of using
 # l_freq) because ICA needs a highpass.
@@ -31,7 +31,7 @@ def run_ica(subject_id, tsss=None):
                                 % (run, tsss))
         else:
             run_fname = op.join(data_path, 'run_%02d_filt_sss_highpass-%sHz'
-                                '_raw.fif' % (run, 1))
+                                '_raw.fif' % (run, l_freq))
         raws.append(mne.io.read_raw_fif(run_fname))
     raw = mne.concatenate_raws(raws)
     # SSS reduces the data rank and the noise levels, so let's include
